@@ -1,0 +1,3 @@
+name = importdata
+description = imports data from old site to drupal
+core = 7.x
