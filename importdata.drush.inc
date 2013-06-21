@@ -22,6 +22,15 @@ function importdata_drush_command() {
     'aliases' => array('ih'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
+  
+  $items['clear_all_files'] = array(
+    'description' => 'delete all files from public://',
+    'examples' => array('drush clear_all_files'),
+    'arguments' => array(),
+    'required-arguments' => 0,
+    'aliases' => array("caf"),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
 
   return $items;
 }
@@ -40,4 +49,9 @@ function drush_importdata_import_static($path) {
 function drush_importdata_import_html($path) {
   $obj = new DataImport();
   $obj->copyHtmlFiles($path);
+}
+
+function drush_importdata_clear_all_files(){
+  $query = 'DELETE FROM `file_managed` WHERE 1 > 0';
+  db_query($query);
 }
