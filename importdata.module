@@ -5,7 +5,7 @@ class DataImport {
   /**
    * array of extensions for static files
    */
-  private $staticExtensionsArray = array(
+  private static $correctFiles = array(
     'pdf',
     'gif',
     'jpeg',
@@ -20,7 +20,7 @@ class DataImport {
   /**
    * array of extensions for dynamic files
    */
-  private $dynamicExtensionsArray = array(
+  private static $possibleCorrectFiles = array(
     'html',
     'phtml',
     'shtml',
@@ -31,7 +31,7 @@ class DataImport {
    * contructor
    */
   public function __construct() {
-    ;
+    
   }
 
   /**
@@ -49,7 +49,7 @@ class DataImport {
     $it = new RecursiveDirectoryIterator($path);
 
     foreach (new RecursiveIteratorIterator($it) as $file) {
-      if ($file->isFile() && in_array($file->getExtension(), $this->staticExtensionsArray)) {
+      if ($file->isFile() && in_array($file->getExtension(), DataImport::$correctFiles)) {
         $filePath = drupal_realpath($file);
         $fileObj = (object) array(
               'uid' => 1,
@@ -80,15 +80,25 @@ class DataImport {
   public function iterateDirectoryForHtmlFiles($path) {
     $it = new RecursiveDirectoryIterator($path);
     foreach (new RecursiveIteratorIterator($it) as $file)
-      if ($file->isFile() && in_array($file->getExtension(), $this->dynamicExtensionsArray)) {
+      if ($file->isFile() && in_array($file->getExtension(), DataImport::$possibleCorrectFiles)) {
         $absolutePath = drupal_realpath($file);
         $result = array();
         exec("php $file 2> /dev/null", $result);
         $html = implode("\n", $result);
-        $title = $this->getTitleFromHtmlPage($html);
-        $content = $this->getContentOfDivMain($html);
-        $alias = str_replace($path, "", $absolutePath);
-        $this->addBasicPage($title, $content, $alias);
+        $tidyDocument = $html;
+        $title = $this->getTitleFromHtmlPage($tidyDocument);
+        $content = $this->getContentOfDiv($tidyDocument,'main');
+        if (empty($content)) $content = $this->getContentOfDiv($tidyDocument, 'milieu');
+        if (empty($content)) $content = $this->getContentOfDiv($tidyDocument, 'mainContent');
+        if (empty($content)) 
+          echo "Incorrect file: " . $absolutePath . "\n";
+        else if (strlen($content) < 20) {
+          echo "Possible incorrect file (length less than 20): " . $absolutePath . "\n";
+        }
+        else {
+          $alias = str_replace($path, "", $absolutePath);
+          $this->addBasicPage($title, $content, $alias);
+        }
       }
   }
 
@@ -99,18 +109,19 @@ class DataImport {
     $page = new DOMDocument();
     libxml_use_internal_errors(true);
     $page->loadHTML("$resource");
+    libxml_use_internal_errors(false);
     return $page->getElementsByTagName("title")->item(0)->textContent;
   }
 
   /**
    * get content of div main 
    */
-  public function getContentOfDivMain($resource) {
+  public function getContentOfDiv($resource,$divId) {
     $page = new DOMDocument();
     libxml_use_internal_errors(true);
     $page->loadHTML("$resource");
     libxml_use_internal_errors(false);
-    return $page->getElementById("main")->textContent;
+    return $page->getElementById($divId)->textContent;
   }
 
   /**
@@ -126,8 +137,7 @@ class DataImport {
 
   $newnode->uid = $user->uid;
   $newnode->name = $user->name;
-  $newnode->type = 'page';
-  //$newNode->format = 1;     
+  $newnode->type = 'page';    
   $newnode->status = 1;     
   $newnode->promote = 0;
   $newnode = node_submit( $newnode );
