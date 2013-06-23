@@ -3,97 +3,108 @@
 class DataImport {
 
   /**
-   * array of extensions for static files
+   * array of extensions for correct files
    */
   private static $correctFiles = array(
-    'pdf',
-    'gif',
-    'jpeg',
-    'jpg',
-    'doc',
-    'docx',
-    'txt',
-    'bmp',
-    'png'
+    'pdf', 'PDF',
+    'gif', 'GIF',
+    'jpeg', 'JPEG',
+    'jpg', 'JPG',
+    'doc', 'DOC',
+    'docx', 'DOCX',
+    'txt', 'TXT',
+    'bmp', 'BMP',
+    'png', 'PNG'
   );
 
   /**
-   * array of extensions for dynamic files
+   * array of extensions for possible correct files
    */
   private static $possibleCorrectFiles = array(
-    'html',
-    'phtml',
-    'shtml',
-    'php'
+    'html', 'HTML',
+    'phtml', 'PHTML',
+    'shtml', 'SHTML',
+    'php', 'PHP'
+  );
+  
+  /**
+   *
+   * patterns for filenames that should not be included as pages
+   */
+  private static $unusedFiles = array(
+    'footer',
+    'header'
   );
 
-  /**
-   * contructor
-   */
-  public function __construct() {
-    
-  }
 
   /**
    * copy all static files to public://
+   * @param $path - path to the directory that contains static files
    */
-  public function copyStaticFiles($source) {
-    $this->iterateDirectoryForStaticFiles($source);
+  public function copyStaticFiles($path) {
+    $this->iterateDirectoryForStaticFiles($path);
   }
 
   /**
    * iterate through a directory, copy static file to public://
-   * and keep the old structure
+   * and keep the old structure of the tree
+   * @param $path - path to the directory that contains static files
    */
   private function iterateDirectoryForStaticFiles($path) {
-    $it = new RecursiveDirectoryIterator($path);
-    foreach (new RecursiveIteratorIterator($it,RecursiveIteratorIterator::SELF_FIRST) as $file) {
-      if ($file->isFile() && in_array($file->getExtension(), DataImport::$correctFiles)) {
-        $filePath = drupal_realpath($file);
-        $fileObj = (object) array(
-              'uid' => 1,
-              'uri' => $filePath,
-              'filemime' => file_get_mimetype($filePath),
-              'status' => 1
-        );
-        $res = file_copy($fileObj, 'public://' . str_replace($path, "", $filePath), FILE_EXISTS_ERROR);
-      
-        
-      }
-      else if ($file->isDir()) {
-        if (!file_exists('public://' . str_replace($path, "", $file)))
-          drupal_mkdir('public://' . str_replace($path, "", $file), 0777, TRUE);
-      }
+    $extensions = implode("|", DataImport::$correctFiles);
+    $files = file_scan_directory("$path", "/^.*\.($extensions)$/", array(
+      'recurse' => TRUE
+        )
+    );
+
+    foreach ($files as $fileObj) {
+      $filePath = str_replace($path, "", $fileObj->uri);
+      $baseName = basename($fileObj->uri);
+      $dirPath = str_replace($baseName, "", $filePath);
+      $dirPath = "public://" . $dirPath;
+      file_prepare_directory($dirPath, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+      $destinationObj = (object) array(
+            'uid' => 1,
+            'uri' => drupal_realpath($fileObj->uri),
+            'filemime' => file_get_mimetype($fileObj->uri),
+            'status' => 1
+      );
+      if (!file_copy($destinationObj, "public://" . $filePath, FILE_EXISTS_ERROR))
+        echo "Error copying $filePath to public://$filePath \n";
     }
-   
   }
 
   /**
    * copy all .html, .php, .shtml files
+   * @param $path - absolute path to directory that contains all html files
    */
   public function copyHtmlFiles($path) {
     $this->iterateDirectoryForHtmlFiles($path);
   }
 
   /**
-   *  iterate through a directory, generate html and create 
-   *  page in drupal 
+   * iterate through a directory, generate html and create 
+   * page in drupal
+   * @param $path - path to the html resource
    */
   public function iterateDirectoryForHtmlFiles($path) {
     $it = new RecursiveDirectoryIterator($path);
     foreach (new RecursiveIteratorIterator($it) as $file)
       if ($file->isFile() && in_array($file->getExtension(), DataImport::$possibleCorrectFiles)) {
         $absolutePath = drupal_realpath($file);
+        if ($this->checkIsUnused($absolutePath))
+          continue;
         $result = array();
         exec("php $file 2> /dev/null", $result);
         $html = implode("\n", $result);
-        $tidyDocument = tidy_parse_string($html);
-        $tidyDocument->cleanRepair();
+        $tidyDocument = $html;
         $title = $this->getTitleFromHtmlPage($tidyDocument);
-        $content = $this->getContentOfDiv($tidyDocument,'main');
-        if (empty($content)) $content = $this->getContentOfDiv($tidyDocument, 'milieu');
-        if (empty($content)) $content = $this->getContentOfDiv($tidyDocument, 'mainContent');
-        if (empty($content)) 
+        $content = $this->getContentOfDiv($tidyDocument, 'main');
+        if (empty($content))
+          $content = $this->getContentOfDiv($tidyDocument, 'milieu');
+        if (empty($content))
+          $content = $this->getContentOfDiv($tidyDocument, 'mainContent');
+        if (empty($content))
           echo "Incorrect file: " . $absolutePath . "\n";
         else if (strlen($content) < 20) {
           echo "Possible incorrect file (length less than 20): " . $absolutePath . "\n";
@@ -107,43 +118,79 @@ class DataImport {
 
   /**
    * get title of an html page
+   * @param $resource - html page
+   * @return string - title of the page
    */
   public function getTitleFromHtmlPage($resource) {
     $page = new DOMDocument();
     libxml_use_internal_errors(true);
-    $page->loadHTML("$resource",LIBXML_NONET);
+    $page->loadHTML("$resource", LIBXML_NONET);
     libxml_use_internal_errors(false);
     return $page->getElementsByTagName("title")->item(0)->textContent;
   }
 
   /**
-   * get content of div main 
+   * Get content of a div specified by id
+   * @param $resource - html resource
+   * @param $divId - divId
+   * @return string - content of the div if it exists
    */
-  public function getContentOfDiv($resource,$divId) {
-    $page = new DOMDocument();
+  public function getContentOfDiv($resource, $divId) {
+    $dom = new DOMDocument;
     libxml_use_internal_errors(true);
-    $page->loadHTML("$resource",LIBXML_NOENT);
+    $dom->loadHTML($resource);
+    $main = null;
+    $main = $dom->getElementById($divId);
+    $html = '';
+    if ($main == null)
+      return "";
+    foreach ($main->childNodes as $node) {
+      $html .= $dom->saveXML($node,LIBXML_NOEMPTYTAG); 
+    }
     libxml_use_internal_errors(false);
-    return $page->getElementById($divId)->textContent;
+    return $html;
   }
 
   /**
-   * add basic page in drupal
+   * Add a basic page 
+   * @param $title - title of the page 
+   * @param $content - content of the page
+   * @param $alias - url alias
    */
   private function addBasicPage($title, $content, $alias) {
-  $newnode = new stdClass();
-  $newnode->title = "$title";
-  $newnode->body =array('und'=>array(array('value'=> "$content")));
-  $newnode->path['alias'] = $alias;
-  $newnode->language = 'en';
-  global $user;
+    $node = new stdClass(); // Create a new page
+    $node->type = "page"; 
+    node_object_prepare($node); 
 
-  $newnode->uid = $user->uid;
-  $newnode->name = $user->name;
-  $newnode->type = 'page';    
-  $newnode->status = 1;     
-  $newnode->promote = 0;
-  $newnode = node_submit( $newnode );
-  node_save( $newnode ); 
+    $node->title = "{$title}";
+    $node->language = LANGUAGE_NONE; 
+
+    $node->uid = 1; // UID of the author of the page 
+
+    $node->body[$node->language][0]['value'] = $content;
+    $node->body[$node->language][0]['summary'] = text_summary($content);
+    $node->body[$node->language][0]['format'] = 'full_html';
+
+    $path = 'node_created_on' . date('YmdHis');
+    $node->path = array('alias' => $alias);
+
+    if ($node = node_submit($node))  // Prepare node for saving
+      node_save($node);
   }
+  
+  /**
+   * 
+   * Check if file should be included as page or not(footers should not 
+   * be included as pages) 
+   * @param $path - absolute path that should be checked
+   * @return boolean
+   */
+  private function checkIsUnused($path){
+    foreach (DataImport::$unusedFiles as $value) {
+      if (preg_match("/$value/i", $path))
+          return true;
+    }
+    return false;
+  }
+
 }
