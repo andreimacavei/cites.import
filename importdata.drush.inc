@@ -36,6 +36,7 @@ function importdata_drush_command() {
 
 /**
  * This is the callback function for drush task 'import_static'
+ * @param $path - absolute path to directory where static files are located
  */
 function drush_importdata_import_static($path) {
   $obj = new DataImport();
@@ -44,6 +45,7 @@ function drush_importdata_import_static($path) {
 
 /**
  * This is the callback function for drush task 'import_html'
+ * @param $path - absolute path to directory where html files are located
  */
 function drush_importdata_import_html($path) {
   $obj = new DataImport();

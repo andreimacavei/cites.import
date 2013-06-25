@@ -26,7 +26,7 @@ class DataImport {
     'shtml', 'SHTML',
     'php', 'PHP'
   );
-  
+
   /**
    *
    * patterns for filenames that should not be included as pages
@@ -35,7 +35,7 @@ class DataImport {
     'footer',
     'header'
   );
-
+  private static $publicFilesPath = "/sites/default/files";
 
   /**
    * copy all static files to public://
@@ -69,8 +69,8 @@ class DataImport {
             'filemime' => file_get_mimetype($fileObj->uri),
             'status' => 1
       );
-      if (!file_copy($destinationObj, "public://" . $filePath, FILE_EXISTS_ERROR))
-        echo "Error copying $filePath to public://$filePath \n";
+      if (!file_copy($destinationObj, "public:/" . $filePath, FILE_EXISTS_ERROR))
+        echo "Error copying $filePath to public:/$filePath \n";
     }
   }
 
@@ -92,27 +92,28 @@ class DataImport {
     foreach (new RecursiveIteratorIterator($it) as $file)
       if ($file->isFile() && in_array($file->getExtension(), DataImport::$possibleCorrectFiles)) {
         $absolutePath = drupal_realpath($file);
+        $fileName = basename($file);
         if ($this->checkIsUnused($absolutePath))
           continue;
         $result = array();
         exec("php $file 2> /dev/null", $result);
         $html = implode("\n", $result);
         $tidyDocument = $html;
-        
+
         // clean the html page with tidy html functionality
         // check if all tags are closed
         $tidyConfig = array(
           'clean' => true,
           'input-xhtml' => true,
-          'output-xhtml' => true, 
-          'show-body-only' => false, 
-          'wrap' => 0, 
+          'output-xhtml' => true,
+          'show-body-only' => false,
+          'wrap' => 0,
         );
         $tidyDocument = tidy_parse_string($html, $tidyConfig, 'UTF8');
         $tidyDocument->cleanRepair();
-        
-        echo "Parsing " . $absolutePath . "file\n";
-        
+
+        echo "Parsing " . $absolutePath . " file\n";
+
         $title = $this->getTitleFromHtmlPage($tidyDocument);
         $content = $this->getContentOfDiv($tidyDocument, 'main');
         if (empty($content))
@@ -126,6 +127,10 @@ class DataImport {
         }
         else {
           $alias = str_replace($path, "", $absolutePath);
+          // change href attribute for anchors
+          $content = $this->changeUrlForTag($content, "a", str_replace($fileName, "", $alias));
+          // change src attribute for imgs
+          $content = $this->changeUrlForTag($content, "img", str_replace($fileName, "", $alias));
           $this->addBasicPage($title, $content, $alias);
         }
       }
@@ -158,7 +163,7 @@ class DataImport {
     if ($main == null)
       return "";
     foreach ($main->childNodes as $node) {
-      $html .= $dom->saveXML($node,LIBXML_NOEMPTYTAG); 
+      $html .= $dom->saveXML($node, LIBXML_NOEMPTYTAG);
     }
     libxml_use_internal_errors(false);
     return $html;
@@ -172,11 +177,11 @@ class DataImport {
    */
   private function addBasicPage($title, $content, $alias) {
     $node = new stdClass(); // Create a new page
-    $node->type = "page"; 
-    node_object_prepare($node); 
+    $node->type = "page";
+    node_object_prepare($node);
 
     $node->title = "{$title}";
-    $node->language = LANGUAGE_NONE; 
+    $node->language = LANGUAGE_NONE;
 
     $node->uid = 1; // UID of the author of the page 
 
@@ -190,20 +195,81 @@ class DataImport {
     if ($node = node_submit($node))  // Prepare node for saving
       node_save($node);
   }
-  
+
   /**
    * 
-   * Check if file should be included as page or not(footers should not 
+   * Check if file should be included as page or not(example: footers should not 
    * be included as pages) 
    * @param $path - absolute path that should be checked
    * @return boolean
    */
-  private function checkIsUnused($path){
+  private function checkIsUnused($path) {
     foreach (DataImport::$unusedFiles as $value) {
       if (preg_match("/$value/i", $path))
-          return true;
+        return true;
     }
     return false;
+  }
+
+  /**
+   * Change url alias for url 
+   * @param $resource - html string that will be modified
+   * @param $dirPath - path of the directory where is located the file
+   * <a href = "../../image.jpg"> and dirPath = http://cites.localhost/eng/disc/production> 
+   * => <a href = "http://cites.localhost/eng/disc/production/../../image.jpg>
+   */
+  public function changeUrl($dirPath, $path) {
+    return DataImport::$publicFilesPath . "/" . $dirPath . $path;
+  }
+
+  /**
+   * check if a filename has extensions such as PDF,JPG,JPEG,BMP,GIF 
+   * @param $path - path of the file
+   * @return boolean
+   */
+  private function checkIsCorrectFile($path) {
+    $pathArray = explode("/", $path);
+    $n = count($pathArray);
+    if ($n <= 0)
+      return FALSE;
+    $fileArray = explode(".", $pathArray[$n - 1]);
+    return in_array($fileArray[count($fileArray) - 1], DataImport::$correctFiles);
+  }
+
+  /**
+   * change the attribute url for a specified tag
+   * @param $resource - html page
+   * @param $tag - tag whose attribute is changed
+   * @param $dirPath - directory page where is located the html page
+   * @return - new html page with attributes of the specified tag changed
+   */
+  private function changeUrlForTag($resource, $tag, $dirPath) {
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $resource);
+    libxml_use_internal_errors(false);
+    $xpath = new DOMXPath($dom);
+    $srcs = $xpath->evaluate("/html/body//$tag");
+
+    for ($i = 0; $i < $srcs->length; $i++) {
+      $src = $srcs->item($i);
+      if ($tag == "a")
+        $attribute = "href";
+      else if ($tag == "img")
+        $attribute = "src";
+      $url = $src->getAttribute($attribute);
+
+      if ($this->checkIsCorrectFile($url) && substr($url, 0, 7) !== "http://" &&
+          substr($url, 0, 8) !== "https://" && $url[0] !== "/")
+        $newUrl = $this->changeUrl($dirPath, $url);
+      else
+        $newUrl = $url;
+
+      //remove and set correct attribute       
+      $src->removeAttribute($attribute);
+      $src->setAttribute($attribute, $newUrl);
+    }
+    return $dom->saveHTML();
   }
 
 }
