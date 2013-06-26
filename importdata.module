@@ -115,11 +115,20 @@ class DataImport {
         echo "Parsing " . $absolutePath . " file\n";
 
         $title = $this->getTitleFromHtmlPage($tidyDocument);
-        $content = $this->getContentOfDiv($tidyDocument, 'main');
-        if (empty($content))
-          $content = $this->getContentOfDiv($tidyDocument, 'milieu');
-        if (empty($content))
-          $content = $this->getContentOfDiv($tidyDocument, 'mainContent');
+
+        $content = "";
+        $main = $this->getContentOfDiv($tidyDocument, 'main');
+        if (!empty($main))
+          $content .= "<div id='main'>" . $main . "</div>";
+
+        $milieu = $this->getContentOfDiv($tidyDocument, "milieu");
+        if (!empty($milieu))
+          $content .= "<div id='milieu'>" . $milieu . "</div>";
+
+        $mainContent = $this->getContentOfDiv($tidyDocument, "mainContent");
+        if (!empty($mainContent))
+          $content .= "<div id='mainContent'>" . $mainContent . "</div>";
+
         if (empty($content))
           echo "Incorrect file: " . $absolutePath . "\n";
         else if (strlen($content) < 20) {
