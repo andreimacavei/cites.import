@@ -15,8 +15,8 @@ class DataImport {
     'txt', 'TXT',
     'bmp', 'BMP',
     'png', 'PNG',
-    'ppt','PPT',
-    'pptx','PPTX'
+    'ppt', 'PPT',
+    'pptx', 'PPTX'
   );
 
   /**
@@ -37,7 +37,40 @@ class DataImport {
     'footer',
     'header'
   );
+
+  /**
+   *
+   * blacklist for files/directories that should not be included
+   */
+  private static $blackList = array(
+    "admin/", "cms/", "forum/", "forum_old",
+    "forum_phpbb/", "js/", "listserver/", "mac/",
+    "new/", "nivo/", "phpmyadmin/", "style/", "yui/",
+    ".vim/", "index0.php", "index.php.LCK",
+    "jquery.nivo.slider.js", "google.html",
+    "404.php", "500.php", "blank_index.html",
+    "favicon.ico", "htaccess", "listserver.tar.gz",
+    "mysql_all.sql", "slide.", ".viminfo"
+  );
+
+  /**
+   * path for public files in drupal 
+   */
   private static $publicFilesPath = "/sites/default/files";
+
+  /**
+   * check if a path is in blacklist
+   * @param $path - path to be checked
+   * @return boolean
+   */
+  private function isInBlackList($path) {
+    foreach (DataImport::$blackList as $blackElement) {
+      if (strpos($path, $blackElement) !== false) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /**
    * copy all static files to public://
@@ -58,8 +91,11 @@ class DataImport {
       'recurse' => TRUE
         )
     );
-
+    
     foreach ($files as $fileObj) {
+      echo "Copying {$fileObj->uri} file\n";
+      if ($this->isInBlackList($fileObj->uri))
+        continue;
       $filePath = str_replace($path, "", $fileObj->uri);
       $baseName = basename($fileObj->uri);
       $dirPath = str_replace($baseName, "", $filePath);
@@ -94,6 +130,8 @@ class DataImport {
     foreach (new RecursiveIteratorIterator($it) as $file)
       if ($file->isFile() && in_array($file->getExtension(), DataImport::$possibleCorrectFiles)) {
         $absolutePath = drupal_realpath($file);
+        if ($this->isInBlackList($absolutePath))
+          continue;
         $fileName = basename($file);
         if ($this->checkIsUnused($absolutePath))
           continue;
@@ -179,7 +217,7 @@ class DataImport {
     libxml_use_internal_errors(false);
     return $html;
   }
-  
+
   /**
    * Add a basic page 
    * @param $title - title of the page 
@@ -275,12 +313,19 @@ class DataImport {
         $newUrl = $this->changeUrl($dirPath, $url);
       else
         $newUrl = $url;
-
       //remove and set correct attribute       
       $src->removeAttribute($attribute);
       $src->setAttribute($attribute, $newUrl);
     }
     return $dom->saveHTML();
+  }
+
+  /**
+   * import forum in drupal
+   * @param path - path of the forum database
+   */
+  public function importForum($path) {
+    // TODO
   }
 
 }

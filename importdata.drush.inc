@@ -22,13 +22,32 @@ function importdata_drush_command() {
     'aliases' => array('ih'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
-  
+
   $items['clear_all_files'] = array(
     'description' => 'delete all files from public://',
     'examples' => array('drush clear_all_files'),
     'arguments' => array(0),
     'required-arguments' => 0,
     'aliases' => array("caf"),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
+
+  $items['import_forum'] = array(
+    'description' => 'import forum from old site to drupal',
+    'examples' => array('drush import_forum /home/andrei/Desktop/workspace/forum'),
+    'arguments' => array('sourcePath'),
+    'required-arguments' => 1,
+    'aliases' => array('if'),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
+  
+  $items['import_all'] = array(
+    'description' => 'import correct Files (pdf,doc,jpg), possible correct Files(php,html)
+                      and import forum',
+    'examples' => array('drush import_all /home/andrei/Desktop/workspace/cites'),
+    'arguments' => array('path'),
+    'required-arguments' => 1,
+    'aliases' => array('ia'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   return $items;
@@ -55,8 +74,20 @@ function drush_importdata_import_html($path) {
 /**
  * This is the callback function for task 'clear_all_files'
  */
-function drush_importdata_clear_all_files(){
+function drush_importdata_clear_all_files() {
   file_unmanaged_delete_recursive("public://");
   $query = 'DELETE FROM `file_managed` WHERE 1 > 0';
   db_query($query);
+}
+
+function drush_importdata_import_forum($sourcePath) {
+  $forumObj = new DataImport();
+  $forumObj->importForum($sourcePath);
+}
+
+function drush_importdata_import_all($path){
+  $importObj = new DataImport();
+  $importObj->copyStaticFiles($path);
+  $importObj->copyHtmlFiles($path);
+  $importObj->importForum($path);
 }
