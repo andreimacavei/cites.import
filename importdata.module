@@ -91,11 +91,11 @@ class DataImport {
       'recurse' => TRUE
         )
     );
-    
+
     foreach ($files as $fileObj) {
-      echo "Copying {$fileObj->uri} file\n";
       if ($this->isInBlackList($fileObj->uri))
         continue;
+      echo "Copying {$fileObj->uri} file\n";
       $filePath = str_replace($path, "", $fileObj->uri);
       $baseName = basename($fileObj->uri);
       $dirPath = str_replace($baseName, "", $filePath);
@@ -155,7 +155,10 @@ class DataImport {
         echo "Parsing " . $absolutePath . " file\n";
 
         $title = $this->getTitleFromHtmlPage($tidyDocument);
-
+        if (empty($title)) {
+          echo "File $absolutePath has empty title \n";
+          continue;
+        }
         $content = "";
         $main = $this->getContentOfDiv($tidyDocument, 'main');
         if (!empty($main))
@@ -174,7 +177,14 @@ class DataImport {
         else if (strlen($content) < 20) {
           echo "Possible incorrect file (length less than 20): " . $absolutePath . "\n";
         }
-        else {
+        else { 
+          // check to see if content has � characters
+          if (strpos($title,"�")) {
+            echo "File $absolutePath (title) contains at least one character � \n";
+          }
+          if (strpos($content,"�")) {
+            echo "File $absolutePath (content) contains at least one character � \n";
+          }
           $alias = str_replace($path, "", $absolutePath);
           // change href attribute for anchors
           $content = $this->changeUrlForTag($content, "a", str_replace($fileName, "", $alias));
@@ -192,7 +202,7 @@ class DataImport {
    */
   public function getTitleFromHtmlPage($resource) {
     $page = new DOMDocument();
-    $page->loadHTML("$resource", LIBXML_NONET);
+    $page->loadHTML('<?xml encoding="utf-8" ?>' . $resource);
     return $page->getElementsByTagName("title")->item(0)->textContent;
   }
 
@@ -205,7 +215,7 @@ class DataImport {
   public function getContentOfDiv($resource, $divId) {
     $dom = new DOMDocument;
     libxml_use_internal_errors(true);
-    $dom->loadHTML($resource);
+    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $resource);
     $main = null;
     $main = $dom->getElementById($divId);
     $html = '';
@@ -309,8 +319,11 @@ class DataImport {
       $url = $src->getAttribute($attribute);
 
       if ($this->checkIsCorrectFile($url) && substr($url, 0, 7) !== "http://" &&
-          substr($url, 0, 8) !== "https://" && $url[0] !== "/")
+          substr($url, 0, 8) !== "https://" &&
+          substr($url, 0, 4) !== "www." && $url[0] !== "/")
         $newUrl = $this->changeUrl($dirPath, $url);
+      else if ($url[0] === "/")
+        $newUrl = "/sites/default/files" . $url;
       else
         $newUrl = $url;
       //remove and set correct attribute       
