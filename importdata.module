@@ -16,18 +16,19 @@ class DataImport {
     'bmp', 'BMP',
     'png', 'PNG',
     'ppt', 'PPT',
-    'pptx', 'PPTX'
+    'pptx', 'PPTX',
+    'swf','SWF',
+    'mp3','MP3',
+    'mp4','MP4',
+    'fla','FLA'
   );
 
   /**
    * array of extensions for possible correct files
    */
   private static $possibleCorrectFiles = array(
-    'html', 'HTML',
-    'phtml', 'PHTML',
-    'shtml', 'SHTML',
-    'php', 'PHP'
-  );
+    'html','phtml',
+    'shtml', 'php' );
 
   /**
    *
@@ -95,7 +96,7 @@ class DataImport {
     foreach ($files as $fileObj) {
       if ($this->isInBlackList($fileObj->uri))
         continue;
-      echo "Copying {$fileObj->uri} file\n";
+      echo "Copying {$fileObj->uri} file" . PHP_EOL;
       $filePath = str_replace($path, "", $fileObj->uri);
       $baseName = basename($fileObj->uri);
       $dirPath = str_replace($baseName, "", $filePath);
@@ -108,7 +109,7 @@ class DataImport {
             'status' => 1
       );
       if (!file_copy($destinationObj, "public:/" . $filePath, FILE_EXISTS_ERROR))
-        echo "Error copying $filePath to public:/$filePath \n";
+        echo "Error copying $filePath to public:/$filePath" . PHP_EOL;
     }
   }
 
@@ -128,7 +129,7 @@ class DataImport {
   public function iterateDirectoryForHtmlFiles($path) {
     $it = new RecursiveDirectoryIterator($path);
     foreach (new RecursiveIteratorIterator($it) as $file)
-      if ($file->isFile() && in_array($file->getExtension(), DataImport::$possibleCorrectFiles)) {
+      if ($file->isFile() && in_array(strtolower($file->getExtension()), DataImport::$possibleCorrectFiles)) {
         $absolutePath = drupal_realpath($file);
         if ($this->isInBlackList($absolutePath))
           continue;
@@ -152,11 +153,11 @@ class DataImport {
         $tidyDocument = tidy_parse_string($html, $tidyConfig, 'UTF8');
         $tidyDocument->cleanRepair();
 
-        echo "Parsing " . $absolutePath . " file\n";
-
+        echo "Parsing " . $absolutePath . " file" . PHP_EOL;
+       
         $title = $this->getTitleFromHtmlPage($tidyDocument);
         if (empty($title)) {
-          echo "File $absolutePath has empty title \n";
+          echo "File $absolutePath has empty title" . PHP_EOL;
           continue;
         }
         $content = "";
@@ -171,25 +172,30 @@ class DataImport {
         $mainContent = $this->getContentOfDiv($tidyDocument, "mainContent");
         if (!empty($mainContent))
           $content .= "<div id='mainContent'>" . $mainContent . "</div>";
-
+        
         if (empty($content))
-          echo "Incorrect file: " . $absolutePath . "\n";
+          $content = $this->getContentOfBody($tidyDocument);
+          
+        if (empty($content))
+          echo "Incorrect file: " . $absolutePath . PHP_EOL;
         else if (strlen($content) < 20) {
-          echo "Possible incorrect file (length less than 20): " . $absolutePath . "\n";
+          echo "Possible incorrect file (length less than 20): " . $absolutePath . PHP_EOL;
         }
         else { 
           // check to see if content has � characters
           if (strpos($title,"�")) {
-            echo "File $absolutePath (title) contains at least one character � \n";
+            echo "File $absolutePath (title) contains at least one character �" . PHP_EOL;
           }
           if (strpos($content,"�")) {
-            echo "File $absolutePath (content) contains at least one character � \n";
+            echo "File $absolutePath (content) contains at least one character �" . PHP_EOL;
           }
           $alias = str_replace($path, "", $absolutePath);
           // change href attribute for anchors
           $content = $this->changeUrlForTag($content, "a", str_replace($fileName, "", $alias));
           // change src attribute for imgs
           $content = $this->changeUrlForTag($content, "img", str_replace($fileName, "", $alias));
+          // change src attribute for embed
+          $content = $this->changeUrlForTag($content, "embed", str_replace($fileName, "", $alias));
           $this->addBasicPage($title, $content, $alias);
         }
       }
@@ -202,7 +208,7 @@ class DataImport {
    */
   public function getTitleFromHtmlPage($resource) {
     $page = new DOMDocument();
-    $page->loadHTML('<?xml encoding="utf-8" ?>' . $resource);
+    $page->loadHTML('<?xml encoding="UTF-8" ?>' . $resource);
     return $page->getElementsByTagName("title")->item(0)->textContent;
   }
 
@@ -213,9 +219,9 @@ class DataImport {
    * @return string - content of the div if it exists
    */
   public function getContentOfDiv($resource, $divId) {
-    $dom = new DOMDocument;
+    $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $resource);
+    $dom->loadHTML('<?xml encoding="UTF-8" ?>' .$resource);
     $main = null;
     $main = $dom->getElementById($divId);
     $html = '';
@@ -227,7 +233,19 @@ class DataImport {
     libxml_use_internal_errors(false);
     return $html;
   }
-
+  
+  private function getContentOfBody($resource){
+    $dom = new DOMDocument();
+    $mock = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($resource);
+    libxml_use_internal_errors(false);
+    $body = $dom->getElementsByTagName('body')->item(0);
+    foreach ($body->childNodes as $child) {
+      $mock->appendChild($mock->importNode($child, true));
+    }
+    return $mock->saveHTML();
+  }
   /**
    * Add a basic page 
    * @param $title - title of the page 
@@ -246,7 +264,7 @@ class DataImport {
 
     $node->body[$node->language][0]['value'] = $content;
     $node->body[$node->language][0]['summary'] = text_summary($content);
-    $node->body[$node->language][0]['format'] = 'full_html';
+    $node->body[$node->language][0]['format'] = 'full_html'; //full_html
 
     $path = 'node_created_on' . date('YmdHis');
     $node->path = array('alias' => $alias);
@@ -305,7 +323,7 @@ class DataImport {
   private function changeUrlForTag($resource, $tag, $dirPath) {
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $resource);
+    $dom->loadHTML('<?xml encoding="UTF-8" ?>' . $resource);
     libxml_use_internal_errors(false);
     $xpath = new DOMXPath($dom);
     $srcs = $xpath->evaluate("/html/body//$tag");
@@ -315,6 +333,8 @@ class DataImport {
       if ($tag == "a")
         $attribute = "href";
       else if ($tag == "img")
+        $attribute = "src";
+      else if ($tag == "embed")
         $attribute = "src";
       $url = $src->getAttribute($attribute);
 
@@ -340,5 +360,5 @@ class DataImport {
   public function importForum($path) {
     // TODO
   }
-
 }
+
