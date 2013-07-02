@@ -17,18 +17,18 @@ class DataImport {
     'png', 'PNG',
     'ppt', 'PPT',
     'pptx', 'PPTX',
-    'swf','SWF',
-    'mp3','MP3',
-    'mp4','MP4',
-    'fla','FLA'
+    'swf', 'SWF',
+    'mp3', 'MP3',
+    'mp4', 'MP4',
+    'fla', 'FLA'
   );
 
   /**
    * array of extensions for possible correct files
    */
   private static $possibleCorrectFiles = array(
-    'html','phtml',
-    'shtml', 'php' );
+    'html', 'phtml',
+    'shtml', 'php');
 
   /**
    *
@@ -154,7 +154,7 @@ class DataImport {
         $tidyDocument->cleanRepair();
 
         echo "Parsing " . $absolutePath . " file" . PHP_EOL;
-       
+
         $title = $this->getTitleFromHtmlPage($tidyDocument);
         if (empty($title)) {
           echo "File $absolutePath has empty title" . PHP_EOL;
@@ -172,21 +172,21 @@ class DataImport {
         $mainContent = $this->getContentOfDiv($tidyDocument, "mainContent");
         if (!empty($mainContent))
           $content .= "<div id='mainContent'>" . $mainContent . "</div>";
-        
+
         if (empty($content))
           $content = $this->getContentOfBody($tidyDocument);
-          
+
         if (empty($content))
           echo "Incorrect file: " . $absolutePath . PHP_EOL;
         else if (strlen($content) < 20) {
           echo "Possible incorrect file (length less than 20): " . $absolutePath . PHP_EOL;
         }
-        else { 
+        else {
           // check to see if content has � characters
-          if (strpos($title,"�")) {
+          if (strpos($title, "�")) {
             echo "File $absolutePath (title) contains at least one character �" . PHP_EOL;
           }
-          if (strpos($content,"�")) {
+          if (strpos($content, "�")) {
             echo "File $absolutePath (content) contains at least one character �" . PHP_EOL;
           }
           $alias = str_replace($path, "", $absolutePath);
@@ -196,6 +196,8 @@ class DataImport {
           $content = $this->changeUrlForTag($content, "img", str_replace($fileName, "", $alias));
           // change src attribute for embed
           $content = $this->changeUrlForTag($content, "embed", str_replace($fileName, "", $alias));
+          $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+            "!</body></html>$!si"), "", $content);
           $this->addBasicPage($title, $content, $alias);
         }
       }
@@ -208,7 +210,10 @@ class DataImport {
    */
   public function getTitleFromHtmlPage($resource) {
     $page = new DOMDocument();
+    $string = $resource;
+    libxml_use_internal_errors(true);
     $page->loadHTML('<?xml encoding="UTF-8" ?>' . $resource);
+    libxml_use_internal_errors(false);
     return $page->getElementsByTagName("title")->item(0)->textContent;
   }
 
@@ -221,31 +226,37 @@ class DataImport {
   public function getContentOfDiv($resource, $divId) {
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadHTML('<?xml encoding="UTF-8" ?>' .$resource);
+    $dom->loadHTML('<?xml encoding="UTF-8" ?>' .$resource); 
     $main = null;
     $main = $dom->getElementById($divId);
     $html = '';
     if ($main == null)
       return "";
     foreach ($main->childNodes as $node) {
-      $html .= $dom->saveXML($node, LIBXML_NOEMPTYTAG);
+      $html .= preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+      "!</body></html>$!si"), "",$dom->saveHTML($node)); 
     }
     libxml_use_internal_errors(false);
-    return $html;
+    $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+      "!</body></html>$!si"), "",$html);
+    return $content;
   }
-  
-  private function getContentOfBody($resource){
+
+  private function getContentOfBody($resource) {
     $dom = new DOMDocument();
     $mock = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadHTML($resource);
+    $dom->loadHTML('<?xml encoding="UTF-8" ?>' . $resource);
     libxml_use_internal_errors(false);
     $body = $dom->getElementsByTagName('body')->item(0);
     foreach ($body->childNodes as $child) {
       $mock->appendChild($mock->importNode($child, true));
     }
-    return $mock->saveHTML();
+    $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+      "!</body></html>$!si"), "", $mock->saveHTML());
+    return $content;
   }
+
   /**
    * Add a basic page 
    * @param $title - title of the page 
@@ -257,13 +268,18 @@ class DataImport {
     $node->type = "page";
     node_object_prepare($node);
 
+    $title = mb_convert_encoding($title,"iso-8859-2");
+    $title = mb_convert_encoding($title, "utf-8","iso-8859-2");
     $node->title = "{$title}";
     $node->language = LANGUAGE_NONE;
 
     $node->uid = 1; // UID of the author of the page 
 
+    $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+      "!</body></html>$!si"), "", $content);
+    $content = mb_convert_encoding ( $content , 'iso-8859-2','utf-8' );
+    $content = mb_convert_encoding($content, 'utf-8', 'iso-8859-2');
     $node->body[$node->language][0]['value'] = $content;
-    $node->body[$node->language][0]['summary'] = text_summary($content);
     $node->body[$node->language][0]['format'] = 'full_html'; //full_html
 
     $path = 'node_created_on' . date('YmdHis');
@@ -350,7 +366,10 @@ class DataImport {
       $src->removeAttribute($attribute);
       $src->setAttribute($attribute, $newUrl);
     }
-    return $dom->saveHTML();
+    
+    $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+      "!</body></html>$!si"), '', $dom->saveHTML());
+    return $content;
   }
 
   /**
@@ -360,5 +379,6 @@ class DataImport {
   public function importForum($path) {
     // TODO
   }
+
 }
 
