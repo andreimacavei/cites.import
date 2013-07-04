@@ -235,8 +235,16 @@ class DataImport {
     if ($main == null)
       return "";
     foreach ($main->childNodes as $node) {
-      $html .= preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
-        "!</body></html>$!si"), "", $dom->saveHTML($node));
+      if (version_compare(phpversion(), '5.3.4', '<')) {
+        //$html .= preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+         // "!</body></html>$!si"), "", $dom->saveHTML($node));
+        $html .= $node->nodeValue;
+        
+      }
+      else {
+        $html .= preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+          "!</body></html>$!si"), "", $dom->saveHTML($node));
+      }
     }
     libxml_use_internal_errors(false);
     $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
