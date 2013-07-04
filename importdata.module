@@ -128,8 +128,9 @@ class DataImport {
    */
   public function iterateDirectoryForHtmlFiles($path) {
     $it = new RecursiveDirectoryIterator($path);
-    foreach (new RecursiveIteratorIterator($it) as $file)
-      if ($file->isFile() && in_array(strtolower($file->getExtension()), DataImport::$possibleCorrectFiles)) {
+    foreach (new RecursiveIteratorIterator($it) as $file) {
+      $extension = pathinfo($file, PATHINFO_EXTENSION);
+      if ($file->isFile() && in_array(strtolower($extension), DataImport::$possibleCorrectFiles)) {
         $absolutePath = drupal_realpath($file);
         if ($this->isInBlackList($absolutePath))
           continue;
@@ -200,6 +201,7 @@ class DataImport {
           $this->addBasicPage($title, $content, $alias);
         }
      }
+    }
   }
  
 
