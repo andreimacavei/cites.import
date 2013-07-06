@@ -1,0 +1,4 @@
+name = importforum
+description = Import forum from old site 
+core = 7.x
+files[] = DatabaseInterface.php
