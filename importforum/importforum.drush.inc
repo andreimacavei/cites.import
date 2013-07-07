@@ -3,8 +3,8 @@
 function importforum_drush_command() {
   $items['import_forum'] = array(
     'description' => 'import forum  from old site to drupal',
-    'examples' => array('drush import_forum localhost root root forumDatabase'),
-    'arguments' => array('host', 'username', 'password', 'database'),
+    'examples' => array('drush import_forum /home/andrei/cites/attachments/ localhost root root forumDatabase'),
+    'arguments' => array('pathToAttachments','host', 'username', 'password', 'database'),
     'required-arguments' => 0,
     'aliases' => array('if'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
@@ -30,12 +30,12 @@ function importforum_drush_command() {
   return $items;
 }
 
-function drush_importforum_import_forum($host = 'localhost', $username = 'root', $password = '', $database = 'cites') {
+function drush_importforum_import_forum($pathToAttachments,$host = 'localhost', $username = 'root', $password = '', $database = 'cites') {
   foreach (taxonomy_get_tree(2) as $term) {
     taxonomy_term_delete($term->tid);
   }
   $dataBaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
-  $forumObj = new ForumManagement($dataBaseObj);
+  $forumObj = new ForumManagement($dataBaseObj,$pathToAttachments);
   // stage I - add users
   //$forumObj->addUsers($databaseObj);
   // stage II - add forum content

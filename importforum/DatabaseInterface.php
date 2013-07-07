@@ -81,9 +81,6 @@ class DatabaseInterface {
               WHERE `group_id` = $id";
     return mysql_query($query);
   }
-  
-  
-
 }
 
 ?>

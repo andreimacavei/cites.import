@@ -39,10 +39,14 @@ class ForumManagement {
   private $dataBaseObj;
   private $counter = 1;
   private $destinationFolder;
+  private $pathToAttachments;
 
-  public function __construct(DatabaseInterface $databaseObj) {
+  public function __construct(DatabaseInterface $databaseObj,$pathToAttach) {
     $this->dataBaseObj = $databaseObj;
     $this->forumVid = 0;
+    $this->pathToAttachments = $pathToAttach;
+    if ($this->pathToAttachments[strlen($this->pathToAttachments)] != "/")
+      $this->pathToAttachments .= "/";
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
 
@@ -117,10 +121,9 @@ class ForumManagement {
       while ($row = mysql_fetch_object($result)) {
         if (empty($row->filename))
           continue;
-        if (!file_exists("/home/andrei/Desktop/cites.production.arhive/cites.production/forum/assets/files/" . $row->filename))
+        if (!file_exists($this->pathToAttachments . $row->filename))
           continue;
-        $fileName = "/home/andrei/Desktop/cites.production.arhive/cites.production/forum/assets/files/"
-            . $row->filename;
+        $fileName = $this->pathToAttachments . $row->filename;
         $file_path = drupal_realpath($fileName);
         $file = (object) array(
               'fid' => $this->counter,
