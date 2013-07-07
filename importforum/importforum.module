@@ -191,7 +191,7 @@ class ForumManagement {
     $forums = $this->dataBaseObj->getForums();
     while ($row = mysql_fetch_object($forums)) {
       $this->addSingleForum($row);
-      //echo $row->group_id . " ";
+      //echo $row->group_id . PHP_EOL;
       //$this->createRoles($row->group_id);
     }
   }
