@@ -1,6 +1,7 @@
 <?php
 
 class ForumManagement {
+
   private static $forumDictionary = array(
     11 => array("Feedback Manager", "Feedback Member", "Feedback Visitor"),
     16 => array("Plants Committee Manager", "Plants Committee Member", "Plants Commitee Visitor"),
@@ -37,22 +38,26 @@ class ForumManagement {
   private $forumVid;
   private $dataBaseObj;
   private $counter = 1;
+  private $destinationFolder;
 
   public function __construct(DatabaseInterface $databaseObj) {
     $this->dataBaseObj = $databaseObj;
     $this->forumVid = 0;
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
+
+    $dirPath = "public://privateFolder/forum_attachments/";
+    $result = file_prepare_directory($dirPath, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    if (!$result)
+      throw new Exception("Cannot create directory to put attachments" . PHP_EOL);
+    echo "Forum attachments will be put in " . $dirPath . PHP_EOL;
+    $this->destinationFolder = $dirPath;
   }
 
   public function addUsers() {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
-      //$this->insertUser($row);
-      echo $row->user . " " . $row->email . " " . $row->firstname . " " . $row->lastname . PHP_EOL;
-    
-      $types = profile2_get_types();
-      var_dump($types);
+      $this->insertUser($row);
     }
   }
 
@@ -73,8 +78,19 @@ class ForumManagement {
         DRUPAL_AUTHENTICATED_RID => 'authenticated user',
       ),
     );
-    $account = user_save('', $fields);
-    
+    try {
+      $account = user_save('', $fields);
+      // get profile2 object
+      $profile = profile_create(array('user' => $account, 'type' => 'main'));
+      $profile->field_firstname[LANGUAGE_NONE][0]['value'] = $user->firstname;
+      $profile->field_lastname[LANGUAGE_NONE][0]['value'] = $user->lastname;
+      $profile->field_organization[LANGUAGE_NONE][0]['value'] = $user->organization;
+      $profile->field_telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
+      // save profile
+      profile2_save($profile);
+    } catch (Exception $e) {
+      echo $e->getMessage() . PHP_EOL;
+    }
   }
 
   private function addComment($post, $nodeId, $user) {
@@ -82,59 +98,59 @@ class ForumManagement {
     $comment->nid = $nodeId; // nid of a node you want to attach a comment to
     $comment->cid = 0;
     $comment->pid = 0; // parent comment id, 0 if none
-    $comment->uid = 1; // user's id, who left the comment
+
+    $userAccount = user_load_by_name($user->user);
+    if ($userAccount)
+      $comment->uid = $userAccount->uid;
+    else
+      $comment->uid = 1; // user's id, who left the comment
     $comment->created = strtotime($post->data);
-    $comment->changed = $comment->created;
-    $comment->created = time();
+    $comment->changed = strtotime($post->data);
     $comment->is_anonymous = 0;
     $comment->status = COMMENT_PUBLISHED;
     $comment->language = LANGUAGE_NONE;
     $comment->subject = $post->pname;
     $comment->comment_body[$comment->language][0]['value'] = $post->description;
     $comment->comment_body[$comment->language][0]['format'] = 'filtered_html';
-
     $result = $this->dataBaseObj->getPostsFiles($post->post_id);
     try {
-    while ($row = mysql_fetch_object($result)) {
-      if (empty($row->filename))
-        continue;
-      if (!file_exists("/home/andrei/Desktop/cites.production.arhive/cites.production/forum/assets/files/" . $row->filename))
+      while ($row = mysql_fetch_object($result)) {
+        if (empty($row->filename))
           continue;
-      $fileName = "/home/andrei/Desktop/cites.production.arhive/cites.production/forum/assets/files/"
-          . $row->filename;
-      $file_path = drupal_realpath($fileName);
-      $file = (object) array(
-            'fid' => $this->counter,
-            'display' => 1,
-            'uid' => 1,
-            'uri' => $file_path,
-            'filemime' => file_get_mimetype($file_path),
-            'status' => 1,
-      );
-      $this->counter++;
-      $destinationPath = "public://privateFolder/forum_attachments/";
-      echo $row->filename . PHP_EOL;
-      if (file_exists($destinationPath . $row->filename)) {
-        $uri = $destinationPath . $row->filename;
-        $files = file_load_multiple(array(), array('uri' => $uri));
-        $file = reset($files);
-        $file->display = 1;
-      }
-      else {
-        $file = file_copy($file, $destinationPath . $row->filename, FILE_EXISTS_REPLACE);
-      }
+        if (!file_exists("/home/andrei/Desktop/cites.production.arhive/cites.production/forum/assets/files/" . $row->filename))
+          continue;
+        $fileName = "/home/andrei/Desktop/cites.production.arhive/cites.production/forum/assets/files/"
+            . $row->filename;
+        $file_path = drupal_realpath($fileName);
+        $file = (object) array(
+              'fid' => $this->counter,
+              'display' => 1,
+              'uid' => 1,
+              'uri' => $file_path,
+              'filemime' => file_get_mimetype($file_path),
+              'status' => 1,
+        );
+        $this->counter++;
+        $destinationPath = $this->destinationFolder;
+        echo $row->filename . PHP_EOL;
+        if (file_exists($destinationPath . $row->filename)) {
+          $uri = $destinationPath . $row->filename;
+          $files = file_load_multiple(array(), array('uri' => $uri));
+          $file = reset($files);
+          $file->display = 1;
+        }
+        else {
+          $file = file_copy($file, $destinationPath . $row->filename, FILE_EXISTS_REPLACE);
+        }
 
-      if (!is_null($file))
-        $comment->field_comment_attachment[LANGUAGE_NONE][] = (array) $file;
+        if (!is_null($file))
+          $comment->field_commentattachment[LANGUAGE_NONE][] = (array) $file;
+      }
+      comment_save($comment);
+    } catch (Exception $e) {
+      echo $e->getMessage() . PHP_EOL;
     }
-    comment_submit($comment); // saving a comment
-    comment_save($comment);
-    }
-    catch(Exception $e) {
-      echo $e->getMessage() . PHP_EOL ;
-    }
-    
- }
+  }
 
   private function addTopic($topic, $forumTaxonomyId) {
     $node = new stdClass();
@@ -150,10 +166,10 @@ class ForumManagement {
       $title = iconv('UTF-8', 'UTF-8', $title);
     }
 
-    $node->title = "$title";
+    $node->title = $title;
     $node->type = 'forum';   // Your specified content type
     $node->created = strtotime($topic->datetime);
-    $node->changed = $node->created;
+    $node->changed = strtotime($topic->datetime);
     $node->status = 1;       // To have published, else use 0
     $node->promote = 1;      // If you want promoted to front page, else use 0
     $node->sticky = 0;
@@ -191,12 +207,16 @@ class ForumManagement {
     $forums = $this->dataBaseObj->getForums();
     while ($row = mysql_fetch_object($forums)) {
       $this->addSingleForum($row);
-      //echo $row->group_id . PHP_EOL;
-      //$this->createRoles($row->group_id);
     }
   }
 
-  public function createRoles($id) {
+  public function addRoles() {
+    foreach (ForumManagement::$forumDictionary as $key => $value) {
+      $this->createRole($key);
+    }
+  }
+
+  public function createRole($id) {
     // create Forum Manager Role
     $managerRoleName = ForumManagement::$forumDictionary[$id][0];
     $role = new stdClass();
@@ -204,13 +224,17 @@ class ForumManagement {
     user_role_save($role);
     $role = user_role_load_by_name($managerRoleName);
     $manager_permissions = array(
-      'administer blocks' => TRUE, 
-      'access dashboard' => TRUE,
-      'administer advanced forum' => TRUE,
-      'view forum statistics' => TRUE
+      //'administer comments' => TRUE,
+      //'access comments' => TRUE,
+      //'view comments' => TRUE,
+      //'post comments' => TRUE,
+      //'skip comment approval' => TRUE,
+      //'edit comment' => TRUE
+      "administer blocks" => TRUE
     );
+    echo $role->rid . PHP_EOL;
     user_role_change_permissions($role->rid, $manager_permissions);
-  
+
     // create Forum Member role
     $memberRoleName = ForumManagement::$forumDictionary[$id][1];
     $role = new stdClass();
@@ -218,14 +242,17 @@ class ForumManagement {
     user_role_save($role);
     $role = user_role_load_by_name($memberRoleName);
     $member_permissions = array(
-      'administer blocks' => TRUE, 
-      'access dashboard' => TRUE,
-      'administer advanced forum' => TRUE,
-      'view forum statistics' => TRUE
+      //'administer comments' => FALSE,
+      //'access comments' => TRUE,
+      //'view comments' => TRUE,
+      //'post comments' => TRUE,
+      //'skip comment approval' => TRUE,
+      //'edit comment' => TRUE
+      "administer blocks" => TRUE
     );
     user_role_change_permissions($role->rid, $member_permissions);
-    
-    
+
+
     // create Forum Visitor role
     $visitorRoleName = ForumManagement::$forumDictionary[$id][2];
     $role = new stdClass();
@@ -233,19 +260,68 @@ class ForumManagement {
     user_role_save($role);
     $role = user_role_load_by_name($visitorRoleName);
     $visitor_permissions = array(
-      'administer blocks' => TRUE, 
-      'access dashboard' => TRUE,
-      'administer advanced forum' => TRUE,
-      'view forum statistics' => TRUE
+      //'administer comments' => FALSE,
+      //'access comments' => TRUE,
+      //'view comments' => TRUE,
+      //'post comments' => FALSE,
+      //'skip comment approval' => FALSE,
+      //'edit comments' => FALSE
+      "administer blocks" => FALSE
     );
     user_role_change_permissions($role->rid, $visitor_permissions);
   }
-  
-  public function deleteRoles(){
-    foreach(ForumManagement::$forumDictionary as $forumRoles) {
+
+  public function deleteRoles() {
+    foreach (ForumManagement::$forumDictionary as $forumRoles) {
       foreach ($forumRoles as $role) {
         user_role_delete($role);
       }
     }
   }
+
+  public function assignRolesToUsers() {
+    $result = $this->dataBaseObj->getGroupSubscriptions();
+    while ($row = mysql_fetch_object($result)) {
+      $this->giveRoleToUser($row->user_id, $row->group_id, $row->group_level);
+    }
+  }
+
+  public function giveRoleToUser($userId, $groupId, $level) {
+    $user = $this->dataBaseObj->getUser($userId);
+    $userObj = user_load_by_name($user->user);
+    $userRoles = $userObj->roles;
+    // add visitor role 
+    if ($level == 1) {
+      $roleName = ForumManagement::$forumDictionary[$groupId][2];
+    }
+    // add member role
+    else if ($level == 2) {
+      $roleName = ForumManagement::$forumDictionary[$groupId][1];
+    }
+    // add manager role
+    else if ($level == 7) {
+      $roleName = ForumManagement::$forumDictionary[$groupId][0];
+    }
+    // add admin role
+    else if ($level == 6) {
+      $roleName = ForumManagement::$forumDictionary[$groupId][0];
+    }
+    else
+      throw new Exception("Unknown level($level) for roles");
+    if ($role = user_role_load_by_name($roleName)) {
+      user_multiple_role_edit(array($userObj->uid), 'add_role', $role->rid);
+    }
+  }
+
+  public function deleteUsers() {
+    $result = $this->dataBaseObj->getUsers();
+    while ($row = mysql_fetch_object($result)) {
+      if (!empty($row->user) && $row->user != 'admin') {
+        $userObj = user_load_by_name($row->user);
+        user_delete($userObj->uid);
+      }
+    }
+  }
+  
+
 }
