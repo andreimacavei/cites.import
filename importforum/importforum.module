@@ -233,7 +233,7 @@ class ForumManagement {
       //'post comments' => TRUE,
       //'skip comment approval' => TRUE,
       //'edit comment' => TRUE
-      "administer blocks" => TRUE
+      "administer comments" => TRUE
     );
     echo $role->rid . PHP_EOL;
     user_role_change_permissions($role->rid, $manager_permissions);
