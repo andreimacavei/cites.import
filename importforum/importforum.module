@@ -148,7 +148,7 @@ class ForumManagement {
         }
 
         if (!is_null($file))
-          $comment->field_commentattachment[LANGUAGE_NONE][] = (array) $file;
+          $comment->field_comment_attachment[LANGUAGE_NONE][] = (array) $file;
       }
       comment_save($comment);
     } catch (Exception $e) {
@@ -234,7 +234,7 @@ class ForumManagement {
         }
 
         if (!is_null($file))
-          $topic->field_comment_attachment[LANGUAGE_NONE][] = (array) $file;
+          $topic->field_topic_attachment[LANGUAGE_NONE][] = (array) $file;
       }
     } catch (Exception $e) {
       echo $e->getMessage() . PHP_EOL;
