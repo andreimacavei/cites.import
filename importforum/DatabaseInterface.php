@@ -25,7 +25,12 @@ class DatabaseInterface {
     $result = mysql_query($query);
     return $result;
   }
-
+  public function getTopic($topicId){
+    $query = "SELECT * 
+              FROM `categs`
+              WHERE `categ_id` = $topicId";
+    return mysql_query($query);
+  }
   public function getTopics($forumId) {
     $query = "SELECT * 
               FROM `categs`
@@ -75,13 +80,14 @@ class DatabaseInterface {
     $result = mysql_query($query);
     return $result;
   }
-  
-  public function getForum($id){
+
+  public function getForum($id) {
     $query = "SELECT * 
               FROM `groups`
               WHERE `group_id` = $id";
     return mysql_query($query);
   }
+
 }
 
 ?>

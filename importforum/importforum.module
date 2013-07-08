@@ -277,7 +277,7 @@ class ForumManagement {
     $forum = mysql_fetch_object($this->dataBaseObj->getForum($id));
     $taxonomyTermArray = taxonomy_get_term_by_name($forum->gname);
     if (empty($taxonomyTermArray)) {
-      return ;
+      return;
     }
     $taxonomyTerm = reset($taxonomyTermArray);
     $managerRoleName = ForumManagement::$forumDictionary[$id][0];
@@ -295,7 +295,7 @@ class ForumManagement {
       "administer comments" => TRUE
     );
     user_role_change_permissions($role->rid, $manager_permissions);
-    $this->grantPermissions($taxonomyTerm->tid, $role->rid,1,1,1,1);
+    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 1, 1, 1);
 
     // create Forum Member role
     $memberRoleName = ForumManagement::$forumDictionary[$id][1];
@@ -306,7 +306,7 @@ class ForumManagement {
     $member_permissions = array(
     );
     user_role_change_permissions($role->rid, $member_permissions);
-    $this->grantPermissions($taxonomyTerm->tid, $role->rid,1,0,0,1);
+    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 1);
     // create Forum Visitor role
     $visitorRoleName = ForumManagement::$forumDictionary[$id][2];
     $role = new stdClass();
@@ -316,7 +316,7 @@ class ForumManagement {
     $visitor_permissions = array(
     );
     user_role_change_permissions($role->rid, $visitor_permissions);
-    $this->grantPermissions($taxonomyTerm->tid, $role->rid,1,0,0,1);
+    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 1);
   }
 
   public function deleteRoles() {
@@ -374,25 +374,51 @@ class ForumManagement {
   private function grantPermissions($tid, $rid, $grant_view, $grant_update, $grant_delete, $grant_create) {
     db_query("INSERT INTO `forum_access` VALUES($tid,$rid,$grant_view,$grant_update,$grant_delete,$grant_create,0)");
   }
-  
-   public function addSubscriptionToUsers() {
+
+  public function addSubscriptionToUsers() {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
       if ($row->alert_topics != NULL) {
         $this->addTopicAlerts($row);
       }
-      else if ($row->alert_forum != NULL) {
-        $this->addTopicAlerts($row);
+      if ($row->alert_forum != NULL) {
+        //$this->addForumAlerts($row);
       }
     }
   }
-  
-  private function addTopicAlerts($user){  
-    
+
+  private function addTopicAlerts($user) {
+    echo $user->email . PHP_EOL;
+    $alerts = explode(",", $user->alert_topics);
+    $userObj = user_load_by_mail($user->email);
+    if (!$userObj)
+      return;
+    foreach ($alerts as $topicAlert) {
+      $topic = mysql_fetch_object($this->dataBaseObj->getTopic($topicAlert));
+      if ($topic)
+        continue;
+      $topicNid = db_query("SELECT nid FROM `node` 
+                        WHERE `title` LIKE '{$topic->title}'")->fetchField();
+      $topicObj = node_load($topicNid);
+      if (!$topicObj)
+        continue;
+      $subscription = notifications_subscription('content_thread');
+      $subscription = $subscription->instance();
+      $subscription->set_interval(0);
+      $subscription->set_method('mail');
+      $subscription->uid = $userObj->uid;
+      notifications_save_subscription($subscription);
+    }
   }
-  
-  private function addForumAlerts($user){
-    
+
+  private function addForumAlerts($user) {
+    $alerts = explode(",", $user->alert_forums);
+    $userObj = user_load_by_mail($user->mail);
+    if (!userObj)
+      return;
+    foreach ($alerts as $forumAlert) {
+      
+    }
   }
 
 }
