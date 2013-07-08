@@ -1,0 +1,3 @@
+name = addconsistency
+description =  add consistency for url and create node translation
+core = 7.x
