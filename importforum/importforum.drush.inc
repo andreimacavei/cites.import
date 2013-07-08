@@ -37,14 +37,16 @@ function drush_importforum_import_forum($host = 'localhost', $username = 'root',
   $dataBaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
   $forumObj = new ForumManagement($dataBaseObj, $pathToAttachments);
   // stage I - add users
-  $forumObj->addUsers($databaseObj);
+  //$forumObj->addUsers($databaseObj);
   // stage II - add forum content
-  $forumObj->addForums();
+  //$forumObj->addForums();
   // stage III - add custom roles
-  $forumObj->addRoles();
+  //$forumObj->addRoles();
   // stage IV - assign roles to users
-  $forumObj->assignRolesToUsers();
-  }
+  //$forumObj->assignRolesToUsers();
+  
+  $forumObj->addSubscriptionToUsers();
+}
 
 /**
  * command to remove custom roles

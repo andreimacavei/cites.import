@@ -54,8 +54,9 @@ class DatabaseInterface {
   }
 
   public function getUsers() {
-    $query = "SELECT *
-              FROM `users`";
+    $query = "SELECT * FROM `users` 
+              WHERE `email` NOT LIKE '' 
+              GROUP BY `email`";
     $result = mysql_query($query);
     return $result;
   }

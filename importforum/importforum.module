@@ -374,5 +374,25 @@ class ForumManagement {
   private function grantPermissions($tid, $rid, $grant_view, $grant_update, $grant_delete, $grant_create) {
     db_query("INSERT INTO `forum_access` VALUES($tid,$rid,$grant_view,$grant_update,$grant_delete,$grant_create,0)");
   }
+  
+   public function addSubscriptionToUsers() {
+    $result = $this->dataBaseObj->getUsers();
+    while ($row = mysql_fetch_object($result)) {
+      if ($row->alert_topics != NULL) {
+        $this->addTopicAlerts($row);
+      }
+      else if ($row->alert_forum != NULL) {
+        $this->addTopicAlerts($row);
+      }
+    }
+  }
+  
+  private function addTopicAlerts($user){  
+    
+  }
+  
+  private function addForumAlerts($user){
+    
+  }
 
 }
