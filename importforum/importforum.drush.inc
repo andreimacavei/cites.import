@@ -31,9 +31,9 @@ function importforum_drush_command() {
 }
 
 function drush_importforum_import_forum($host = 'localhost', $username = 'root', $password = '', $database = 'cites', $pathToAttachments = '/') {
-  foreach (taxonomy_get_tree(2) as $term) {
-    taxonomy_term_delete($term->tid);
-  }
+  //foreach (taxonomy_get_tree(2) as $term) {
+  //  taxonomy_term_delete($term->tid);
+  //}
   $dataBaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
   $forumObj = new ForumManagement($dataBaseObj, $pathToAttachments);
   // stage I - add users
@@ -46,7 +46,7 @@ function drush_importforum_import_forum($host = 'localhost', $username = 'root',
   $forumObj->assignRolesToUsers();  
   // stage V - add subscriptions
   $forumObj->addSubscriptionToUsers();
-}
+  }
 
 /**
  * command to remove custom roles

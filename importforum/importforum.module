@@ -100,18 +100,22 @@ class ForumManagement {
       $profile->field_telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
       // save profile
       if (count($this->strangeUsers[$user->email]) > 1) {
+        echo $user->firstname . " " . $user->lastname . " " . $user->email . " has multiple identities: {$user->user_id}, ";
         foreach ($this->strangeUsers[$user->email] as $user_id) {
           if ($user_id != $user->user_id) {
+            echo $user_id . ", ";
             $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($user_id));
-            if (!$duplicateUser) continue;
+            if (!$duplicateUser)
+              continue;
             if ($profile->field_organization[LANGUAGE_NONE][0]['value'] != $duplicateUser->organization) {
               $profile->field_organization[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->organization}";
             }
-            if ($profile->field_organization[LANGUAGE_NONE][0]['value'] != $duplicateUser->telephone) {
-              $profile->field_organization[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->telephone}";
+            if ($profile->field_telephone[LANGUAGE_NONE][0]['value'] != $duplicateUser->telephone) {
+              $profile->field_telephone[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->telephone}";
             }
           }
         }
+        echo PHP_EOL;
       }
       profile2_save($profile);
     } catch (Exception $e) {
@@ -152,7 +156,7 @@ class ForumManagement {
     $comment->cid = 0;
     $comment->pid = 0; // parent comment id, 0 if none
 
-    $userAccount = user_load_by_mail($user->email);
+    $userAccount = user_load_by_name($user->user);
     if ($userAccount)
       $comment->uid = $userAccount->uid;
     else
@@ -232,12 +236,14 @@ class ForumManagement {
     $result = $this->dataBaseObj->getPosts($topic->categ_id);
 
     if ($u = mysql_fetch_object($result)) {
-      $user = $this->dataBaseObj->getUser($u->user_id);
+      $userResult = $this->dataBaseObj->getUser($u->user_id);
+      $user = mysql_fetch_object($userResult);
       $node = $this->completeTopic($node, $u, $user);
     }
     node_save($node);
     while ($u = mysql_fetch_object($result)) {
-      $user = $this->dataBaseObj->getUser($u->user_id);
+      $userResult = $this->dataBaseObj->getUser($u->user_id);
+      $user = mysql_fetch_object($userResult);
       $this->addComment($u, $node->nid, $user);
     }
   }
@@ -245,7 +251,7 @@ class ForumManagement {
   private function completeTopic($topic, $post, $user) {
     $topic->body[$topic->language][0]['value'] = $post->description;
     $topic->body[$topic->language][0]['format'] = 'filtered_html';
-    $userAccount = user_load_by_mail($user->email);
+    $userAccount = user_load_by_name($user->user);
     if ($userAccount)
       $topic->uid = $userAccount->uid;
     else
@@ -336,7 +342,7 @@ class ForumManagement {
     $manager_permissions = array(
     );
     user_role_change_permissions($role->rid, $manager_permissions);
-    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 1, 1, 1);
+    $this->asPermissions($taxonomyTerm->tid, $role->rid, 1, 1, 1, 1);
 
     // create Forum Member role
     $memberRoleName = ForumManagement::$forumDictionary[$id][1];
@@ -357,7 +363,7 @@ class ForumManagement {
     $visitor_permissions = array(
     );
     user_role_change_permissions($role->rid, $visitor_permissions);
-    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 1);
+    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 0);
   }
 
   public function deleteRoles() {
@@ -376,8 +382,9 @@ class ForumManagement {
   }
 
   public function giveRoleToUser($userId, $groupId, $level) {
-    $user = $this->dataBaseObj->getUser($userId);
-    $userObj = user_load_by_mail($user->email);
+    $userResult = $this->dataBaseObj->getUser($userId);
+    $user = mysql_fetch_object($userResult);
+    $userObj = user_load_by_name($user->user);
     $userRoles = $userObj->roles;
     // add visitor role 
     if ($level == 1) {
@@ -406,9 +413,9 @@ class ForumManagement {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
       if (!empty($row->user) && $row->user != 'admin') {
-        if (strpos($row->email,"eaudeweb") || strpos($row->email,"example"))
-            continue;
-        $userObj = user_load_by_mail($row->email);
+        if (strpos($row->email, "eaudeweb") || strpos($row->email, "example"))
+          continue;
+        $userObj = user_load_by_name($row->user);
         if (!is_null($userObj))
           user_delete($userObj->uid);
       }
@@ -439,7 +446,7 @@ class ForumManagement {
         if (count($this->strangeUsers[$row->email]) > 1) {
           foreach ($this->strangeUsers[$row->email] as $uid) {
             if ($uid != $row->uid) {
-              $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($usid));
+              $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($uid));
               if ($duplicateUser)
                 $this->addForumAlerts($duplicateUser);
             }
@@ -451,12 +458,12 @@ class ForumManagement {
 
   private function addTopicAlerts($user) {
     $alerts = explode(",", $user->alert_topics);
-    $userObj = user_load_by_mail($user->email);
+    $userObj = user_load_by_name($user->user);
     if (!$userObj)
       return;
     foreach ($alerts as $topicAlert) {
       $topic = mysql_fetch_object($this->dataBaseObj->getTopic(intval($topicAlert)));
-      if (is_null($topic))
+      if (!$topic)
         continue;
       $topicNid = db_query("SELECT nid FROM `node` 
                         WHERE `title` = '{$topic->cname}'")->fetchField();
@@ -468,8 +475,8 @@ class ForumManagement {
 
   private function addForumAlerts($user) {
     $alerts = explode(",", $user->alert_forums);
-    $userObj = user_load_by_mail($user->email);
-    if (!userObj)
+    $userObj = user_load_by_name($user->user);
+    if (!$userObj)
       return;
     foreach ($alerts as $forumAlert) {
       $forum = mysql_fetch_object($this->dataBaseObj->getForum(intval($forumAlert)));
@@ -483,7 +490,6 @@ class ForumManagement {
       if (!$result)
         continue;
       $tid = $result->tid;
-      var_dump($result);
       $uid = $userObj->uid;
       db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
     }
