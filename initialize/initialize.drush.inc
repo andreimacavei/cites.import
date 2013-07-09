@@ -249,10 +249,36 @@ function drush_initialize_menus( $config ) {
 			continue;
 		}
 
+		if ( isset( $menu['links'] ) ) {
+			$links = $menu['links'];
+
+			unset( $menu['links'] );
+		}
+
 		// Saves a custom menu.
 		menu_save( $menu );
 
 		drush_log( dt( '!menu-name: Menu successfully saved', array( '!menu-name' => $menu['menu_name'] ) ), 'ok' );
+
+		if ( ! isset( $links ) || empty( $links ) )
+			continue;
+
+		foreach ( $links as $link ) {
+			$link['menu_name'] = $menu['menu_name'];
+
+			if ( ! isset( $link['link_path'] ) || empty( $link['link_path'] ) || ! drupal_lookup_path( 'source', $link['link_path'] ) )
+				continue;
+
+			if ( ! isset( $link['link_title'] ) || empty( $link['link_title'] ) )
+				continue;
+
+			$link['link_path']   = drupal_get_normal_path( $link['link_path'] );
+			$link['router_path'] = _menu_find_router_path( $link['link_path'] );
+
+			menu_link_save( $link );
+		}
+
+		drush_log( dt( '!menu-name: Links successfully saved', array( '!menu-name' => $menu['menu_name'] ) ), 'ok' );
 	}
 }
 
