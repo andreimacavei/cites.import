@@ -388,27 +388,21 @@ class ForumManagement {
   }
 
   private function addTopicAlerts($user) {
-    echo $user->email . PHP_EOL;
     $alerts = explode(",", $user->alert_topics);
     $userObj = user_load_by_mail($user->email);
     if (!$userObj)
       return;
     foreach ($alerts as $topicAlert) {
-      $topic = mysql_fetch_object($this->dataBaseObj->getTopic($topicAlert));
-      if ($topic)
+      $topic = mysql_fetch_object($this->dataBaseObj->getTopic(intval($topicAlert)));
+      if (is_null($topic))
         continue;
       $topicNid = db_query("SELECT nid FROM `node` 
-                        WHERE `title` LIKE '{$topic->title}'")->fetchField();
-      $topicObj = node_load($topicNid);
-      if (!$topicObj)
+                        WHERE `title` = '{$topic->cname}'")->fetchField();
+      if (empty($topicNid))
         continue;
-      $subscription = notifications_subscription('content_thread');
-      $subscription = $subscription->instance();
-      $subscription->set_interval(0);
-      $subscription->set_method('mail');
-      $subscription->uid = $userObj->uid;
-      notifications_save_subscription($subscription);
+      node_notify_subscribe($topicNid, $userObj->uid,$userObj->email,TRUE);
     }
+    echo PHP_EOL;
   }
 
   private function addForumAlerts($user) {
