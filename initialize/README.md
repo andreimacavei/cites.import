@@ -6,7 +6,9 @@ Initialize commands initializes your site.
 
 The following commands are available:
 
-* **initialize (init)** Initializes your site.
+```
+initialize (init)     Initializes your site.
+```
 
 ### initialize
 
