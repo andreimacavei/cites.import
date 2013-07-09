@@ -15,15 +15,17 @@ This command will initialize your site.
 #### Examples
 
 ```
-drush init languages --config-file=config.json
+drush init languages       Adds languages defined in the
+--config-file=config.json  config.json configuration file.
 ```
-
-Adds languages defined in the config.json configuration file.
 
 #### Arguments
 
-`type` Type of the initialization. Omit this argument to choose from available
-options.
+```
+type                                      Type of the initialization. Omit
+                                          this argument to choose from
+                                          available options.
+```
 
 The following initialization types are available:
 
@@ -35,7 +37,9 @@ Each type must be defined in the configuration file.
 
 #### Options
 
-`--config-file=[config.json]` Path to the configuration file.
+```
+--config-file=[config.json]               Path to the configuration file.
+```
 
 If set then the specified configuration file will be loaded. Otherwise the
 default value will be used.
@@ -80,4 +84,6 @@ A sample configuration file is shown below:
 
 #### Aliases
 
-`init`
+```
+init
+```
