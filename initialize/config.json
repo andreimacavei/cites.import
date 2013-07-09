@@ -25,7 +25,22 @@
 		{
 			"menu_name": "footer-menu",
 			"title": "Footer menu",
-			"i18n_mode": "I18N_MODE_MULTIPLE"
+			"i18n_mode": "I18N_MODE_MULTIPLE",
+			"links":
+			[
+				{
+					"link_path": "disclaimer.php",
+					"link_title": "Disclaimer"
+				},
+				{
+					"link_path": "contact.php",
+					"link_title": "Contact us"
+				},
+				{
+					"link_path": "resources/faq.php",
+					"link_title": "FAQs"
+				}
+			]
 		}
 	]
 }

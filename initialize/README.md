@@ -87,7 +87,14 @@ A sample configuration file is shown below:
 			"menu_name": "main-menu",
 			"title": "Main menu",
 			"description": "The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.",
-			"i18n_mode": "I18N_MODE_MULTIPLE"
+			"i18n_mode": "I18N_MODE_MULTIPLE",
+			"links":
+			[
+				{
+					"link_path": "<front>",
+					"link_title": "Home"
+				}
+			]
 		}
 	]
 }
