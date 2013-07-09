@@ -98,6 +98,33 @@ class ForumManagement {
     }
   }
 
+  public static function updateUser($username, $password, $email) {
+    $userObj = user_load_by_mail($email);
+    $userDuplicate = user_load_by_name($username);
+    if ($userObj->uid != $userDuplicate->uid)
+      $username .= rand (10, 99);
+    if (is_null($userObj)) {
+      $fields = array(
+        'name' => $username,
+        'mail' => $email,
+        'pass' => $password,
+        'status' => 1,
+        'init' => $username,
+        'roles' => array(
+          DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        ),
+      );
+      $account = user_save($userObj);
+      $profile = profile_create(array('user' => $account, 'type' => 'main'));
+      $profile->field_firstname[LANGUAGE_NONE][0]['value'] ='';
+      $profile->field_lastname[LANGUAGE_NONE][0]['value'] = '';
+      $profile->field_organization[LANGUAGE_NONE][0]['value'] = '';
+      $profile->field_telephone[LANGUAGE_NONE][0]['value'] = '';
+      profile2_save($profile);
+    }
+    return $userObj;
+  }
+
   private function addComment($post, $nodeId, $user) {
     $comment = new stdClass();
     $comment->nid = $nodeId; // nid of a node you want to attach a comment to
@@ -400,9 +427,8 @@ class ForumManagement {
                         WHERE `title` = '{$topic->cname}'")->fetchField();
       if (empty($topicNid))
         continue;
-      node_notify_subscribe($topicNid, $userObj->uid,$userObj->email,TRUE);
+      node_notify_subscribe($topicNid, $userObj->uid, $userObj->email, TRUE);
     }
-    echo PHP_EOL;
   }
 
   private function addForumAlerts($user) {
