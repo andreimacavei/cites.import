@@ -97,7 +97,7 @@ function drush_initialize_all( $config ) {
 }
 
 /**
- * Sanitizes a language.
+ * Sanitizes a language definition.
  *
  * @param array $language An associative array describing a language.
  *
@@ -142,12 +142,28 @@ function drush_initialize_languages( $config ) {
 	// Returns a list of installed languages, indexed by the specified key.
 	$languages = language_list();
 
-	foreach ( $config['languages'] as $language ) {
-		// Sanitizes language.
+	foreach ( $config['languages'] as $index => $language ) {
+		// Sanitizes the language definition.
 		$language = drush_initialize_sanitize_language( $language );
 
 		if ( array_key_exists( $language['langcode'], $languages ) ) {
 			drush_log( dt( '!langcode: Language already exists', array( '!langcode' => $language['langcode'] ) ), 'warning' );
+
+			$properties = array( 'name', 'native', 'direction', 'domain', 'prefix' );
+
+			$options = array();
+
+			foreach ( array_keys( $config['languages'][ $index ] ) as $key ) {
+				if ( in_array( $key, $properties ) )
+					$options[ $key ] = $language[ $key ];
+			}
+
+			if ( ! empty( $options ) ) {
+				// Returns a new UpdateQuery object for the active database.
+				db_update( 'languages' )->fields( $options )->condition( 'language', $language['langcode'] )->execute();
+			}
+
+			drush_log( dt( '!langcode: Language successfully updated', array( '!langcode' => $language['langcode'] ) ), 'ok' );
 
 			continue;
 		}
@@ -163,7 +179,7 @@ function drush_initialize_languages( $config ) {
 			continue;
 		}
 
-		// Add the language definition.
+		// Adds the language definition.
 		locale_add_language(
 			$language['langcode'],
 			$language['name'],
@@ -175,16 +191,18 @@ function drush_initialize_languages( $config ) {
 			$language['default']
 		);
 
-		// See if we have language files to import for the newly added
-		// language, collect and import them.
+		// Checks whether there are language files to import for the newly added
+		// language, collects and imports them.
 		if ( $batch = locale_batch_by_language( $language['langcode'], '_l10n_update_batch_finished' ) ) {
+			// Adds a new batch.
 			batch_set( $batch );
 
+			// Retrieves the current batch.
 			$batch =& batch_get();
 
 			$batch['progressive'] = FALSE;
 
-			// Process the batch.
+			// Processes the batch.
 			drush_backend_batch_process();
 		}
 
