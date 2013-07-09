@@ -83,10 +83,11 @@ class ForumManagement {
         DRUPAL_AUTHENTICATED_RID => 'authenticated user',
       ),
     );
+
     try {
       $account = user_save('', $fields);
       // get profile2 object
-      $profile = profile_create(array('user' => $account, 'type' => 'main'));
+      $profile = profile_create(array('user' => $account, 'type' => 'extendedprofile'));
       $profile->field_firstname[LANGUAGE_NONE][0]['value'] = $user->firstname;
       $profile->field_lastname[LANGUAGE_NONE][0]['value'] = $user->lastname;
       $profile->field_organization[LANGUAGE_NONE][0]['value'] = $user->organization;
@@ -102,7 +103,7 @@ class ForumManagement {
     $userObj = user_load_by_mail($email);
     $userDuplicate = user_load_by_name($username);
     if ($userObj->uid != $userDuplicate->uid)
-      $username .= rand (10, 99);
+      $username .= rand(10, 99);
     if (is_null($userObj)) {
       $fields = array(
         'name' => $username,
@@ -116,7 +117,7 @@ class ForumManagement {
       );
       $account = user_save($userObj);
       $profile = profile_create(array('user' => $account, 'type' => 'main'));
-      $profile->field_firstname[LANGUAGE_NONE][0]['value'] ='';
+      $profile->field_firstname[LANGUAGE_NONE][0]['value'] = '';
       $profile->field_lastname[LANGUAGE_NONE][0]['value'] = '';
       $profile->field_organization[LANGUAGE_NONE][0]['value'] = '';
       $profile->field_telephone[LANGUAGE_NONE][0]['value'] = '';
@@ -393,7 +394,8 @@ class ForumManagement {
     while ($row = mysql_fetch_object($result)) {
       if (!empty($row->user) && $row->user != 'admin') {
         $userObj = user_load_by_name($row->user);
-        user_delete($userObj->uid);
+        if (!is_null($userObj))
+          user_delete($userObj->uid);
       }
     }
   }
@@ -408,8 +410,8 @@ class ForumManagement {
       if ($row->alert_topics != NULL) {
         $this->addTopicAlerts($row);
       }
-      if ($row->alert_forum != NULL) {
-        //$this->addForumAlerts($row);
+      if ($row->alert_forums != NULL) {
+        $this->addForumAlerts($row);
       }
     }
   }
@@ -433,12 +435,26 @@ class ForumManagement {
 
   private function addForumAlerts($user) {
     $alerts = explode(",", $user->alert_forums);
-    $userObj = user_load_by_mail($user->mail);
+    $userObj = user_load_by_mail($user->email);
     if (!userObj)
       return;
     foreach ($alerts as $forumAlert) {
-      
+      $forum = mysql_fetch_object($this->dataBaseObj->getForum(intval($forumAlert)));
+      if (is_null($forum)) {
+        continue;
+      }
+      $result = db_query("SELECT * FROM `taxonomy_term_data` WHERE `name` = '{$forum->gname}'");
+      if (!$result)
+        continue;
+      $result = $result->fetch();
+      if (!$result)
+        continue;
+      $tid = $result->tid;
+      var_dump($result);
+      $uid = $userObj->uid;
+      db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
     }
   }
+  
 
 }

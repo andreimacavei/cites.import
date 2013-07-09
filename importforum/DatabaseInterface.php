@@ -87,6 +87,18 @@ class DatabaseInterface {
               WHERE `group_id` = $id";
     return mysql_query($query);
   }
+  
+  public function getStrangeUsers(){
+    $query = "SELECT * 
+              FROM `users` 
+              WHERE `email` != ''
+              AND
+              `user_id` NOT IN 
+              (SELECT `user_id` 
+              FROM `users` 
+              GROUP BY `email`
+              );";
+  }
 
 }
 
