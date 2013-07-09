@@ -1,0 +1,18 @@
+{
+	"languages":
+	[
+		{
+			"langcode": "en",
+			"prefix": "eng",
+			"default": true
+		},
+		{
+			"langcode": "fr",
+			"prefix": "fra"
+		},
+		{
+			"langcode": "es",
+			"prefix": "esp"
+		}
+	]
+}
