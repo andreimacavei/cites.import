@@ -71,7 +71,7 @@ class DatabaseInterface {
               FROM `users`
               WHERE `user_id` = $userId";
     $result = mysql_query($query);
-    return mysql_fetch_object($result);
+    return $result;
   }
 
   public function getGroupSubscriptions() {

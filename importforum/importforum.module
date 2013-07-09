@@ -406,6 +406,8 @@ class ForumManagement {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
       if (!empty($row->user) && $row->user != 'admin') {
+        if (strpos($row->email,"eaudeweb") || strpos($row->email,"example"))
+            continue;
         $userObj = user_load_by_mail($row->email);
         if (!is_null($userObj))
           user_delete($userObj->uid);
