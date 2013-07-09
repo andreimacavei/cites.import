@@ -237,6 +237,18 @@ function drush_initialize_menus( $config ) {
 	foreach ( $config['menus'] as $index => $menu ) {
 		$menu = drush_initialize_sanitize_menu( $menu );
 
+		if ( ! isset( $menu['menu_name'] ) || empty( $menu['menu_name'] ) ) {
+			drush_log( dt( '!menu-name: \'menu_name\' cannot be null', array( '!menu-name' => $menu['menu_name'] ) ), 'warning' );
+
+			continue;
+		}
+
+		if ( ! isset( $menu['title'] ) || empty( $menu['title'] ) ) {
+			drush_log( dt( '!menu-name: \'title\' cannot be null', array( '!menu-name' => $menu['menu_name'] ) ), 'warning' );
+
+			continue;
+		}
+
 		// Saves a custom menu.
 		menu_save( $menu );
 
