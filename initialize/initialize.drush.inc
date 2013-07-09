@@ -146,9 +146,6 @@ function drush_initialize_languages( $config ) {
 		// Sanitizes language.
 		$language = drush_initialize_sanitize_language( $language );
 
-		if ( is_null( $language ) )
-			continue;
-
 		if ( array_key_exists( $language['langcode'], $languages ) ) {
 			drush_log( dt( '!langcode: Language already exists', array( '!langcode' => $language['langcode'] ) ), 'warning' );
 
