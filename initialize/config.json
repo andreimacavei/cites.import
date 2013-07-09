@@ -3,8 +3,7 @@
 	[
 		{
 			"langcode": "en",
-			"prefix": "eng",
-			"default": true
+			"prefix": "eng"
 		},
 		{
 			"langcode": "fr",
