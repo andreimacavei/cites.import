@@ -100,6 +100,9 @@ class ForumManagement {
 
   public static function updateUser($username, $password, $email) {
     $userObj = user_load_by_mail($email);
+    $userDuplicate = user_load_by_name($username);
+    if ($userObj->uid != $userDuplicate->uid)
+      $username .= rand (10, 99);
     if (is_null($userObj)) {
       $fields = array(
         'name' => $username,
