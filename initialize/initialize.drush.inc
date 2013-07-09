@@ -15,7 +15,7 @@ function initialize_drush_command() {
 		),
 		'bootstrap'           => DRUSH_BOOTSTRAP_DRUPAL_FULL,
 		'description'         => 'Initializes your site.',
-		'drupal dependencies' => array( 'locale' ),
+		'drupal dependencies' => array( 'i18n_menu', 'locale' ),
 		'examples'            => array(
 			'drush init languages --config-file=config.json' => 'Adds languages defined in the config.json configuration file.'
 		),
@@ -213,12 +213,47 @@ function drush_initialize_languages( $config ) {
 }
 
 /**
+ * Sanitizes a menu definition.
+ *
+ * @param array $menu An associative array describing a menu.
+ *
+ * @return array An associative array with the sanitized menu.
+ */
+function drush_initialize_sanitize_menu( $menu ) {
+	if ( ! isset( $menu['i18n_mode'] ) )
+		$menu['i18n_mode'] = I18N_MODE_NONE;
+	else
+		$menu['i18n_mode'] = defined( $menu['i18n_mode'] ) ? constant( $menu['i18n_mode'] ) : I18N_MODE_NONE;
+
+	return $menu;
+}
+
+/**
  * Initializes menus.
  *
  * @param $config An associative array with the configuration data.
  */
 function drush_initialize_menus( $config ) {
+	foreach ( $config['menus'] as $index => $menu ) {
+		$menu = drush_initialize_sanitize_menu( $menu );
 
+		if ( ! isset( $menu['menu_name'] ) || empty( $menu['menu_name'] ) ) {
+			drush_log( dt( '!menu-name: \'menu_name\' cannot be null', array( '!menu-name' => $menu['menu_name'] ) ), 'warning' );
+
+			continue;
+		}
+
+		if ( ! isset( $menu['title'] ) || empty( $menu['title'] ) ) {
+			drush_log( dt( '!menu-name: \'title\' cannot be null', array( '!menu-name' => $menu['menu_name'] ) ), 'warning' );
+
+			continue;
+		}
+
+		// Saves a custom menu.
+		menu_save( $menu );
+
+		drush_log( dt( '!menu-name: Menu successfully saved', array( '!menu-name' => $menu['menu_name'] ) ), 'ok' );
+	}
 }
 
 /**
