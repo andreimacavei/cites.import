@@ -58,6 +58,11 @@ class ForumManagement {
       throw new Exception("Cannot create directory to put attachments" . PHP_EOL);
     echo "Forum attachments will be put in " . $dirPath . PHP_EOL;
     $this->destinationFolder = $dirPath;
+
+    $result = $this->dataBaseObj->getAllUsers();
+    while ($row = mysql_fetch_object($result)) {
+      $this->strangeUsers[$row->email][] = $row->user_id;
+    }
   }
 
   public function addUsers() {
@@ -94,6 +99,20 @@ class ForumManagement {
       $profile->field_organization[LANGUAGE_NONE][0]['value'] = $user->organization;
       $profile->field_telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
       // save profile
+      if (count($this->strangeUsers[$user->email]) > 1) {
+        foreach ($this->strangeUsers[$user->email] as $user_id) {
+          if ($user_id != $user->user_id) {
+            $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($user_id));
+            if (!$duplicateUser) continue;
+            if ($profile->field_organization[LANGUAGE_NONE][0]['value'] != $duplicateUser->organization) {
+              $profile->field_organization[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->organization}";
+            }
+            if ($profile->field_organization[LANGUAGE_NONE][0]['value'] != $duplicateUser->telephone) {
+              $profile->field_organization[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->telephone}";
+            }
+          }
+        }
+      }
       profile2_save($profile);
     } catch (Exception $e) {
       echo $e->getMessage() . PHP_EOL;
@@ -133,7 +152,7 @@ class ForumManagement {
     $comment->cid = 0;
     $comment->pid = 0; // parent comment id, 0 if none
 
-    $userAccount = user_load_by_name($user->user);
+    $userAccount = user_load_by_mail($user->email);
     if ($userAccount)
       $comment->uid = $userAccount->uid;
     else
@@ -226,7 +245,7 @@ class ForumManagement {
   private function completeTopic($topic, $post, $user) {
     $topic->body[$topic->language][0]['value'] = $post->description;
     $topic->body[$topic->language][0]['format'] = 'filtered_html';
-    $userAccount = user_load_by_name($user->user);
+    $userAccount = user_load_by_mail($user->email);
     if ($userAccount)
       $topic->uid = $userAccount->uid;
     else
@@ -315,13 +334,6 @@ class ForumManagement {
     user_role_save($role);
     $role = user_role_load_by_name($managerRoleName);
     $manager_permissions = array(
-      //'administer comments' => TRUE,
-      //'access comments' => TRUE,
-      //'view comments' => TRUE,
-      //'post comments' => TRUE,
-      //'skip comment approval' => TRUE,
-      //'edit comment' => TRUE
-      "administer comments" => TRUE
     );
     user_role_change_permissions($role->rid, $manager_permissions);
     $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 1, 1, 1);
@@ -365,7 +377,7 @@ class ForumManagement {
 
   public function giveRoleToUser($userId, $groupId, $level) {
     $user = $this->dataBaseObj->getUser($userId);
-    $userObj = user_load_by_name($user->user);
+    $userObj = user_load_by_mail($user->email);
     $userRoles = $userObj->roles;
     // add visitor role 
     if ($level == 1) {
@@ -394,7 +406,7 @@ class ForumManagement {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
       if (!empty($row->user) && $row->user != 'admin') {
-        $userObj = user_load_by_name($row->user);
+        $userObj = user_load_by_mail($row->email);
         if (!is_null($userObj))
           user_delete($userObj->uid);
       }
@@ -410,9 +422,27 @@ class ForumManagement {
     while ($row = mysql_fetch_object($result)) {
       if ($row->alert_topics != NULL) {
         $this->addTopicAlerts($row);
+        if (count($this->strangeUsers[$row->email]) > 1) {
+          foreach ($this->strangeUsers[$row->email] as $uid) {
+            if ($uid != $row->uid) {
+              $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($uid));
+              if ($duplicateUser)
+                $this->addTopicAlerts($duplicateUser);
+            }
+          }
+        }
       }
       if ($row->alert_forums != NULL) {
         $this->addForumAlerts($row);
+        if (count($this->strangeUsers[$row->email]) > 1) {
+          foreach ($this->strangeUsers[$row->email] as $uid) {
+            if ($uid != $row->uid) {
+              $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($usid));
+              if ($duplicateUser)
+                $this->addForumAlerts($duplicateUser);
+            }
+          }
+        }
       }
     }
   }
@@ -456,15 +486,5 @@ class ForumManagement {
       db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
     }
   }
-
-  public function detectStrangeUsers() {
-    $result = $this->dataBaseObj->getAllUsers();
-    while ($row = mysql_fetch_object($result)) {
-      $this->strangeUsers[$row->email][] = $row->user_id;
-    }
-    print_r($this->strangeUsers);
-  }
-  
-  
 
 }

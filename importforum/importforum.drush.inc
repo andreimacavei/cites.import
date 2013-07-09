@@ -30,36 +30,35 @@ function importforum_drush_command() {
   return $items;
 }
 
-function drush_importforum_import_forum($host = 'localhost', $username = 'root', $password = '', $database = 'cites', $pathToAttachments) {
+function drush_importforum_import_forum($host = 'localhost', $username = 'root', $password = '', $database = 'cites', $pathToAttachments = '/') {
   foreach (taxonomy_get_tree(2) as $term) {
     taxonomy_term_delete($term->tid);
   }
   $dataBaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
   $forumObj = new ForumManagement($dataBaseObj, $pathToAttachments);
-    $forumObj->detectStrangeUsers();
   // stage I - add users
-  //$forumObj->addUsers($databaseObj);
+  $forumObj->addUsers($databaseObj);
   // stage II - add forum content
-  //$forumObj->addForums();
+  $forumObj->addForums();
   // stage III - add custom roles
-  //$forumObj->addRoles();
+  $forumObj->addRoles();
   // stage IV - assign roles to users
-  //$forumObj->assignRolesToUsers();  
+  $forumObj->assignRolesToUsers();  
   // stage V - add subscriptions
-  //$forumObj->addSubscriptionToUsers();
-  // stage VI - add strange users
+  $forumObj->addSubscriptionToUsers();
 }
 
 /**
  * command to remove custom roles
  */
-function drush_importforum_remove_roles() {
-  $obj = new ForumManagement();
+function drush_importforum_remove_roles($host = 'localhost',$username = 'root',$password = '',$database = 'cites',$pathToAttachments = '/') {
+  $databaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
+  $obj = new ForumManagement($databaseObj,$pathToAttachments);
   $obj->deleteRoles();
 }
 
-function drush_importforum_delete_users($host = 'localhost', $username = 'root', $password = '', $database = 'cites') {
+function drush_importforum_delete_users($host = 'localhost', $username = 'root', $password = '', $database = 'cites',$pathToAttachments = '/') {
   $databaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
-  $obj = new ForumManagement($databaseObj);
+  $obj = new ForumManagement($databaseObj,$pathToAttachments);
   $obj->deleteUsers();
 }
