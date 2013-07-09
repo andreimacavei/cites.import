@@ -153,6 +153,8 @@ function drush_initialize_languages( $config ) {
 
 			$options = array();
 
+			// Keeps only valid properties that are defined in the configuration
+			// file.
 			foreach ( array_keys( $config['languages'][ $index ] ) as $key ) {
 				if ( in_array( $key, $properties ) )
 					$options[ $key ] = $language[ $key ];
