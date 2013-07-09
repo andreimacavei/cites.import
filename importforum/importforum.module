@@ -40,6 +40,7 @@ class ForumManagement {
   private $counter = 1;
   private $destinationFolder;
   private $pathToAttachments;
+  private $strangeUsers;
 
   public function __construct(DatabaseInterface $databaseObj, $pathToAttach = "/home/andrei/Desktop/cites.production.
     arhive/cites.production/forum/asserts/files/") {
@@ -116,7 +117,7 @@ class ForumManagement {
         ),
       );
       $account = user_save($userObj);
-      $profile = profile_create(array('user' => $account, 'type' => 'main'));
+      $profile = profile_create(array('user' => $account, 'type' => 'extendedprofile'));
       $profile->field_firstname[LANGUAGE_NONE][0]['value'] = '';
       $profile->field_lastname[LANGUAGE_NONE][0]['value'] = '';
       $profile->field_organization[LANGUAGE_NONE][0]['value'] = '';
@@ -455,6 +456,15 @@ class ForumManagement {
       db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
     }
   }
+
+  public function detectStrangeUsers() {
+    $result = $this->dataBaseObj->getAllUsers();
+    while ($row = mysql_fetch_object($result)) {
+      $this->strangeUsers[$row->email][] = $row->user_id;
+    }
+    print_r($this->strangeUsers);
+  }
+  
   
 
 }

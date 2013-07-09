@@ -97,7 +97,15 @@ class DatabaseInterface {
               (SELECT `user_id` 
               FROM `users` 
               GROUP BY `email`
-              );";
+              )";
+    return mysql_query($query);
+  }
+  
+  public function getAllUsers(){
+    $query = "SELECT * 
+              FROM `users`
+              WHERE `email` != ''";
+    return mysql_query($query);
   }
 
 }
