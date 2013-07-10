@@ -30,19 +30,39 @@
 			[
 				{
 					"link_path": "disclaimer.php",
-					"link_title": "Disclaimer"
+					"link_title": "Disclaimer",
+					"translations":
+					{
+						"fr": "Avertissement",
+						"es": "Descargo"
+					}
 				},
 				{
 					"link_path": "contact.php",
-					"link_title": "Contact us"
+					"link_title": "Contact us",
+					"translations":
+					{
+						"fr": "Contactez-nous",
+						"es": "Contáctenos"
+					}
 				},
 				{
 					"link_path": "resources/faq.php",
-					"link_title": "FAQs"
+					"link_title": "FAQs",
+					"translations":
+					{
+						"fr": "FAQs",
+						"es": "FAQs"
+					}
 				},
 				{
 					"link_path": "user/login",
-					"link_title": "Log in"
+					"link_title": "Log in",
+					"translations":
+					{
+						"fr": "Se connecter",
+						"es": "Iniciar sesión"
+					}
 				}
 			]
 		}
