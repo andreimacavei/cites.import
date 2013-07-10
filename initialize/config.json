@@ -20,7 +20,451 @@
 			"menu_name": "main-menu",
 			"title": "Main menu",
 			"description": "The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.",
-			"i18n_mode": "I18N_MODE_MULTIPLE"
+			"i18n_mode": "I18N_MODE_MULTIPLE",
+			"links":
+			[
+				{
+					"link_path": "<front>",
+					"link_title": "Home"
+				},
+				{
+					"link_path": "disc/what.php",
+					"link_title": "Discover CITES",
+					"links":
+					[
+						{
+							"link_path": "disc/what.php",
+							"link_title": "What is CITES?"
+						},
+						{
+							"link_path": "disc/how.php",
+							"link_title": "How CITES works?"
+						},
+						{
+							"link_path": "disc/org.php",
+							"link_title": "Structure",
+							"links":
+							[
+								{
+									"link_path": "disc/org.php",
+									"link_title": "Organigramme"
+								},
+								{
+									"link_path": "disc/cop.php",
+									"link_title": "Conference of the Parties"
+								},
+								{
+									"link_path": "disc/sc.php",
+									"link_title": "Standing Committee"
+								},
+								{
+									"link_path": "disc/ac_pc.php",
+									"link_title": "Animals Committee"
+								},
+								{
+									"link_path": "disc/ac_pc.php",
+									"link_title": "Plants Committee"
+								},
+								{
+									"link_path": "disc/sec/index.php",
+									"link_title": "CITES Secretariat",
+									"links":
+									[
+										{
+											"link_path": "disc/sec/index.php",
+											"link_title": "Overview"
+										},
+										{
+											"link_path": "disc/sec/ann_rep/index.php",
+											"link_title": "Annual reports"
+										},
+										{
+											"link_path": "disc/sec/staff.php",
+											"link_title": "Staff list"
+										},
+										{
+											"link_path": "disc/sec/sec-structure.pdf",
+											"link_title": "Organigramme"
+										}
+									]
+								}
+							]
+						},
+						{
+							"link_path": "disc/species.php",
+							"link_title": "CITES species"
+						},
+						{
+							"link_path": "disc/parties/index.php",
+							"link_title": "Member countries"
+						},
+						{
+							"link_path": "http://www.cites.org/cms/index.php/en/component/cp",
+							"link_title": "National contacts & information"
+						},
+						{
+							"link_path": "disc/sec/index.php",
+							"link_title": "CITES Secretariat",
+							"links":
+							[
+								{
+									"link_path": "disc/sec/index.php",
+									"link_title": "Overview"
+								},
+								{
+									"link_path": "disc/sec/ann_rep/index.php",
+									"link_title": "Annual reports"
+								},
+								{
+									"link_path": "disc/sec/staff.php",
+									"link_title": "Staff list"
+								},
+								{
+									"link_path": "disc/sec/sec-structure.pdf",
+									"link_title": "Organigramme"
+								},
+								{
+									"link_path": "disc/sec/intern.php",
+									"link_title": "Intership"
+								}
+							]
+						},
+						{
+							"link_path": "disc/coop.php",
+							"link_title": "Cooperation and partnerships"
+						},
+						{
+							"link_path": "disc/fund.php",
+							"link_title": "How is CITES financed?"
+						},
+						{
+							"link_path": "disc/certificate_commend.php",
+							"link_title": "Certificate of Commendation"
+						},
+						{
+							"link_path": "disc/certificate_merit.php",
+							"link_title": "Certificate of Merit"
+						}
+					]
+				},
+				{
+					"link_path": "prog/african_cherry.php",
+					"link_title": "Programmes",
+					"links":
+					[
+						{
+							"link_path": "prog/african_cherry.php",
+							"link_title": "Species programmes",
+							"links":
+							[
+								{
+									"link_path": "prog/african_cherry.php",
+									"link_title": "African cherry"
+								},
+								{
+									"link_path": "prog/mike_etis.php",
+									"link_title": "Elephants",
+									"links":
+									[
+										{
+											"link_path": "prog/MIKE/index.php",
+											"link_title": "MIKE"
+										},
+										{
+											"link_path": "prog/ETIS/index.php",
+											"link_title": "ETIS"
+										}
+									]
+								},
+								{
+									"link_path": "prog/falcon.php",
+									"link_title": "Falcon"
+								},
+								{
+									"link_path": "prog/ape.php",
+									"link_title": "Great apes"
+								},
+								{
+									"link_path": "prog/itto.php",
+									"link_title": "ITTO-CITES programme on timber species"
+								},
+								{
+									"link_path": "prog/mwg.php",
+									"link_title": "Mahogany"
+								},
+								{
+									"link_path": "prog/sturgeon.php",
+									"link_title": "Sturgeons"
+								}
+							]
+						},
+						{
+							"link_path": "prog/ndf/index.php",
+							"link_title": "Other issues",
+							"links":
+							[
+								{
+									"link_path": "prog/ndf/index.php",
+									"link_title": "CITES 'Non-detriment findings'"
+								},
+								{
+									"link_path": "prog/economics.php",
+									"link_title": "Economic incentives"
+								},
+								{
+									"link_path": "prog/e-commerce.php",
+									"link_title": "Electronic commerce"
+								},
+								{
+									"link_path": "prog/e/e-permitting-toolkit.php",
+									"link_title": "Electronic permitting"
+								},
+								{
+									"link_path": "prog/iccwc.php",
+									"link_title": "International Consortium on Combating Wildlife Crime"
+								},
+								{
+									"link_path": "prog/ifs.php",
+									"link_title": "Introduction from the sea"
+								},
+								{
+									"link_path": "prog/policy/index.php",
+									"link_title": "Wildlife trade policy reviews"
+								}
+							]
+						}
+					]
+				},
+				{
+					"link_path": "disc/text.php",
+					"link_title": "Documents",
+					"links":
+					[
+						{
+							"link_path": "disc/text.php",
+							"link_title": "Convention text"
+						},
+						{
+							"link_path": "app/index.php",
+							"link_title": "Appendices"
+						},
+						{
+							"link_path": "app/reserve.php",
+							"link_title": "Reservations"
+						},
+						{
+							"link_path": "res/index.php",
+							"link_title": "Resolutions"
+						},
+						{
+							"link_path": "dec/index.php",
+							"link_title": "Decisions"
+						},
+						{
+							"link_path": "notif/index.php",
+							"link_title": "Notifications"
+						},
+						{
+							"link_path": "cop/index.php",
+							"link_title": "Conference of the Parties"
+						},
+						{
+							"link_path": "com/sc/index.php",
+							"link_title": "Standing Committee",
+							"links":
+							[
+								{
+									"link_path": "com/sc/index.php",
+									"link_title": "Documents of meetings"
+								},
+								{
+									"link_path": "com/sc/member.php",
+									"link_title": "Members of the Committee"
+								},
+								{
+									"link_path": "com/sc/rules.pdf",
+									"link_title": "Rules of procedure"
+								}
+							]
+						},
+						{
+							"link_path": "com/ac/index.php",
+							"link_title": "Animals Committee",
+							"links":
+							[
+								{
+									"link_path": "com/ac/index.php",
+									"link_title": "Documents of meetings"
+								},
+								{
+									"link_path": "com/ac/member.php",
+									"link_title": "Members of the Committee"
+								},
+								{
+									"link_path": "com/ac/E-AC23-RoP.pdf",
+									"link_title": "Rules of procedure"
+								}
+							]
+						},
+						{
+							"link_path": "com/pc/index.php",
+							"link_title": "Plants Committee",
+							"links":
+							[
+								{
+									"link_path": "com/pc/index.php",
+									"link_title": "Documents of meetings"
+								},
+								{
+									"link_path": "com/pc/member.php",
+									"link_title": "Members of the Committee"
+								},
+								{
+									"link_path": "com/pc/E-PC-RoP.pdf",
+									"link_title": "Rules of procedure"
+								}
+							]
+						},
+						{
+							"link_path": "resources/ref/suspend.php",
+							"link_title": "Trade suspensions"
+						},
+						{
+							"link_path": "res/14/14-02.php#vision",
+							"link_title": "Strategic vision"
+						}
+					]
+				},
+				{
+					"link_path": "resources/species.html",
+					"link_title": "Resources",
+					"links":
+					[
+						{
+							"link_path": "resources/species.html",
+							"link_title": "Species database"
+						},
+						{
+							"link_path": "http://www.unep-wcmc.org/citestrade/trade.cfm",
+							"link_title": "Trade database"
+						},
+						{
+							"link_path": "http://www.unep-wcmc.org/isdb/extra/index.cfm",
+							"link_title": "Trade information query tool"
+						},
+						{
+							"link_path": "http://dashboards.cites.org/",
+							"link_title": "CITES trade data dashboards"
+						},
+						{
+							"link_path": "http://sigtrade.cites.org/",
+							"link_title": "Review of Significant Trade Management System"
+						},
+						{
+							"link_path": "https://eva.unia.es/cites/",
+							"link_title": "CITES Virtual College"
+						},
+						{
+							"link_path": "resources/quotas/index.php",
+							"link_title": "Export quotas"
+						},
+						{
+							"link_path": "resources/wiki_id.php",
+							"link_title": "Identification manual"
+						},
+						{
+							"link_path": "resources/registers.php",
+							"link_title": "CITES registers",
+							"links":
+							[
+								{
+									"link_path": "resources/registers.php",
+									"link_title": "Introduction"
+								},
+								{
+									"link_path": "http://www.cites.org/common/reg/e_cb.html",
+									"link_title": "Register of captive-breeding operations"
+								},
+								{
+									"link_path": "http://www.cites.org/common/reg/e_nu.html",
+									"link_title": "Register of nurseries"
+								},
+								{
+									"link_path": "http://www.cites.org/common/reg/e_si.html",
+									"link_title": "Register of scientific Institutions"
+								},
+								{
+									"link_path": "http://www.cites.org/cms/public/common/resources/reg_caviar.pdf",
+									"link_title": "Register of caviar exporters"
+								}
+							]
+						},
+						{
+							"link_path": "resources/reports.php",
+							"link_title": "National reports"
+						},
+						{
+							"link_path": "resources/publications.php",
+							"link_title": "Publications"
+						},
+						{
+							"link_path": "resources/transport/index.php",
+							"link_title": "Guidelines for transport"
+						},
+						{
+							"link_path": "resources/terms/index.php",
+							"link_title": "Terminology"
+						},
+						{
+							"link_path": "resources/links.php",
+							"link_title": "Useful links"
+						},
+						{
+							"link_path": "resources/reference.php",
+							"link_title": "Reference lists"
+						},
+						{
+							"link_path": "forum",
+							"link_title": "Forum"
+						},
+						{
+							"link_path": "http://www.cites.org/gallery/species/index.html",
+							"link_title": "CITES species photo gallery"
+						},
+						{
+							"link_path": "resources/faq.php",
+							"link_title": "FAQ"
+						}
+					]
+				},
+				{
+					"link_path": "news/SG/index.php",
+					"link_title": "News",
+					"links":
+					[
+						{
+							"link_path": "news/SG/index.php",
+							"link_title": "Secretary-General's statements"
+						},
+						{
+							"link_path": "news/pr/index.php",
+							"link_title": "Press releases"
+						},
+						{
+							"link_path": "news/sundry/index.php",
+							"link_title": "Other news items"
+						},
+						{
+							"link_path": "news/newsletter.php",
+							"link_title": "Newsletter"
+						},
+						{
+							"link_path": "news/calendar.php",
+							"link_title": "CITES calendar"
+						}
+					]
+				}
+			]
 		},
 		{
 			"menu_name": "footer-menu",
