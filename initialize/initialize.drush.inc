@@ -285,7 +285,50 @@ function drush_initialize_menus( $config ) {
 			$link['weight']     = $weight++;
 			$link['customized'] = 1;
 
-			menu_link_save( $link );
+			unset( $children );
+
+			if ( isset( $link['children'] ) ) {
+				$children = $link['children'];
+
+				unset( $link['children'] );
+			}
+
+			$mlid = menu_link_save( $link );
+
+			if ( ! $mlid || ! isset( $children ) || empty( $children ) )
+				continue;
+
+			$weight = -50;
+
+			foreach ( $children as $link ) {
+				$link['menu_name'] = $menu['menu_name'];
+				$link['plid']      = $mlid;
+
+				if ( ! isset( $link['link_path'] ) || empty( $link['link_path'] ) )
+					continue;
+
+				if ( ! isset( $link['link_title'] ) || empty( $link['link_title'] ) )
+					continue;
+
+				if ( $link['link_path'] != '<front>' ) {
+					if ( ! drupal_lookup_path( 'source', $link['link_path'] ) )
+						continue;
+
+					$link['link_path']   = drupal_get_normal_path( $link['link_path'] );
+					$link['router_path'] = _menu_find_router_path( $link['link_path'] );
+				}
+
+				$link['weight']     = $weight++;
+				$link['customized'] = 1;
+
+				if ( isset( $link['children'] ) ) {
+					$children = $link['children'];
+
+					unset( $link['children'] );
+				}
+
+				menu_link_save( $link );
+			}
 		}
 
 		drush_log( dt( '!menu-name: Links successfully saved', array( '!menu-name' => $menu['menu_name'] ) ), 'ok' );
