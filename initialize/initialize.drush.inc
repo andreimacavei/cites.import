@@ -259,7 +259,11 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 		$link['weight']     = $weight++;
 		$link['customized'] = 1;
 
-		unset( $children );
+		if ( isset( $link['translations'] ) ) {
+			$translations = $link['translations'];
+
+			unset( $link['translations'] );
+		}
 
 		if ( isset( $link['links'] ) ) {
 			$children = $link['links'];
@@ -270,11 +274,25 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 		// Saves a menu link.
 		$mlid = menu_link_save( $link );
 
-		if ( ! $mlid || ! isset( $children ) || empty( $children ) )
+		if ( ! $mlid )
+			continue;
+
+		if ( isset( $translations ) ) {
+			foreach ( $translations as $langcode => $translation ) {
+				// Updates / creates translation for a certain source.
+				i18n_string_translation_update( 'menu:item:' . $mlid . ':title', $translation, $langcode );
+			}
+		}
+
+		unset( $translations );
+
+		if ( ! isset( $children ) || empty( $children ) )
 			continue;
 
 		// Initializes links.
 		drush_initialize_links( $menu_name, $children, $mlid );
+
+		unset( $children );
 	}
 }
 
