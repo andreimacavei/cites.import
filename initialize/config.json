@@ -436,6 +436,33 @@
 							"link_title": "FAQ"
 						}
 					]
+				},
+				{
+					"link_path": "news/SG/index.php",
+					"link_title": "News",
+					"links":
+					[
+						{
+							"link_path": "news/SG/index.php",
+							"link_title": "Secretary-General's statements"
+						},
+						{
+							"link_path": "news/pr/index.php",
+							"link_title": "Press releases"
+						},
+						{
+							"link_path": "news/sundry/index.php",
+							"link_title": "Other news items"
+						},
+						{
+							"link_path": "news/newsletter.php",
+							"link_title": "Newsletter"
+						},
+						{
+							"link_path": "news/calendar.php",
+							"link_title": "CITES calendar"
+						}
+					]
 				}
 			]
 		},
