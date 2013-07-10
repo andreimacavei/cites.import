@@ -334,6 +334,108 @@
 							"link_title": "Strategic vision"
 						}
 					]
+				},
+				{
+					"link_path": "resources/species.html",
+					"link_title": "Resources",
+					"links":
+					[
+						{
+							"link_path": "resources/species.html",
+							"link_title": "Species database"
+						},
+						{
+							"link_path": "http://www.unep-wcmc.org/citestrade/trade.cfm",
+							"link_title": "Trade database"
+						},
+						{
+							"link_path": "http://www.unep-wcmc.org/isdb/extra/index.cfm",
+							"link_title": "Trade information query tool"
+						},
+						{
+							"link_path": "http://dashboards.cites.org/",
+							"link_title": "CITES trade data dashboards"
+						},
+						{
+							"link_path": "http://sigtrade.cites.org/",
+							"link_title": "Review of Significant Trade Management System"
+						},
+						{
+							"link_path": "https://eva.unia.es/cites/",
+							"link_title": "CITES Virtual College"
+						},
+						{
+							"link_path": "resources/quotas/index.php",
+							"link_title": "Export quotas"
+						},
+						{
+							"link_path": "resources/wiki_id.php",
+							"link_title": "Identification manual"
+						},
+						{
+							"link_path": "resources/registers.php",
+							"link_title": "CITES registers",
+							"links":
+							[
+								{
+									"link_path": "resources/registers.php",
+									"link_title": "Introduction"
+								},
+								{
+									"link_path": "http://www.cites.org/common/reg/e_cb.html",
+									"link_title": "Register of captive-breeding operations"
+								},
+								{
+									"link_path": "http://www.cites.org/common/reg/e_nu.html",
+									"link_title": "Register of nurseries"
+								},
+								{
+									"link_path": "http://www.cites.org/common/reg/e_si.html",
+									"link_title": "Register of scientific Institutions"
+								},
+								{
+									"link_path": "http://www.cites.org/cms/public/common/resources/reg_caviar.pdf",
+									"link_title": "Register of caviar exporters"
+								}
+							]
+						},
+						{
+							"link_path": "resources/reports.php",
+							"link_title": "National reports"
+						},
+						{
+							"link_path": "resources/publications.php",
+							"link_title": "Publications"
+						},
+						{
+							"link_path": "resources/transport/index.php",
+							"link_title": "Guidelines for transport"
+						},
+						{
+							"link_path": "resources/terms/index.php",
+							"link_title": "Terminology"
+						},
+						{
+							"link_path": "resources/links.php",
+							"link_title": "Useful links"
+						},
+						{
+							"link_path": "resources/reference.php",
+							"link_title": "Reference lists"
+						},
+						{
+							"link_path": "forum",
+							"link_title": "Forum"
+						},
+						{
+							"link_path": "http://www.cites.org/gallery/species/index.html",
+							"link_title": "CITES species photo gallery"
+						},
+						{
+							"link_path": "resources/faq.php",
+							"link_title": "FAQ"
+						}
+					]
 				}
 			]
 		},
