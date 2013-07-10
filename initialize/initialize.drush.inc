@@ -263,6 +263,8 @@ function drush_initialize_menus( $config ) {
 		if ( ! isset( $links ) || empty( $links ) )
 			continue;
 
+		$weight = -50;
+
 		foreach ( $links as $link ) {
 			$link['menu_name'] = $menu['menu_name'];
 
@@ -279,6 +281,9 @@ function drush_initialize_menus( $config ) {
 				$link['link_path']   = drupal_get_normal_path( $link['link_path'] );
 				$link['router_path'] = _menu_find_router_path( $link['link_path'] );
 			}
+
+			$link['weight']     = $weight++;
+			$link['customized'] = 1;
 
 			menu_link_save( $link );
 		}
