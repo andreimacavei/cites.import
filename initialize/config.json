@@ -20,7 +20,134 @@
 			"menu_name": "main-menu",
 			"title": "Main menu",
 			"description": "The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.",
-			"i18n_mode": "I18N_MODE_MULTIPLE"
+			"i18n_mode": "I18N_MODE_MULTIPLE",
+			"links":
+			[
+				{
+					"link_path": "<front>",
+					"link_title": "Home"
+				},
+				{
+					"link_path": "disc/what.php",
+					"link_title": "Discover CITES",
+					"links":
+					[
+						{
+							"link_path": "disc/what.php",
+							"link_title": "What is CITES?"
+						},
+						{
+							"link_path": "disc/how.php",
+							"link_title": "How CITES works?"
+						},
+						{
+							"link_path": "disc/org.php",
+							"link_title": "Structure",
+							"links":
+							[
+								{
+									"link_path": "disc/org.php",
+									"link_title": "Organigramme"
+								},
+								{
+									"link_path": "disc/cop.php",
+									"link_title": "Conference of the Parties"
+								},
+								{
+									"link_path": "disc/sc.php",
+									"link_title": "Standing Committee"
+								},
+								{
+									"link_path": "disc/ac_pc.php",
+									"link_title": "Animals Committee"
+								},
+								{
+									"link_path": "disc/ac_pc.php",
+									"link_title": "Plants Committee"
+								},
+								{
+									"link_path": "disc/sec/index.php",
+									"link_title": "CITES Secretariat",
+									"links":
+									[
+										{
+											"link_path": "disc/sec/index.php",
+											"link_title": "Overview"
+										},
+										{
+											"link_path": "disc/sec/ann_rep/index.php",
+											"link_title": "Annual reports"
+										},
+										{
+											"link_path": "disc/sec/staff.php",
+											"link_title": "Staff list"
+										},
+										{
+											"link_path": "disc/sec/sec-structure.pdf",
+											"link_title": "Organigramme"
+										}
+									]
+								}
+							]
+						},
+						{
+							"link_path": "disc/species.php",
+							"link_title": "CITES species"
+						},
+						{
+							"link_path": "disc/parties/index.php",
+							"link_title": "Member countries"
+						},
+						{
+							"link_path": "http://www.cites.org/cms/index.php/en/component/cp",
+							"link_title": "National contacts & information"
+						},
+						{
+							"link_path": "disc/sec/index.php",
+							"link_title": "CITES Secretariat",
+							"links":
+							[
+								{
+									"link_path": "disc/sec/index.php",
+									"link_title": "Overview"
+								},
+								{
+									"link_path": "disc/sec/ann_rep/index.php",
+									"link_title": "Annual reports"
+								},
+								{
+									"link_path": "disc/sec/staff.php",
+									"link_title": "Staff list"
+								},
+								{
+									"link_path": "disc/sec/sec-structure.pdf",
+									"link_title": "Organigramme"
+								},
+								{
+									"link_path": "disc/sec/intern.php",
+									"link_title": "Intership"
+								}
+							]
+						},
+						{
+							"link_path": "disc/coop.php",
+							"link_title": "Cooperation and partnerships"
+						},
+						{
+							"link_path": "disc/fund.php",
+							"link_title": "How is CITES financed?"
+						},
+						{
+							"link_path": "disc/certificate_commend.php",
+							"link_title": "Certificate of Commendation"
+						},
+						{
+							"link_path": "disc/certificate_merit.php",
+							"link_title": "Certificate of Merit"
+						}
+					]
+				}
+			]
 		},
 		{
 			"menu_name": "footer-menu",
