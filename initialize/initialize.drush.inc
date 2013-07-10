@@ -249,11 +249,11 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 			continue;
 
 		if ( $link['link_path'] != '<front>' ) {
-			if ( ! drupal_lookup_path( 'source', $link['link_path'] ) )
-				continue;
-
 			$link['link_path']   = drupal_get_normal_path( $link['link_path'] );
 			$link['router_path'] = _menu_find_router_path( $link['link_path'] );
+
+			if ( ! $link['link_path'] || ! $link['router_path'] )
+				continue;
 		}
 
 		$link['weight']     = $weight++;
