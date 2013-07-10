@@ -1,0 +1,270 @@
+<?php 
+/*define (DS,DIRECTORY_SEPARATOR);
+require_once DRUPAL_ROOT.'sites'.DS.'all'.*/
+class MailingListManagement{
+    
+       private $db;
+       private $newsletterVid;
+       private $role;
+       private $file_field_name='field_simplenews_attachments';
+       //put files to be imported in
+       private $import_file_path='public://newsletter_import';
+       private $categTaxonomyID;
+   public function __construct($db){
+       $this->db=$db;
+       
+       //load newsletter term
+       $newsl = taxonomy_vocabulary_machine_name_load('newsletter');
+       $this->newsletterVid=$newsl->vid;
+       
+       //check if role for newsletter exists
+       $role=user_role_load_by_name('newsletter');
+       if($role===false){
+            //create role
+            $role = new stdClass();
+            $role->name = 'newsletter'; 
+            user_role_save($role);                       
+       }
+       $this->role=$role;
+       //create file field for attachments
+       if(!db_field_exists('field_data_'.$this->file_field_name,'bundle' ))
+            $this->createFileField();
+       //create folder for newletters
+       //check if exists
+       //if(!drupal_valid_path((drupal_realpath('public://newsletter')))
+            drupal_mkdir(drupal_realpath('public://newsletter'));
+       
+       //create taxonomy for impoerted newletters category
+       $taxon=taxonomy_get_term_by_name('imported_newsletters');
+       if(empty($taxon)){
+            $term=(object) Array(
+            'vid'=>$this->newsletterVid,
+            'name'=>'imported_newsletters',
+            'description'=>'Category for imported newsletters from old site'
+            );   
+           taxonomy_term_save($term);
+           $this->categTaxonomyID=$term->tid;
+       }
+       else $this->categTaxonomyID=$taxon[0]->tid;
+   }
+   //Main function
+   public function import(){
+        
+        $categories=$this->getCategOld();
+        if(empty($categories)) return 'No categories';
+        foreach ($categories as $category ) {
+            //import each category at once and add its users with subscriptions
+            $new_categ=$this->importCategory($category);
+            $this->importUsers($category['id_categ'],$new_categ->tid);
+        }
+        $this->importNewsletters();
+        return 'OK';
+    }
+   
+    private function getCategOld($limit=null){
+        $sql='Select * from categories ';
+        $param=array();
+        if($limit!=null){
+            $sql.=' Limit 0 , ? ';
+            $param[]=$limit;
+        }
+        $req=$this->db->prepare($sql);
+        $req->execute($param);
+        $categ = $req->fetchAll();
+        return $categ;
+    }
+    
+    /*Import one category
+     * @param array $category - db row from old site
+     * */
+    private function importCategory($category){
+            $term=(object) array(
+                  'vid' => $this->newsletterVid,
+                  'name' =>  utf8_encode($category['name_categ']),
+                  'description' => utf8_encode( $category['categ_desc']));
+             taxonomy_term_save($term);
+             $categ=(object) array(    
+                  'tid' =>$term->tid,
+                  'format' => 'plain',/*req plain or html*/
+                  'priority' => 3,/* int 1-5*/
+                  'receipt' => 0,/* confirmation email*/
+                  'from_name' => 'CITES',/*req*/
+                  'from_address' => 'no_reply@cites.org',/*req*/
+
+                  'email_subject' =>'[node:title]',/*req*/
+                  'hyperlinks' => 1,
+                  'new_account' =>'none', //not displaying on new subscription page
+                  'opt_inout' => 'single', // un/subscribe without confirmation email
+                  'block' => 1 //block for un/subbscribe is available
+               );
+            simplenews_category_save($categ);
+            return $categ;
+    }
+    /* get customers from old site db
+     * @param $id_categ - id of category for filter results
+     * */
+    private function getCustomers($id_categ=null){
+        $sql='Select * from customers ';
+        $param=array();
+        if($id_categ){
+            $param[]=$id_categ;
+            $sql.=' where id_categ=?';
+        }
+        $req=$this->db->prepare($sql);
+        $req->execute($param);
+        $customers = $req->fetchAll();
+        return $customers;
+    }
+    
+    /*Import users from old DB to new DB by category*/
+     private function importUsers($id_categ,$new_categ_tid){
+        $customers=$this->getCustomers($id_categ);
+        foreach ($customers as $customer) {
+            if(strlen($customer['name'])>1||strlen($customer['company'])>1||strlen($customer['country'])>1){
+                //create or get user
+                /*$usr=user_load_by_mail($customer['email']);
+                if($usr===false) $isNew=true;*/
+                if(strlen($customer['name'])==0)
+                  $customer['name']=substr($customer['email'],strrpos($customer['email'],'@'));
+                $username=utf8_encode(substr(strtolower(str_replace(' ', '_', $customer['name'])),0,15));
+                //drush_print_r($username .' --- '. $customer['email']); 
+                $user=ForumManagement::updateUser($username, self::generateRandomString(),
+                                                  $customer['email'],
+                                                  array('name'=>utf8_encode($fields['name']),
+                                                        'company'=>utf8_encode($fields['company'])
+                                                  )); 
+                //add role
+                $user->roles[$this->role->rid]=$this->role->name;
+                user_save($user,array('roles'=>$user->roles));              
+            } 
+            $subscriber=(object) array(    
+                    'activated' => 1, //is active
+                    'mail' => strtolower($customer['email']),
+                    'uid' => ($user)?$user->uid:0, //is anonymus or Drupall user
+                    'language' => '', //nothing
+                    'changes' => serialize(array()) //nothing         
+                 ); 
+            simplenews_subscriber_save($subscriber);
+            $subscription=(object) array(
+                'snid' => $subscriber->snid, //id of the subscriber that i've just inserted
+                'tid' => $new_categ_tid, //tid of category that is to subscribe
+                'status' => 1, // 1 - subscribed
+                'timestamp' => 0,
+                'source' => 'Import from old site');
+            simplenews_subscription_save($subscription);
+        }
+       return true;
+    } 
+    //import old newsletters  - old newsletters are not connected to category
+    private function importNewsletters(){
+        $newsletters=$this->getNewsletters();
+        foreach ($newsletters as $newsletter) {
+            $node=$this->createNode($newsletter);
+        }
+        return true;
+    }
+     private function getNewsletters($limit=null){
+        $sql='Select * from newsletters ';
+        $param=array();
+        if($limit!=null){
+            $sql.=' Limit 0 , ? ';
+            $param[]=$limit;
+        }
+        $req=$this->db->prepare($sql);
+        $req->execute($param);
+        $newsletters = $req->fetchAll();
+        return $newsletters;
+    } 
+    private function createNode($newsletter){
+          $node = new StdClass();
+          $node->type = 'simplenews';
+          $node->title = t($newsletter['title']);
+          node_object_prepare($node);
+          
+          if(!empty($newsletter['filename'])){
+              $filename=substr($newsletter['filename'],1);   
+              $filepath=$this->import_file_path.DIRECTORY_SEPARATOR.$filename;
+              $this->importFile($filepath, $node);
+          }
+            
+          $node->body[LANGUAGE_NONE][0]['value']   =utf8_encode( $newsletter['comments']);
+          $node->body[LANGUAGE_NONE][0]['summary'] = utf8_encode(text_summary($newsletter['comments']));
+          $node->body[LANGUAGE_NONE][0]['format']  = 'filtered_html';
+          $node->created=strtotime ($newsletter['upload_date']);
+          $node->language=LANGUAGE_NONE;
+          $node->uid = 1;
+          $node->status = 1;
+          $node->active = 1;
+          $node->promote = 1;
+          $node->comment=1;
+          
+              $field_name = variable_get('simplenews_category_field', 'field_simplenews_term');
+              $node->{$field_name}[LANGUAGE_NONE][0]['tid']=$this->$categTaxonomyID;
+ 
+          node_save($node);
+          
+          return $node;
+    }
+    private function importFile($filename,&$node){
+          $filepath = drupal_realpath($filename);
+          // Create managed File object and associate with Image field.
+          $file = (object) array(
+            'uid' => 1,
+            'uri' => $filepath,
+            'filemime' => file_get_mimetype($filepath),
+            'status' => 1,
+            'display' => 1
+          );
+            // We save the file to the root of the files directory.
+            $file = file_copy($file, 'public://'.DIRECTORY_SEPARATOR.'newsletter'.DIRECTORY_SEPARATOR);
+            $node->{$this->file_field_name}[LANGUAGE_NONE][0] = (array)$file;
+            return true;
+    }
+    private function createFileField(){
+                //Document Field
+          $field = array(
+            'field_name' => $this->file_field_name,
+            'type'  => 'file',                                       
+            'cardinality' => FIELD_CARDINALITY_UNLIMITED,                          
+            );
+          field_create_field($field);
+          
+          $instance = array(
+            'field_name' => $this->file_field_name,
+            'entity_type' => 'node',
+            'label' => 'Attachments',
+            'bundle' => 'simplenews',
+            'description' => 'Documents',
+            'settings' => array(
+              'file_directory' => 'newsletter',
+              'file_extensions' => 'txt doc docx pdf ods odt xls xlsx',
+              'max_filesize' => '2MB',
+              'title_field' => '',
+            ),
+            'widget' => array(
+              'type' => 'file_generic',
+              'weight' => -4,
+            ),
+            'display' => array(
+              'default' => array(
+                'type' => 'file_default',
+                'weight' => 10,
+              ),
+              'teaser' => array(
+                'type' => 'file_default',
+                'weight' => 10,
+              ),
+            ),
+          );
+          field_create_instance($instance); 
+   }
+static public function generateRandomString($length = 10) {
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, strlen($characters) - 1)];
+                }
+                return $randomString;
+            }
+               
+}
