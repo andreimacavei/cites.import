@@ -39,6 +39,10 @@
 				{
 					"link_path": "resources/faq.php",
 					"link_title": "FAQs"
+				},
+				{
+					"link_path": "user/login",
+					"link_title": "Log in"
 				}
 			]
 		}
