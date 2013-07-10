@@ -1,10 +1,20 @@
 <?php
-class AddConsistency{
+
+class AddConsistency {
+
+  private static $changes = array(
+    "I/" => "i/",
+    "CoP" => "COP"
+  );
+  private static $extensions = array(
+    ".pdf", ".jpg", ".bmp", ".doc", ".docx", ".ppt", ".pptx"
+  );
+
   public function __construct() {
     ;
   }
-  
-  public function changeNodeAliases(){
+
+  public function changeNodeAliases() {
     // get all basic page nodes
     $result = db_query("SELECT *
               FROM `node`
@@ -14,7 +24,64 @@ class AddConsistency{
       echo $node->title . PHP_EOL;
     }
   }
+
+  public function checkUrlsForNodes() {
+    $pages = db_query("SELECT * FROM `node`
+      WHERE `type` = 'page'");
+    foreach ($pages as $page) {
+      $nodeObj = node_load($page->nid);
+      $body = $nodeObj->body[LANGUAGE_NONE][0]['value'];
+      $body = $this->changeUrlForTag($body, "a");
+      $body = $this->changeUrlForTag($body, "img");
+      $nodeObj->body[LANGUAGE_NONE][0]['value'] = $body;
+      node_save($nodeObj);
+    }
+  }
+
+  private function changeUrlForTag($resource, $tag) {
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($resource);
+    libxml_use_internal_errors(false);
+    $xpath = new DOMXPath($dom);
+    $srcs = $xpath->evaluate("//$tag");
+
+    for ($i = 0; $i < $srcs->length; $i++) {
+      $src = $srcs->item($i);
+      if ($tag == "a")
+        $attribute = "href";
+      else if ($tag == "img")
+        $attribute = "src";
+      else if ($tag == "embed")
+        $attribute = "src";
+      $url = $src->getAttribute($attribute);
+      if ($this->isInFileExtensions($url) && strpos($url,"sites/default/files")){
+         if (!file_exists($url)) $newUrl = $this->changeUrl($url);
+         else $newUrl = $url;
+      }
+      else $newUrl = $url;
+      $src->removeAttribute($attribute);
+      $src->setAttribute($attribute, $newUrl);
+    }
+    $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
+      "!</body></html>$!si"), '', $dom->saveHTML());
+    return $content;
+  }
+
+  private function isInFileExtensions($url) {
+    foreach (AddConsistency::$extensions as $extension)
+      if (strpos($url, $extension))
+        return TRUE;
+    return FALSE;
+  }
   
-  
-  
+  private function changeUrl($url){
+    foreach (AddConsistency::$changes as $before => $after) {
+      if (file_exists(str_replace($before, $after, $url))) {
+        return str_replace($before, $after, $url);
+      }
+    }
+    return $url;
+  }
+
 }

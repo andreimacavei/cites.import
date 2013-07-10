@@ -69,7 +69,7 @@ class DatabaseInterface {
   public function getUser($userId) {
     $query = "SELECT * 
               FROM `users`
-              WHERE `user_id` = '$userId'";
+              WHERE `user_id` = $userId";
     $result = mysql_query($query);
     return $result;
   }

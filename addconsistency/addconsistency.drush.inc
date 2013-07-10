@@ -22,6 +22,8 @@ function addconsistency_drush_command() {
 }
 
 function drush_addconsistency_change_invalid_urls(){  
+  $consistencyObj = new AddConsistency();
+  $consistencyObj->checkUrlsForNodes();
 }
 
 function drush_addconsistency_change_node_aliases(){
