@@ -47,15 +47,17 @@ class ForumManagement {
     $this->dataBaseObj = $databaseObj;
     $this->forumVid = 0;
     $this->pathToAttachments = $pathToAttach;
-    if ($this->pathToAttachments[strlen($this->pathToAttachments)] != "/")
+    if ($this->pathToAttachments[strlen($this->pathToAttachments)] != "/") {
       $this->pathToAttachments .= "/";
+    }
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
 
     $dirPath = "public://privateFolder/forum_attachments/";
     $result = file_prepare_directory($dirPath, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-    if (!$result)
+    if (!$result) {
       throw new Exception("Cannot create directory to put attachments" . PHP_EOL);
+    }
     echo "Forum attachments will be put in " . $dirPath . PHP_EOL;
     $this->destinationFolder = $dirPath;
 
@@ -126,8 +128,9 @@ class ForumManagement {
   public static function updateUser($username, $password, $email) {
     $userObj = user_load_by_mail($email);
     $userDuplicate = user_load_by_name($username);
-    if ($userObj->uid != $userDuplicate->uid)
+    if ($userObj->uid != $userDuplicate->uid) {
       $username .= rand(10, 99);
+    }
     if (is_null($userObj)) {
       $fields = array(
         'name' => $username,
@@ -157,10 +160,12 @@ class ForumManagement {
     $comment->pid = 0; // parent comment id, 0 if none
 
     $userAccount = user_load_by_name($user->user);
-    if ($userAccount)
+    if ($userAccount) {
       $comment->uid = $userAccount->uid;
-    else
+    }
+    else {
       $comment->uid = 1; // user's id, who left the comment
+    }
     $comment->created = strtotime($post->data);
     $comment->changed = strtotime($post->data);
     $comment->is_anonymous = 0;
@@ -172,10 +177,12 @@ class ForumManagement {
     $result = $this->dataBaseObj->getPostsFiles($post->post_id);
     try {
       while ($row = mysql_fetch_object($result)) {
-        if (empty($row->filename))
+        if (empty($row->filename)) {
           continue;
-        if (!file_exists($this->pathToAttachments . $row->filename))
+        }
+        if (!file_exists($this->pathToAttachments . $row->filename)) {
           continue;
+        }
         $fileName = $this->pathToAttachments . $row->filename;
         $file_path = drupal_realpath($fileName);
         $file = (object) array(
@@ -199,8 +206,9 @@ class ForumManagement {
           $file = file_copy($file, $destinationPath . $row->filename, FILE_EXISTS_REPLACE);
         }
 
-        if (!is_null($file))
+        if (!is_null($file)) {
           $comment->field_comment_attachment[LANGUAGE_NONE][] = (array) $file;
+        }
       }
       comment_save($comment);
     } catch (Exception $e) {
@@ -252,18 +260,21 @@ class ForumManagement {
     $topic->body[$topic->language][0]['value'] = $post->description;
     $topic->body[$topic->language][0]['format'] = 'filtered_html';
     $userAccount = user_load_by_name($user->user);
-    if ($userAccount)
+    if ($userAccount) {
       $topic->uid = $userAccount->uid;
-    else
-      $topic->uid = 1; // user's id, who left the comment
+    }
+    else {
+      $topic->uid = 1;
+    }
     $result = $this->dataBaseObj->getPostsFiles($post->post_id);
-
     try {
       while ($row = mysql_fetch_object($result)) {
-        if (empty($row->filename))
+        if (empty($row->filename)) {
           continue;
-        if (!file_exists($this->pathToAttachments . $row->filename))
+        }
+        if (!file_exists($this->pathToAttachments . $row->filename)) {
           continue;
+        }
         $fileName = $this->pathToAttachments . $row->filename;
         $file_path = drupal_realpath($fileName);
         $file = (object) array(
@@ -287,8 +298,9 @@ class ForumManagement {
           $file = file_copy($file, $destinationPath . $row->filename, FILE_EXISTS_REPLACE);
         }
 
-        if (!is_null($file))
+        if (!is_null($file)) {
           $topic->field_topic_attachment[LANGUAGE_NONE][] = (array) $file;
+        }
       }
     } catch (Exception $e) {
       echo $e->getMessage() . PHP_EOL;
@@ -302,7 +314,7 @@ class ForumManagement {
   private function addSingleForum($forum) {
     taxonomy_term_save((object) array(
           'vid' => $this->forumVid,
-          'name' => $forum->gname, // "$forumName"
+          'name' => $forum->gname,
           'description' => ""
     ));
     $value = taxonomy_get_term_by_name($forum->gname);
@@ -354,6 +366,7 @@ class ForumManagement {
     );
     user_role_change_permissions($role->rid, $member_permissions);
     $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 1);
+
     // create Forum Visitor role
     $visitorRoleName = ForumManagement::$forumDictionary[$id][2];
     $role = new stdClass();
@@ -402,8 +415,9 @@ class ForumManagement {
     else if ($level == 6) {
       $roleName = ForumManagement::$forumDictionary[$groupId][0];
     }
-    else
+    else {
       throw new Exception("Unknown level($level) for roles");
+    }
     if ($role = user_role_load_by_name($roleName)) {
       user_multiple_role_edit(array($userObj->uid), 'add_role', $role->rid);
     }
@@ -413,11 +427,13 @@ class ForumManagement {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
       if (!empty($row->user) && $row->user != 'admin') {
-        if (strpos($row->email, "eaudeweb") || strpos($row->email, "example"))
+        if (strpos($row->email, "eaudeweb") || strpos($row->email, "example")) {
           continue;
+        }
         $userObj = user_load_by_name($row->user);
-        if (!is_null($userObj))
+        if (!is_null($userObj)) {
           user_delete($userObj->uid);
+        }
       }
     }
   }
@@ -435,8 +451,9 @@ class ForumManagement {
           foreach ($this->strangeUsers[$row->email] as $uid) {
             if ($uid != $row->uid) {
               $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($uid));
-              if ($duplicateUser)
+              if ($duplicateUser) {
                 $this->addTopicAlerts($duplicateUser);
+              }
             }
           }
         }
@@ -447,8 +464,9 @@ class ForumManagement {
           foreach ($this->strangeUsers[$row->email] as $uid) {
             if ($uid != $row->uid) {
               $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($uid));
-              if ($duplicateUser)
+              if ($duplicateUser) {
                 $this->addForumAlerts($duplicateUser);
+              }
             }
           }
         }
@@ -459,16 +477,19 @@ class ForumManagement {
   private function addTopicAlerts($user) {
     $alerts = explode(",", $user->alert_topics);
     $userObj = user_load_by_name($user->user);
-    if (!$userObj)
+    if (!$userObj) {
       return;
+    }
     foreach ($alerts as $topicAlert) {
       $topic = mysql_fetch_object($this->dataBaseObj->getTopic(intval($topicAlert)));
-      if (!$topic)
+      if (!$topic) {
         continue;
+      }
       $topicNid = db_query("SELECT nid FROM `node` 
                         WHERE `title` = '{$topic->cname}'")->fetchField();
-      if (empty($topicNid))
+      if (empty($topicNid)) {
         continue;
+      }
       node_notify_subscribe($topicNid, $userObj->uid, $userObj->email, TRUE);
     }
   }
@@ -476,19 +497,22 @@ class ForumManagement {
   private function addForumAlerts($user) {
     $alerts = explode(",", $user->alert_forums);
     $userObj = user_load_by_name($user->user);
-    if (!$userObj)
+    if (!$userObj) {
       return;
+    }
     foreach ($alerts as $forumAlert) {
       $forum = mysql_fetch_object($this->dataBaseObj->getForum(intval($forumAlert)));
       if (is_null($forum)) {
         continue;
       }
       $result = db_query("SELECT * FROM `taxonomy_term_data` WHERE `name` = '{$forum->gname}'");
-      if (!$result)
+      if (!$result) {
         continue;
+      }
       $result = $result->fetch();
-      if (!$result)
+      if (!$result) {
         continue;
+      }
       $tid = $result->tid;
       $uid = $userObj->uid;
       db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
@@ -496,4 +520,5 @@ class ForumManagement {
   }
 
 }
+
 ?>
