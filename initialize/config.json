@@ -1,6 +1,5 @@
 {
-	"languages":
-	[
+	"languages": [
 		{
 			"langcode": "en",
 			"prefix": "eng"
@@ -14,15 +13,13 @@
 			"prefix": "esp"
 		}
 	],
-	"menus":
-	[
+	"menus": [
 		{
 			"menu_name": "main-menu",
 			"title": "Main menu",
 			"description": "The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.",
 			"i18n_mode": "I18N_MODE_MULTIPLE",
-			"links":
-			[
+			"links": [
 				{
 					"link_path": "<front>",
 					"link_title": "Home"
@@ -30,8 +27,7 @@
 				{
 					"link_path": "disc/what.php",
 					"link_title": "Discover CITES",
-					"links":
-					[
+					"links": [
 						{
 							"link_path": "disc/what.php",
 							"link_title": "What is CITES?"
@@ -43,8 +39,7 @@
 						{
 							"link_path": "disc/org.php",
 							"link_title": "Structure",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "disc/org.php",
 									"link_title": "Organigramme"
@@ -68,8 +63,7 @@
 								{
 									"link_path": "disc/sec/index.php",
 									"link_title": "CITES Secretariat",
-									"links":
-									[
+									"links": [
 										{
 											"link_path": "disc/sec/index.php",
 											"link_title": "Overview"
@@ -105,8 +99,7 @@
 						{
 							"link_path": "disc/sec/index.php",
 							"link_title": "CITES Secretariat",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "disc/sec/index.php",
 									"link_title": "Overview"
@@ -150,13 +143,11 @@
 				{
 					"link_path": "prog/african_cherry.php",
 					"link_title": "Programmes",
-					"links":
-					[
+					"links": [
 						{
 							"link_path": "prog/african_cherry.php",
 							"link_title": "Species programmes",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "prog/african_cherry.php",
 									"link_title": "African cherry"
@@ -164,8 +155,7 @@
 								{
 									"link_path": "prog/mike_etis.php",
 									"link_title": "Elephants",
-									"links":
-									[
+									"links": [
 										{
 											"link_path": "prog/MIKE/index.php",
 											"link_title": "MIKE"
@@ -201,8 +191,7 @@
 						{
 							"link_path": "prog/ndf/index.php",
 							"link_title": "Other issues",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "prog/ndf/index.php",
 									"link_title": "CITES 'Non-detriment findings'"
@@ -238,8 +227,7 @@
 				{
 					"link_path": "disc/text.php",
 					"link_title": "Documents",
-					"links":
-					[
+					"links": [
 						{
 							"link_path": "disc/text.php",
 							"link_title": "Convention text"
@@ -271,8 +259,7 @@
 						{
 							"link_path": "com/sc/index.php",
 							"link_title": "Standing Committee",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "com/sc/index.php",
 									"link_title": "Documents of meetings"
@@ -290,8 +277,7 @@
 						{
 							"link_path": "com/ac/index.php",
 							"link_title": "Animals Committee",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "com/ac/index.php",
 									"link_title": "Documents of meetings"
@@ -309,8 +295,7 @@
 						{
 							"link_path": "com/pc/index.php",
 							"link_title": "Plants Committee",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "com/pc/index.php",
 									"link_title": "Documents of meetings"
@@ -338,8 +323,7 @@
 				{
 					"link_path": "resources/species.html",
 					"link_title": "Resources",
-					"links":
-					[
+					"links": [
 						{
 							"link_path": "resources/species.html",
 							"link_title": "Species database"
@@ -375,8 +359,7 @@
 						{
 							"link_path": "resources/registers.php",
 							"link_title": "CITES registers",
-							"links":
-							[
+							"links": [
 								{
 									"link_path": "resources/registers.php",
 									"link_title": "Introduction"
@@ -440,8 +423,7 @@
 				{
 					"link_path": "news/SG/index.php",
 					"link_title": "News",
-					"links":
-					[
+					"links": [
 						{
 							"link_path": "news/SG/index.php",
 							"link_title": "Secretary-General's statements"
@@ -470,13 +452,11 @@
 			"menu_name": "footer-menu",
 			"title": "Footer menu",
 			"i18n_mode": "I18N_MODE_MULTIPLE",
-			"links":
-			[
+			"links": [
 				{
 					"link_path": "disclaimer.php",
 					"link_title": "Disclaimer",
-					"translations":
-					{
+					"translations": {
 						"fr": "Avertissement",
 						"es": "Descargo"
 					}
@@ -484,8 +464,7 @@
 				{
 					"link_path": "contact.php",
 					"link_title": "Contact us",
-					"translations":
-					{
+					"translations": {
 						"fr": "Contactez-nous",
 						"es": "Contáctenos"
 					}
@@ -493,8 +472,7 @@
 				{
 					"link_path": "resources/faq.php",
 					"link_title": "FAQs",
-					"translations":
-					{
+					"translations": {
 						"fr": "FAQs",
 						"es": "FAQs"
 					}
@@ -502,8 +480,7 @@
 				{
 					"link_path": "user/login",
 					"link_title": "Log in",
-					"translations":
-					{
+					"translations": {
 						"fr": "Se connecter",
 						"es": "Iniciar sesión"
 					}
