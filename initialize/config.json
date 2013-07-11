@@ -758,7 +758,7 @@
 					]
 				},
 				{
-					"link_path": "news/SG/index.php",
+					"link_path": "news/sg/index.php",
 					"link_title": "News",
 					"translations": {
 						"fr": "A la une",
@@ -766,11 +766,11 @@
 					},
 					"links": [
 						{
-							"link_path": "news/SG/index.php",
+							"link_path": "news/sg/index.php",
 							"link_title": "Secretary-General's statements",
 							"translations": {
-								"fr": "A la une",
-								"es": "Noticias"
+								"fr": "Déclarations du Secrétaire général",
+								"es": "Declaraciones del Secretario General"
 							}
 						},
 						{
