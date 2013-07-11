@@ -40,8 +40,8 @@
 							"link_path": "disc/what.php",
 							"link_title": "What is CITES?",
 							"translations": {
-								"fr": "Découvrez la CITES",
-								"es": "Descubra la CITES"
+								"fr": "La CITES en bref",
+								"es": "¿Qué es la CITES?"
 							}
 						},
 						{
@@ -64,8 +64,8 @@
 									"link_path": "disc/org.php",
 									"link_title": "Organigramme",
 									"translations": {
-										"fr": "Structure",
-										"es": "Estructura"
+										"fr": "Organigramme",
+										"es": "Organigrama"
 									}
 								},
 								{
@@ -96,8 +96,8 @@
 									"link_path": "disc/ac_pc.php",
 									"link_title": "Plants Committee",
 									"translations": {
-										"fr": "Comité pour les animaux",
-										"es": "Comité de Fauna"
+										"fr": "Comité pour les plantes",
+										"es": "Comité de Flora"
 									}
 								},
 								{
@@ -231,7 +231,7 @@
 					"link_path": "prog/african_cherry.php",
 					"link_title": "Programmes",
 					"translations": {
-						"fr": "Programmes sur les espèces",
+						"fr": "Programmes",
 						"es": "Programas"
 					},
 					"links": [
@@ -240,15 +240,15 @@
 							"link_title": "Species programmes",
 							"translations": {
 								"fr": "Programmes sur les espèces",
-								"es": "Programas"
+								"es": "Programas sobre especies"
 							},
 							"links": [
 								{
 									"link_path": "prog/african_cherry.php",
 									"link_title": "African cherry",
 									"translations": {
-										"fr": "Programmes sur les espèces",
-										"es": "Programas"
+										"fr": "Prunier d'Afrique",
+										"es": "Ciruelo africano"
 									}
 								},
 								{
@@ -330,8 +330,8 @@
 									"link_path": "prog/ndf/index.php",
 									"link_title": "CITES 'Non-detriment findings'",
 									"translations": {
-										"fr": "Autres questions",
-										"es": "Otras cuestiones"
+										"fr": "Les \"avis de commerce non préjudiciable\" (ACNP) de la CITES",
+										"es": "Dictámenes de extracción no perjudicial CITES"
 									}
 								},
 								{
@@ -397,8 +397,8 @@
 							"link_path": "disc/text.php",
 							"link_title": "Convention text",
 							"translations": {
-								"fr": "Documents",
-								"es": "Documentos"
+								"fr": "Texte de la Convention",
+								"es": "Texto de la Convención"
 							}
 						},
 						{
@@ -461,8 +461,8 @@
 									"link_path": "com/sc/index.php",
 									"link_title": "Documents of meetings",
 									"translations": {
-										"fr": "Comité permanent",
-										"es": "Comité Permanente"
+										"fr": "Documents",
+										"es": "Documentos"
 									}
 								},
 								{
@@ -495,8 +495,8 @@
 									"link_path": "com/ac/index.php",
 									"link_title": "Documents of meetings",
 									"translations": {
-										"fr": "Comité pour les animaux",
-										"es": "Comité de Fauna"
+										"fr": "Documents",
+										"es": "Documentos"
 									}
 								},
 								{
@@ -529,8 +529,8 @@
 									"link_path": "com/pc/index.php",
 									"link_title": "Documents of meetings",
 									"translations": {
-										"fr": "Comité pour les plantes",
-										"es": "Comité de Flora"
+										"fr": "Documents",
+										"es": "Documentos"
 									}
 								},
 								{
@@ -581,8 +581,8 @@
 							"link_path": "resources/species.html",
 							"link_title": "Species database",
 							"translations": {
-								"fr": "Ressources",
-								"es": "Recursos"
+								"fr": "Base de données sur les espèces CITES",
+								"es": "de especies de la CITES"
 							}
 						},
 						{
@@ -649,8 +649,8 @@
 									"link_path": "resources/registers.php",
 									"link_title": "Introduction",
 									"translations": {
-										"fr": "Registres CITES",
-										"es": "Registros CITES"
+										"fr": "Introduction",
+										"es": "Introducción"
 									}
 								},
 								{
