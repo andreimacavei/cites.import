@@ -4,10 +4,15 @@ class AddConsistency {
 
   private static $changes = array(
     "I/" => "i/",
-    "CoP" => "COP"
+    "COP" => "CoP",
+    "ac-pc" => "AC-PC"
   );
-  private static $extensions = array(
-    ".pdf", ".jpg", ".bmp", ".doc", ".docx", ".ppt", ".pptx"
+  private static $correctExtensions = array(
+    ".pdf", ".jpg", ".bmp", ".doc", ".docx", ".ppt", ".pptx","gif","bmp"
+  );
+  
+  private static $possibleCorrectExtensions = array(
+    ".html",".shtml",".php",".html",".phtml"
   );
 
   public function __construct() {
@@ -21,7 +26,6 @@ class AddConsistency {
               WHERE `type` = 'page'");
     foreach ($result as $record) {
       $node = node_load($record->nid);
-      echo $node->title . PHP_EOL;
     }
   }
 
@@ -30,11 +34,9 @@ class AddConsistency {
       WHERE `type` = 'page'");
     foreach ($pages as $page) {
       $nodeObj = node_load($page->nid);
-      $body = $nodeObj->body[LANGUAGE_NONE][0]['value'];
-      $body = $this->changeUrlForTag($body, "a");
-      $body = $this->changeUrlForTag($body, "img");
-      $nodeObj->body[LANGUAGE_NONE][0]['value'] = $body;
-      node_save($nodeObj);
+      $content = $nodeObj->body[$nodeObj->language][0]['value'];
+      $this->changeUrlForTag($content, "img");
+      $this->changeUrlForTag($content,"a");
     }
   }
 
@@ -55,27 +57,36 @@ class AddConsistency {
       else if ($tag == "embed")
         $attribute = "src";
       $url = $src->getAttribute($attribute);
-      if ($this->isInFileExtensions($url) && strpos($url,"sites/default/files")){
-         if (!file_exists($url)) $newUrl = $this->changeUrl($url);
-         else $newUrl = $url;
+      if ($this->isInFileExtensions($url,  AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
+        if (!file_exists($url))
+          //echo "$url does not exist" . PHP_EOL;
+          $newUrl = $this->changeUrl($url);
+        else
+          $newUrl = $url;
       }
-      else $newUrl = $url;
+      else
+        $newUrl = $url;
+      
+      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && strpos($url, "sites/default/files/imported")){
+        $newUrl = str_replace("sites/default/files/imported","",$url);
+      }
       $src->removeAttribute($attribute);
       $src->setAttribute($attribute, $newUrl);
     }
     $content = preg_replace(array("/^\<\!DOCTYPE.*?<html><body>/si",
       "!</body></html>$!si"), '', $dom->saveHTML());
-    return $content;
+    //return $content;
+    echo $content;
   }
 
-  private function isInFileExtensions($url) {
-    foreach (AddConsistency::$extensions as $extension)
+  private function isInFileExtensions($url,$fileExtensions) {
+    foreach ($fileExtensions as $extension)
       if (strpos($url, $extension))
         return TRUE;
     return FALSE;
   }
-  
-  private function changeUrl($url){
+
+  private function changeUrl($url) {
     foreach (AddConsistency::$changes as $before => $after) {
       if (file_exists(str_replace($before, $after, $url))) {
         return str_replace($before, $after, $url);

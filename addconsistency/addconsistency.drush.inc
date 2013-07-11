@@ -9,7 +9,7 @@ function addconsistency_drush_command() {
     'aliases' => array('ciu'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
-  
+
   $items['change_node_aliases'] = array(
     'description' => 'change all node aliases and use EntityTranslation Module',
     'examples' => array('drush change_node_aliases'),
@@ -21,12 +21,12 @@ function addconsistency_drush_command() {
   return $items;
 }
 
-function drush_addconsistency_change_invalid_urls(){  
+function drush_addconsistency_change_invalid_urls() {
   $consistencyObj = new AddConsistency();
   $consistencyObj->checkUrlsForNodes();
 }
 
-function drush_addconsistency_change_node_aliases(){
+function drush_addconsistency_change_node_aliases() {
   $obj = new AddConsistency();
   $obj->changeNodeAliases();
 }
