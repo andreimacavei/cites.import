@@ -25,8 +25,91 @@ class AddConsistency {
               WHERE `type` = 'page'");
     foreach ($result as $record) {
       $nodeObj = node_load($record->nid);
+      // check if the requested object exists
+      if (!$nodeObj) {
+        continue;
+      }
       $alias = drupal_lookup_path("alias", "node/" . $nodeObj->nid);
-      echo $alias . PHP_EOL;
+      $firstPartAlias = substr($alias, 0, 4);
+      $secondPartAlias = substr($alias, 4);
+      if ($firstPartAlias == "eng/") {
+        $espPath = drupal_lookup_path("source", "esp/" . $secondPartAlias);
+        $fraPath = drupal_lookup_path("source", "fra/" . $secondPartAlias);
+        $espObj = menu_get_object("node", 1, $espPath);
+        $fraObj = menu_get_object("node", 1, $fraPath);
+        if ($espObj != FALSE) {
+          $nodeObj->title_field['es'][0]['value'] = $espObj->title;
+          $nodeObj->title_field['es'][0]['format'] = 'full_html';
+          $nodeObj->body['es'][0]['value'] = $espObj->body[$espObj->language][0]['value'];
+          $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
+          node_delete($espObj->nid);
+        }
+        if ($fraObj != FALSE) {
+          $nodeObj->title_field['fr'][0]['value'] = $fraObj->title;
+          $nodeObj->title_field['fr'][0]['format'] = 'full_html';
+          $nodeObj->body['fr'][0]['value'] = $fraObj->body[$fraObj->language][0]['value'];
+          $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
+          node_delete($fraObj->nid);
+        }
+        $nodeObj->title_field['en'][0]['value'] = $nodeObj->title;
+        $nodeObj->title_field['en'][0]['format'] = 'full_html';
+        $nodeObj->body['en'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
+        $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
+        $nodeObj->path['alias'] = $secondPartAlias;
+        node_save($nodeObj);
+      }
+      else if ($firstPartAlias == "fra/") {
+        $engPath = drupal_lookup_path("source", "eng/" . $secondPartAlias);
+        $espPath = drupal_lookup_path("source", "esp/" . $secondPartAlias);
+        $espObj = menu_get_object("node", 1, $espPath);
+        $engObj = menu_get_object("node", 1, $engPath);
+        if ($espObj != FALSE) {
+          $nodeObj->title_field['es'][0]['value'] = $espObj->title;
+          $nodeObj->title_field['es'][0]['format'] = 'full_html';
+          $nodeObj->body['es'][0]['value'] = $espObj->body[$espObj->language][0]['value'];
+          $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
+          node_delete($espObj->nid);
+        }
+        if ($engObj != FALSE) {
+          $nodeObj->title_field['en'][0]['value'] = $engObj->title;
+          $nodeObj->title_field['en'][0]['format'] = 'full_html';
+          $nodeObj->body['en'][0]['value'] = $engObj->body[$engObj->language][0]['value'];
+          $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
+          node_delete($engObj->nid);
+        }
+        $nodeObj->title_field['fr'][0]['value'] = $nodeObj->title;
+        $nodeObj->title_field['fr'][0]['format'] = 'full_html';
+        $nodeObj->path['alias'] = $secondPartAlias;
+        $nodeObj->body['fr'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
+        $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
+        node_save($nodeObj);
+      }
+      else if ($firstPartAlias == "esp/") {
+        $engPath = drupal_lookup_path("source", "eng/" . $secondPartAlias);
+        $fraPath = drupal_lookup_path("source", "fra/" . $secondPartAlias);
+        $engObj = menu_get_object("node", 1, $engPath);
+        $fraObj = menu_get_object("node", 1, $fraPath);
+        if ($engObj != FALSE) {
+          $nodeObj->title_field['en'][0]['value'] = $engObj->title;
+          $nodeObj->title_field['en'][0]['format'] = 'full_html';
+          $nodeObj->body['en'][0]['value'] = $engObj->body[$engObj->language][0]['value'];
+          $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
+          node_delete($engObj->nid);
+        }
+        if ($fraObj != FALSE) {
+          $nodeObj->title_field['fr']['value'] = $fraObj->title;
+          $nodeObj->title_field['fr'][0]['format'] = 'full_html';
+          $nodeObj->body['fr'][0]['value'] = $fraObj->body[$fraObj->language][0]['value'];
+          $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
+          node_delete($fraObj->nid);
+        }
+        $nodeObj->title_field['es'][0]['value'] = $nodeObj->title;
+        $nodeObj->title_field['es'][0]['format'] = 'full_html';
+        $nodeObj->path['alias'] = $secondPartAlias;
+        $nodeObj->body['es'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
+        $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
+        node_save($nodeObj);
+      }
     }
   }
 
@@ -36,8 +119,8 @@ class AddConsistency {
     foreach ($pages as $page) {
       $nodeObj = node_load($page->nid);
       $content = $nodeObj->body[$nodeObj->language][0]['value'];
-      $this->changeUrlForTag($content, "img");
-      $this->changeUrlForTag($content, "a");
+      $content = $this->changeUrlForTag($content, "img");
+      $content = $this->changeUrlForTag($content, "a");
     }
   }
 
@@ -71,7 +154,7 @@ class AddConsistency {
       }
 
       if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && strpos($url, "sites/default/files/imported")) {
-        $newUrl = str_replace("sites/default/files/imported", "", $url);
+        $newUrl = str_replace("sites/default/files/imported/", "", $url);
       }
       $src->removeAttribute($attribute);
       $src->setAttribute($attribute, $newUrl);
@@ -96,4 +179,5 @@ class AddConsistency {
     }
     return $url;
   }
+
 }

@@ -25,12 +25,14 @@ class DatabaseInterface {
     $result = mysql_query($query);
     return $result;
   }
-  public function getTopic($topicId){
+
+  public function getTopic($topicId) {
     $query = "SELECT * 
               FROM `categs`
               WHERE `categ_id` = $topicId";
     return mysql_query($query);
   }
+
   public function getTopics($forumId) {
     $query = "SELECT * 
               FROM `categs`
@@ -87,25 +89,34 @@ class DatabaseInterface {
               WHERE `group_id` = $id";
     return mysql_query($query);
   }
-  
-  public function getStrangeUsers(){
+
+  public function getStrangeUsers() {
     $query = "SELECT * 
               FROM `users` 
-              WHERE `email` != ''
-              AND
-              `user_id` NOT IN 
+              WHERE `email` != '' AND `user_id` NOT IN 
               (SELECT `user_id` 
               FROM `users` 
-              GROUP BY `email`
-              )";
+              GROUP BY `email`)";
     return mysql_query($query);
   }
-  
-  public function getAllUsers(){
+
+  public function getAllUsers() {
     $query = "SELECT * 
               FROM `users`
               WHERE `email` != ''";
     return mysql_query($query);
+  }
+
+  public function getCountryByUser($user) {
+    $query = "SELECT *
+              FROM `users`
+              INNER JOIN `countries` ON `users`.`country_id` = `countries`.`country_id`
+              WHERE `users`.`user` = '$user'";
+    $result = mysql_query($query);
+    if ($result) {
+      return mysql_fetch_object($result)->cname;
+    }
+    return "";
   }
 
 }

@@ -53,13 +53,9 @@ class ForumManagement {
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
 
-    $dirPath = "public://privateFolder/forum_attachments/";
-    $result = file_prepare_directory($dirPath, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-    if (!$result) {
-      throw new Exception("Cannot create directory to put attachments" . PHP_EOL);
-    }
-    echo "Forum attachments will be put in " . $dirPath . PHP_EOL;
-    $this->destinationFolder = $dirPath;
+    //$this->destinationFolder = variable_get("file_private_path") . "/";
+    $this->destinationFolder = "public://privateFolder/forum_attachments";
+    echo "Forum attachments will be put in " . $this->destinationFolder . PHP_EOL;
 
     $result = $this->dataBaseObj->getAllUsers();
     while ($row = mysql_fetch_object($result)) {
@@ -100,6 +96,13 @@ class ForumManagement {
       $profile->field_lastname[LANGUAGE_NONE][0]['value'] = $user->lastname;
       $profile->field_organization[LANGUAGE_NONE][0]['value'] = $user->organization;
       $profile->field_telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
+      $country = $this->dataBaseObj->getCountryByUser($user->user);
+      if ($country != "") {
+        $countryObj = Country::get_by_name($country);
+        if ($countryObj) {
+          $profile->field_country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
+        }
+      }
       // save profile
       if (count($this->strangeUsers[$user->email]) > 1) {
         echo $user->firstname . " " . $user->lastname . " " . $user->email . " has multiple identities: {$user->user_id}, ";
@@ -131,7 +134,7 @@ class ForumManagement {
     if ($userObj->uid != $userDuplicate->uid) {
       $username .= rand(10, 99);
     }
-    if (is_null($userObj)) {
+    if ($userObj) {
       $fields = array(
         'name' => $username,
         'mail' => $email,
@@ -204,7 +207,7 @@ class ForumManagement {
           $file = file_copy($file, $destinationPath . $row->filename, FILE_EXISTS_REPLACE);
         }
 
-        if (!is_null($file)) {
+        if ($file) {
           $comment->field_comment_attachment[LANGUAGE_NONE][] = (array) $file;
         }
       }
@@ -296,7 +299,7 @@ class ForumManagement {
           $file = file_copy($file, $destinationPath . $row->filename, FILE_EXISTS_REPLACE);
         }
 
-        if (!is_null($file)) {
+        if ($file) {
           $topic->field_topic_attachment[LANGUAGE_NONE][] = (array) $file;
         }
       }
@@ -391,9 +394,15 @@ class ForumManagement {
 
   public function giveRoleToUser($userId, $groupId, $level) {
     $userResult = $this->dataBaseObj->getUser($userId);
+    if (!$userResult) {
+      return;
+    }
     $user = mysql_fetch_object($userResult);
     $userObj = user_load_by_name($user->user);
-    $userRoles = $userObj->roles;
+    if (!$userObj) {
+      return;
+    }
+    //$userRoles = $userObj->roles;
     // add visitor role 
     if ($level == 1) {
       $roleName = ForumManagement::$forumDictionary[$groupId][2];
@@ -421,14 +430,9 @@ class ForumManagement {
   public function deleteUsers() {
     $result = $this->dataBaseObj->getUsers();
     while ($row = mysql_fetch_object($result)) {
-      if (!empty($row->user) && $row->user != 'admin') {
-        if (strpos($row->email, "eaudeweb") || strpos($row->email, "example")) {
-          continue;
-        }
-        $userObj = user_load_by_name($row->user);
-        if (!is_null($userObj)) {
-          user_delete($userObj->uid);
-        }
+      $userObj = user_load_by_name($row->user);
+      if ($userObj) {
+        user_delete($userObj->uid);
       }
     }
   }
@@ -497,7 +501,7 @@ class ForumManagement {
     }
     foreach ($alerts as $forumAlert) {
       $forum = mysql_fetch_object($this->dataBaseObj->getForum(intval($forumAlert)));
-      if (is_null($forum)) {
+      if (!$forum) {
         continue;
       }
       $result = db_query("SELECT * FROM `taxonomy_term_data` WHERE `name` = '{$forum->gname}'");
