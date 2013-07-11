@@ -138,9 +138,7 @@ class ForumManagement {
         'pass' => $password,
         'status' => 1,
         'init' => $username,
-        'roles' => array(
-          DRUPAL_AUTHENTICATED_RID => 'authenticated user',
-        ),
+        'roles' => array(DRUPAL_AUTHENTICATED_RID => 'authenticated user'),
       );
       $account = user_save($userObj);
       $profile = profile_create(array('user' => $account, 'type' => 'extendedprofile'));
@@ -351,10 +349,9 @@ class ForumManagement {
     $role->name = $managerRoleName;
     user_role_save($role);
     $role = user_role_load_by_name($managerRoleName);
-    $manager_permissions = array(
-    );
+    $manager_permissions = array();
     user_role_change_permissions($role->rid, $manager_permissions);
-    $this->asPermissions($taxonomyTerm->tid, $role->rid, 1, 1, 1, 1);
+    $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 1, 1, 1);
 
     // create Forum Member role
     $memberRoleName = ForumManagement::$forumDictionary[$id][1];
@@ -362,8 +359,7 @@ class ForumManagement {
     $role->name = $memberRoleName;
     user_role_save($role);
     $role = user_role_load_by_name($memberRoleName);
-    $member_permissions = array(
-    );
+    $member_permissions = array();
     user_role_change_permissions($role->rid, $member_permissions);
     $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 1);
 
@@ -373,8 +369,7 @@ class ForumManagement {
     $role->name = $visitorRoleName;
     user_role_save($role);
     $role = user_role_load_by_name($visitorRoleName);
-    $visitor_permissions = array(
-    );
+    $visitor_permissions = array();
     user_role_change_permissions($role->rid, $visitor_permissions);
     $this->grantPermissions($taxonomyTerm->tid, $role->rid, 1, 0, 0, 0);
   }
