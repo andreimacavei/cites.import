@@ -1,4 +1,4 @@
-name = cites_importforum
+name = Cites Import Forum
 description = Import forum from old site 
 package = CITES
 core = 7.x

@@ -1,6 +1,6 @@
 <?php
 
-function addconsistency_drush_command() {
+function cites_addconsistency_drush_command() {
   $items['change_invalid_urls'] = array(
     'description' => 'change all invalid url from content',
     'examples' => array('drush change_invalid_urls'),
@@ -21,12 +21,12 @@ function addconsistency_drush_command() {
   return $items;
 }
 
-function drush_addconsistency_change_invalid_urls() {
+function drush_cites_addconsistency_change_invalid_urls() {
   $consistencyObj = new AddConsistency();
   $consistencyObj->checkUrlsForNodes();
 }
 
-function drush_addconsistency_change_node_aliases() {
+function drush_cites_addconsistency_change_node_aliases() {
   $obj = new AddConsistency();
   $obj->changeNodeAliases();
 }
