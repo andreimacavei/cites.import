@@ -15,7 +15,7 @@ function initialize_drush_command() {
 		),
 		'bootstrap'           => DRUSH_BOOTSTRAP_DRUPAL_FULL,
 		'description'         => 'Initializes your site.',
-		'drupal dependencies' => array( 'i18n_menu', 'locale' ),
+		'drupal dependencies' => array( 'i18n_menu', 'l10n_update', 'locale' ),
 		'examples'            => array(
 			'drush init languages --config-file=config.json' => 'Adds languages defined in the config.json configuration file.'
 		),
@@ -210,6 +210,9 @@ function drush_initialize_languages( $config ) {
 
 		drush_log( dt( '!langcode: Language successfully added', array( '!langcode' => $language['langcode'] ) ), 'ok' );
 	}
+
+	// Invoke drush api calls, including all hooks.
+	drush_invoke( 'l10n-update' );
 }
 
 /**
@@ -252,8 +255,11 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 			$link['link_path']   = drupal_get_normal_path( $link['link_path'] );
 			$link['router_path'] = _menu_find_router_path( $link['link_path'] );
 
-			if ( ! $link['link_path'] || ! $link['router_path'] )
+			if ( ! $link['link_path'] || ! $link['router_path'] ) {
+				drush_log( dt( '!link-path: Invalid path', array( '!link-path' => $link['link_path'] ) ), 'warning' );
+
 				continue;
+			}
 		}
 
 		$link['weight']     = $weight++;
