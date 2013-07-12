@@ -804,6 +804,7 @@
 		{
 			"menu_name": "footer-menu",
 			"title": "Footer menu",
+			"description": "The <em>Footer</em> menu is used to provide users with the information they are looking for.",
 			"i18n_mode": "I18N_MODE_MULTIPLE",
 			"links": [
 				{
