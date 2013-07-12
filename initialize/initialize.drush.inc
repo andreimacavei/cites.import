@@ -256,7 +256,7 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 			$link['router_path'] = _menu_find_router_path( $link['link_path'] );
 
 			if ( ! $link['link_path'] || ! $link['router_path'] ) {
-				drush_log( dt( '!link-path: Invalid path', array( '!link-path' => $link['link_path'] ) ), 'warning' );
+				drush_log( dt( '!link-path: Invalid path for \'!link-title\'', array( '!link-path' => $link['link_path'], '!link-title' => $link['link_title'] ) ), 'warning' );
 
 				continue;
 			}
@@ -336,6 +336,9 @@ function drush_initialize_menus( $config ) {
 
 		if ( ! isset( $links ) || empty( $links ) )
 			continue;
+
+		// Deletes all links for a menu.
+		menu_delete_links( $menu['menu_name'] );
 
 		// Initializes links.
 		drush_initialize_links( $menu['menu_name'], $links );
