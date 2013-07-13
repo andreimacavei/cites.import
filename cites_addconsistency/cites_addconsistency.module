@@ -13,6 +13,20 @@ class AddConsistency {
   private static $possibleCorrectExtensions = array(
     ".html", ".shtml", ".php", ".html", ".phtml"
   );
+  private $search = array("eng/esp/", "eng/fra/", "eng/eng/",
+    "fra/esp/", "fra/fra/", "fra/eng/",
+    "esp/esp/", "esp/fra/", "esp/eng/",
+    "espsites/", "frasites/", "engsites/",
+    "engeng/","engfra/","engesp/",
+    "fraeng/","frafra/","fraesp/",
+    "espeng/","espfra/","espesp/");
+  private $replace = array("esp/", "fra/", "eng/",
+    "esp/", "fra/", "eng/",
+    "esp/", "fra/", "eng",
+    "sites/", "sites/", "sites/",
+    "eng/","fra/","esp/",
+    "eng/","fra/","esp/",
+    "eng/","fra/","esp/");
 
   public function __construct() {
     ;
@@ -21,8 +35,8 @@ class AddConsistency {
   public function changeNodeAliases() {
     // get all basic page nodes
     $result = db_query("SELECT *
-              FROM `node`
-              WHERE `type` = 'page'");
+      FROM `node`
+      WHERE `type` = 'page'");
     foreach ($result as $record) {
       $nodeObj = node_load($record->nid);
       // check if the requested object exists
@@ -56,6 +70,7 @@ class AddConsistency {
         $nodeObj->body['en'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
         $nodeObj->path['alias'] = $secondPartAlias;
+        $nodeObj->translate = 1;
         node_save($nodeObj);
       }
       else if ($firstPartAlias == "fra/") {
@@ -82,6 +97,7 @@ class AddConsistency {
         $nodeObj->path['alias'] = $secondPartAlias;
         $nodeObj->body['fr'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
+        $nodeObj->translate = 1;
         node_save($nodeObj);
       }
       else if ($firstPartAlias == "esp/") {
@@ -97,7 +113,7 @@ class AddConsistency {
           node_delete($engObj->nid);
         }
         if ($fraObj != FALSE) {
-          $nodeObj->title_field['fr']['value'] = $fraObj->title;
+          $nodeObj->title_field['fr'][0]['value'] = $fraObj->title;
           $nodeObj->title_field['fr'][0]['format'] = 'full_html';
           $nodeObj->body['fr'][0]['value'] = $fraObj->body[$fraObj->language][0]['value'];
           $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
@@ -108,6 +124,7 @@ class AddConsistency {
         $nodeObj->path['alias'] = $secondPartAlias;
         $nodeObj->body['es'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
+        $nodeObj->translate = 1;
         node_save($nodeObj);
       }
     }
@@ -121,6 +138,8 @@ class AddConsistency {
       $content = $nodeObj->body[$nodeObj->language][0]['value'];
       $content = $this->changeUrlForTag($content, "img");
       $content = $this->changeUrlForTag($content, "a");
+      $nodeObj->body[$nodeObj->language][0]['value'] = $content;
+      node_save($nodeObj);
     }
   }
 
@@ -131,7 +150,7 @@ class AddConsistency {
     libxml_use_internal_errors(false);
     $xpath = new DOMXPath($dom);
     $srcs = $xpath->evaluate("//$tag");
-
+    
     for ($i = 0; $i < $srcs->length; $i++) {
       $src = $srcs->item($i);
       if ($tag == "a")
@@ -142,6 +161,7 @@ class AddConsistency {
         $attribute = "src";
       $url = $src->getAttribute($attribute);
       if ($this->isInFileExtensions($url, AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
+        $url = $this->replaceLanguagePrefix($url);
         if (!file_exists($url)) {
           $newUrl = $this->changeUrl($url);
         }
@@ -152,9 +172,11 @@ class AddConsistency {
       else {
         $newUrl = $url;
       }
-
-      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && strpos($url, "sites/default/files/imported")) {
-        $newUrl = str_replace("sites/default/files/imported/", "", $url);
+      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions)) {
+        $newUrl = $this->replaceLanguagePrefix($url);
+      }
+      else {
+        $newUrl = $url;
       }
       $src->removeAttribute($attribute);
       $src->setAttribute($attribute, $newUrl);
@@ -178,6 +200,10 @@ class AddConsistency {
       }
     }
     return $url;
+  }
+
+  private function replaceLanguagePrefix($url) {
+    return str_replace($this->search, $this->replace, $url);
   }
 
 }

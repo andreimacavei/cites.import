@@ -4,3 +4,4 @@ package = CITES
 core = 7.x
 version = 7.x-1.17
 files[] = DatabaseInterface.php
+dependencies[] = entityreference

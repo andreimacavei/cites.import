@@ -52,9 +52,9 @@ class ForumManagement {
     }
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
-
     //$this->destinationFolder = variable_get("file_private_path") . "/";
-    $this->destinationFolder = "public://privateFolder/forum_attachments";
+    $this->destinationFolder = "private://";
+    file_prepare_directory($this->destinationFolder, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
     echo "Forum attachments will be put in " . $this->destinationFolder . PHP_EOL;
 
     $result = $this->dataBaseObj->getAllUsers();
@@ -164,8 +164,9 @@ class ForumManagement {
     if ($userAccount) {
       $comment->uid = $userAccount->uid;
     }
+    // if user is unknown set uid as anonymous
     else {
-      $comment->uid = 1; // user's id, who left the comment
+      $comment->uid = 0; 
     }
     $comment->created = strtotime($post->data);
     $comment->changed = strtotime($post->data);
@@ -265,7 +266,7 @@ class ForumManagement {
       $topic->uid = $userAccount->uid;
     }
     else {
-      $topic->uid = 1;
+      $topic->uid = 0;
     }
     $result = $this->dataBaseObj->getPostsFiles($post->post_id);
     try {
@@ -438,7 +439,15 @@ class ForumManagement {
   }
 
   private function grantPermissions($tid, $rid, $grant_view, $grant_update, $grant_delete, $grant_create) {
-    db_query("INSERT INTO `forum_access` VALUES($tid,$rid,$grant_view,$grant_update,$grant_delete,$grant_create,0)");
+    db_insert("forum_access")->fields(array(
+      "tid" => $tid,
+      "rid" => $rid,
+      "grant_view" => $grant_view,
+      "grant_update" => $grant_update,
+      "grant_delete" => $grant_delete,
+      "grant_create" => $grant_create,
+      "priority" => 0
+    ));
   }
 
   public function addSubscriptionToUsers() {
