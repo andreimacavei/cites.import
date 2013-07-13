@@ -582,7 +582,7 @@
 							"link_title": "Species database",
 							"translations": {
 								"fr": "Base de données sur les espèces CITES",
-								"es": "de especies de la CITES"
+								"es": "Base de datos de especies de la CITES"
 							}
 						},
 						{
@@ -590,7 +590,7 @@
 							"link_title": "Trade database",
 							"translations": {
 								"fr": "Base de données sur le commerce",
-								"es": "sobre el comercio CITES"
+								"es": "Base de datos sobre el comercio CITES"
 							}
 						},
 						{
@@ -804,6 +804,7 @@
 		{
 			"menu_name": "footer-menu",
 			"title": "Footer menu",
+			"description": "The <em>Footer</em> menu is used to provide users with the information they are looking for.",
 			"i18n_mode": "I18N_MODE_MULTIPLE",
 			"links": [
 				{
