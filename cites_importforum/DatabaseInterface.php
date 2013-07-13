@@ -76,13 +76,15 @@ class DatabaseInterface {
     return $result;
   }
 
-  public function getGroupSubscriptions() {
-    $query = "SELECT *
-              FROM `users_groups`";
-    $result = mysql_query($query);
-    return $result;
+  public function getGroupSubscriptions(){
+    $query = "SELECT * 
+              FROM `users`
+              INNER JOIN `users_groups`
+              ON `users`.`user_id` = `users_groups`.`user_id`
+              WHERE `users`.`email` != ''";
+    return mysql_query($query);
   }
-
+  
   public function getForum($id) {
     $query = "SELECT * 
               FROM `groups`

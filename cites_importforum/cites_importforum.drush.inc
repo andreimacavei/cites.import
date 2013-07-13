@@ -31,8 +31,12 @@ function cites_importforum_drush_command() {
 }
 
 function drush_cites_importforum_import_forum($host = 'localhost', $username = 'root', $password = '', $database = 'cites', $pathToAttachments = '/') {
-  foreach (taxonomy_get_tree(2) as $term) {
-    taxonomy_term_delete($term->tid);
+  $taxonomyObj = taxonomy_vocabulary_machine_name_load("Forums");
+  // delete previous created forums
+  if ($taxonomyObj) {
+    foreach (taxonomy_get_tree($taxonomyObj->vid) as $term) {
+      taxonomy_term_delete($term->tid);
+    }
   }
   $dataBaseObj = DatabaseInterface::getInstance($host, $username, $password, $database);
   $forumObj = new ForumManagement($dataBaseObj, $pathToAttachments);

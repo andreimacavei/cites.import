@@ -91,7 +91,7 @@ class ForumManagement {
     try {
       $account = user_save('', $fields);
       // get profile2 object
-      $profile = profile_create(array('user' => $account, 'type' => 'extendedprofile'));
+      $profile = profile2_create(array('user' => $account, 'type' => 'extendedprofile'));
       $profile->field_firstname[LANGUAGE_NONE][0]['value'] = $user->firstname;
       $profile->field_lastname[LANGUAGE_NONE][0]['value'] = $user->lastname;
       $profile->field_organization[LANGUAGE_NONE][0]['value'] = $user->organization;
@@ -166,7 +166,7 @@ class ForumManagement {
     }
     // if user is unknown set uid as anonymous
     else {
-      $comment->uid = 0; 
+      $comment->uid = 0;
     }
     $comment->created = strtotime($post->data);
     $comment->changed = strtotime($post->data);
@@ -197,7 +197,7 @@ class ForumManagement {
         );
         $this->counter++;
         $destinationPath = $this->destinationFolder;
-        echo $row->filename . PHP_EOL;
+        echo "{$row->filename} added as attachment to a comment" . PHP_EOL;
         if (file_exists($destinationPath . $row->filename)) {
           $uri = $destinationPath . $row->filename;
           $files = file_load_multiple(array(), array('uri' => $uri));
@@ -289,7 +289,7 @@ class ForumManagement {
         );
         $this->counter++;
         $destinationPath = $this->destinationFolder;
-        echo $row->filename . PHP_EOL;
+        echo "{$row->filename} added as attachment to a topic forum" . PHP_EOL;
         if (file_exists($destinationPath . $row->filename)) {
           $uri = $destinationPath . $row->filename;
           $files = file_load_multiple(array(), array('uri' => $uri));
@@ -389,22 +389,19 @@ class ForumManagement {
   public function assignRolesToUsers() {
     $result = $this->dataBaseObj->getGroupSubscriptions();
     while ($row = mysql_fetch_object($result)) {
-      $this->giveRoleToUser($row->user_id, $row->group_id, $row->group_level);
+      $this->giveRoleToUser1($row->user, $row->email, $row->group_id, $row->level);
     }
   }
 
-  public function giveRoleToUser($userId, $groupId, $level) {
-    $userResult = $this->dataBaseObj->getUser($userId);
-    if (!$userResult) {
-      return;
-    }
-    $user = mysql_fetch_object($userResult);
-    $userObj = user_load_by_name($user->user);
+  public function giveRoleToUser1($username, $email, $groupId, $level) {
+    $userObj = user_load_by_name($username);
     if (!$userObj) {
-      return;
+      $userObj = user_load_by_mail($email);
     }
-    //$userRoles = $userObj->roles;
-    // add visitor role 
+    if (!$userObj) {
+      echo "User $username does not exist" . PHP_EOL;
+      return ;
+    }
     if ($level == 1) {
       $roleName = ForumManagement::$forumDictionary[$groupId][2];
     }
@@ -447,7 +444,7 @@ class ForumManagement {
       "grant_delete" => $grant_delete,
       "grant_create" => $grant_create,
       "priority" => 0
-    ));
+    ))->execute();
   }
 
   public function addSubscriptionToUsers() {
@@ -523,7 +520,17 @@ class ForumManagement {
       }
       $tid = $result->tid;
       $uid = $userObj->uid;
-      db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
+      //db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
+      db_insert('subscriptions')->fields(array(
+        'module' => 'node',
+        'field' => 'tid',
+        'value' => $tid,
+        'recipient_uid' => $uid,
+        'send_interval' => 1,
+        'author_uid' => -1,
+        'send_updates' => 1,
+        'send_comments' => 1
+      ))->execute();
     }
   }
 
