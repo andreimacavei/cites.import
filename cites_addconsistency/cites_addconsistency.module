@@ -5,7 +5,8 @@ class AddConsistency {
   private static $changes = array(
     "I/" => "i/",
     "COP" => "CoP",
-    "ac-pc" => "AC-PC"
+    "ac-pc" => "AC-PC",
+    "NC" => "nc",
   );
   private static $correctExtensions = array(
     ".pdf", ".jpg", ".bmp", ".doc", ".docx", ".ppt", ".pptx", "gif", "bmp"
@@ -13,20 +14,6 @@ class AddConsistency {
   private static $possibleCorrectExtensions = array(
     ".html", ".shtml", ".php", ".html", ".phtml"
   );
-  private $search = array("eng/esp/", "eng/fra/", "eng/eng/",
-    "fra/esp/", "fra/fra/", "fra/eng/",
-    "esp/esp/", "esp/fra/", "esp/eng/",
-    "espsites/", "frasites/", "engsites/",
-    "engeng/","engfra/","engesp/",
-    "fraeng/","frafra/","fraesp/",
-    "espeng/","espfra/","espesp/");
-  private $replace = array("esp/", "fra/", "eng/",
-    "esp/", "fra/", "eng/",
-    "esp/", "fra/", "eng",
-    "sites/", "sites/", "sites/",
-    "eng/","fra/","esp/",
-    "eng/","fra/","esp/",
-    "eng/","fra/","esp/");
 
   public function __construct() {
     ;
@@ -139,6 +126,21 @@ class AddConsistency {
       $content = $this->changeUrlForTag($content, "img");
       $content = $this->changeUrlForTag($content, "a");
       $nodeObj->body[$nodeObj->language][0]['value'] = $content;
+
+      $content = $nodeObj->body['en'][0]['value'];
+      $content = $this->changeUrlForTag($content, "img");
+      $content = $this->changeUrlForTag($content, "a");
+      $nodeObj->body['en'][0]['value'] = $content;
+
+      $content = $nodeObj->body['es'][0]['value'];
+      $content = $this->changeUrlForTag($content, "img");
+      $content = $this->changeUrlForTag($content, "a");
+      $nodeObj->body['es'][0]['value'] = $content;
+
+      $content = $nodeObj->body['fr'][0]['value'];
+      $content = $this->changeUrlForTag($content, "img");
+      $content = $this->changeUrlForTag($content, "a");
+      $nodeObj->body['fr'][0]['value'] = $content;
       node_save($nodeObj);
     }
   }
@@ -150,7 +152,7 @@ class AddConsistency {
     libxml_use_internal_errors(false);
     $xpath = new DOMXPath($dom);
     $srcs = $xpath->evaluate("//$tag");
-    
+
     for ($i = 0; $i < $srcs->length; $i++) {
       $src = $srcs->item($i);
       if ($tag == "a")
@@ -160,10 +162,11 @@ class AddConsistency {
       else if ($tag == "embed")
         $attribute = "src";
       $url = $src->getAttribute($attribute);
+      global $base_url;
       if ($this->isInFileExtensions($url, AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
-        $url = $this->replaceLanguagePrefix($url);
-        if (!file_exists($url)) {
-          $newUrl = $this->changeUrl($url);
+        $relUrl = substr($url, 1);
+        if (!file_exists($relUrl)) {
+          $newUrl = "/" . $this->changeUrl($relUrl);
         }
         else {
           $newUrl = $url;
@@ -172,8 +175,16 @@ class AddConsistency {
       else {
         $newUrl = $url;
       }
-      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions)) {
-        $newUrl = $this->replaceLanguagePrefix($url);
+
+      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && substr($url,0,4) != "http"
+          && !strpos($url,"#")) {
+        $relUrl = substr($url, 1);
+        if (!drupal_lookup_path("source", $relUrl)) {
+          $newUrl = "/" . $this->changeUrlForHTMLFiles($relUrl);
+        }
+        else {
+          $newUrl = $url;
+        }
       }
       else {
         $newUrl = $url;
@@ -202,8 +213,14 @@ class AddConsistency {
     return $url;
   }
 
-  private function replaceLanguagePrefix($url) {
-    return str_replace($this->search, $this->replace, $url);
+  private function changeUrlForHTMLFiles($url) {
+    foreach (AddConsistency::$changes as $before => $after) {
+      $path = str_replace($before, $after, $url);
+      if (drupal_lookup_path("source", $path)) {
+        return $path;
+      }
+    }
+    return $url;
   }
 
 }

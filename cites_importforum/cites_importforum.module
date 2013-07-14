@@ -400,7 +400,7 @@ class ForumManagement {
     }
     if (!$userObj) {
       echo "User $username does not exist" . PHP_EOL;
-      return ;
+      return;
     }
     if ($level == 1) {
       $roleName = ForumManagement::$forumDictionary[$groupId][2];
