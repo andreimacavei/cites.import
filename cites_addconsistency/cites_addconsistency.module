@@ -162,7 +162,6 @@ class AddConsistency {
       else if ($tag == "embed")
         $attribute = "src";
       $url = $src->getAttribute($attribute);
-      global $base_url;
       if ($this->isInFileExtensions($url, AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
         $relUrl = substr($url, 1);
         if (!file_exists($relUrl)) {
