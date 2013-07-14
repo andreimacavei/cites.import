@@ -5,8 +5,10 @@ class AddConsistency {
   private static $changes = array(
     "I/" => "i/",
     "COP" => "CoP",
-    "ac-pc" => "AC-PC",
+    "AC-PC" => "ac-pc",
     "NC" => "nc",
+    "PC" => "pc",
+    "SC" => "sc"
   );
   private static $correctExtensions = array(
     ".pdf", ".jpg", ".bmp", ".doc", ".docx", ".ppt", ".pptx", "gif", "bmp"

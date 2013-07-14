@@ -389,11 +389,11 @@ class ForumManagement {
   public function assignRolesToUsers() {
     $result = $this->dataBaseObj->getGroupSubscriptions();
     while ($row = mysql_fetch_object($result)) {
-      $this->giveRoleToUser1($row->user, $row->email, $row->group_id, $row->level);
+      $this->giveRoleToUser($row->user, $row->email, $row->group_id, $row->level);
     }
   }
 
-  public function giveRoleToUser1($username, $email, $groupId, $level) {
+  public function giveRoleToUser($username, $email, $groupId, $level) {
     $userObj = user_load_by_name($username);
     if (!$userObj) {
       $userObj = user_load_by_mail($email);
@@ -520,7 +520,6 @@ class ForumManagement {
       }
       $tid = $result->tid;
       $uid = $userObj->uid;
-      //db_query("INSERT INTO `subscriptions` VALUES(NULL,'node','tid',$tid,$uid,1,-1,1,1)");
       db_insert('subscriptions')->fields(array(
         'module' => 'node',
         'field' => 'tid',
