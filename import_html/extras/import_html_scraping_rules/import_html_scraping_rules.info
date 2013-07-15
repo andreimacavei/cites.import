@@ -1,7 +1,7 @@
 core = 7.x
 description = "Extend the import settings with XPath-based element scraping rules"
 name = "Import HTML - XPath Scraping rules"
-package = "Import/Export"
+package = "CITES"
 dependencies[] = import_html
 
 

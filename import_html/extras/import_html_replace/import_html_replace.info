@@ -1,7 +1,7 @@
 core = 7.x
 description = "Perform simple search & replace on content during the import"
 name = "Import HTML - Search & Replace"
-package = "Import/Export"
+package = "CITES"
 dependencies[] = import_html
 
 

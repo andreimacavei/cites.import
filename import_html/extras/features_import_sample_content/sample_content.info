@@ -8,7 +8,7 @@ features[import_html_content][] = "sample_content_data"
 features[import_html_content][] = "sample_feature_data"
 features[import_html_profile][] = "sample_content_profile"
 name = "Import sample content"
-package = "Testing"
+package = "CITES"
 project = "Import/Export"
 
 
