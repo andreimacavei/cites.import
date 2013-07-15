@@ -411,6 +411,6 @@ function drush_initialize( $type = NULL ) {
 		// Gets the name of the current bootstrapped site.
 		$site_name = drush_sitealias_bootstrapped_site_name();
 
-		drush_log( dt( '!site-name: \'!type\' successfully initialized', array('!site-name' => $site_name, '!type' => $type ) ), 'success' );
+		drush_log( dt( '!site-name: \'!type\' successfully initialized', array( '!site-name' => $site_name, '!type' => $type ) ), 'success' );
 	}
 }
