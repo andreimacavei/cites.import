@@ -293,9 +293,10 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 				// Updates / creates translation for a certain source.
 				i18n_string_translation_update( 'menu:item:' . $mlid . ':title', $translation, $langcode );
 			}
+
+			unset( $translations );
 		}
 
-		unset( $translations );
 
 		if ( ! isset( $children ) || empty( $children ) )
 			continue;
@@ -411,6 +412,6 @@ function drush_initialize( $type = NULL ) {
 		// Gets the name of the current bootstrapped site.
 		$site_name = drush_sitealias_bootstrapped_site_name();
 
-		drush_log( dt( '!site-name: \'!type\' successfully initialized', array('!site-name' => $site_name, '!type' => $type ) ), 'success' );
+		drush_log( dt( '!site-name: \'!type\' successfully initialized', array( '!site-name' => $site_name, '!type' => $type ) ), 'success' );
 	}
 }
