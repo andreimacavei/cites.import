@@ -1,3 +1,79 @@
 <?php
 
+function cites_importforum_install() {
+  if (!module_exists("profile2")) {
+    echo "Profile2 module does not exists or is not enabled" . PHP_EOL;
+    return;
+  }
+  if (!profile2_type_load('extendedprofile')) {
+    profile2_type_save(new ProfileType(array(
+      'type' => 'extendedprofile',
+      'label' => 'Extended Profile',
+      'weight' => 0
+    )));
+  }
+  else {
+    echo "Profile type extendedprofile already exists" . PHP_EOL;
+    return;
+  }
+  if (field_info_field('firstname')) {
+    field_delete_field('firstname');
+  }
+  if (field_info_field('lastname')) {
+    field_delete_field('lastname');
+  }
+  if (field_info_field('organization')) {
+    field_delete_field('organization');
+  }
+  if (field_info_field('telephone')) {
+    field_delete_field('telephone');
+  }
+  if (field_info_field('country')) {
+    field_delete_field('country');
+  }
+  $field = array(
+    'field_name' => 'firstname',
+    'type' => 'text',
+    'cardinality' => 1,
+    'translatable' => FALSE,
+  );
+  field_create_field($field);
+  $instance = array(
+    'entity_type' => 'profile2',
+    'field_name' => 'firstname',
+    'bundle' => 'extendedprofile',
+    'label' => 'Firstname',
+    'widget' => array(
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+  field_create_instance($instance);
+
+  $field['field_name'] = 'lastname';
+  field_create_field($field);
+  $instance['field_name'] = 'lastname';
+  $instance['label'] = 'Lastname';
+  field_create_instance($instance);
+
+  $field['field_name'] = 'organization';
+  field_create_field($field);
+  $instance['field_name'] = 'organization';
+  $instance['label'] = 'Organization';
+  field_create_instance($instance);
+
+  $field['field_name'] = 'telephone';
+  field_create_field($field);
+  $instance['field_name'] = 'telephone';
+  $instance['label'] = 'Telephone';
+  field_create_instance($instance);
+
+  $field['field_name'] = 'country';
+  $field['type'] = 'entityreference';
+  field_create_field($field);
+  $instance['field_name'] = 'country';
+  $instance['label'] = 'Country';
+  field_create_instance($instance);
+}
+
 ?>

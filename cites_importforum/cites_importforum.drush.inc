@@ -27,6 +27,7 @@ function cites_importforum_drush_command() {
     'aliases' => array('du'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
+
   return $items;
 }
 
