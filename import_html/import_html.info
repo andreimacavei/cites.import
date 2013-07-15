@@ -1,6 +1,6 @@
 name = Import HTML
 description = Import/Export an entire site to/from static HTML
-package = "Import/Export"
+package = "CITES"
 core = 7.x
 php = 5.0
 files[] = tests/import_html.test
