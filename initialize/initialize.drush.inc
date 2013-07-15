@@ -293,9 +293,10 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 				// Updates / creates translation for a certain source.
 				i18n_string_translation_update( 'menu:item:' . $mlid . ':title', $translation, $langcode );
 			}
+
+			unset( $translations );
 		}
 
-		unset( $translations );
 
 		if ( ! isset( $children ) || empty( $children ) )
 			continue;
