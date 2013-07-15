@@ -1,4 +1,6 @@
 name = importmailinglist
 description = Import mailing list from old site 
 core = 7.x
-//files[] = DatabaseInterface.php
+dependencies[] = simplenews
+dependencies[] = importforum
+dependencies[] = profile2

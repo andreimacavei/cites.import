@@ -5,7 +5,7 @@
     'arguments' => array('host', 'username', 'password', 'database'),
     'required-arguments' => 0,
     'aliases' => array(),
-    'options'=>array('drupal dependencies'=>'simplenews'),
+    'options'=>array(), 
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   return $items;
