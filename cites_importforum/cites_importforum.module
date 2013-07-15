@@ -92,15 +92,15 @@ class ForumManagement {
       $account = user_save('', $fields);
       // get profile2 object
       $profile = profile2_create(array('user' => $account, 'type' => 'extendedprofile'));
-      $profile->field_firstname[LANGUAGE_NONE][0]['value'] = $user->firstname;
-      $profile->field_lastname[LANGUAGE_NONE][0]['value'] = $user->lastname;
-      $profile->field_organization[LANGUAGE_NONE][0]['value'] = $user->organization;
-      $profile->field_telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
+      $profile->firstname[LANGUAGE_NONE][0]['value'] = $user->firstname;
+      $profile->lastname[LANGUAGE_NONE][0]['value'] = $user->lastname;
+      $profile->organization[LANGUAGE_NONE][0]['value'] = $user->organization;
+      $profile->telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
       $country = $this->dataBaseObj->getCountryByUser($user->user);
       if ($country != "") {
         $countryObj = Country::get_by_name($country);
         if ($countryObj) {
-          $profile->field_country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
+          $profile->country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
         }
       }
       // save profile
@@ -112,11 +112,11 @@ class ForumManagement {
             $duplicateUser = mysql_fetch_object($this->dataBaseObj->getUser($user_id));
             if (!$duplicateUser)
               continue;
-            if ($profile->field_organization[LANGUAGE_NONE][0]['value'] != $duplicateUser->organization) {
-              $profile->field_organization[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->organization}";
+            if ($profile->organization[LANGUAGE_NONE][0]['value'] != $duplicateUser->organization) {
+              $profile->organization[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->organization}";
             }
-            if ($profile->field_telephone[LANGUAGE_NONE][0]['value'] != $duplicateUser->telephone) {
-              $profile->field_telephone[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->telephone}";
+            if ($profile->telephone[LANGUAGE_NONE][0]['value'] != $duplicateUser->telephone) {
+              $profile->telephone[LANGUAGE_NONE][0]['value'] .= ",{$duplicateUser->telephone}";
             }
           }
         }
@@ -145,10 +145,10 @@ class ForumManagement {
       );
       $account = user_save($userObj);
       $profile = profile_create(array('user' => $account, 'type' => 'extendedprofile'));
-      $profile->field_firstname[LANGUAGE_NONE][0]['value'] = '';
-      $profile->field_lastname[LANGUAGE_NONE][0]['value'] = '';
-      $profile->field_organization[LANGUAGE_NONE][0]['value'] = '';
-      $profile->field_telephone[LANGUAGE_NONE][0]['value'] = '';
+      $profile->firstname[LANGUAGE_NONE][0]['value'] = '';
+      $profile->lastname[LANGUAGE_NONE][0]['value'] = '';
+      $profile->organization[LANGUAGE_NONE][0]['value'] = '';
+      $profile->telephone[LANGUAGE_NONE][0]['value'] = '';
       profile2_save($profile);
     }
     return $userObj;

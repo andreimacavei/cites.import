@@ -177,8 +177,7 @@ class AddConsistency {
         $newUrl = $url;
       }
 
-      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && substr($url,0,4) != "http"
-          && !strpos($url,"#")) {
+      if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && substr($url, 0, 4) != "http" && !strpos($url, "#")) {
         $relUrl = substr($url, 1);
         if (!drupal_lookup_path("source", $relUrl)) {
           $newUrl = "/" . $this->changeUrlForHTMLFiles($relUrl);
