@@ -54,8 +54,12 @@ function import_html_import_files($file_list, $context) {
 
     // $rel_path may still be empty
     // - representing the root item of the base_path.
+    try {
     $file_results = import_html_import_file($rel_path, $context);
-
+    }
+    catch(Exception $e) {
+      file_put_contents("eroare.txt", "-------------------------- $rel_path --------------- {$e->getMessage()}",FILE_APPEND);
+    }
     // The results may be empty if the path scanned was just a directory
     // that had no immediate index page. The child items may have been queued
     // recursively, but no results are immediately returned in that case.
