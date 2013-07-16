@@ -12,6 +12,7 @@ class MailingListManagement{
        private $countCategories=0;
        private $countNewsletters=0;
        private $countFiles=0;
+       private $countUsers=0;
    public function __construct($db){
        $this->db=$db;
        //load newsletter term
@@ -59,6 +60,7 @@ class MailingListManagement{
    public function import(){
         $categories=$this->getCategOld();
         if(empty($categories)) return 'No categories in import DB';
+        drush_print_r('Please wait....');
         foreach ($categories as $category ) {
             //import each category at once and add its users with subscriptions
             $new_categ=$this->importCategory($category);
@@ -68,7 +70,8 @@ class MailingListManagement{
         return $this->countCategories.' categories imported' . PHP_EOL
                .$this->countSubscribers. ' subscribers created'.PHP_EOL
                .$this->countNewsletters. ' newsletters created'.PHP_EOL
-               .$this->countFiles. ' files added'.PHP_EOL;
+               .$this->countFiles. ' files added'.PHP_EOL
+               .$this->countUsers. ' users added or updated'.PHP_EOL;
     }
    
     private function getCategOld($limit=null){
@@ -138,19 +141,24 @@ class MailingListManagement{
 
         $customers=$this->getCustomers($id_categ);
         foreach ($customers as $customer) {
-            if(strlen($customer['name'])>1||strlen($customer['company'])>1||strlen($customer['country'])>1){
-                if(strlen($customer['name'])==0){
+            $customer['name']=trim($customer['name']);
+            $customer['company']=trim($customer['company']);
+            $customer['country']=trim($customer['country']);
+            if(!empty($customer['name'])||!empty($customer['company'])||!empty($customer['country'])){
+                if(empty($customer['name'])){
                     $customer['name']=substr($customer['email'],0,strrpos($customer['email'],'@')-1);                    
                 }
                 $username=utf8_encode(substr(strtolower(str_replace(' ', '_', $customer['name'])),0,15));
                 $user=ForumManagement::updateUser($username, user_password(),
                                                   $customer['email'],
-                                                  array('name'=>utf8_encode($fields['name']),
-                                                        'company'=>utf8_encode($fields['company'])
+                                                  array('name'=>utf8_encode($customer['name']),
+                                                        'company'=>utf8_encode($customer['company']),
+                                                        'country'=>utf8_encode($customer['country'])                                                    
                                                   )); 
                 //add role
                 $user->roles[$this->role->rid]=$this->role->name;
-                user_save($user,array('roles'=>$user->roles));              
+                user_save($user,array('roles'=>$user->roles)); 
+                $this->countUsers++;             
             }
             $subscriber=simplenews_subscriber_load_by_mail(strtolower($customer['email']));
             //IF SUBSCRIBER ALREADY EXISTS DON'T ADD

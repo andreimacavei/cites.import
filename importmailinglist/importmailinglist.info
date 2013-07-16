@@ -2,5 +2,5 @@ name = importmailinglist
 description = Import mailing list from old site 
 core = 7.x
 dependencies[] = simplenews
-dependencies[] = importforum
+dependencies[] = cites_importforum
 dependencies[] = profile2
