@@ -11,7 +11,7 @@ class DatabaseInterface {
     if (!mysql_connect($host, $username, $password)) {
       throw new Exception('Error connecting to the database server');
     }
-    if (!mysql_select_db($database_name)){
+    if (!mysql_select_db($database)){
       throw new Exception('Error connecting to the database');
     }
   }
