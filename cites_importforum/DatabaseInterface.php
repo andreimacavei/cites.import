@@ -8,8 +8,12 @@ class DatabaseInterface {
   private static $dbObj = null;
 
   private function __construct($host, $username, $password, $database) {
-    mysql_connect($host, $username, $password) or die('Error connecting to the database server \n');
-    mysql_select_db($database) or die('Error connecting to the database \n');
+    if (!mysql_connect($host, $username, $password)) {
+      throw new Exception('Error connecting to the database server');
+    }
+    if (!mysql_select_db($database_name)){
+      throw new Exception('Error connecting to the database');
+    }
   }
 
   public static function getInstance($host, $username, $password, $database) {
