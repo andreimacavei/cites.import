@@ -42,7 +42,7 @@ function cites_importforum_install() {
     'widget' => array(
       'type' => 'text_textfield',
       'weight' => 0,
-    ),
+    )
   );
   field_create_instance($instance);
 
@@ -69,6 +69,11 @@ function cites_importforum_install() {
   field_create_field($field);
   $instance['field_name'] = 'country';
   $instance['label'] = 'Country';
+  $instance['settings'] = array(
+    'target_type' => 'node',
+    'handler_settings' => array('target_bundles' => array('country')),
+  );
+  $instance['widget'] = array('type' => 'options_select');
   field_create_instance($instance);
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file Actual routines for importing files.
  *
@@ -7,7 +8,6 @@
  * @author Dan Morrison http://coders.co.nz/
  *
  */
-
 module_load_include('inc', 'import_html', 'coders_php_library/debug');
 module_load_include('inc', 'import_html', 'coders_php_library/xml-transform');
 module_load_include('inc', 'import_html', 'coders_php_library/file-routines');
@@ -29,14 +29,14 @@ module_load_include('inc', 'import_html', 'coders_php_library/file-routines');
 function import_html_import_files($file_list, $context) {
   drupal_set_message(t('Processing %count files for import. Using %profile_id configuration settings.', array('%count' => count($file_list), '%profile_id' => $context['profile_id'])));
 
-  if ( empty($file_list)) {
+  if (empty($file_list)) {
     drupal_set_message(__FUNCTION__ . ' ' . t("No Files Selected. Nothing to import"), 'error');
     return;
   }
 
   // Validate the profile, early exit if something is wrong.
   $profile = import_html_profile_load($context['profile_id']);
-  if (! $profile) {
+  if (!$profile) {
     drupal_set_message(t("Invalid profile_id '%profile_id' specified to %func. Aborting process.", array('%func' => __FUNCTION__, '%profile_id' => $context['profile_id'])), 'error');
     return NULL;
   }
@@ -51,24 +51,17 @@ function import_html_import_files($file_list, $context) {
   $results = array();
   foreach ($file_list as $list_index => $rel_path) {
     // The $list_index is usually numeric.
-
     // $rel_path may still be empty
     // - representing the root item of the base_path.
-    try {
     $file_results = import_html_import_file($rel_path, $context);
-    }
-    catch(Exception $e) {
-      file_put_contents("eroare.txt", "-------------------------- $rel_path --------------- {$e->getMessage()}",FILE_APPEND);
-    }
+    //file_put_contents("eroare.txt", "-------------------------- $rel_path --------------- {$e->getMessage()}", FILE_APPEND);
     // The results may be empty if the path scanned was just a directory
     // that had no immediate index page. The child items may have been queued
     // recursively, but no results are immediately returned in that case.
-    if (! $file_results) {
+    if (!$file_results) {
       import_html_debug('
         Failed to get any results from the attempted analysis of %rel_path.
-        The source file path was probably unavailable or not HTML.',
-        array('%rel_path' => $rel_path),
-        WATCHDOG_ERROR
+        The source file path was probably unavailable or not HTML.', array('%rel_path' => $rel_path), WATCHDOG_ERROR
       );
       continue;
     }
@@ -82,29 +75,24 @@ function import_html_import_files($file_list, $context) {
       $results[] = $node;
     }
   }
-
-  if (! empty($results)) {
+  if (!empty($results)) {
     // This isn't happening correctly until I visit admin?
     menu_rebuild();
     $profile = import_html_profile_load($context['profile_id']);
     list($menu_name, $mid) = explode(":", $profile['menu_parent_id']);
     import_html_debug(
-      'Processed %filecount files for %nodecount nodes! The new pages may be found at !menu_link . or in your content management.',
-      array(
-        '!menu_link' => l($menu_name, 'admin/structure/menu-customize/' . $menu_name),
-        '%filecount' => count($file_list),
-        '%nodecount' => count($results),
-      ),
-      WATCHDOG_NOTICE
+        'Processed %filecount files for %nodecount nodes! The new pages may be found at !menu_link . or in your content management.', array(
+      '!menu_link' => l($menu_name, 'admin/structure/menu-customize/' . $menu_name),
+      '%filecount' => count($file_list),
+      '%nodecount' => count($results),
+        ), WATCHDOG_NOTICE
     );
   }
   else {
     import_html_debug('No results! Failed to extract any new nodes', array(), WATCHDOG_WARNING);
   }
-
   return $results;
 }
-
 
 /**
  * Given a html file, prepare all the node info we can get out of it.
@@ -149,9 +137,7 @@ function import_html_import_file($rel_path, $context) {
 
   $strings = array('%rel_path' => $rel_path);
   import_html_debug(
-    "<strong>Importing</strong> '%rel_path'",
-    $strings,
-    WATCHDOG_NOTICE
+      "<strong>Importing</strong> '%rel_path'", $strings, WATCHDOG_NOTICE
   );
   // Return value is always an array of summaries of the results.
   $files = array();
@@ -163,7 +149,6 @@ function import_html_import_file($rel_path, $context) {
   $strings['%source_path'] = $source_path;
 
   // Handle URLS/Folders with training slash
-
   // Handle trailing slashes differently at home and away.
   if ($is_remote) {
     // It's remote,
@@ -195,16 +180,18 @@ function import_html_import_file($rel_path, $context) {
   if (is_local($source_path) && import_html_guess_file_class($checkfile) != 'html') {
     // Non-page resource - what sort of processing can I do here?
     import_html_debug(
-      "I think (due to file suffix '%doctype')
+        "I think (due to file suffix '%doctype')
         that '%source_path' is not a html page I can process.<br/>
-        It's just been copied into '!dest'.",
-      $strings + array(
+        It's just been copied into '!dest'.", $strings + array(
       '!dest' => l($dest_path, $dest_path),
       '%doctype' => import_html_guess_file_class($checkfile),
-    ),
-      WATCHDOG_NOTICE
+        ), WATCHDOG_NOTICE
     );
-    import_html_get_raw_file_local($source_path, $dest_path, $is_remote);
+    try {
+      import_html_get_raw_file_local($source_path, $dest_path, $is_remote);
+    } catch (Exception $e) {
+      echo $e->getMessage();
+    }
     $file['type'] = 'resource';
     $file['path'] = $dest_path;
     $files[] = $file;
@@ -223,27 +210,23 @@ function import_html_import_file($rel_path, $context) {
     if ($profile['handle_duplicates'] == IMPORT_HTML_SKIP) {
 
       import_html_debug(
-        "We already have '%new_path' in the system as '%normal_path'.
-          According to import_html settings, this import is being skipped",
-        $strings,
-        WATCHDOG_INFO
+          "We already have '%new_path' in the system as '%normal_path'.
+          According to import_html settings, this import is being skipped", $strings, WATCHDOG_INFO
       );
 
       return;
     }
 
     import_html_debug(
-      "We already have '%new_path' in the system as '%normal_path'.
-        Overwriting/updating it with the new import",
-      $strings,
-      WATCHDOG_INFO
+        "We already have '%new_path' in the system as '%normal_path'.
+        Overwriting/updating it with the new import", $strings, WATCHDOG_INFO
     );
   }
 
   // Minor clean-up.
   // Helps recover from crashes and prevents temp files
   // getting renamed into file-01.etc
-  if (is_file($dest_path) && ! $profile['keep_temp_files']) {
+  if (is_file($dest_path) && !$profile['keep_temp_files']) {
     unlink($dest_path);
   }
 
@@ -254,30 +237,25 @@ function import_html_import_file($rel_path, $context) {
   // ??
   // Forcably add a suffix to otherwise unsuffixed stuff?
   // is it a problem from wget?
-  if (! is_file($dest_path) || ! $profile['keep_temp_files']) {
+  if (!is_file($dest_path) || !$profile['keep_temp_files']) {
     // If getting raw_file from an http request, the $source and $dest paths
     // may get updated by ref
     // - eg to change 'about_us' to 'about_us/index.htm'.
     if (!import_html_get_raw_file_local($source_path, $dest_path, $is_remote)) {
       import_html_debug(
-        "Failed to fetch a copy of %source_path into %dest_path",
-        $strings,
-        WATCHDOG_ERROR
+          "Failed to fetch a copy of %source_path into %dest_path", $strings, WATCHDOG_ERROR
       );
       return FALSE;
     }
 
     $strings['%persistant'] = ($profile['keep_temp_files'] ? 'persistant' : 'temporary');
     import_html_debug(
-      "Fetched a %persistant local copy to %dest_path",
-      $strings
+        "Fetched a %persistant local copy to %dest_path", $strings
     );
-
   }
   else {
     import_html_debug(
-      "Local copy exists at %dest_path",
-      $strings
+        "Local copy exists at %dest_path", $strings
     );
   }
 
@@ -293,7 +271,6 @@ function import_html_import_file($rel_path, $context) {
   $nodes = import_html_process_html_page($dest_path, $rel_path, $profile);
 
   // At this point, the node(s) are full of data, but not yet saved.
-
   // On rare occasions, (using xt:document) the processing can produce
   // an ARRAY of nodes that need saving.
   // So we always work with $nodes as an array of nodes.
@@ -301,30 +278,28 @@ function import_html_import_file($rel_path, $context) {
 
   if (empty($nodes)) {
     import_html_debug(
-      "Failed to process any node out of file '%rel_path'",
-      $strings,
-      WATCHDOG_ERROR
+        "Failed to process any node out of file '%rel_path'", $strings, WATCHDOG_ERROR
     );
     return array();
   }
 
   // We can immediately discard the source file -
   // it should have been a temp copy made by import_html_get_raw_file_local() above
-  if ( file_exists($dest_path) && ! $profile['keep_temp_files']) {
+  if (file_exists($dest_path) && !$profile['keep_temp_files']) {
     unlink($dest_path);
   }
 
   // Almost trivial loop (probably over 1 item).
   foreach ($nodes as $node) {
-    /*if (substr($node->path_alias,0,4) == "eng/") {
-        $node->path_alias = substr($node->path_alias,4); 
-    }
-    else if (substr($node->path_alias,0,4) == "fra/") {
-        $node->path_alias = substr($node->path_alias,4); 
-    } 
-    else if (substr($node->path_alias,0,4) == "esp/") {
-        $node->path_alias = substr($node->path_alias,4); 
-    }*/
+    /* if (substr($node->path_alias,0,4) == "eng/") {
+      $node->path_alias = substr($node->path_alias,4);
+      }
+      else if (substr($node->path_alias,0,4) == "fra/") {
+      $node->path_alias = substr($node->path_alias,4);
+      }
+      else if (substr($node->path_alias,0,4) == "esp/") {
+      $node->path_alias = substr($node->path_alias,4);
+      } */
     $strings = array(
       '%title' => $node->title,
       '!node' => l($node->title, $node->path_alias),
@@ -336,7 +311,7 @@ function import_html_import_file($rel_path, $context) {
     // The node data object has been initialized
     // It may contain heaps of extra junk set in via a random absorbtion of elements in the XML import.
     // They will get ignored if not recognised.
-    import_html_debug("Processed page to extract content. Title: <strong>'%title'</strong> ", $strings, WATCHDOG_INFO );
+    import_html_debug("Processed page to extract content. Title: <strong>'%title'</strong> ", $strings, WATCHDOG_INFO);
     import_html_debug_code("Ready to save node", $node, WATCHDOG_DEBUG);
 
     // If file logging was enabled, save the intermediate steps for heavy debugging.
@@ -383,31 +358,28 @@ function import_html_import_file($rel_path, $context) {
     // dependency, have made a typo or just set $node->type wrong.
     // Saving them in the database is hell to clean out again.
     $types = node_type_get_names();
-    if (! in_array($node->type, array_keys($types))) {
+    if (!in_array($node->type, array_keys($types))) {
       import_html_debug("Node type [%type] is invalid. %path will NOT be saved. Either there is a mistake somewhere or a required dependency or content type definition is unavailable", $strings, WATCHDOG_CRITICAL);
       // Early exit.
       continue;
     }
 
     // Finished prep, now save.
-
     // 'prepare' occasionally ensures that some required fields are filled in
     // depending on enabled modules. Maybe.
     // node_invoke_nodeapi($node, 'prepare');
-
     // I really should VALIDATE now!
     // but what to do with errors?
     // path_nodeapi complains if I try to validate before I know my nid.
     // Is that correct?
     // node_invoke_nodeapi($node, 'validate');
-
     // node_submit() doesn't actually save, it just fills in extra fields.
     // node_submit() 'tidies' $node->created for us. Work around that.
     // It's probably best if the preprocessors just set $node->date = string instead.
     if (isset($node->created) && empty($node->date)) {
       $node->date = format_date($node->created, 'custom', 'Y-m-d\TH:i:sP');
     }
-    
+
     $node = node_submit($node);
 
     if (isset($context['form_id']) && $context['form_id'] == 'import_html_demo_form') {
@@ -419,30 +391,23 @@ function import_html_import_file($rel_path, $context) {
       if ($errors = form_get_errors()) {
 
         import_html_debug(
-          "Import of '%rel_path' did not quite validate. I'm not sure how to recover from that problem. <br/>!errors",
-          array(
+            "Import of '%rel_path' did not quite validate. I'm not sure how to recover from that problem. <br/>!errors", array(
           '%rel_path' => $file['rel_path'],
           '!errors' => join(',<br/> ', $errors),
-        ),
-          WATCHDOG_ERROR
+            ), WATCHDOG_ERROR
         );
         // TODO This is not very helpful in bulk mode.
         // What can I do now?
       }
-
       else {
-        if (! empty($node->nid)) {
+        if (!empty($node->nid)) {
           import_html_debug(
-            "!node Exists, updating it with content from %source_path.",
-            $strings,
-            WATCHDOG_INFO
+              "!node Exists, updating it with content from %source_path.", $strings, WATCHDOG_INFO
           );
         }
         else {
           import_html_debug(
-            "Inserting New Node !node with content from %source_path",
-            $strings,
-            WATCHDOG_INFO
+              "Inserting New Node !node with content from %source_path", $strings, WATCHDOG_INFO
           );
           #dpm($node);
           // Note, navigation items only gets set up on first import.
@@ -454,7 +419,6 @@ function import_html_import_file($rel_path, $context) {
         // Call after_save hook.
         // Had to wait until I had an ID to do this.
         // These callbacks add the aliases and menus.
-
         //module_invoke_all('import_html_after_save', $profile, $node);
         // That fails due to pass-by-ref limitations in invoke_all
         // WORKAROUND for php 5.3
@@ -485,11 +449,8 @@ function import_html_import_file($rel_path, $context) {
 
       $strings['%memory'] = format_size(memory_get_usage()) . '/' . format_size(memory_get_peak_usage());
       import_html_debug(
-        "<strong>Imported Node</strong> !node with content from %source_path .\n  [mem: %memory]",
-        $strings,
-        WATCHDOG_NOTICE
+          "<strong>Imported Node</strong> !node with content from %source_path .\n  [mem: %memory]", $strings, WATCHDOG_NOTICE
       );
-
     } // Looped over all nodes from file.
     $files[] = $file;
   } // Looped over all files.
@@ -519,9 +480,7 @@ function import_html_import_directory($rel_path, $context) {
   $profile = $context + import_html_profile_load($context['profile_id']);
   $source_siteroot = $profile['source_siteroot'];
   import_html_debug(
-    "<strong>Importing Directory</strong> '%rel_path'",
-    array('%rel_path' => $rel_path),
-    WATCHDOG_INFO
+      "<strong>Importing Directory</strong> '%rel_path'", array('%rel_path' => $rel_path), WATCHDOG_INFO
   );
   $source_path = $source_siteroot . $rel_path;
   $results = array();
@@ -562,9 +521,7 @@ function import_html_import_directory($rel_path, $context) {
     // Invoke the appropriate batch queue operation.
     if (!empty($context['recursion_method'])) {
       import_html_debug(
-        "Deferring processing of sub-pages, due to the recursion_method setting (%recursion_method). Directory:[%rel_path]'",
-        array('%rel_path' => $rel_path, '%recursion_method' => $context['recursion_method']),
-        WATCHDOG_INFO
+          "Deferring processing of sub-pages, due to the recursion_method setting (%recursion_method). Directory:[%rel_path]'", array('%rel_path' => $rel_path, '%recursion_method' => $context['recursion_method']), WATCHDOG_INFO
       );
       $context['batch_id'] = $context['task_id'] ? $context['task_id'] : NULL;
       $callback_function = $context['recursion_method'] . '_add_list_to_queue';
@@ -574,9 +531,7 @@ function import_html_import_directory($rel_path, $context) {
       }
       else {
         import_html_debug(
-          "A recursion method '%recursion_method' is defined, but no recusion func for that method was available. Child items are NOT being queued correctly.'",
-          array('%recursion_method' => $context['recursion_method']),
-          WATCHDOG_WARNING
+            "A recursion method '%recursion_method' is defined, but no recusion func for that method was available. Child items are NOT being queued correctly.'", array('%recursion_method' => $context['recursion_method']), WATCHDOG_WARNING
         );
       }
     }
@@ -594,7 +549,6 @@ function import_html_import_directory($rel_path, $context) {
   return $results;
 }
 
-
 /**
  * Carefully fetch a (potentially remote?) file and save it nearby.
  *
@@ -610,7 +564,7 @@ function import_html_get_raw_file_local(&$source_path, &$dest_path, $host) {
     $dest_path = "$dest_path/index.html";
     $source_path = ensure_trailing_slash($source_path);
   }
-  if (! mkdirs(dirname($dest_path)) ) {
+  if (!mkdirs(dirname($dest_path))) {
     trigger_error("Failed to create directory for $dest_path Might be permissions.", E_USER_ERROR);
   }
 
@@ -622,9 +576,7 @@ function import_html_get_raw_file_local(&$source_path, &$dest_path, $host) {
   );
 
   import_html_debug(
-    "Fetching content from %location '<a href='!realpath'>%source_path</a>' now. Saving temp file locally as %dest_path",
-    $strings,
-    WATCHDOG_INFO
+      "Fetching content from %location '<a href='!realpath'>%source_path</a>' now. Saving temp file locally as %dest_path", $strings, WATCHDOG_INFO
   );
 
   $orig_path = $source_path;
@@ -633,73 +585,58 @@ function import_html_get_raw_file_local(&$source_path, &$dest_path, $host) {
     // It's remote. Trust PHP5 and allow_url_fopen is available.
     if (!copy($source_path, $dest_path)) {
       import_html_debug(
-        "Remote file copy from %source_path to %dest_path failed",
-        $strings,
-        WATCHDOG_ERROR
+          "Remote file copy from %source_path to %dest_path failed", $strings, WATCHDOG_ERROR
       );
       return FALSE;
     }
   }
   else {
     // local copy
-    if (! is_file($source_path) ) {
+    if (!is_file($source_path)) {
       import_html_debug(
-        "Source file %source_path is not a normal file. Returning a failure.",
-        $strings,
-        WATCHDOG_ERROR
+          "Source file %source_path is not a normal file. Returning a failure.", $strings, WATCHDOG_ERROR
       );
       return FALSE;
     }
-    if (! is_writable(dirname($dest_path)) ) {
+    if (!is_writable(dirname($dest_path))) {
       import_html_debug(
-        "Cannot copy file to %dest_path, destination not writable.",
-        $strings,
-        WATCHDOG_ERROR
+          "Cannot copy file to %dest_path, destination not writable.", $strings, WATCHDOG_ERROR
       );
       return FALSE;
     }
 
     if (file_exists($source_path) && realpath($source_path) == realpath($dest_path)) {
       import_html_debug(
-        "Copying between identical source and destination, %source_path = %dest_path , importing file in-place.",
-        $strings,
-        WATCHDOG_INFO
+          "Copying between identical source and destination, %source_path = %dest_path , importing file in-place.", $strings, WATCHDOG_INFO
       );
     }
 
-    if (! copy($source_path, $dest_path) ) {
+    if (!copy($source_path, $dest_path)) {
       import_html_debug(
-        'Local file copy failed (%source_path to %dest_path).',
-        $strings,
-        WATCHDOG_ERROR
+          'Local file copy failed (%source_path to %dest_path).', $strings, WATCHDOG_ERROR
       );
     }
   }
   // Check the actual result, not the return from copy().
-  if (! is_file($dest_path)) {
+  if (!is_file($dest_path)) {
     import_html_debug(
-      'Local file copy failed (%source_path to %dest_path).
+        'Local file copy failed (%source_path to %dest_path).
       Source %source_path is <pre>!source_stat</pre>
       Dest folder %dest_path is <pre>!dest_stat</pre>
-      ',
-      $strings + array(
+      ', $strings + array(
       '!source_stat' => print_r(stat($source_path), 1),
       '!dest_stat' => print_r(stat(dirname($dest_path)), 1),
-    ),
-      WATCHDOG_ERROR
+        ), WATCHDOG_ERROR
     );
 
     return FALSE;
   }
 
   import_html_debug(
-    "Copied import file from %source_path to %dest_path",
-    $strings,
-    WATCHDOG_INFO
+      "Copied import file from %source_path to %dest_path", $strings, WATCHDOG_INFO
   );
   return TRUE;
 }
-
 
 /**
  * Analyse a source page and create a node definition from it.
@@ -742,20 +679,18 @@ function import_html_process_html_page($path, $rel_path, $profile) {
   if (is_string($path)) {
     // Read from file
     import_html_debug(
-      "Processing file as HTML page.
+        "Processing file as HTML page.
         Full file path: %path , will be imported as a relative path
         under the current section.
-        Relative-path is: !rel_path",
-        $strings,
-        WATCHDOG_INFO
+        Relative-path is: !rel_path", $strings, WATCHDOG_INFO
     );
 
-    if (! file_exists($path)) {
+    if (!file_exists($path)) {
       trigger_error(t("
         Path '%path' was not found.
         This should have been a local copy of the file being imported,
         but the paths may be wrong somehow. Abject failure processing !rel_path"
-      , $strings));
+              , $strings));
     }
 
     $raw_source = file_get_contents($path);
@@ -777,9 +712,7 @@ function import_html_process_html_page($path, $rel_path, $profile) {
         !rel_path.
         Either file was empty, unreadable, or the preprocess functions
         returned NULL.
-        Aborting import on this file (%path)",
-        $strings,
-        WATCHDOG_ERROR
+        Aborting import on this file (%path)", $strings, WATCHDOG_ERROR
       );
       return FALSE;
     }
@@ -796,10 +729,9 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     $xmldoc = parse_in_xml_string($raw_source, $profile['force_tidy']);
     restore_error_handler();
 
-    if (! $xmldoc && $profile['force_tidy'] ) {
+    if (!$xmldoc && $profile['force_tidy']) {
       import_html_debug(
-        "%path was not tidy enough - running tidy over it now so I can parse it.",
-        $strings
+          "%path was not tidy enough - running tidy over it now so I can parse it.", $strings
       );
       // If a raw XML parse failed,
       // tell parse_in_xml_file() to use htmlTidy before it begins.
@@ -818,7 +750,7 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     if (is_object($path)) {
       $source_node = $path;
       $path = $source_node->path_alias;
-      if (! $source_node->raw_html) {
+      if (!$source_node->raw_html) {
         trigger_error(t("import_html_process_html_page called with no HTML source to analyse"), E_USER_ERROR);
       }
       import_html_debug("Processing page source, " . strlen($source_node->raw_html) . " chars long", array());
@@ -835,8 +767,7 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     // Parsing failed.
     import_html_debug("
       Import_HTML failed to initialize or parse XMLdoc input.
-      !rel_path seems like bad news.",
-      $strings, WATCHDOG_ERROR
+      !rel_path seems like bad news.", $strings, WATCHDOG_ERROR
     );
     return FALSE;
   }
@@ -868,7 +799,7 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     'xmlid' => TRUE,
     'xsl_path' => $profile['translation_template'],
   );
-  if ( !empty($profile['content_tag_id'])) {
+  if (!empty($profile['content_tag_id'])) {
     $parameters['contentid'] = $profile['content_tag_id'];
   }
 
@@ -879,11 +810,11 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     import_html_debug("
       Using XSL translation template to extract semantic content.
       Will search for body content labelled '" . @$parameters['contentid']
-      . "' in the source.
+        . "' in the source.
       Active XML Namespaces are
       {$xml_top->nodeName} : {$xml_top->namespaceURI} -
       {$xsl_top->nodeName} : {$xsl_top->namespaceURI}  \n"
-      , array(), WATCHDOG_DEBUG);
+        , array(), WATCHDOG_DEBUG);
 
     $importxml = xmldoc_plus_xsldoc($xmldoc, $xsldoc, $parameters);
 
@@ -893,22 +824,19 @@ function import_html_process_html_page($path, $rel_path, $profile) {
 
     import_html_debug("
       Transform Successful.
-      TRANSLATED %path from messy source into a pure xhtml page to import",
-      $strings
+      TRANSLATED %path from messy source into a pure xhtml page to import", $strings
     );
   }
   else {
     // get_xsl_doc failed.
     trigger_error(t("
-      Failed to initialize XSLdoc '%translation_template'. Aborting.",
-      array('%translation_template' => $profile['translation_template'])),
-      E_USER_WARNING
+      Failed to initialize XSLdoc '%translation_template'. Aborting.", array('%translation_template' => $profile['translation_template'])), E_USER_WARNING
     );
     // Abort.
     return NULL;
   }
 
-  if (! $importxml) {
+  if (!$importxml) {
     trigger_error("Nothing useful extracted via XML from that content", E_USER_WARNING);
     return FALSE;
   }
@@ -931,7 +859,6 @@ function import_html_process_html_page($path, $rel_path, $profile) {
   // $source_node->language = language_default('language');
   $source_node->language = LANGUAGE_NONE;
   #import_html_debug("Setting node language to %language", array('%language' => $source_node->language), WATCHDOG_DEBUG);
-
   // Allow one source document to produce multiple nodes.
   $nodes = array();
   // If the process has resulted in xt:document blocks, each block
@@ -968,14 +895,13 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     $node = import_html_xhtml_to_node($html_element, $source_node, $profile);
     //
     ////////////////////////////////////
-
     // The rest is housekeeping or generic.
     // Most core node properties (type, modified) are set in node_import_html()
 
     $node->title = import_html_guess_document_title($node, $profile['handle_no_title']);
     $node->status = $profile['import_status'];
     $node->promote = $profile['import_promote'];
-    if (! $node->type) {
+    if (!$node->type) {
       import_html_debug("Node wasn't even given a type, this means something is wrong.", array(), WATCHDOG_WARNING);
       $node->type = $profile['content_type'];
     }
@@ -991,8 +917,6 @@ function import_html_process_html_page($path, $rel_path, $profile) {
 
   return $nodes;
 }
-
-
 
 /**
  * From a given XML document, create a node structure with all useful
@@ -1041,7 +965,6 @@ function import_html_xhtml_to_node($datadoc, $node, $profile) {
   //
   // Absorb the most generic bits first. Later processes may overwrite them
   // more accurately.
-
   // This initial import is a totally generic catch-all.
   // Optional - this can get madly messy on complex modern sites.
   // TODO - separate ids (few) and classes (hundreds)
@@ -1059,7 +982,6 @@ function import_html_xhtml_to_node($datadoc, $node, $profile) {
   import_html_absorb_metas($node, $head_element, 'link', 'rel', 'href');
 
   // Most of the simple data is now loaded into a keyed array in $node->import_html.
-
   // This import all may have discovered a preferred $node->type
   // from meta (which is good) or css ids (which are possibly accidental)
   // We may have an array, which needs flattening and validation.
@@ -1087,8 +1009,7 @@ function import_html_xhtml_to_node($datadoc, $node, $profile) {
 
   import_html_include_add_on_module_handlers();
   import_html_debug_code(
-    "Invoking hook to let all modules change this node as I'm creating it",
-    module_implements('import_html')
+      "Invoking hook to let all modules change this node as I'm creating it", module_implements('import_html')
   );
 
   // Call anything that provides HOOK_import_html implimentations.
@@ -1107,19 +1028,15 @@ function import_html_xhtml_to_node($datadoc, $node, $profile) {
   import_html_debug_code(
       "After absorbing all the tagged items found in the raw source, the
        available data array has the following keys:
-      ",
-      array_keys($node->import_html),
-      WATCHDOG_DEBUG
+      ", array_keys($node->import_html), WATCHDOG_DEBUG
   );
 
   // Clean this up for a clearer debug message
   $debug_node = clone $node;
   unset($debug_node->file_data);
   import_html_debug_code(
-    "After absorbing absolutely everything I could find,
-    the node object now contains the following blocks and bits:",
-    $debug_node,
-    WATCHDOG_DEBUG
+      "After absorbing absolutely everything I could find,
+    the node object now contains the following blocks and bits:", $debug_node, WATCHDOG_DEBUG
   );
   unset($debug_node);
 
@@ -1148,9 +1065,8 @@ function import_html_absorb_all_tagged_elements(&$node, $datadoc) {
   foreach (array('class', 'property', 'typeof', 'id') as $attribute_label) {
 
     import_html_debug(
-      "Absorbing all elements with an %attribute_label
-      as incidental data blobs (possibly html) into node structure",
-      array('%attribute_label' => $attribute_label)
+        "Absorbing all elements with an %attribute_label
+      as incidental data blobs (possibly html) into node structure", array('%attribute_label' => $attribute_label)
     );
     $found_elements = xml_query($datadoc, './/*[@' . $attribute_label . ']');
 
@@ -1164,23 +1080,21 @@ function import_html_absorb_all_tagged_elements(&$node, $datadoc) {
 
       foreach ($keys as $key) {
         // Found 'something' labelled 'something'.
-        if (! trim($key)) {
+        if (!trim($key)) {
           continue;
         }
 
         // Allow HTML though. Sometimes this will not be right...
         // TODO, figure it out?
         $value = xml_tostring($found_element, TRUE);
-        if (! trim($value)) {
+        if (!trim($value)) {
           continue;
         }
 
         // The value just gets absorbed.
         import_html_debug(
-          "Found a tagged %attribute_label value - %key ,
-            Absorbing it into the node as a default text/html value",
-          array('%attribute_label' => $attribute_label, '%key' => $key),
-          WATCHDOG_DEBUG
+            "Found a tagged %attribute_label value - %key ,
+            Absorbing it into the node as a default text/html value", array('%attribute_label' => $attribute_label, '%key' => $key), WATCHDOG_DEBUG
         );
 
         // Set it onto the node data list.
@@ -1194,8 +1108,6 @@ function import_html_absorb_all_tagged_elements(&$node, $datadoc) {
         if ($attribute_label == 'id') {
           $node->import_html[$key] = array($value);
         }
-
-
       } // Each multiple key.
     } // Each found element.
   } // Each attribute type.
@@ -1224,14 +1136,12 @@ function import_html_absorb_all_tagged_elements(&$node, $datadoc) {
 function import_html_absorb_metas(&$node, $xml_element, $tagname, $keyname, $valname) {
 
   import_html_debug(
-    "Absorbing the '%valname' of '%tagname's with a '%keyname'
-      from source doc into node structure",
-    array(
+      "Absorbing the '%valname' of '%tagname's with a '%keyname'
+      from source doc into node structure", array(
     '%valname' => $valname,
     '%tagname' => $tagname,
     '%keyname' => $keyname,
-  ),
-    WATCHDOG_DEBUG
+      ), WATCHDOG_DEBUG
   );
 
   $metas = xml_getelementsbytagname($xml_element, $tagname);
@@ -1252,37 +1162,31 @@ function import_html_absorb_metas(&$node, $xml_element, $tagname, $keyname, $val
       foreach ($keys as $key) {
         import_html_absorb_properties($node, $key, $value);
         import_html_debug(
-          "Absorbed '%tagname':'%valname' from source doc,
-          (%key='%value') .",
-          array(
-            '%valname' => $valname,
-            '%tagname' => $tagname,
-            '%keyname' => $keyname,
-            '%key' => $key,
-            '%value' => $value,
-          ),
-          WATCHDOG_INFO
+            "Absorbed '%tagname':'%valname' from source doc,
+          (%key='%value') .", array(
+          '%valname' => $valname,
+          '%tagname' => $tagname,
+          '%keyname' => $keyname,
+          '%key' => $key,
+          '%value' => $value,
+            ), WATCHDOG_INFO
         );
       }
-
     }
     else {
       import_html_debug(
-        "When absorbing '%valname' from '%tagname's with a '%keyname' from source doc,
-        (%key='%value') had a null value. Not a great problem, just letting you know.",
-        array(
+          "When absorbing '%valname' from '%tagname's with a '%keyname' from source doc,
+        (%key='%value') had a null value. Not a great problem, just letting you know.", array(
         '%valname' => $valname,
         '%tagname' => $tagname,
         '%keyname' => $keyname,
         '%key' => $key,
         '%value' => $value,
-      ),
-        WATCHDOG_INFO
+          ), WATCHDOG_INFO
       );
     }
   }
 }
-
 
 /**
  * Set the given property on the given object,
@@ -1305,20 +1209,20 @@ function import_html_absorb_properties(&$node, $key, $value) {
   $node->import_html[$key][] = $value;
 
   /*
-REMOVE
-  // Auto-expand into arrays - most metas can legally have duplicates
-  if ( ! isset($node->import_html[$key]) ) {
+    REMOVE
+    // Auto-expand into arrays - most metas can legally have duplicates
+    if ( ! isset($node->import_html[$key]) ) {
     $node->import_html[$key] = $value;
-  }
-  elseif ( is_array($node->import_html[$key]) ) {
+    }
+    elseif ( is_array($node->import_html[$key]) ) {
     $a = $node->import_html[$key];
     $a[] = $value;
     $node->import_html[$key] = $a;
-  }
-  else {
+    }
+    else {
     $node->import_html[$key] = array($node->import_html[$key], $value);
-  }
-  */
+    }
+   */
 }
 
 /**
@@ -1346,11 +1250,9 @@ function import_html_include_add_on_module_handlers() {
  * If none is set, fill in a default.
  */
 function import_html_guess_document_title($node, $handle_no_title = IMPORT_HTML_GUESS) {
-  if (empty($node->title) ) {
+  if (empty($node->title)) {
     import_html_debug(
-      "Failed to extract a useful title for this node, falling back to a default value.",
-      array(),
-      WATCHDOG_NOTICE
+        "Failed to extract a useful title for this node, falling back to a default value.", array(), WATCHDOG_NOTICE
     );
     switch ($handle_no_title) {
       case IMPORT_HTML_GUESS:
@@ -1375,8 +1277,8 @@ function import_html_guess_label($title, $path) {
   // If your TITLE is long, prefer to drop back to filename,
   // which may be more concise and meaningful.
   // Truncating a long title often loses any info it had.
-  if (strlen($title) > IMPORT_HTML_MAX_LABEL_LENGTH || empty($title) ) {
-    if (! empty($path)) { // Yeah. No path.module, no path.
+  if (strlen($title) > IMPORT_HTML_MAX_LABEL_LENGTH || empty($title)) {
+    if (!empty($path)) { // Yeah. No path.module, no path.
       $path_bits = explode('/', $path);
       $label = array_pop($path_bits);
       if (!$label) {
@@ -1421,17 +1323,13 @@ function import_html_check_default_document(&$path, $default_documents = array('
       $trimmed_path = 'home';
     }
     import_html_debug(
-      "'%path' is an index page, so we will chop it back to %trimmed_path",
-      array('%path' => $path, '%trimmed_path' => $trimmed_path),
-      WATCHDOG_INFO
+        "'%path' is an index page, so we will chop it back to %trimmed_path", array('%path' => $path, '%trimmed_path' => $trimmed_path), WATCHDOG_INFO
     );
     $path = $trimmed_path;
     return TRUE;
   }
   import_html_debug(
-    "'%path' is not an index page",
-    array('%path' => $path),
-    WATCHDOG_INFO
+      "'%path' is not an index page", array('%path' => $path), WATCHDOG_INFO
   );
   return FALSE;
 }
@@ -1547,7 +1445,6 @@ function import_html_rewrite_links($xmldoc, $rel_path, $profile) {
   // dirname('/ok.htm') returns '\';
   // No idea why, may only happen at root level on Win
   // !! B-X
-
   // $rel_base is the path from the import root to the current page dir.
   // I want a trailing slash, but not a leading one for the next concatenation.
   // dirname('/a/dir/') returns '/a' - which is not what I want.
@@ -1555,12 +1452,12 @@ function import_html_rewrite_links($xmldoc, $rel_path, $profile) {
   $rel_base = ensure_trailing_slash($rel_dir);
 
   $site_root = isset($profile['site_root']) ? $profile['site_root'] : url('');
-  $path_to_import_top = url( ensure_trailing_slash($profile['import_site_prefix']) );
+  $path_to_import_top = url(ensure_trailing_slash($profile['import_site_prefix']));
   $site_root = $path_to_import_top;
 
   // If we are re-writing thing/index.htm to thing - our links will resolve differently!
   // Either too high for thing, or too low for the thing/index.htm alias.
-  $href_base = url( ensure_trailing_slash($profile['import_site_prefix']) . $rel_base);
+  $href_base = url(ensure_trailing_slash($profile['import_site_prefix']) . $rel_base);
   //echo $href_base . " ";
   //$href_base = substr($href_base,4);
   //echo $href_base . PHP_EOL;
@@ -1596,9 +1493,7 @@ function import_html_rewrite_links($xmldoc, $rel_path, $profile) {
     or to find the base for <em>relative</em> resource files over in
     the file storage area
     ({$profile['file_storage_path']})
-    would be '$src_base' ",
-    array(),
-    WATCHDOG_DEBUG
+    would be '$src_base' ", array(), WATCHDOG_DEBUG
   );
 
 
@@ -1619,17 +1514,15 @@ function import_html_rewrite_links($xmldoc, $rel_path, $profile) {
   import_html_debug("
     XSL for URL rewrites loaded OK.
     HTML links for files that were under '$rel_base' will be made relative to '"
-    . $parameters['href_base'] . "' (for pages) and '" . $parameters['src_base'] . "' (for resources) "
-    ,
-    array(),
-    WATCHDOG_DEBUG
+      . $parameters['href_base'] . "' (for pages) and '" . $parameters['src_base'] . "' (for resources) "
+      , array(), WATCHDOG_DEBUG
   );
   //print_r($parameters);
-  
+
   $parameters['site_root'] = "/" . substr($parameters['site_root'], 4);
   $parameters['src_root'] = "/" . substr($parameters['src_root'], 4);
-  $parameters['src_base'] = "/" . substr($parameters['src_base'],4);
-  $parameters['href_base'] = substr($parameters['href_base'],4);
+  $parameters['src_base'] = "/" . substr($parameters['src_base'], 4);
+  $parameters['href_base'] = substr($parameters['href_base'], 4);
   //print_r($parameters);
   $rewritten = xmldoc_plus_xsldoc($xmldoc, $rewrite_xsldoc, $parameters);
 
@@ -1639,7 +1532,7 @@ function import_html_rewrite_links($xmldoc, $rel_path, $profile) {
   $maxout = 5;
   while (preg_match('|/([^\.][^/\s"\'>]*/\.\./)|', $rewritten, $matches) && $maxout) {
     $rewritten = preg_replace('|/[^\.][^/\s"\'>]*/\.\./|', '/', $rewritten);
-    $maxout --;
+    $maxout--;
   }
 
   import_html_debug_code("The source after URL rewriting . XHTML (string)", $rewritten);
@@ -1688,7 +1581,7 @@ function import_html_strip_tables($xmldoc) {
 function import_html_cleanup_namespaces($xmldoc) {
   import_html_debug("Cleaning up unused or deep namespaces in the XHTML");
 
-   $xslfilepath = drupal_get_path('module', 'import_html') . "/cleanup_namespaces.xsl";
+  $xslfilepath = drupal_get_path('module', 'import_html') . "/cleanup_namespaces.xsl";
   // Memo this to speed up bulk imports.
   static $cleanup_namespaces_xsldoc;
   if (!$cleanup_namespaces_xsldoc) {
@@ -1710,7 +1603,6 @@ function import_html_cleanup_namespaces($xmldoc) {
   return $xmldoc;
 }
 
-
 /**
  * Ensure a string is able to be used as an XML, CSS or Javascript ID. Basically
  * strip out all non-alpha-numerics.
@@ -1722,7 +1614,6 @@ function import_html_cleanup_namespaces($xmldoc) {
 function import_html_check_name($name) {
   return preg_replace('|[^a-zA-Z0-9_]+|', '_', $name);
 }
-
 
 /**
  * Avoid double-ups, if the path already exists, UPDATE the existing node.
@@ -1760,19 +1651,17 @@ function import_html_merge_over_existing_node($node, $profile) {
 
     $path_parts = explode("/", $internal_link);
     $probable_nid = array_pop($path_parts);
-    if (! is_numeric($probable_nid)) {
+    if (!is_numeric($probable_nid)) {
       // This may happen if the menu builder has created a placeholder alias
       // pseudo-page, or the alias conflicts with an already-created system path.
       import_html_debug("
         When looking for an alias to '%nodepath',
         Found some pre-existing (non-node) content (or callback handler) there.
         the internal link
-        '%internal_link' - was expected to return a nid. Therefore, not attempting a content merge",
-        array(
+        '%internal_link' - was expected to return a nid. Therefore, not attempting a content merge", array(
         '%nodepath' => $node->path_alias,
         '%internal_link' => $internal_link,
-      ),
-        WATCHDOG_NOTICE
+          ), WATCHDOG_NOTICE
       );
       return $node;
     }
@@ -1783,16 +1672,14 @@ function import_html_merge_over_existing_node($node, $profile) {
         It's already linked to node id '%nodenid'.
         This data import will <em>replace</em> that content,
         but try to keep and merge any other values.
-      ",
-      array(
-        '%nodepath' => $node->path_alias,
-        '%nodenid' => $node->nid,
-      ),
-      WATCHDOG_INFO
+      ", array(
+      '%nodepath' => $node->path_alias,
+      '%nodenid' => $node->nid,
+        ), WATCHDOG_INFO
     );
 
     // Load existing item, layer changes on top of it.
-    $old_node = node_load($node->nid );
+    $old_node = node_load($node->nid);
 
     // Paranoia.
     if (empty($old_node)) {
@@ -1808,7 +1695,6 @@ function import_html_merge_over_existing_node($node, $profile) {
     // It's tricky to handle merges for some complex modules.
     // Invoke a callback to let (for example) taxonomy figure out
     // how to blend an old node term list with a new node term list.
-
     // module_invoke_all('import_html_node_merge', $old_node, $node, $profile);
     // WORKAROUND for php 5.3
     foreach (module_implements('import_html_node_merge') as $module) {
@@ -1835,11 +1721,9 @@ function import_html_merge_over_existing_node($node, $profile) {
   }
   else {
     import_html_debug(
-      "No previous node at found at the path %nodepath.",
-      array(
+        "No previous node at found at the path %nodepath.", array(
       '%nodepath' => $node->path_alias,
-    ),
-      WATCHDOG_INFO
+        ), WATCHDOG_INFO
     );
   }
   return $node;
@@ -1862,8 +1746,7 @@ function import_html_import_html_node_merge($profile, &$node, &$old_node) {
     import_html_debug('
       We need to check if the node we are replacing
       has been modified locally.
-      Recently-modified pages will not be overwritten',
-      array(), WATCHDOG_INFO
+      Recently-modified pages will not be overwritten', array(), WATCHDOG_INFO
     );
 
     if ($node->uid == $old_node->revision_uid) {
@@ -1878,15 +1761,11 @@ function import_html_import_html_node_merge($profile, &$node, &$old_node) {
       This node [!title] has recently been edited by %revision_user.
       When running as %import_html_user, we will not overwrite those changes,
       so we will not import this item.
-      ',
-      $strings, WATCHDOG_WARNING
+      ', $strings, WATCHDOG_WARNING
     );
     $node->import_html_exclude = 'Local edits by other user detected.';
-
   }
-
 }
-
 
 /**
  * Scan directory for files, with a max_depth limitation.
@@ -1914,7 +1793,6 @@ function import_html_file_scan_directory($dir, $mask, $options = array(), $depth
     'key' => 'uri',
     'min_depth' => 0,
   );
-
   // If no max_depth is set, the normal recursed version is OK
   // Note, set to 0 is not the same as 'not set'
   if (empty($options['max_depth'])) {
@@ -1925,7 +1803,6 @@ function import_html_file_scan_directory($dir, $mask, $options = array(), $depth
     // Use file_scan_directory - non-recursive
     $options['recurse'] = FALSE;
     $files = file_scan_directory($dir, $mask, $options);
-
     foreach ($files as $filepath => $file) {
       if (is_dir($filepath)) {
         // Now do our own recursion, but only up to max_depth.
@@ -1942,7 +1819,6 @@ function import_html_file_scan_directory($dir, $mask, $options = array(), $depth
   return $files;
 }
 
-
 /**
  * Convert the newline-separated file exclusions in the UI
  * into the regexp that is used by file_scan_directory.
@@ -1951,7 +1827,7 @@ function import_html_file_scan_directory($dir, $mask, $options = array(), $depth
  * @return a regular expression for file matching.
  */
 function import_html_file_exclusions_to_regexp($file_exclusions) {
-  $parts = explode("\n",$file_exclusions);
+  $parts = explode("\n", $file_exclusions);
   // Always exclude '..'
   $parts[] = '\.\.';
   // I want to use nomask to also exclude based on regexp.
@@ -2022,7 +1898,6 @@ function import_html_collapse_parent_directories($path) {
   return $path;
 }
 
-
 /**
  * Tidy URLs before saving locally - for URL imports.
  *
@@ -2052,27 +1927,22 @@ function charset_decode_utf_8($string) {
   /* Only do the slow convert if there are 8-bit characters */
   /* avoid using 0xA0 (\240) in ereg ranges. RH73 does not like that */
   #if (! ereg("[\200-\237]", $string) and ! ereg("[\241-\377]", $string)) {
-  if (! preg_match("@[\200-\237]@", $string) and ! preg_match("@[\241-\377]@", $string)) {
+  if (!preg_match("@[\200-\237]@", $string) and !preg_match("@[\241-\377]@", $string)) {
     return $string;
   }
 
   // Decode three byte unicode characters.
   $string = preg_replace(
-    "/([\340-\357])([\200-\277])([\200-\277])/e",
-    "'&#'.((ord('\\1')-224)*4096 + (ord('\\2')-128)*64 + (ord('\\3')-128)).';'",
-    $string
+      "/([\340-\357])([\200-\277])([\200-\277])/e", "'&#'.((ord('\\1')-224)*4096 + (ord('\\2')-128)*64 + (ord('\\3')-128)).';'", $string
   );
 
   // Decode two byte unicode characters.
   $string = preg_replace(
-    "/([\300-\337])([\200-\277])/e",
-    "'&#'.((ord('\\1')-192)*64+(ord('\\2')-128)).';'",
-    $string
+      "/([\300-\337])([\200-\277])/e", "'&#'.((ord('\\1')-192)*64+(ord('\\2')-128)).';'", $string
   );
 
   return $string;
 }
-
 
 /**
  * Dummy error handler.
@@ -2080,8 +1950,8 @@ function charset_decode_utf_8($string) {
  * Used to shush DOM errors when we know the doc is probably invalid.
  */
 function stfu($err, $str) {
+  
 }
-
 
 /**
  * Resolve a URL relative to a base path. This happens to work with POSIX
@@ -2136,7 +2006,7 @@ function resolve_url($base, $url) {
       if ($segment == '.') {
         // skip
       }
-      elseif ($segment == '..' && $path && $path[sizeof($path) -1] != '..') {
+      elseif ($segment == '..' && $path && $path[sizeof($path) - 1] != '..') {
         array_pop($path);
       }
       else {
@@ -2147,8 +2017,8 @@ function resolve_url($base, $url) {
     if ($end == '.') {
       $path[] = '';
     }
-    elseif ($end == '..' && $path && $path[sizeof($path) -1] != '..') {
-      $path[sizeof($path) -1] = '';
+    elseif ($end == '..' && $path && $path[sizeof($path) - 1] != '..') {
+      $path[sizeof($path) - 1] = '';
     }
     else {
       $path[] = $end;

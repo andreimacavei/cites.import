@@ -41,9 +41,11 @@ class ForumManagement {
   private $destinationFolder;
   private $pathToAttachments;
   private $strangeUsers;
+  private $defaultCountry;
 
   public function __construct(DatabaseInterface $databaseObj, $pathToAttach = "/home/andrei/Desktop/cites.production.
     arhive/cites.production/forum/asserts/files/") {
+    $this->defaultCountry = "Argentina";
     $this->dataBaseObj = $databaseObj;
     $this->forumVid = 0;
     $this->pathToAttachments = $pathToAttach;
@@ -102,6 +104,10 @@ class ForumManagement {
         if ($countryObj) {
           $profile->country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
         }
+        else {
+          $profile->country[LANGUAGE_NONE][0]['target_id'] = Country::get_by_name($this->defaultCountry)->nid;
+          echo "UNKNOWN Country for user" . $user->firstname . " " . $user->lastname . " " . $user->email . " " . $country . PHP_EOL;
+        }
       }
       // save profile
       if (count($this->strangeUsers[$user->email]) > 1) {
@@ -128,27 +134,43 @@ class ForumManagement {
     }
   }
 
-  public static function updateUser($username, $password, $email) {
+  public static function updateUser($username, $password, $email, $fields = null) {
     $userObj = user_load_by_mail($email);
     $userDuplicate = user_load_by_name($username);
-    if ($userObj->uid != $userDuplicate->uid) {
-      $username .= rand(10, 99);
+    if ($userDuplicate) {
+      if ($userDuplicate->mail != $email) {
+        /* same username different emails
+         * generate new username */
+        $newUsername = $username . (string) mt_rand(10, mt_rand(30, 999));
+        while (user_load_by_name($newUsername)) {
+          $newUsername = $username . (string) mt_rand(10, mt_rand(30, 999));
+        }
+        $username = $newUsername;
+        $userObj = false;
+      }
+      else
+        return $userDuplicate;
     }
-    if ($userObj) {
-      $fields = array(
-        'name' => $username,
-        'mail' => $email,
-        'pass' => $password,
-        'status' => 1,
-        'init' => $username,
-        'roles' => array(DRUPAL_AUTHENTICATED_RID => 'authenticated user'),
+    if ($userObj === false) {
+      $userObj = (object) array(
+            'name' => $username,
+            'mail' => $email,
+            'pass' => $password,
+            'status' => 1,
+            'init' => $username,
       );
-      $account = user_save($userObj);
-      $profile = profile_create(array('user' => $account, 'type' => 'extendedprofile'));
-      $profile->firstname[LANGUAGE_NONE][0]['value'] = '';
+      $userObj = user_save($userObj);
+      $profile = profile_create(array('user' => $userObj, 'type' => 'extendedprofile'));
+      $profile->firstname[LANGUAGE_NONE][0]['value'] = trim($fields['name']);
       $profile->lastname[LANGUAGE_NONE][0]['value'] = '';
-      $profile->organization[LANGUAGE_NONE][0]['value'] = '';
+      $profile->organization[LANGUAGE_NONE][0]['value'] = trim($fields['company']);
       $profile->telephone[LANGUAGE_NONE][0]['value'] = '';
+      if (!empty($fields['country'])) {
+        $countryObj = Country::get_by_name($fields['country']);
+        if ($countryObj) {
+          $profile->country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
+        }
+      }
       profile2_save($profile);
     }
     return $userObj;
