@@ -195,7 +195,7 @@ function drush_initialize_languages( $config ) {
 
 		// Checks whether there are language files to import for the newly added
 		// language, collects and imports them.
-		if ( $batch = locale_batch_by_language( $language['langcode'], '_l10n_update_batch_finished' ) ) {
+		if ( $batch = locale_batch_by_language( $language['langcode'], '_locale_batch_language_finished' ) ) {
 			// Adds a new batch.
 			batch_set( $batch );
 
