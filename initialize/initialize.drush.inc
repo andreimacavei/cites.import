@@ -12,21 +12,21 @@ function initialize_drush_command() {
     'aliases'             => array('init'),
     'arguments'           => array(
       'type' => 'Type of the initialization. Omit this argument to choose from available options.'
-   ),
+    ),
     'bootstrap'           => DRUSH_BOOTSTRAP_DRUPAL_FULL,
     'description'         => 'Initializes your site.',
     'drupal dependencies' => array('i18n_menu', 'l10n_update', 'locale'),
     'examples'            => array(
       'drush init languages --config-file=config.json' => 'Adds languages defined in the config.json configuration file.'
-   ),
+    ),
     'options'             => array(
       'config-file' => array(
         'description'   => 'Path to the configuration file.',
         'example-value' => 'config.json',
         'value'         => 'optional'
-     )
-   )
- );
+      )
+    )
+  );
 
   return $items;
 }
@@ -62,7 +62,7 @@ function drush_initialize_types() {
     'all'       => 'drush_initialize_all',
     'languages' => 'drush_initialize_languages',
     'menus'     => 'drush_initialize_menus'
- );
+  );
 
   // Command files may customize types as desired.
   drush_command_invoke_all_ref('drush_init', $types);
@@ -191,7 +191,7 @@ function drush_initialize_languages($config) {
       $language['prefix'],
       $language['enabled'],
       $language['default']
-   );
+    );
 
     // Checks whether there are language files to import for the newly added
     // language, collects and imports them.
@@ -263,7 +263,7 @@ function drush_initialize_links($menu_name, $links, $plid = 0) {
           array(
             '!link-path'  => $link['link_path'],
             '!link-title' => $link['link_title']
-         )), 'warning');
+          )), 'warning');
 
         continue;
       }
