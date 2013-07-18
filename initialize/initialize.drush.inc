@@ -251,7 +251,9 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
 		if ( ! isset( $link['link_title'] ) || empty( $link['link_title'] ) )
 			continue;
 
-		if ( $link['link_path'] != '<front>' ) {
+		$link['external'] = url_is_external( $link['link_path'] ) || $link['link_path'] == '<front>' ? 1 : 0;
+
+		if ( ! $link['external'] ) {
 			$link['link_path']   = drupal_get_normal_path( $link['link_path'] );
 			$link['router_path'] = _menu_find_router_path( $link['link_path'] );
 
