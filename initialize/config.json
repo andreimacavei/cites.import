@@ -125,7 +125,7 @@
 											"link_title": "Staff list"
 										},
 										{
-											"link_path": "disc/sec/sec-structure.pdf",
+											"link_path": "http://dev.cites.org/sites/default/files/imported/eng/disc/sec/sec-structure.pdf",
 											"link_title": "Organigramme"
 										}
 									]
@@ -181,7 +181,7 @@
 									"link_title": "Staff list"
 								},
 								{
-									"link_path": "disc/sec/sec-structure.pdf",
+									"link_path": "http://dev.cites.org/sites/default/files/imported/eng/disc/sec/sec-structure.pdf",
 									"link_title": "Organigramme"
 								},
 								{
@@ -474,7 +474,7 @@
 									}
 								},
 								{
-									"link_path": "com/sc/rules.pdf",
+									"link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/rules.pdf",
 									"link_title": "Rules of procedure",
 									"translations": {
 										"fr": "Règlement intérieur",
@@ -508,7 +508,7 @@
 									}
 								},
 								{
-									"link_path": "com/ac/E-AC23-RoP.pdf",
+									"link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/ac/E-AC23-RoP.pdf",
 									"link_title": "Rules of procedure",
 									"translations": {
 										"fr": "Règlement intérieur",
@@ -542,7 +542,7 @@
 									}
 								},
 								{
-									"link_path": "com/pc/E-PC-RoP.pdf",
+									"link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/pc/E-PC-RoP.pdf",
 									"link_title": "Rules of procedure",
 									"translations": {
 										"fr": "Règlement intérieur",
