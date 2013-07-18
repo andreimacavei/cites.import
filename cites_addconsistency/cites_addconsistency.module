@@ -36,6 +36,7 @@ class AddConsistency {
       $alias = drupal_lookup_path("alias", "node/" . $nodeObj->nid);
       $firstPartAlias = substr($alias, 0, 4);
       $secondPartAlias = substr($alias, 4);
+      $thirdPartAlias = substr($secondPartAlias, 0, 4);
       if ($firstPartAlias == "eng/") {
         $espPath = drupal_lookup_path("source", "esp/" . $secondPartAlias);
         $fraPath = drupal_lookup_path("source", "fra/" . $secondPartAlias);
@@ -59,6 +60,9 @@ class AddConsistency {
         $nodeObj->title_field['en'][0]['format'] = 'full_html';
         $nodeObj->body['en'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
+        if ($thirdPartAlias == "eng/" || $thirdPartAlias == "esp/" || $thirdPartAlias == "fra/") {
+          $secondPartAlias = substr($secondPartAlias, 4);
+        }
         $nodeObj->path['alias'] = $secondPartAlias;
         $nodeObj->translate = 1;
         $nodeObj->language = 'en';
@@ -85,6 +89,9 @@ class AddConsistency {
         }
         $nodeObj->title_field['fr'][0]['value'] = $nodeObj->title;
         $nodeObj->title_field['fr'][0]['format'] = 'full_html';
+        if ($thirdPartAlias == "eng/" || $thirdPartAlias == "esp/" || $thirdPartAlias == "fra/") {
+          $secondPartAlias = substr($secondPartAlias, 4);
+        }
         $nodeObj->path['alias'] = $secondPartAlias;
         $nodeObj->body['fr'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
@@ -113,6 +120,9 @@ class AddConsistency {
         }
         $nodeObj->title_field['es'][0]['value'] = $nodeObj->title;
         $nodeObj->title_field['es'][0]['format'] = 'full_html';
+        if ($thirdPartAlias == "eng/" || $thirdPartAlias == "esp/" || $thirdPartAlias == "fra/") {
+          $secondPartAlias = substr($secondPartAlias, 4);
+        }
         $nodeObj->path['alias'] = $secondPartAlias;
         $nodeObj->body['es'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
