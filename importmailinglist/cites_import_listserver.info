@@ -1,4 +1,4 @@
-name = importmailinglist
+name = cites_import_listserver
 description = Import mailing list from old site
 core = 7.x
 dependencies[] = simplenews
