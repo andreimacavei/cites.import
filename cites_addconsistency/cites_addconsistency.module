@@ -157,12 +157,19 @@ class AddConsistency {
 
     for ($i = 0; $i < $srcs->length; $i++) {
       $src = $srcs->item($i);
-      if ($tag == "a")
-        $attribute = "href";
-      else if ($tag == "img")
-        $attribute = "src";
-      else if ($tag == "embed")
-        $attribute = "src";
+      switch ($tag) {
+        case "a":
+          $attribute = "href";
+          break;
+        case "img":
+          $attribute = "src";
+          break;
+        case "embed":
+          $attribute = "src";
+          break;
+        default:
+          break;
+      }
       $url = $src->getAttribute($attribute);
       if ($this->isInFileExtensions($url, AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
         $relUrl = substr($url, 1);

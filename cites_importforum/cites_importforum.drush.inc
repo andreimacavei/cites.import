@@ -41,7 +41,6 @@ function cites_importforum_drush_command() {
 function drush_cites_importforum_create_profile2() {
   $profileObj = profile2_type_load('extendedprofile');
   if (field_info_field('extendedprofile_country')) {
-    print_r(field_info_field('extendedprofile_country'));
   }
   if ($profileObj) {
     profile2_type_delete($profileObj);
@@ -91,7 +90,7 @@ function drush_cites_importforum_create_profile2() {
       'target_type' => 'node',
       'handler_settings' => array('target_bundles' => array('country')),
     ),
-    '#default_value' => '100'
+    '#default_value' => '701'
   );
   field_create_instance($instance);
 

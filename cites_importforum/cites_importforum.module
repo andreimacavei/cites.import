@@ -244,10 +244,10 @@ class ForumManagement {
     $node = new stdClass();
     $title = $topic->cname;
     $encoding = mb_detect_encoding($title);
-    if ($encoding === 'ISO-8859-1') {
+    if ($encoding == 'ISO-8859-1') {
       $title = iconv('ISO-8859-1', 'UTF-8', $title);
     }
-    else if ($encoding === 'WINDOWS-1252') {
+    else if ($encoding == 'WINDOWS-1252') {
       $title = iconv('WINDOWS-1252', 'UTF-8', $title);
     }
     else if ($encoding != 'ASCII' && $encoding != 'LATIN-1') {
