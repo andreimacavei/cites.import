@@ -316,7 +316,7 @@ function drush_initialize_links( $menu_name, $links, $plid = 0 ) {
  * @param array $config An associative array with the configuration data.
  */
 function drush_initialize_menus( $config ) {
-	foreach ( $config['menus'] as $index => $menu ) {
+	foreach ( $config['menus'] as $menu ) {
 		$menu = drush_initialize_sanitize_menu( $menu );
 
 		if ( ! isset( $menu['menu_name'] ) || empty( $menu['menu_name'] ) ) {
