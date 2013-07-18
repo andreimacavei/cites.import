@@ -323,7 +323,6 @@ function drush_initialize_links($menu_name, $links, $plid = 0) {
       unset($translations);
     }
 
-
     if (!isset($children) || empty($children))
       continue;
 
