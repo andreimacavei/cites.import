@@ -560,8 +560,11 @@
 							}
 						},
 						{
-							"link_path": "res/14/14-02.php#vision",
+							"link_path": "res/14/14-02.php",
 							"link_title": "Strategic vision",
+							"options": {
+								"fragment": "vision"
+							},
 							"translations": {
 								"fr": "Vision de la stratégie",
 								"es": "Visión Estratégica"
