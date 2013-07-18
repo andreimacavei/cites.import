@@ -654,7 +654,7 @@
 									}
 								},
 								{
-									"link_path": "http://www.cites.org/common/reg/e_cb.html",
+									"link_path": "common/reg/e_cb.html",
 									"link_title": "Register of captive-breeding operations",
 									"translations": {
 										"fr": "Registre des établissements d'élevage en captivité",
@@ -662,7 +662,7 @@
 									}
 								},
 								{
-									"link_path": "http://www.cites.org/common/reg/e_nu.html",
+									"link_path": "common/reg/e_nu.html",
 									"link_title": "Register of nurseries",
 									"translations": {
 										"fr": "Registre des pépinières",
@@ -670,7 +670,7 @@
 									}
 								},
 								{
-									"link_path": "http://www.cites.org/common/reg/e_si.html",
+									"link_path": "common/reg/e_si.html",
 									"link_title": "Register of scientific Institutions",
 									"translations": {
 										"fr": "Registre des institutions scientifiques",
@@ -740,7 +740,7 @@
 							}
 						},
 						{
-							"link_path": "http://www.cites.org/gallery/species/index.html",
+							"link_path": "gallery/species/index.html",
 							"link_title": "CITES species photo gallery",
 							"translations": {
 								"fr": "Galerie de photos des espèces CITES",
