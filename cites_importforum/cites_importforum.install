@@ -28,7 +28,29 @@ function cites_importforum_install() {
     field_delete_field('country');
   }
   $field = array(
-    'field_name' => 'firstname',
+    'field_name' => 'country',
+    'type' => 'entityreference',
+    'cardinality' => 1
+  );
+  field_create_field($field);
+  $instance = array(
+    'entity_type' => 'profile2',
+    'field_name' => 'country',
+    'bundle' => 'extendedprofile',
+    'label' => 'Country',
+    'widget' => array(
+      'type' => 'options_select',
+      'weight' => 0
+    ),
+    'settings' => array(
+      'target_type' => 'node',
+      'handler_settings' => array('target_bundles' => array('country'))
+    )
+  );
+  field_create_instance($instance);
+
+  $field = array(
+    'field_name' => 'organization',
     'type' => 'text',
     'cardinality' => 1,
     'translatable' => FALSE,
@@ -36,45 +58,32 @@ function cites_importforum_install() {
   field_create_field($field);
   $instance = array(
     'entity_type' => 'profile2',
-    'field_name' => 'firstname',
+    'field_name' => 'organization',
     'bundle' => 'extendedprofile',
-    'label' => 'Firstname',
+    'label' => 'Organization',
     'widget' => array(
       'type' => 'text_textfield',
       'weight' => 0,
     )
   );
   field_create_instance($instance);
-
-  $field['field_name'] = 'lastname';
-  field_create_field($field);
-  $instance['field_name'] = 'lastname';
-  $instance['label'] = 'Lastname';
-  field_create_instance($instance);
-
-  $field['field_name'] = 'organization';
-  field_create_field($field);
-  $instance['field_name'] = 'organization';
-  $instance['label'] = 'Organization';
-  field_create_instance($instance);
-
+  
   $field['field_name'] = 'telephone';
   field_create_field($field);
   $instance['field_name'] = 'telephone';
   $instance['label'] = 'Telephone';
   field_create_instance($instance);
-
-  $field['field_name'] = 'country';
-  $field['type'] = 'entityreference';
+  
+  $field['field_name'] = 'lastname';
   field_create_field($field);
-  $instance['field_name'] = 'country';
-  $instance['label'] = 'Country';
-  $instance['settings'] = array(
-    'target_type' => 'node',
-    'handler_settings' => array('target_bundles' => array('country')),
-  );
-  $instance['widget'] = array('type' => 'options_select');
+  $instance['field_name'] = 'lastname';
+  $instance['label'] = 'Lastname';
   field_create_instance($instance);
-}
-
+  
+  $field['field_name'] = 'firstname';
+  field_create_field($field);
+  $instance['field_name'] = 'firstname';
+  $instance['label'] = 'Firstname';
+  field_create_instance($instance);
+  }
 ?>
