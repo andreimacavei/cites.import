@@ -145,14 +145,18 @@ class MailingListManagement{
     private function importUsers($id_categ,$new_categ_tid) {
         $customers=$this->getCustomers($id_categ);
         foreach($customers as $customer) {
-            $customer['name'] = trim($customer['name']);
-            $customer['company'] = trim($customer['company']);
-            $customer['country'] = trim($customer['country']);
+            $customer['name'] = utf8_encode(trim($customer['name']));
+            $customer['company'] = utf8_encode(trim($customer['company']));
+            $customer['country'] = utf8_encode(trim($customer['country']));
             if(!empty($customer['name'])
                     || !empty($customer['company'])
                     || !empty($customer['country'])) {
                 if(empty($customer['name'])){
-                    $customer['name'] = substr($customer['email'],0,strrpos($customer['email'],'@')-1);
+                    $customer['name'] = substr(
+                        $customer['email'],
+                        0,
+                        strrpos($customer['email'],'@') - 1
+                    );
                 }
                 $username = utf8_encode(
                     substr(
@@ -201,7 +205,7 @@ class MailingListManagement{
                     'tid' => $new_categ_tid, //tid of category that is to subscribe
                     'status' => 1, // 1 - subscribed
                     'timestamp' => 0,
-                    'source' => 'Imported from the old site'
+                    'source' => 'Old site'
                 );
                 simplenews_subscription_save($subscription);
             }
