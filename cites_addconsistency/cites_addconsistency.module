@@ -17,6 +17,10 @@ class AddConsistency {
   private static $possibleCorrectExtensions = array(
     ".html", ".shtml", ".php", ".html", ".phtml"
   );
+  private static $specificCharacters = array(
+    'fr' => array("d’", "l'", "L'", "ç"),
+    'es' => array("¿", " y ", " el ",)
+  );
 
   public function __construct() {
     ;
@@ -128,6 +132,16 @@ class AddConsistency {
         $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
         $nodeObj->translate = 1;
         $nodeObj->language = 'es';
+        node_save($nodeObj);
+      }
+      else {
+        $language = $this->detectLanguage($secondPartAlias, $nodeObj->body[LANGUAGE_NONE][0]['value']);
+        $nodeObj->body[$language][0]['value'] = $nodeObj->body[LANGUAGE_NONE][0]['value'];
+        $nodeObj->body[$language][0]['format'] = 'unfiltered_html';
+        $nodeObj->title_field[$language][0]['value'] = $nodeObj->title;
+        $nodeObj->title_field[$language][0]['format'] = 'full_html';
+        $nodeObj->language = $language;
+        $nodeObj->path['alias'] = $secondPartAlias;
         node_save($nodeObj);
       }
     }
@@ -242,6 +256,26 @@ class AddConsistency {
       }
     }
     return $url;
+  }
+
+  private function detectLanguage($path, $body) {
+    if (strpos("/eng/", $path)) {
+      return "en";
+    }
+    if (strpos("/fra/", $path)) {
+      return "fr";
+    }
+    if (strpos("/esp/", $path)) {
+      return "es";
+    }
+    foreach (AddConsistency::$specificCharacters as $language => $arrayOfPatterns) {
+      foreach ($arrayOfPatterns as $pattern) {
+        if (strpos($body, $pattern)) {
+          return $language;
+        }
+      }
+    }
+    return "en";
   }
 
 }
