@@ -1,5 +1,5 @@
 <?php
-function importmailinglist_drush_command() {
+function cites_import_listserver_drush_command() {
     $items['importml'] = array(
         'description' => 'import newsletter database from old cites site',
         'examples' => array('drush importml localhost root admin cites_db'),
@@ -12,7 +12,7 @@ function importmailinglist_drush_command() {
     return $items;
 }
 
-function drush_importmailinglist_importml($host = 'localhost', $username = 'root', $password = '', $database = 'edw_mailing_list') {
+function drush_import_listserver_importml($host = 'localhost', $username = 'root', $password = '', $database = 'edw_mailing_list') {
     /* Connect to an ODBC database using driver invocation */
     $dsn = "mysql:dbname=$database;host=$host";
     try {
