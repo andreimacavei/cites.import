@@ -20,7 +20,6 @@ function drush_importmailinglist_importml($host = 'localhost', $username = 'root
     } catch (PDOException $e) {
         drush_print($e->getMessage());
     }
-    $db->exec("SET NAMES utf8");
     $mlm = new MailingListManagement($db);
     $rez = $mlm->import();
     drush_print_r($rez);
