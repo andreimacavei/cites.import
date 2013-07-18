@@ -1,5 +1,5 @@
 name = cites_import_listserver
-description = Import mailing list from old site
+description = Imports the list server from old CITES website
 core = 7.x
 dependencies[] = simplenews
 dependencies[] = cites_importforum

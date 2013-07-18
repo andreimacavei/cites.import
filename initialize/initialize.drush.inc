@@ -2,7 +2,8 @@
 /**
  * Implementation of hook_drush_command().
  *
- * @return array An associative array describing available command(s).
+ * @return
+ *   An associative array describing available command(s).
  */
 function initialize_drush_command() {
   $items = array();
@@ -34,9 +35,11 @@ function initialize_drush_command() {
 /**
  * Implementation of hook_drush_help().
  *
- * @param string $section A string with the help section (prepend with 'drush:').
+ * @param $section
+ *   A string with the help section (prepend with 'drush:').
  *
- * @return string A string with the help text for the command.
+ * @return
+ *   A string with the help text for the command.
  */
 function initialize_drush_help($section) {
   switch ($section) {
@@ -55,7 +58,8 @@ function initialize_drush_help($section) {
  * All types available for initialization. Contrib commands can alter in their
  * own.
  *
- * @return array An associative array of initialization types.
+ * @return
+ *   An associative array of initialization types.
  */
 function drush_initialize_types() {
   $types = array(
@@ -75,7 +79,8 @@ function drush_initialize_types() {
  * Command argument complete callback. Provides argument values for shell
  * completion.
  *
- * @return array An associative array of initialization types.
+ * @return
+ *   An associative array of initialization types.
  */
 function initialize_initialize_complete() {
   return array('values' => array_keys(drush_initialize_types()));
@@ -84,7 +89,11 @@ function initialize_initialize_complete() {
 /**
  * Calls all available initializations.
  *
- * @param array $config An associative array with the configuration data.
+ * @param $config
+ *   An associative array with the configuration data.
+ *
+ * @return
+ *   Nothing.
  */
 function drush_initialize_all($config) {
   // Retrieves all types available for initialization.
@@ -99,9 +108,11 @@ function drush_initialize_all($config) {
 /**
  * Sanitizes a language definition.
  *
- * @param array $language An associative array describing a language.
+ * @param $language
+ *   An associative array describing a language.
  *
- * @return array An associative array with the sanitized language.
+ * @return
+ *   An associative array with the sanitized language.
  */
 function drush_initialize_sanitize_language($language) {
   if (!isset($language['langcode']))
@@ -136,7 +147,8 @@ function drush_initialize_sanitize_language($language) {
 /**
  * Initializes languages.
  *
- * @param array $config An associative array with the configuration data.
+ * @param $config
+ *   An associative array with the configuration data.
  */
 function drush_initialize_languages($config) {
   // Returns a list of installed languages, indexed by the specified key.
@@ -218,9 +230,11 @@ function drush_initialize_languages($config) {
 /**
  * Sanitizes a menu definition.
  *
- * @param array $menu An associative array describing a menu.
+ * @param $menu
+ *   An associative array describing a menu.
  *
- * @return array An associative array with the sanitized menu.
+ * @return
+ *   An associative array with the sanitized menu.
  */
 function drush_initialize_sanitize_menu($menu) {
   if (!isset($menu['i18n_mode']))
@@ -234,9 +248,15 @@ function drush_initialize_sanitize_menu($menu) {
 /**
  * Initializes links.
  *
- * @param string $menu_name A string with the menu name.
- * @param array $links An associative array describing a links hierarchy.
- * @param int $plid An integer with the menu link identifier of the parent.
+ * @param $menu_name
+ *   A string with the menu name.
+ * @param $links
+ *   An associative array describing a links hierarchy.
+ * @param $plid
+ *   An integer with the menu link identifier of the parent.
+ *
+ * @return
+ *   Nothing.
  */
 function drush_initialize_links($menu_name, $links, $plid = 0) {
   $weight = -50;
@@ -258,12 +278,16 @@ function drush_initialize_links($menu_name, $links, $plid = 0) {
       $link['router_path'] = _menu_find_router_path($link['link_path']);
 
       if (!$link['link_path'] || !$link['router_path']) {
-        drush_log(dt(
-          '!link-path: Invalid path for \'!link-title\'',
-          array(
-            '!link-path'  => $link['link_path'],
-            '!link-title' => $link['link_title']
-          )), 'warning');
+        drush_log(
+          dt(
+            '!link-path: Invalid path for \'!link-title\'',
+            array(
+              '!link-path'  => $link['link_path'],
+              '!link-title' => $link['link_title']
+            )
+          ),
+          'warning'
+        );
 
         continue;
       }
@@ -299,7 +323,6 @@ function drush_initialize_links($menu_name, $links, $plid = 0) {
       unset($translations);
     }
 
-
     if (!isset($children) || empty($children))
       continue;
 
@@ -313,7 +336,11 @@ function drush_initialize_links($menu_name, $links, $plid = 0) {
 /**
  * Initializes menus.
  *
- * @param array $config An associative array with the configuration data.
+ * @param $config
+ *   An associative array with the configuration data.
+ *
+ * @return
+ *   Nothing.
  */
 function drush_initialize_menus($config) {
   foreach ($config['menus'] as $menu) {
@@ -361,7 +388,11 @@ function drush_initialize_menus($config) {
  * @see drush_invoke()
  * @see drush.api.php
  *
- * @param string $type A string with the type of the initialization.
+ * @param $type
+ *   A string with the type of the initialization.
+ *
+ * @return
+ *   Nothing.
  */
 function drush_initialize($type = NULL) {
   // Gets the value for the configuration file option.
