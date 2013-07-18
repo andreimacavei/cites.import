@@ -32,6 +32,7 @@ function initialize_drush_command() {
   return $items;
 }
 
+
 /**
  * Implementation of hook_drush_help().
  *
@@ -53,6 +54,7 @@ function initialize_drush_help($section) {
       return dt('Initializes your site.');
   }
 }
+
 
 /**
  * All types available for initialization. Contrib commands can alter in their
@@ -86,6 +88,7 @@ function initialize_initialize_complete() {
   return array('values' => array_keys(drush_initialize_types()));
 }
 
+
 /**
  * Calls all available initializations.
  *
@@ -104,6 +107,7 @@ function drush_initialize_all($config) {
   foreach ($types as $callback)
     call_user_func($callback, $config);
 }
+
 
 /**
  * Sanitizes a language definition.
@@ -143,6 +147,7 @@ function drush_initialize_sanitize_language($language) {
 
   return $language;
 }
+
 
 /**
  * Initializes languages.
@@ -227,6 +232,7 @@ function drush_initialize_languages($config) {
   drush_invoke('l10n-update');
 }
 
+
 /**
  * Sanitizes a menu definition.
  *
@@ -244,6 +250,7 @@ function drush_initialize_sanitize_menu($menu) {
 
   return $menu;
 }
+
 
 /**
  * Initializes links.
@@ -333,6 +340,7 @@ function drush_initialize_links($menu_name, $links, $plid = 0) {
   }
 }
 
+
 /**
  * Initializes menus.
  *
@@ -381,6 +389,7 @@ function drush_initialize_menus($config) {
     drush_log(dt('!menu-name: Links successfully saved', array('!menu-name' => $menu['menu_name'])), 'ok');
   }
 }
+
 
 /**
  * Command callback for drush initialize.
