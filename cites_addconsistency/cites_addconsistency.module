@@ -8,7 +8,8 @@ class AddConsistency {
     "AC-PC" => "ac-pc",
     "NC" => "nc",
     "PC" => "pc",
-    "SC" => "sc"
+    "SC" => "sc",
+    "ifs-" => "IFS-"
   );
   private static $correctExtensions = array(
     ".pdf", ".jpg", ".bmp", ".doc", ".docx", ".ppt", ".pptx", "gif", "bmp"
@@ -60,6 +61,7 @@ class AddConsistency {
         $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
         $nodeObj->path['alias'] = $secondPartAlias;
         $nodeObj->translate = 1;
+        $nodeObj->language = 'en';
         node_save($nodeObj);
       }
       else if ($firstPartAlias == "fra/") {
@@ -87,6 +89,7 @@ class AddConsistency {
         $nodeObj->body['fr'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
         $nodeObj->translate = 1;
+        $nodeObj->language = 'fr';
         node_save($nodeObj);
       }
       else if ($firstPartAlias == "esp/") {
@@ -114,6 +117,7 @@ class AddConsistency {
         $nodeObj->body['es'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
         $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
         $nodeObj->translate = 1;
+        $nodeObj->language = 'es';
         node_save($nodeObj);
       }
     }
@@ -157,12 +161,19 @@ class AddConsistency {
 
     for ($i = 0; $i < $srcs->length; $i++) {
       $src = $srcs->item($i);
-      if ($tag == "a")
-        $attribute = "href";
-      else if ($tag == "img")
-        $attribute = "src";
-      else if ($tag == "embed")
-        $attribute = "src";
+      switch ($tag) {
+        case "a":
+          $attribute = "href";
+          break;
+        case "img":
+          $attribute = "src";
+          break;
+        case "embed":
+          $attribute = "src";
+          break;
+        default:
+          break;
+      }
       $url = $src->getAttribute($attribute);
       if ($this->isInFileExtensions($url, AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
         $relUrl = substr($url, 1);

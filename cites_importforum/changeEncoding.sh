@@ -3,7 +3,7 @@
 path=$1;
 
 
-for file in $(find "$path" -name '*.php' -or -name '*.html' -or -name "*.shtml" -or -name "*.phtml");
+for file in $(find "$path" -name '*.php' -or -name '*.html' -or -name "*.shtml" -or -name "*.phtml" -or -name "*.htm" -or -name "*.tpl");
 do
 	infoFile=$(file -i "$file");
 	temp="$file"".utf";
