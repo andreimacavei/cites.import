@@ -893,7 +893,7 @@
                     }
                 },
                 {
-                    "link_path": "http://dev.cites.org/cms/index.php/component/cp",
+                    "link_path": "http://www.cites.org/cms/index.php/component/cp",
                     "link_title": "National contacts and information",
                     "translations": {
                         "fr": "Informations & contacts nationaux",
@@ -1048,6 +1048,132 @@
                     "translations": {
                         "fr": "Les \"avis de commerce non préjudiciable\" de la CITES",
                         "es": "Dictámenes de extracción no perjudicial CITES"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "discover-cites",
+            "title": "Discover CITES",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Découvrez la CITES",
+                "es": "Descubra la CITES"
+            },
+            "links": [
+                {
+                    "link_path": "disc/what.php",
+                    "link_title": "What is CITES?",
+                    "translations": {
+                        "fr": "La CITES en bref",
+                        "es": "¿Qué es CITES?"
+                    }
+                },
+                {
+                    "link_path": "disc/how.php",
+                    "link_title": "How CITES works",
+                    "translations": {
+                        "fr": "Comment la CITES fonctionne-t-elle?",
+                        "es": "¿Cómo funciona la CITES?"
+                    }
+                },
+                {
+                    "link_path": "disc/org.php",
+                    "link_title": "Structure",
+                    "translations": {
+                        "fr": "Structure",
+                        "es": "Estructura"
+                    }
+                },
+                {
+                    "link_path": "disc/species.php",
+                    "link_title": "CITES species",
+                    "translations": {
+                        "fr": "Espèces CITES",
+                        "es": "Especies CITES"
+                    }
+                },
+                {
+                    "link_path": "disc/parties/index.php",
+                    "link_title": "Member countries",
+                    "translations": {
+                        "fr": "Les Parties à la CITES",
+                        "es": "Países miembros"
+                    }
+                },
+                {
+                    "link_path": "http://www.cites.org/cms/index.php/component/cp/",
+                    "link_title": "National contacts and information",
+                    "translations": {
+                        "fr": "Informations & contacts nationaux",
+                        "es": "Contactos nacionales"
+                    }
+                },
+                {
+                    "link_path": "disc/sec/index.php",
+                    "link_title": "CITES Secretariat",
+                    "translations": {
+                        "fr": "Le Secrétariat CITES",
+                        "es": "La Secretaría CITES"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "other-information",
+            "title": "Other information",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Autres informations",
+                "es": "Otra información"
+            },
+            "links": [
+                {
+                    "link_path": "disc/coop.php",
+                    "link_title": "Cooperation and partnerships",
+                    "translations": {
+                        "fr": "Coopération et partenariats",
+                        "es": "Cooperación y asociaciones"
+                    }
+                },
+                {
+                    "link_path": "disc/certificate_commend.php",
+                    "link_title": "Certificate of Commendation",
+                    "translations": {
+                        "fr": "Certificats de louanges",
+                        "es": "Certificado de felicitación"
+                    }
+                },
+                {
+                    "link_path": "disc/certificate_merit.php",
+                    "link_title": "Certificate of Merit",
+                    "translations": {
+                        "fr": "Certificats de mérite",
+                        "es": "Certificados de Mérito"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/res/16/E-Res-16-03.pdf",
+                    "link_title": "CITES Strategic Vision: 2008-2020",
+                    "translations": {
+                        "fr": "Vision de la stratégie avec les indicateurs",
+                        "es": "Visión Estratégica con indicadores"
+                    }
+                },
+                {
+                    "link_path": "disc/fund.php",
+                    "link_title": "How is CITES financed?",
+                    "translations": {
+                        "fr": "Comment la CITES est-elle financée?",
+                        "es": "¿Cómo se financia la CITES?"
+                    }
+                },
+                {
+                    "link_path": "disc/sec/intern.php",
+                    "link_title": "Internship Programme",
+                    "translations": {
+                        "fr": "Programme de stages",
+                        "es": "Programa de pasantías"
                     }
                 }
             ]
