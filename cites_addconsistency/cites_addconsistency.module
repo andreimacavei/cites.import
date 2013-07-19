@@ -26,11 +26,25 @@ class AddConsistency {
     ;
   }
 
+  private function addCustomFieldsForNode(&$sourceNode, $extraNode, $language) {
+    $sourceNode->title_field[$language][0]['value'] = $extraNode->title;
+    $sourceNode->title_field[$language][0]['format'] = 'full_html';
+    $sourceNode->body[$language][0]['value'] = $extraNode->body[$extraNode->language][0]['value'];
+    $sourceNode->body[$language][0]['format'] = 'unfiltered_html';
+  }
+
+  private function completeNodeLanguageFields(&$sourceNode, $language) {
+    $sourceNode->title_field[$language][0]['value'] = $sourceNode->title;
+    $sourceNode->title_field[$language][0]['format'] = 'full_html';
+    $sourceNode->body[$language][0]['value'] = $sourceNode->body[$sourceNode->language][0]['value'];
+    $sourceNode->body[$language][0]['format'] = 'unfiltered_html';
+  }
+
   public function changeNodeAliases() {
     // get all basic page nodes
     $result = db_query("SELECT *
-      FROM `node`
-      WHERE `type` = 'page'");
+    FROM `node`
+    WHERE `type` = 'page'");
     foreach ($result as $record) {
       $nodeObj = node_load($record->nid);
       // check if the requested object exists
@@ -38,34 +52,24 @@ class AddConsistency {
         continue;
       }
       $alias = drupal_lookup_path("alias", "node/" . $nodeObj->nid);
-      echo $alias . PHP_EOL;
       $firstPartAlias = substr($alias, 0, 4);
       $secondPartAlias = substr($alias, 4);
+      $nodeObj->path['alias'] = $secondPartAlias;
+      $nodeObj->translate = 1;
       if ($firstPartAlias == "eng/") {
         $espPath = drupal_lookup_path("source", "esp/" . $secondPartAlias);
         $fraPath = drupal_lookup_path("source", "fra/" . $secondPartAlias);
         $espObj = menu_get_object("node", 1, $espPath);
         $fraObj = menu_get_object("node", 1, $fraPath);
         if ($espObj != FALSE) {
-          $nodeObj->title_field['es'][0]['value'] = $espObj->title;
-          $nodeObj->title_field['es'][0]['format'] = 'full_html';
-          $nodeObj->body['es'][0]['value'] = $espObj->body[$espObj->language][0]['value'];
-          $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
+          $this->addCustomFieldsForNode($nodeObj, $espObj, 'es');
           node_delete($espObj->nid);
         }
         if ($fraObj != FALSE) {
-          $nodeObj->title_field['fr'][0]['value'] = $fraObj->title;
-          $nodeObj->title_field['fr'][0]['format'] = 'full_html';
-          $nodeObj->body['fr'][0]['value'] = $fraObj->body[$fraObj->language][0]['value'];
-          $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
+          $this->addCustomFieldsForNode($nodeObj, $fraObj, 'fr');
           node_delete($fraObj->nid);
         }
-        $nodeObj->title_field['en'][0]['value'] = $nodeObj->title;
-        $nodeObj->title_field['en'][0]['format'] = 'full_html';
-        $nodeObj->body['en'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
-        $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
-        $nodeObj->path['alias'] = $secondPartAlias;
-        $nodeObj->translate = 1;
+        $this->completeNodeLanguageFields($nodeObj, 'en');
         node_save($nodeObj);
       }
       else if ($firstPartAlias == "fra/") {
@@ -74,25 +78,14 @@ class AddConsistency {
         $espObj = menu_get_object("node", 1, $espPath);
         $engObj = menu_get_object("node", 1, $engPath);
         if ($espObj != FALSE) {
-          $nodeObj->title_field['es'][0]['value'] = $espObj->title;
-          $nodeObj->title_field['es'][0]['format'] = 'full_html';
-          $nodeObj->body['es'][0]['value'] = $espObj->body[$espObj->language][0]['value'];
-          $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
+          $this->addCustomFieldsForNode($nodeObj, $espObj, 'es');
           node_delete($espObj->nid);
         }
         if ($engObj != FALSE) {
-          $nodeObj->title_field['en'][0]['value'] = $engObj->title;
-          $nodeObj->title_field['en'][0]['format'] = 'full_html';
-          $nodeObj->body['en'][0]['value'] = $engObj->body[$engObj->language][0]['value'];
-          $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
+          $this->addCustomFieldsForNode($nodeObj, $engObj, 'en');
           node_delete($engObj->nid);
         }
-        $nodeObj->title_field['fr'][0]['value'] = $nodeObj->title;
-        $nodeObj->title_field['fr'][0]['format'] = 'full_html';
-        $nodeObj->path['alias'] = $secondPartAlias;
-        $nodeObj->body['fr'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
-        $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
-        $nodeObj->translate = 1;
+        $this->completeNodeLanguageFields($nodeObj, 'fr');
         node_save($nodeObj);
       }
       else if ($firstPartAlias == "esp/") {
@@ -101,33 +94,14 @@ class AddConsistency {
         $engObj = menu_get_object("node", 1, $engPath);
         $fraObj = menu_get_object("node", 1, $fraPath);
         if ($engObj != FALSE) {
-          $nodeObj->title_field['en'][0]['value'] = $engObj->title;
-          $nodeObj->title_field['en'][0]['format'] = 'full_html';
-          $nodeObj->body['en'][0]['value'] = $engObj->body[$engObj->language][0]['value'];
-          $nodeObj->body['en'][0]['format'] = 'unfiltered_html';
+          $this->addCustomFieldsForNode($nodeObj, $engObj, 'en');
           node_delete($engObj->nid);
         }
         if ($fraObj != FALSE) {
-          $nodeObj->title_field['fr'][0]['value'] = $fraObj->title;
-          $nodeObj->title_field['fr'][0]['format'] = 'full_html';
-          $nodeObj->body['fr'][0]['value'] = $fraObj->body[$fraObj->language][0]['value'];
-          $nodeObj->body['fr'][0]['format'] = 'unfiltered_html';
+          $this->addCustomFieldsForNode($nodeObj, $fraObj, 'fr');
           node_delete($fraObj->nid);
         }
-        $nodeObj->title_field['es'][0]['value'] = $nodeObj->title;
-        $nodeObj->title_field['es'][0]['format'] = 'full_html';
-        $nodeObj->path['alias'] = $secondPartAlias;
-        $nodeObj->body['es'][0]['value'] = $nodeObj->body[$nodeObj->language][0]['value'];
-        $nodeObj->body['es'][0]['format'] = 'unfiltered_html';
-        $nodeObj->translate = 1;
-        node_save($nodeObj);
-      }
-      else {
-        $language = $this->detectLanguage($secondPartAlias, $nodeObj->body[LANGUAGE_NONE][0]['value']);
-        $nodeObj->body[$language][0]['value'] = $nodeObj->body[LANGUAGE_NONE][0]['value'];
-        $nodeObj->body[$language][0]['format'] = 'unfiltered_html';
-        $nodeObj->title_field[$language][0]['value'] = $nodeObj->title;
-        $nodeObj->title_field[$language][0]['format'] = 'full_html';
+        $this->completeNodeLanguageFields($nodeObj, 'es');
         node_save($nodeObj);
       }
     }
