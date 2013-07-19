@@ -1177,6 +1177,139 @@
                     }
                 }
             ]
+        },
+        {
+            "menu_name": "species-programmes",
+            "title": "Species programmes",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Programmes sur les espèces",
+                "es": "Programas sobre especies"
+            },
+            "links": [
+                {
+                    "link_path": "prog/african_cherry.php",
+                    "link_title": "African cherry",
+                    "translations": {
+                        "fr": "Prunier d'Afrique",
+                        "es": "Ciruelo africano"
+                    }
+                },
+                {
+                    "link_path": "prog/mike_etis.php",
+                    "link_title": "Elephants",
+                    "translations": {
+                        "fr": "Eléphants",
+                        "es": "Elefantes"
+                    }
+                },
+                {
+                    "link_path": "prog/falcon.php",
+                    "link_title": "Falcon",
+                    "translations": {
+                        "fr": "Faucons",
+                        "es": "Halcones"
+                    }
+                },
+                {
+                    "link_path": "prog/ape.php",
+                    "link_title": "Great apes",
+                    "translations": {
+                        "fr": "Grands singes",
+                        "es": "Grandes simios"
+                    }
+                },
+                {
+                    "link_path": "prog/itto.php",
+                    "link_title": "ITTO-CITES programme",
+                    "translations": {
+                        "fr": "Programme OIBT-CITES",
+                        "es": "Programa OIMT-CITES"
+                    }
+                },
+                {
+                    "link_path": "prog/mwg.php",
+                    "link_title": "Mahogany",
+                    "translations": {
+                        "fr": "Acajou",
+                        "es": "Caoba"
+                    }
+                },
+                {
+                    "link_path": "prog/sturgeon.php",
+                    "link_title": "Sturgeons",
+                    "translations": {
+                        "fr": "Esturgeons",
+                        "es": "Esturiones"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "other-issues",
+            "title": "Other issues",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Autres questions",
+                "es": "Otras cuestiones"
+            },
+            "links": [
+                {
+                    "link_path": "prog/ndf/index.php",
+                    "link_title": "CITES 'Non-detriment findings'",
+                    "translations": {
+                        "fr": "Les \"avis de commerce non préjudiciable\" (ACNP) de la CITES",
+                        "es": "Dictámenes de extracción no perjudicial CITES"
+                    }
+                },
+                {
+                    "link_path": "prog/economics.php",
+                    "link_title": "Economic incentives",
+                    "translations": {
+                        "fr": "Incitations économiques"
+                    }
+                },
+                {
+                    "link_path": "prog/e-commerce.php",
+                    "link_title": "Electronic commerce",
+                    "translations": {
+                        "fr": "E-commerce d’espèces CITES",
+                        "es": "Comercio electrÃ³nico"
+                    }
+                },
+                {
+                    "link_path": "prog/e/e-permitting-toolkit.php",
+                    "link_title": "Electronic permitting",
+                    "translations": {
+                        "fr": "Outil CITES de délivrance informatisée des permis",
+                        "es": "Emisión electrónica de permisos CITES"
+                    }
+                },
+                {
+                    "link_path": "prog/iccwc.php",
+                    "link_title": "International Consortium on Combating Wildlife Crime",
+                    "translations": {
+                        "fr": "Consortium international de lutte contre la criminalité liée aux espèces sauvages",
+                        "es": "Consorcio Internacional para Combatir los Delitos contra la Vida Silvestre"
+                    }
+                },
+                {
+                    "link_path": "prog/ifs.php",
+                    "link_title": "Introduction from the sea",
+                    "translations": {
+                        "fr": "Introduction en provenance de la mer",
+                        "es": "Introducción procedente del mar"
+                    }
+                },
+                {
+                    "link_path": "prog/policy/index.php",
+                    "link_title": "Wildlife trade policy reviews",
+                    "translations": {
+                        "fr": "Examen des politiques commerciales",
+                        "es": "ExÃ¡menes de polÃ­ticas sobre el comercio de especies silvestres"
+                    }
+                }
+            ]
         }
     ]
 }
