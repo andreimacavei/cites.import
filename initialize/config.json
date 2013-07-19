@@ -1349,6 +1349,113 @@
                     "link_title": "Sitemap"
                 }
             ]
+        },
+        {
+            "menu_name": "resources",
+            "title": "Resources",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Resources",
+                "es": "Resources"
+            },
+            "links": [
+                {
+                    "link_path": "resources/registers.php",
+                    "link_title": "CITES Registers",
+                    "translations": {
+                        "fr": "Registres CITES",
+                        "es": "Registros CITES"
+                    }
+                },
+                {
+                    "link_path": "forum",
+                    "link_title": "Discussion forum"
+                },
+                {
+                    "link_path": "resources/quotas/index.php",
+                    "link_title": "Export quotas",
+                    "translations": {
+                        "fr": "Quotas d'exportation",
+                        "es": "Cupos de exportación"
+                    }
+                },
+                {
+                    "link_path": "resources/faq.php",
+                    "link_title": "FAQs"
+                },
+                {
+                    "link_path": "resources/transport/index.php",
+                    "link_title": "Guidelines for transport",
+                    "translations": {
+                        "fr": "Lignes directrices pour le transport",
+                        "es": "Directivas para el transporte"
+                    }
+                },
+                {
+                    "link_path": "resources/reports.php",
+                    "link_title": "National reports",
+                    "translations": {
+                        "fr": "Rapports nationaux",
+                        "es": "Informes nacionales"
+                    }
+                },
+                {
+                    "link_path": "resources/publications.php",
+                    "link_title": "Publications",
+                    "translations": {
+                        "fr": "Publications",
+                        "es": "Publicaciones"
+                    }
+                },
+                {
+                    "link_path": "resources/reference.php",
+                    "link_title": "Reference lists",
+                    "translations": {
+                        "fr": "Listes de référence",
+                        "es": "Listas de referencia"
+                    }
+                },
+                {
+                    "link_path": "resources/species.html",
+                    "link_title": "Species database",
+                    "translations": {
+                        "fr": "Base de données sur les espèces",
+                        "es": "Base de datos de especies"
+                    }
+                },
+                {
+                    "link_path": "resources/terms/index.php",
+                    "link_title": "Terminology",
+                    "translations": {
+                        "fr": "Terminologie",
+                        "es": "Terminología"
+                    }
+                },
+                {
+                    "link_path": "http://www.unep-wcmc.org/citestrade/trade.cfm",
+                    "link_title": "Trade database",
+                    "translations": {
+                        "fr": "Base de données sur le commerce",
+                        "es": "Base de datos sobre el comercio"
+                    }
+                },
+                {
+                    "link_path": "http://www.unep-wcmc.org/isdb/extra/index.cfm",
+                    "link_title": "Trade information query tool",
+                    "translations": {
+                        "fr": "Outil de demande d'informations sur le commerce",
+                        "es": "Instrumento de consulta de información sobre el comercio"
+                    }
+                },
+                {
+                    "link_path": "resources/links.php",
+                    "link_title": "Useful links",
+                    "translations": {
+                        "fr": "Liens utiles",
+                        "es": "Enlaces útiles"
+                    }
+                }
+            ]
         }
     ]
 }
