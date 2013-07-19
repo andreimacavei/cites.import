@@ -113,24 +113,29 @@ class AddConsistency {
     foreach ($pages as $page) {
       $nodeObj = node_load($page->nid);
       $content = $nodeObj->body[$nodeObj->language][0]['value'];
-      $content = $this->changeUrlForTag($content, "img");
-      $content = $this->changeUrlForTag($content, "a");
-      $nodeObj->body[$nodeObj->language][0]['value'] = $content;
-
+      if ($content != "") {
+        $content = $this->changeUrlForTag($content, "img");
+        $content = $this->changeUrlForTag($content, "a");
+        $nodeObj->body[$nodeObj->language][0]['value'] = $content;
+      }
       $content = $nodeObj->body['en'][0]['value'];
-      $content = $this->changeUrlForTag($content, "img");
-      $content = $this->changeUrlForTag($content, "a");
-      $nodeObj->body['en'][0]['value'] = $content;
-
+      if ($content != "") {
+        $content = $this->changeUrlForTag($content, "img");
+        $content = $this->changeUrlForTag($content, "a");
+        $nodeObj->body['en'][0]['value'] = $content;
+      }
       $content = $nodeObj->body['es'][0]['value'];
-      $content = $this->changeUrlForTag($content, "img");
-      $content = $this->changeUrlForTag($content, "a");
-      $nodeObj->body['es'][0]['value'] = $content;
-
+      if ($content != "") {
+        $content = $this->changeUrlForTag($content, "img");
+        $content = $this->changeUrlForTag($content, "a");
+        $nodeObj->body['es'][0]['value'] = $content;
+      }
       $content = $nodeObj->body['fr'][0]['value'];
-      $content = $this->changeUrlForTag($content, "img");
-      $content = $this->changeUrlForTag($content, "a");
-      $nodeObj->body['fr'][0]['value'] = $content;
+      if ($content != "") {
+        $content = $this->changeUrlForTag($content, "img");
+        $content = $this->changeUrlForTag($content, "a");
+        $nodeObj->body['fr'][0]['value'] = $content;
+      }
       node_save($nodeObj);
     }
   }
