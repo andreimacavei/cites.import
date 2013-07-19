@@ -47,13 +47,14 @@ function cites_importforum_install() {
       'handler_settings' => array('target_bundles' => array('country'))
     )
   );
+  $instance['display']['default']['weight'] = 4;
   field_create_instance($instance);
 
   $field = array(
     'field_name' => 'organization',
     'type' => 'text',
     'cardinality' => 1,
-    'translatable' => FALSE,
+    'translatable' => FALSE
   );
   field_create_field($field);
   $instance = array(
@@ -66,24 +67,29 @@ function cites_importforum_install() {
       'weight' => 0,
     )
   );
+  $instance['display']['default']['weight'] = 3;
   field_create_instance($instance);
-  
+
   $field['field_name'] = 'telephone';
   field_create_field($field);
   $instance['field_name'] = 'telephone';
   $instance['label'] = 'Telephone';
+  $instance['display']['default']['weight'] = 2;
   field_create_instance($instance);
-  
+
   $field['field_name'] = 'lastname';
   field_create_field($field);
   $instance['field_name'] = 'lastname';
   $instance['label'] = 'Lastname';
+  $instance['display']['default']['weight'] = 1;
   field_create_instance($instance);
-  
+
   $field['field_name'] = 'firstname';
   field_create_field($field);
   $instance['field_name'] = 'firstname';
   $instance['label'] = 'Firstname';
+  $instance['display']['default']['weight'] = 0;
   field_create_instance($instance);
-  }
+}
+
 ?>

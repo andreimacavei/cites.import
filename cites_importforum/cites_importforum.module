@@ -54,8 +54,7 @@ class ForumManagement {
     }
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
-    //$this->destinationFolder = variable_get("file_private_path") . "/";
-    $this->destinationFolder = "private://";
+    $this->destinationFolder = "private://forumPrivateAttachments";
     file_prepare_directory($this->destinationFolder, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
     echo "Forum attachments will be put in " . $this->destinationFolder . PHP_EOL;
 
@@ -100,6 +99,9 @@ class ForumManagement {
       $profile->telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
       $country = $this->dataBaseObj->getCountryByUser($user->user);
       if ($country != "") {
+        if ($country == "United States of America") {
+          $country = "United States";
+        }
         $countryObj = Country::get_by_name($country);
         if ($countryObj) {
           $profile->country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
