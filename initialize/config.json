@@ -1355,6 +1355,116 @@
             ]
         },
         {
+            "menu_name": "official-documents",
+            "title": "Official documents",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Documents officiels",
+                "es": "Official documents"
+            },
+            "links": [
+                {
+                    "link_path": "disc/text.php",
+                    "link_title": "Convention text",
+                    "translations": {
+                        "fr": "Texte de la Convention",
+                        "es": "Texto de la Convención"
+                    }
+                },
+                {
+                    "link_path": "app/index.php",
+                    "link_title": "Appendices",
+                    "translations": {
+                        "fr": "Annexes",
+                        "es": "Apéndices"
+                    }
+                },
+                {
+                    "link_path": "app/reserve.php",
+                    "link_title": "Reservations",
+                    "translations": {
+                        "fr": "Réserves",
+                        "es": "Reservas"
+                    }
+                },
+                {
+                    "link_path": "res/index.php",
+                    "link_title": "Resolutions",
+                    "translations": {
+                        "fr": "Résolutions",
+                        "es": "Resoluciones"
+                    }
+                },
+                {
+                    "link_path": "dec/index.php",
+                    "link_title": "Decisions",
+                    "translations": {
+                        "fr": "Décisions",
+                        "es": "Decisiones"
+                    }
+                },
+                {
+                    "link_path": "notif/index.php",
+                    "link_title": "Notifications",
+                    "translations": {
+                        "fr": "Notifications aux Parties",
+                        "es": "Notificaciones a las Partes"
+                    }
+                },
+                {
+                    "link_path": "cop/index.php",
+                    "link_title": "Conference of the Parties",
+                    "translations": {
+                        "fr": "Conférence des Parties",
+                        "es": "Conferencia de las Partes"
+                    }
+                },
+                {
+                    "link_path": "com/sc/index.php",
+                    "link_title": "Standing Committee",
+                    "translations": {
+                        "fr": "Comité permanent",
+                        "es": "Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "com/ac/index.php",
+                    "link_title": "Animals Committee",
+                    "translations": {
+                        "fr": "Comité pour les animaux",
+                        "es": "Comité de Fauna"
+                    }
+                },
+                {
+                    "link_path": "com/pc/index.php",
+                    "link_title": "Plants Committee",
+                    "translations": {
+                        "fr": "Comité pour les plantes",
+                        "es": "Comité de Flora"
+                    }
+                },
+                {
+                    "link_path": "resources/ref/suspend.php",
+                    "link_title": "Trade suspension",
+                    "translations": {
+                        "fr": "Suspension de commerce",
+                        "es": "Suspensiones del comercio"
+                    }
+                },
+                {
+                    "link_path": "res/14/14-02.php",
+                    "link_title": "Strategic vision",
+                    "options": {
+                        "fragment": "vision"
+                    },
+                    "translations": {
+                        "fr": "Vision de la stratégie",
+                        "es": "Visión Estratégica"
+                    }
+                }
+            ]
+        },
+        {
             "menu_name": "resources",
             "title": "Resources",
             "i18n_mode": "I18N_MODE_MULTIPLE",
