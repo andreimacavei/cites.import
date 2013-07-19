@@ -146,12 +146,12 @@ class ForumManagement {
           $newUsername = $username . (string) mt_rand(10, mt_rand(30, 999));
         }
         $username = $newUsername;
-        $userObj = false;
+        $userObj = FALSE;
       }
       else
         return $userDuplicate;
     }
-    if ($userObj === false) {
+    if ($userObj === FALSE) {
       $userObj = (object) array(
             'name' => $username,
             'mail' => $email,
