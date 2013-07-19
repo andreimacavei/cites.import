@@ -30,7 +30,10 @@ function cites_importforum_install() {
   $field = array(
     'field_name' => 'country',
     'type' => 'entityreference',
-    'cardinality' => 1
+    'cardinality' => 1,
+    'settings' => array(
+      'allowed_values' => drupal_map_assoc(range(0, 100))
+    )
   );
   field_create_field($field);
   $instance = array(
@@ -45,7 +48,8 @@ function cites_importforum_install() {
     'settings' => array(
       'target_type' => 'node',
       'handler_settings' => array('target_bundles' => array('country'))
-    )
+    ),
+    'default_value' => array(array('value' => 1))
   );
   $instance['display']['default']['weight'] = 4;
   field_create_instance($instance);
