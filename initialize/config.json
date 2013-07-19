@@ -1315,6 +1315,10 @@
             "menu_name": "mike",
             "title": "MIKE",
             "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "MIKE",
+                "es": "MIKE"
+            },
             "links": [
                 {
                     "link_path": "prog/MIKE/index.php",
@@ -1347,6 +1351,316 @@
                 {
                     "link_path": "https://sites.google.com/a/citesmike.org/mike-docs/system/app/pages/sitemap/hierarchy",
                     "link_title": "Sitemap"
+                }
+            ]
+        },
+        {
+            "menu_name": "official-documents",
+            "title": "Official documents",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Documents officiels",
+                "es": "Official documents"
+            },
+            "links": [
+                {
+                    "link_path": "disc/text.php",
+                    "link_title": "Convention text",
+                    "translations": {
+                        "fr": "Texte de la Convention",
+                        "es": "Texto de la Convención"
+                    }
+                },
+                {
+                    "link_path": "app/index.php",
+                    "link_title": "Appendices",
+                    "translations": {
+                        "fr": "Annexes",
+                        "es": "Apéndices"
+                    }
+                },
+                {
+                    "link_path": "app/reserve.php",
+                    "link_title": "Reservations",
+                    "translations": {
+                        "fr": "Réserves",
+                        "es": "Reservas"
+                    }
+                },
+                {
+                    "link_path": "res/index.php",
+                    "link_title": "Resolutions",
+                    "translations": {
+                        "fr": "Résolutions",
+                        "es": "Resoluciones"
+                    }
+                },
+                {
+                    "link_path": "dec/index.php",
+                    "link_title": "Decisions",
+                    "translations": {
+                        "fr": "Décisions",
+                        "es": "Decisiones"
+                    }
+                },
+                {
+                    "link_path": "notif/index.php",
+                    "link_title": "Notifications",
+                    "translations": {
+                        "fr": "Notifications aux Parties",
+                        "es": "Notificaciones a las Partes"
+                    }
+                },
+                {
+                    "link_path": "cop/index.php",
+                    "link_title": "Conference of the Parties",
+                    "translations": {
+                        "fr": "Conférence des Parties",
+                        "es": "Conferencia de las Partes"
+                    }
+                },
+                {
+                    "link_path": "com/sc/index.php",
+                    "link_title": "Standing Committee",
+                    "translations": {
+                        "fr": "Comité permanent",
+                        "es": "Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "com/ac/index.php",
+                    "link_title": "Animals Committee",
+                    "translations": {
+                        "fr": "Comité pour les animaux",
+                        "es": "Comité de Fauna"
+                    }
+                },
+                {
+                    "link_path": "com/pc/index.php",
+                    "link_title": "Plants Committee",
+                    "translations": {
+                        "fr": "Comité pour les plantes",
+                        "es": "Comité de Flora"
+                    }
+                },
+                {
+                    "link_path": "resources/ref/suspend.php",
+                    "link_title": "Trade suspension",
+                    "translations": {
+                        "fr": "Suspension de commerce",
+                        "es": "Suspensiones del comercio"
+                    }
+                },
+                {
+                    "link_path": "res/14/14-02.php",
+                    "link_title": "Strategic vision",
+                    "options": {
+                        "fragment": "vision"
+                    },
+                    "translations": {
+                        "fr": "Vision de la stratégie",
+                        "es": "Visión Estratégica"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "resources",
+            "title": "Resources",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Resources",
+                "es": "Resources"
+            },
+            "links": [
+                {
+                    "link_path": "resources/registers.php",
+                    "link_title": "CITES Registers",
+                    "translations": {
+                        "fr": "Registres CITES",
+                        "es": "Registros CITES"
+                    }
+                },
+                {
+                    "link_path": "forum",
+                    "link_title": "Discussion forum"
+                },
+                {
+                    "link_path": "resources/quotas/index.php",
+                    "link_title": "Export quotas",
+                    "translations": {
+                        "fr": "Quotas d'exportation",
+                        "es": "Cupos de exportación"
+                    }
+                },
+                {
+                    "link_path": "resources/faq.php",
+                    "link_title": "FAQs"
+                },
+                {
+                    "link_path": "resources/transport/index.php",
+                    "link_title": "Guidelines for transport",
+                    "translations": {
+                        "fr": "Lignes directrices pour le transport",
+                        "es": "Directivas para el transporte"
+                    }
+                },
+                {
+                    "link_path": "resources/reports.php",
+                    "link_title": "National reports",
+                    "translations": {
+                        "fr": "Rapports nationaux",
+                        "es": "Informes nacionales"
+                    }
+                },
+                {
+                    "link_path": "resources/publications.php",
+                    "link_title": "Publications",
+                    "translations": {
+                        "fr": "Publications",
+                        "es": "Publicaciones"
+                    }
+                },
+                {
+                    "link_path": "resources/reference.php",
+                    "link_title": "Reference lists",
+                    "translations": {
+                        "fr": "Listes de référence",
+                        "es": "Listas de referencia"
+                    }
+                },
+                {
+                    "link_path": "resources/species.html",
+                    "link_title": "Species database",
+                    "translations": {
+                        "fr": "Base de données sur les espèces",
+                        "es": "Base de datos de especies"
+                    }
+                },
+                {
+                    "link_path": "resources/terms/index.php",
+                    "link_title": "Terminology",
+                    "translations": {
+                        "fr": "Terminologie",
+                        "es": "Terminología"
+                    }
+                },
+                {
+                    "link_path": "http://www.unep-wcmc.org/citestrade/trade.cfm",
+                    "link_title": "Trade database",
+                    "translations": {
+                        "fr": "Base de données sur le commerce",
+                        "es": "Base de datos sobre el comercio"
+                    }
+                },
+                {
+                    "link_path": "http://www.unep-wcmc.org/isdb/extra/index.cfm",
+                    "link_title": "Trade information query tool",
+                    "translations": {
+                        "fr": "Outil de demande d'informations sur le commerce",
+                        "es": "Instrumento de consulta de información sobre el comercio"
+                    }
+                },
+                {
+                    "link_path": "resources/links.php",
+                    "link_title": "Useful links",
+                    "translations": {
+                        "fr": "Liens utiles",
+                        "es": "Enlaces útiles"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "secretary-generals-statements",
+            "title": "Secretary-General's statements",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Déclarations du Secrétaire général",
+                "es": "Declaraciones del Secretario General"
+            },
+            "links": [
+                {
+                    "link_path": "news/sg/2013/20130514_wco_it.php",
+                    "link_title": "Keynote Address at 2013 WCO IT Conference & Exhibition: Effective Solutions for Coordinated Border Management"
+                },
+                {
+                    "link_path": "news/sg/index.php",
+                    "link_title": "Archives",
+                    "translations": {
+                        "fr": "Archives",
+                        "es": "Archivos"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "press-releases",
+            "title": "Press releases",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Communiqués de presse",
+                "es": "Comunicados de prensa"
+            },
+            "links": [
+                {
+                    "link_path": "news/pr/2013/20130702_us_eo.php",
+                    "link_title": "CITES Secretariat welcomes President Obama's Executive Order on Combating Wildlife Trafficking",
+                    "translations": {
+                        "fr": "Le Secrétariat de la CITES accueille favorablement le décret du Président Obama sur la lutte contre le trafic d’espèces sauvages",
+                        "es": "La Secretaría de la CITES acoge con satisfacción la Orden Ejecutiva sobre la Lucha contra el Tráfico de Especies Silvestres del Presidente Obama"
+                    }
+                },
+                {
+                    "link_path": "news/pr/2013/20130614_cop16_decisions.php",
+                    "link_title": "New rules for international trade in timber, marine and other wild animals and plants come into force"
+                },
+                {
+                    "link_path": "news/pr/index.php",
+                    "link_title": "Archives",
+                    "translations": {
+                        "fr": "Archives",
+                        "es": "Archivos"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "other-news-items",
+            "title": "Other news items",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Informations diverses",
+                "es": "Otras noticias"
+            },
+            "links": [
+                {
+                    "link_path": "news/sundry/2013/20130717_epermitting_wco.php",
+                    "link_title": "The CITES E-Permitting Toolkit highlighted during the 2013 WCO Knowledge Academy for Customs & Trade"
+                },
+                {
+                    "link_path": "news/sundry/2013/20130716__carribeancountries_legislation.php",
+                    "link_title": "Five Caribbean countries renew commitment to enacting effective CITES legislation",
+                    "translations": {
+                        "fr": "Cinq pays des Caraïbes renouvellent leur engagement à mettre en œuvre une législation CITES appropriée",
+                        "es": "Cinco países del Caribe renuevan el compromiso a promulgar promulgar legislación eficaz sobre la CITES"
+                    }
+                },
+                {
+                    "link_path": "news/calendar.php",
+                    "link_title": "CITES calendar",
+                    "translations": {
+                        "fr": "Calendrier CITES",
+                        "es": "Calendario"
+                    }
+                },
+                {
+                    "link_path": "news/sundry/index.php",
+                    "link_title": "Archives",
+                    "translations": {
+                        "fr": "Archives",
+                        "es": "Archivos"
+                    }
                 }
             ]
         }
