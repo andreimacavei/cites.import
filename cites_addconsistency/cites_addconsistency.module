@@ -164,17 +164,12 @@ class AddConsistency {
           break;
       }
       $url = $src->getAttribute($attribute);
+      $newUrl = $url;
       if ($this->isInFileExtensions($url, AddConsistency::$correctExtensions) && strpos($url, "sites/default/files")) {
         $relUrl = substr($url, 1);
         if (!file_exists($relUrl)) {
           $newUrl = "/" . $this->changeUrl($relUrl);
         }
-        else {
-          $newUrl = $url;
-        }
-      }
-      else {
-        $newUrl = $url;
       }
 
       if ($this->isInFileExtensions($url, AddConsistency::$possibleCorrectExtensions) && substr($url, 0, 4) != "http" && !strpos($url, "#")) {
@@ -182,12 +177,6 @@ class AddConsistency {
         if (!drupal_lookup_path("source", $relUrl)) {
           $newUrl = "/" . $this->changeUrlForHTMLFiles($relUrl);
         }
-        else {
-          $newUrl = $url;
-        }
-      }
-      else {
-        $newUrl = $url;
       }
       $src->removeAttribute($attribute);
       $src->setAttribute($attribute, $newUrl);
