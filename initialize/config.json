@@ -1274,7 +1274,7 @@
                     "link_title": "Electronic commerce",
                     "translations": {
                         "fr": "E-commerce d’espèces CITES",
-                        "es": "Comercio electrÃ³nico"
+                        "es": "Comercio electrónico"
                     }
                 },
                 {
@@ -1306,8 +1306,47 @@
                     "link_title": "Wildlife trade policy reviews",
                     "translations": {
                         "fr": "Examen des politiques commerciales",
-                        "es": "ExÃ¡menes de polÃ­ticas sobre el comercio de especies silvestres"
+                        "es": "Exámenes de políticas sobre el comercio de especies silvestres"
                     }
+                }
+            ]
+        },
+        {
+            "menu_name": "mike",
+            "title": "MIKE",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "links": [
+                {
+                    "link_path": "prog/MIKE/index.php",
+                    "link_title": "EN MIKE Home"
+                },
+                {
+                    "link_path": "prog/MIKE/mike_etis_subgroup.php",
+                    "link_title": "EN MIKE ETIS Subgroup"
+                },
+                {
+                    "link_path": "prog/MIKE/mike_etis_tag.php",
+                    "link_title": "EN MIKE-ETIS Technical Advisory Group (TAG)"
+                },
+                {
+                    "link_path": "prog/MIKE/mike_etis_gtc.php",
+                    "link_title": "FR Groupe technique consultatif (GTC) de MIKE et ETIS"
+                },
+                {
+                    "link_path": "https://sites.google.com/a/citesmike.org/mike-docs/documents-mike-fr",
+                    "link_title": "FR MIKE Home"
+                },
+                {
+                    "link_path": "prog/MIKE/mike_etis_sous_groupe.php",
+                    "link_title": "FR Sous Groupe sur MIKE et ETIS"
+                },
+                {
+                    "link_path": "prog/MIKE/mike_docs.php",
+                    "link_title": "MIKE Docs"
+                },
+                {
+                    "link_path": "https://sites.google.com/a/citesmike.org/mike-docs/system/app/pages/sitemap/hierarchy",
+                    "link_title": "Sitemap"
                 }
             ]
         }
