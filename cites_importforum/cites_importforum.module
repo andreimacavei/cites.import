@@ -98,18 +98,29 @@ class ForumManagement {
       $profile->organization[LANGUAGE_NONE][0]['value'] = $user->organization;
       $profile->telephone[LANGUAGE_NONE][0]['value'] = $user->telephone;
       $country = $this->dataBaseObj->getCountryByUser($user->user);
-      if ($country != "") {
-        if ($country == "United States of America") {
+      switch ($country) {
+        case "United States of America":
           $country = "United States";
-        }
-        $countryObj = Country::get_by_name($country);
-        if ($countryObj) {
-          $profile->country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
-        }
-        else {
-          $profile->country[LANGUAGE_NONE][0]['target_id'] = Country::get_by_name($this->defaultCountry)->nid;
-          echo "UNKNOWN Country for user" . $user->firstname . " " . $user->lastname . " " . $user->email . " " . $country . PHP_EOL;
-        }
+          break;
+        case "Russian Federation":
+          $country = "Russia";
+          break;
+        case "Slovak Republic":
+          $country = "Slovakia";
+          break;
+        case "":
+          $country = $this->defaultCountry;
+          break;
+        default:
+          break;
+      }
+      $countryObj = Country::get_by_name($country);
+      if ($countryObj) {
+        $profile->country[LANGUAGE_NONE][0]['target_id'] = $countryObj->nid;
+      }
+      else {
+        $profile->country[LANGUAGE_NONE][0]['target_id'] = Country::get_by_name($this->defaultCountry)->nid;
+        echo "Unknown Country for user " . $user->firstname . " " . $user->lastname . " " . $user->email . " $country" . PHP_EOL;
       }
       // save profile
       if (count($this->strangeUsers[$user->email]) > 1) {
@@ -558,5 +569,4 @@ class ForumManagement {
   }
 
 }
-
 ?>
