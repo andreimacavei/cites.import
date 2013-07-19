@@ -1315,6 +1315,10 @@
             "menu_name": "mike",
             "title": "MIKE",
             "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "MIKE",
+                "es": "MIKE"
+            },
             "links": [
                 {
                     "link_path": "prog/MIKE/index.php",
