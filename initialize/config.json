@@ -1456,6 +1456,99 @@
                     }
                 }
             ]
+        },
+        {
+            "menu_name": "secretary-generals-statements",
+            "title": "Secretary-General's statements",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Déclarations du Secrétaire général",
+                "es": "Declaraciones del Secretario General"
+            },
+            "links": [
+                {
+                    "link_path": "news/sg/2013/20130514_wco_it.php",
+                    "link_title": "Keynote Address at 2013 WCO IT Conference & Exhibition: Effective Solutions for Coordinated Border Management"
+                },
+                {
+                    "link_path": "news/sg/index.php",
+                    "link_title": "Archives",
+                    "translations": {
+                        "fr": "Archives",
+                        "es": "Archivos"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "press-releases",
+            "title": "Press releases",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Communiqués de presse",
+                "es": "Comunicados de prensa"
+            },
+            "links": [
+                {
+                    "link_path": "news/pr/2013/20130702_us_eo.php",
+                    "link_title": "CITES Secretariat welcomes President Obama's Executive Order on Combating Wildlife Trafficking",
+                    "translations": {
+                        "fr": "Le Secrétariat de la CITES accueille favorablement le décret du Président Obama sur la lutte contre le trafic d’espèces sauvages",
+                        "es": "La Secretaría de la CITES acoge con satisfacción la Orden Ejecutiva sobre la Lucha contra el Tráfico de Especies Silvestres del Presidente Obama"
+                    }
+                },
+                {
+                    "link_path": "news/pr/2013/20130614_cop16_decisions.php",
+                    "link_title": "New rules for international trade in timber, marine and other wild animals and plants come into force"
+                },
+                {
+                    "link_path": "news/pr/index.php",
+                    "link_title": "Archives",
+                    "translations": {
+                        "fr": "Archives",
+                        "es": "Archivos"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "other-news-items",
+            "title": "Other news items",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Informations diverses",
+                "es": "Otras noticias"
+            },
+            "links": [
+                {
+                    "link_path": "news/sundry/2013/20130717_epermitting_wco.php",
+                    "link_title": "The CITES E-Permitting Toolkit highlighted during the 2013 WCO Knowledge Academy for Customs & Trade"
+                },
+                {
+                    "link_path": "news/sundry/2013/20130716__carribeancountries_legislation.php",
+                    "link_title": "Five Caribbean countries renew commitment to enacting effective CITES legislation",
+                    "translations": {
+                        "fr": "Cinq pays des Caraïbes renouvellent leur engagement à mettre en œuvre une législation CITES appropriée",
+                        "es": "Cinco países del Caribe renuevan el compromiso a promulgar promulgar legislación eficaz sobre la CITES"
+                    }
+                },
+                {
+                    "link_path": "news/calendar.php",
+                    "link_title": "CITES calendar",
+                    "translations": {
+                        "fr": "Calendrier CITES",
+                        "es": "Calendario"
+                    }
+                },
+                {
+                    "link_path": "news/sundry/index.php",
+                    "link_title": "Archives",
+                    "translations": {
+                        "fr": "Archives",
+                        "es": "Archivos"
+                    }
+                }
+            ]
         }
     ]
 }
