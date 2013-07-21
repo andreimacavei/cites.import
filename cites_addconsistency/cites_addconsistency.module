@@ -22,10 +22,6 @@ class AddConsistency {
     'es' => array("¿", " y ", " el ", "ñ")
   );
 
-  public function __construct() {
-    ;
-  }
-
   private function addCustomFieldsForNode(&$sourceNode, $extraNode, $language) {
     $sourceNode->title_field[$language][0]['value'] = $extraNode->title;
     $sourceNode->title_field[$language][0]['format'] = 'full_html';
