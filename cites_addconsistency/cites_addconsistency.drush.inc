@@ -1,4 +1,7 @@
 <?php
+/**
+ * File for drush commands from Add Consistency module
+ */
 
 function cites_addconsistency_drush_command() {
   $items['change_invalid_urls'] = array(
