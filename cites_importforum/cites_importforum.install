@@ -32,7 +32,9 @@ function cites_importforum_install() {
     'type' => 'entityreference',
     'cardinality' => 1,
     'settings' => array(
-      'allowed_values' => drupal_map_assoc(range(0, 100))
+      'allowed_values' => drupal_map_assoc(range(0, 100)),
+      'target_type' => 'node',
+      'handler_settings' => array('target_bundles' => array('country'))
     )
   );
   field_create_field($field);
@@ -44,10 +46,6 @@ function cites_importforum_install() {
     'widget' => array(
       'type' => 'options_select',
       'weight' => 0
-    ),
-    'settings' => array(
-      'target_type' => 'node',
-      'handler_settings' => array('target_bundles' => array('country'))
     ),
     'default_value' => array(array('value' => 1))
   );
