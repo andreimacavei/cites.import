@@ -17,9 +17,9 @@ class DatabaseInterface {
   }
 
   public static function getInstance($host, $username, $password, $database) {
-    if (DatabaseInterface::$dbObj == null)
-      DatabaseInterface::$dbObj = new DatabaseInterface($host, $username, $password, $database);
-    return DatabaseInterface::$dbObj;
+    if (self::$dbObj == null)
+      self::$dbObj = new DatabaseInterface($host, $username, $password, $database);
+    return self::$dbObj;
   }
 
   public function getForums() {
