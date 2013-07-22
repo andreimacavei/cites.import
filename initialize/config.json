@@ -1491,7 +1491,61 @@
                 }
             ]
         },
-
+        {
+            "menu_name": "quick-links-com-sc",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "com/sc/member.php",
+                    "link_title": "Members of the Standing Committee",
+                    "translations": {
+                        "fr": "Membres du Comité permanent",
+                        "es": "Miembros del Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/rules.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/common/disc/sec/CITES-UNEP.pdf",
+                    "link_title": "MOU between the Standing Committee and UNEP"
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/E-SC-ToR-Finance-and-Budget-Subcommittee.pdf",
+                    "link_title": "Terms of Reference for the Finance and Budget Subcommittee",
+                    "translations": {
+                        "fr": "Mandat du sous-comité des finances et du budget du Comité permanent",
+                        "es": "Mandato para el Subcomité de Finanzas y Presupuesto del Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "com/sc/clearing.shtml",
+                    "link_title": "Clearing house",
+                    "translations": {
+                        "fr": "Centre de coordination du Comité permanent",
+                        "es": "Centro de intercambio de información del Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/Template_Regional_Report.pdf",
+                    "link_title": "Template for regional report",
+                    "translations": {
+                        "fr": "Modèle pour les rapports régionaux",
+                        "es": "Modelo para los informes regionales"
+                    }
+                }
+            ]
+        },
         {
             "menu_name": "resources",
             "title": "Resources",
