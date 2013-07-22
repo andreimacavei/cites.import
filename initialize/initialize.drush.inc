@@ -366,6 +366,12 @@ function drush_initialize_menus($config) {
       continue;
     }
 
+    if (isset($menu['translations'])) {
+      $translations = $menu['translations'];
+
+      unset($menu['translations']);
+    }
+
     if (isset($menu['links'])) {
       $links = $menu['links'];
 
@@ -374,6 +380,15 @@ function drush_initialize_menus($config) {
 
     // Saves a custom menu.
     menu_save($menu);
+
+    if (isset($translations)) {
+      foreach ($translations as $langcode => $translation) {
+        // Updates / creates translation for a certain source.
+        i18n_string_translation_update('menu:menu:' . $menu['menu_name'] . ':title', $translation, $langcode);
+      }
+
+      unset($translations);
+    }
 
     drush_log(dt('!menu-name: Menu successfully saved', array('!menu-name' => $menu['menu_name'])), 'ok');
 
