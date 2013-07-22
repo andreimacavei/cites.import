@@ -1884,6 +1884,27 @@
         },
         {
             "module": "menu",
+            "delta": "species-programmes",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "prog/*"
+        },
+        {
+            "module": "menu",
+            "delta": "other-issues",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "prog/*"
+        },
+        {
+            "module": "menu",
+            "delta": "mike",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "prog/mike/*"
+        },
+        {
+            "module": "menu",
             "delta": "secretary-generals-statements",
             "region": "sidebar_first",
             "visibility": 1,
