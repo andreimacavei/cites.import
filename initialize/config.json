@@ -1590,6 +1590,57 @@
             ]
         },
         {
+            "menu_name": "quick-links-com-pc",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "com/pc/member.php",
+                    "link_title": "Members of the Plants Committee",
+                    "translations": {
+                        "fr": "Membres du Comité pour les plantes",
+                        "es": "Miembros del Comité de Flora"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/pc/E-PC19-Rules.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "disc/ac_pc.php",
+                    "link_title": "Regional directories",
+                    "translations": {
+                        "fr": "Répertoires régionaux",
+                        "es": "Guías regionales"
+                    }
+                },
+                {
+                    "link_path": "res/12/12-11R16.php",
+                    "link_title": "CITES standard nomenclatural references",
+                    "translations": {
+                        "fr": "Références sur la nomenclature CITES normalisée",
+                        "es": "Referencias normalizadas de nomenclatura CITES"
+                    }
+                },
+                {
+                    "link_path": "com/nc/NC_archive.shtml",
+                    "link_title": "Documents of the former Nomenclature Committee",
+                    "translations": {
+                        "fr": "Documents de l'ancien Comité de la nomenclature",
+                        "es": "Documentos del antiguo Comité de Nomenclatura"
+                    }
+                }
+            ]
+        },
+        {
             "menu_name": "resources",
             "title": "Resources",
             "i18n_mode": "I18N_MODE_MULTIPLE",
