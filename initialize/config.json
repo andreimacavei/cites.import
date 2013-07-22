@@ -1846,6 +1846,27 @@
             "module": "menu",
             "delta": "footer-menu",
             "region": "footer"
+        },
+        {
+            "module": "menu",
+            "delta": "about-cites",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "<front>"
+        },
+        {
+            "module": "menu",
+            "delta": "explore-more",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "<front>"
+        },
+        {
+            "module": "menu",
+            "delta": "special-topics",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "<front>"
         }
     ]
 }
