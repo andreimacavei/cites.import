@@ -1153,7 +1153,7 @@
                     }
                 },
                 {
-                    "link_path": "http://dev.cites.org/res/16/E-Res-16-03.pdf",
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/res/16/E-Res-16-03.pdf",
                     "link_title": "CITES Strategic Vision: 2008-2020",
                     "translations": {
                         "fr": "Vision de la stratégie avec les indicateurs",
@@ -1464,6 +1464,34 @@
                 }
             ]
         },
+        {
+            "menu_name": "quick-links-cop",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/cop/E14-Rules.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/cop/E-Selection_of_nominees.pdf",
+                    "link_title": "Selection of nominees for chairmanship of committees of the CoP",
+                    "translations": {
+                        "fr": "Sélection des candidats à la présidence des comités de la CoP",
+                        "es": "Selección de candidatos para las presidencias de los comités de la CoP"
+                    }
+                }
+            ]
+        },
+
         {
             "menu_name": "resources",
             "title": "Resources",
