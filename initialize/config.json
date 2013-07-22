@@ -1840,5 +1840,12 @@
                 }
             ]
         }
+    ],
+    "blocks": [
+        {
+            "module": "menu",
+            "delta": "footer-menu",
+            "region": "footer"
+        }
     ]
 }
