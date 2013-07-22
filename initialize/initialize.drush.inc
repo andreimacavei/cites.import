@@ -67,7 +67,8 @@ function drush_initialize_types() {
   $types = array(
     'all'       => 'drush_initialize_all',
     'languages' => 'drush_initialize_languages',
-    'menus'     => 'drush_initialize_menus'
+    'menus'     => 'drush_initialize_menus',
+    'blocks'    => 'drush_initialize_blocks'
   );
 
   // Command files may customize types as desired.
@@ -405,6 +406,20 @@ function drush_initialize_menus($config) {
   }
 }
 
+
+/**
+ * Initializes blocks.
+ *
+ * @param $config
+ *   An associative array with the configuration data.
+ *
+ * @return
+ *   Nothing.
+ */
+function drush_initialize_blocks($config) {
+  foreach ($config['blocks'] as $block) {
+  }
+}
 
 /**
  * Command callback for drush initialize.
