@@ -1905,6 +1905,13 @@
         },
         {
             "module": "menu",
+            "delta": "resources",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "resources/*"
+        },
+        {
+            "module": "menu",
             "delta": "secretary-generals-statements",
             "region": "sidebar_first",
             "visibility": 1,
