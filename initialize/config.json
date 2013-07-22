@@ -1547,6 +1547,49 @@
             ]
         },
         {
+            "menu_name": "quick-links-com-ac",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "com/ac/member.php",
+                    "link_title": "Members of the Animals Committee",
+                    "translations": {
+                        "fr": "Membres du Comité pour les animaux",
+                        "es": "Miembros del Comité de Fauna"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/ac/E-AC23-RoP.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/res/12/E-Res-12-11R16.pdf",
+                    "link_title": "CITES standard nomenclatural references",
+                    "translations": {
+                        "fr": "Références sur la nomenclature CITES normalisée",
+                        "es": "Referencias normalizadas de nomenclatura CITES"
+                    }
+                },
+                {
+                    "link_path": "com/nc/NC_archive.shtml",
+                    "link_title": "Documents of the former Nomenclature Committee",
+                    "translations": {
+                        "fr": "Documents de l'ancien Comité de la nomenclature",
+                        "es": "Documentos del antiguo Comité de Nomenclatura"
+                    }
+                }
+            ]
+        },
+        {
             "menu_name": "resources",
             "title": "Resources",
             "i18n_mode": "I18N_MODE_MULTIPLE",
