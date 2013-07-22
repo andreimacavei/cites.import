@@ -1870,6 +1870,20 @@
         },
         {
             "module": "menu",
+            "delta": "discover-cites",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "disc/*"
+        },
+        {
+            "module": "menu",
+            "delta": "other-information",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "disc/*"
+        },
+        {
+            "module": "menu",
             "delta": "secretary-generals-statements",
             "region": "sidebar_first",
             "visibility": 1,
