@@ -1867,6 +1867,27 @@
             "region": "sidebar_first",
             "visibility": 1,
             "pages": "<front>"
+        },
+        {
+            "module": "menu",
+            "delta": "secretary-generals-statements",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "news/*"
+        },
+        {
+            "module": "menu",
+            "delta": "press-releases",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "news/*"
+        },
+        {
+            "module": "menu",
+            "delta": "other-news-items",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "news/*"
         }
     ]
 }
