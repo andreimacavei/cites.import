@@ -47,7 +47,7 @@ function cites_importforum_install() {
       'type' => 'options_select',
       'weight' => 0
     ),
-    'default_value' => array(array('value' => 1))
+    'default_value' => array(0 => array('value' => 1))
   );
   $instance['display']['default']['weight'] = 4;
   field_create_instance($instance);

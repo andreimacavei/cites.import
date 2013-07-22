@@ -11,7 +11,7 @@ class DatabaseInterface {
     if (!mysql_connect($host, $username, $password)) {
       throw new Exception('Error connecting to the database server');
     }
-    if (!mysql_select_db($database)){
+    if (!mysql_select_db($database)) {
       throw new Exception('Error connecting to the database');
     }
   }
@@ -80,7 +80,7 @@ class DatabaseInterface {
     return $result;
   }
 
-  public function getGroupSubscriptions(){
+  public function getGroupSubscriptions() {
     $query = "SELECT * 
               FROM `users`
               INNER JOIN `users_groups`
@@ -88,7 +88,7 @@ class DatabaseInterface {
               WHERE `users`.`email` != ''";
     return mysql_query($query);
   }
-  
+
   public function getForum($id) {
     $query = "SELECT * 
               FROM `groups`
