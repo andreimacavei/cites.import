@@ -901,6 +901,13 @@ function import_html_process_html_page($path, $rel_path, $profile) {
     $node->title = import_html_guess_document_title($node, $profile['handle_no_title']);
     $node->status = $profile['import_status'];
     $node->promote = $profile['import_promote'];
+    if ($profile['content_type'] == 'article') {
+      $termArray = taxonomy_get_term_by_name('News and highlights');
+      if (!empty($termArray)) {
+        $tid = reset($termArray)->tid;
+        $node->field_tags[$node->language][0]['tid'] = $tid;
+      }
+    }
     if (!$node->type) {
       import_html_debug("Node wasn't even given a type, this means something is wrong.", array(), WATCHDOG_WARNING);
       $node->type = $profile['content_type'];

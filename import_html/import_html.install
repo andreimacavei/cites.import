@@ -1,26 +1,33 @@
 <?php
+
 /**
  * @file install (and remove) settings for import_html
  *
  * @author Dan Morrison dman http://coders.co.nz
  */
 
-
 /**
  * Implements hook_install().
  */
 function import_html_install() {
   // D7, *.module files are available, we can call its funcs directly
-
   // Initialize the default profile - to avoid unset settings
   $import_html_profiles = variable_get('import_html_profiles', array());
   $import_html_profiles['default'] = import_html_profile_defaults();
   variable_set('import_html_profiles', $import_html_profiles);
-  
+
   // Calling this once will bootstrap and create the needed import filter.
   import_html_get_preferred_filter();
 
   drupal_set_message(t("Import HTML settings are found at !settings_url", array('!settings_url' => l(IMPORT_HTML_ADMIN_PATH, IMPORT_HTML_ADMIN_PATH))));
+
+  // create taxonomy term for article tags
+  $tagsVocabulary = taxonomy_vocabulary_machine_name_load('tags');
+  taxonomy_term_save((object) array(
+        'name' => 'News and highlights',
+        'vid' => $tagsVocabulary->vid,
+        'description' => 'Taxonomy term for news and highlights'
+  ));
 }
 
 /**
@@ -33,7 +40,6 @@ function import_html_uninstall() {
   variable_del('import_html_current_subsection');
   drupal_set_message('All import_html settings have been cleared.');
 }
-
 
 /**
  * Implements hook_requirements().
