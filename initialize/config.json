@@ -1153,7 +1153,7 @@
                     }
                 },
                 {
-                    "link_path": "http://dev.cites.org/res/16/E-Res-16-03.pdf",
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/res/16/E-Res-16-03.pdf",
                     "link_title": "CITES Strategic Vision: 2008-2020",
                     "translations": {
                         "fr": "Vision de la stratégie avec les indicateurs",
@@ -1465,6 +1465,182 @@
             ]
         },
         {
+            "menu_name": "quick-links-cop",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/cop/E14-Rules.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/cop/E-Selection_of_nominees.pdf",
+                    "link_title": "Selection of nominees for chairmanship of committees of the CoP",
+                    "translations": {
+                        "fr": "Sélection des candidats à la présidence des comités de la CoP",
+                        "es": "Selección de candidatos para las presidencias de los comités de la CoP"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "quick-links-com-sc",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "com/sc/member.php",
+                    "link_title": "Members of the Standing Committee",
+                    "translations": {
+                        "fr": "Membres du Comité permanent",
+                        "es": "Miembros del Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/rules.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/common/disc/sec/CITES-UNEP.pdf",
+                    "link_title": "MOU between the Standing Committee and UNEP"
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/E-SC-ToR-Finance-and-Budget-Subcommittee.pdf",
+                    "link_title": "Terms of Reference for the Finance and Budget Subcommittee",
+                    "translations": {
+                        "fr": "Mandat du sous-comité des finances et du budget du Comité permanent",
+                        "es": "Mandato para el Subcomité de Finanzas y Presupuesto del Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "com/sc/clearing.shtml",
+                    "link_title": "Clearing house",
+                    "translations": {
+                        "fr": "Centre de coordination du Comité permanent",
+                        "es": "Centro de intercambio de información del Comité Permanente"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/sc/Template_Regional_Report.pdf",
+                    "link_title": "Template for regional report",
+                    "translations": {
+                        "fr": "Modèle pour les rapports régionaux",
+                        "es": "Modelo para los informes regionales"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "quick-links-com-ac",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "com/ac/member.php",
+                    "link_title": "Members of the Animals Committee",
+                    "translations": {
+                        "fr": "Membres du Comité pour les animaux",
+                        "es": "Miembros del Comité de Fauna"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/ac/E-AC23-RoP.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/res/12/E-Res-12-11R16.pdf",
+                    "link_title": "CITES standard nomenclatural references",
+                    "translations": {
+                        "fr": "Références sur la nomenclature CITES normalisée",
+                        "es": "Referencias normalizadas de nomenclatura CITES"
+                    }
+                },
+                {
+                    "link_path": "com/nc/NC_archive.shtml",
+                    "link_title": "Documents of the former Nomenclature Committee",
+                    "translations": {
+                        "fr": "Documents de l'ancien Comité de la nomenclature",
+                        "es": "Documentos del antiguo Comité de Nomenclatura"
+                    }
+                }
+            ]
+        },
+        {
+            "menu_name": "quick-links-com-pc",
+            "title": "Quick links",
+            "i18n_mode": "I18N_MODE_MULTIPLE",
+            "translations": {
+                "fr": "Liens directs",
+                "es": "Enlaces directos"
+            },
+            "links": [
+                {
+                    "link_path": "com/pc/member.php",
+                    "link_title": "Members of the Plants Committee",
+                    "translations": {
+                        "fr": "Membres du Comité pour les plantes",
+                        "es": "Miembros del Comité de Flora"
+                    }
+                },
+                {
+                    "link_path": "http://dev.cites.org/sites/default/files/imported/eng/com/pc/E-PC19-Rules.pdf",
+                    "link_title": "Rules of Procedure",
+                    "translations": {
+                        "fr": "Règlement intérieur",
+                        "es": "Reglamento"
+                    }
+                },
+                {
+                    "link_path": "disc/ac_pc.php",
+                    "link_title": "Regional directories",
+                    "translations": {
+                        "fr": "Répertoires régionaux",
+                        "es": "Guías regionales"
+                    }
+                },
+                {
+                    "link_path": "res/12/12-11R16.php",
+                    "link_title": "CITES standard nomenclatural references",
+                    "translations": {
+                        "fr": "Références sur la nomenclature CITES normalisée",
+                        "es": "Referencias normalizadas de nomenclatura CITES"
+                    }
+                },
+                {
+                    "link_path": "com/nc/NC_archive.shtml",
+                    "link_title": "Documents of the former Nomenclature Committee",
+                    "translations": {
+                        "fr": "Documents de l'ancien Comité de la nomenclature",
+                        "es": "Documentos del antiguo Comité de Nomenclatura"
+                    }
+                }
+            ]
+        },
+        {
             "menu_name": "resources",
             "title": "Resources",
             "i18n_mode": "I18N_MODE_MULTIPLE",
@@ -1663,6 +1839,132 @@
                     }
                 }
             ]
+        }
+    ],
+    "blocks": [
+        {
+            "module": "menu",
+            "delta": "footer-menu",
+            "region": "footer"
+        },
+        {
+            "module": "menu",
+            "delta": "about-cites",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "<front>"
+        },
+        {
+            "module": "menu",
+            "delta": "explore-more",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "<front>"
+        },
+        {
+            "module": "menu",
+            "delta": "special-topics",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "<front>"
+        },
+        {
+            "module": "menu",
+            "delta": "discover-cites",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "disc/*"
+        },
+        {
+            "module": "menu",
+            "delta": "other-information",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "disc/*"
+        },
+        {
+            "module": "menu",
+            "delta": "species-programmes",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "prog/*"
+        },
+        {
+            "module": "menu",
+            "delta": "other-issues",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "prog/*"
+        },
+        {
+            "module": "menu",
+            "delta": "mike",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "prog/mike/*"
+        },
+        {
+            "module": "menu",
+            "delta": "official-documents",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": ""
+        },
+        {
+            "module": "menu",
+            "delta": "quick-links-cop",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "cop/index.php"
+        },
+        {
+            "module": "menu",
+            "delta": "quick-links-com-sc",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "com/sc/index.php"
+        },
+        {
+            "module": "menu",
+            "delta": "quick-links-com-ac",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "com/ac/index.php"
+        },
+        {
+            "module": "menu",
+            "delta": "quick-links-com-pc",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "com/pc/index.php"
+        },
+        {
+            "module": "menu",
+            "delta": "resources",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "resources/*"
+        },
+        {
+            "module": "menu",
+            "delta": "secretary-generals-statements",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "news/*"
+        },
+        {
+            "module": "menu",
+            "delta": "press-releases",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "news/*"
+        },
+        {
+            "module": "menu",
+            "delta": "other-news-items",
+            "region": "sidebar_first",
+            "visibility": 1,
+            "pages": "news/*"
         }
     ]
 }

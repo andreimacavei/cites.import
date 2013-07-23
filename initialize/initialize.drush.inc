@@ -67,7 +67,8 @@ function drush_initialize_types() {
   $types = array(
     'all'       => 'drush_initialize_all',
     'languages' => 'drush_initialize_languages',
-    'menus'     => 'drush_initialize_menus'
+    'menus'     => 'drush_initialize_menus',
+    'blocks'    => 'drush_initialize_blocks'
   );
 
   // Command files may customize types as desired.
@@ -170,8 +171,7 @@ function drush_initialize_languages($config) {
 
       $options = array();
 
-      // Keeps only valid properties that are defined in the configuration
-      // file.
+      // Keeps only valid properties that are defined in the configuration file.
       foreach (array_keys($config['languages'][$index]) as $key) {
         if (in_array($key, $properties))
           $options[$key] = $language[$key];
@@ -366,6 +366,12 @@ function drush_initialize_menus($config) {
       continue;
     }
 
+    if (isset($menu['translations'])) {
+      $translations = $menu['translations'];
+
+      unset($menu['translations']);
+    }
+
     if (isset($menu['links'])) {
       $links = $menu['links'];
 
@@ -374,6 +380,15 @@ function drush_initialize_menus($config) {
 
     // Saves a custom menu.
     menu_save($menu);
+
+    if (isset($translations)) {
+      foreach ($translations as $langcode => $translation) {
+        // Updates / creates translation for a certain source.
+        i18n_string_translation_update('menu:menu:' . $menu['menu_name'] . ':title', $translation, $langcode);
+      }
+
+      unset($translations);
+    }
 
     drush_log(dt('!menu-name: Menu successfully saved', array('!menu-name' => $menu['menu_name'])), 'ok');
 
@@ -390,6 +405,66 @@ function drush_initialize_menus($config) {
   }
 }
 
+
+/**
+ * Sanitizes a block definition.
+ *
+ * @param $block
+ *   An associative array describing a block.
+ *
+ * @return
+ *   An associative array with the sanitized block.
+ */
+function drush_initialize_sanitize_block($block) {
+  global $theme_key;
+
+  if (isset($block['bid']))
+      unset($block['bid']);
+
+  if (!isset($block['theme']) || empty($block['theme']))
+    $block['theme'] = $theme_key;
+
+  if (!isset($block['status']) || $block['status'] != 0)
+    $block['status'] = 1;
+
+  if (isset($block['pages']) && is_array($block['pages']))
+    $block['pages'] = implode(PHP_EOL, $block['pages']);
+
+  return $block;
+}
+
+
+/**
+ * Initializes blocks.
+ *
+ * @param $config
+ *   An associative array with the configuration data.
+ *
+ * @return
+ *   Nothing.
+ */
+function drush_initialize_blocks($config) {
+  foreach ($config['blocks'] as $block) {
+    $block = drush_initialize_sanitize_block($block);
+
+    if (!isset($block['module']) || empty($block['module'])) {
+      drush_log(dt('!module: \'module\' cannot be null', array('!module' => $block['module'])), 'warning');
+
+      continue;
+    }
+
+    if (!isset($block['delta']) || empty($block['delta'])) {
+      drush_log(dt('!delta: \'delta\' cannot be null', array('!delta' => $block['delta'])), 'warning');
+
+      continue;
+    }
+
+    // Returns a new UpdateQuery object for the active database.
+    db_update('block')->fields($block)->condition('module', $block['module'])->condition('delta', $block['delta'])->condition('theme', $block['theme'])->execute();
+
+    drush_log(dt('!module: !delta: Block successfully saved', array('!module' => $block['module'], '!delta' => $block['delta'])), 'ok');
+  }
+}
 
 /**
  * Command callback for drush initialize.
