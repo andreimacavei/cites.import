@@ -23,11 +23,19 @@ function import_html_install() {
 
   // create taxonomy term for article tags
   $tagsVocabulary = taxonomy_vocabulary_machine_name_load('tags');
-  taxonomy_term_save((object) array(
-        'name' => 'News and highlights',
-        'vid' => $tagsVocabulary->vid,
-        'description' => 'Taxonomy term for news and highlights'
-  ));
+  if ($tagsVocabulary != FALSE) {
+    $termsArray = taxonomy_get_term_by_name('News and highlights');
+    if (!empty($termsArray)) {
+      foreach ($termsArray as $term) {
+        taxonomy_term_delete($term->tid);
+      }
+    }
+    taxonomy_term_save((object) array(
+          'name' => 'News and highlights',
+          'vid' => $tagsVocabulary->vid,
+          'description' => 'Taxonomy term for news and highlights'
+    ));
+  }
 }
 
 /**
