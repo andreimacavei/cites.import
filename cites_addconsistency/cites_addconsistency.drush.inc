@@ -31,20 +31,7 @@ function cites_addconsistency_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
 
-  $items['create_taxonomy_term_for_news'] = array(
-    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
-  );
-
   return $items;
-}
-
-function drush_cites_addconsistency_create_taxonomy_term_for_news() {
-  $tagsVocabulary = taxonomy_vocabulary_machine_name_load('tags');
-  taxonomy_term_save((object) array(
-        'name' => 'News and highlights',
-        'vid' => $tagsVocabulary->vid,
-        'description' => ''
-  ));
 }
 
 function drush_cites_addconsistency_change_invalid_urls() {
