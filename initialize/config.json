@@ -1467,6 +1467,7 @@
         {
             "menu_name": "quick-links-cop",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Conference of the Parties'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1494,6 +1495,7 @@
         {
             "menu_name": "quick-links-com-sc",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Standing Committee'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1549,6 +1551,7 @@
         {
             "menu_name": "quick-links-com-ac",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Animals Committee'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1592,6 +1595,7 @@
         {
             "menu_name": "quick-links-com-pc",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Plants Committee'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1846,125 +1850,6 @@
             "module": "menu",
             "delta": "footer-menu",
             "region": "footer"
-        },
-        {
-            "module": "menu",
-            "delta": "about-cites",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "<front>"
-        },
-        {
-            "module": "menu",
-            "delta": "explore-more",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "<front>"
-        },
-        {
-            "module": "menu",
-            "delta": "special-topics",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "<front>"
-        },
-        {
-            "module": "menu",
-            "delta": "discover-cites",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "disc/*"
-        },
-        {
-            "module": "menu",
-            "delta": "other-information",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "disc/*"
-        },
-        {
-            "module": "menu",
-            "delta": "species-programmes",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "prog/*"
-        },
-        {
-            "module": "menu",
-            "delta": "other-issues",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "prog/*"
-        },
-        {
-            "module": "menu",
-            "delta": "mike",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "prog/mike/*"
-        },
-        {
-            "module": "menu",
-            "delta": "official-documents",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": ""
-        },
-        {
-            "module": "menu",
-            "delta": "quick-links-cop",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "cop/index.php"
-        },
-        {
-            "module": "menu",
-            "delta": "quick-links-com-sc",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "com/sc/index.php"
-        },
-        {
-            "module": "menu",
-            "delta": "quick-links-com-ac",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "com/ac/index.php"
-        },
-        {
-            "module": "menu",
-            "delta": "quick-links-com-pc",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "com/pc/index.php"
-        },
-        {
-            "module": "menu",
-            "delta": "resources",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "resources/*"
-        },
-        {
-            "module": "menu",
-            "delta": "secretary-generals-statements",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "news/*"
-        },
-        {
-            "module": "menu",
-            "delta": "press-releases",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "news/*"
-        },
-        {
-            "module": "menu",
-            "delta": "other-news-items",
-            "region": "sidebar_first",
-            "visibility": 1,
-            "pages": "news/*"
         }
     ]
 }
