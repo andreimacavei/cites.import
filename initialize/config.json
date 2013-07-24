@@ -1467,6 +1467,7 @@
         {
             "menu_name": "quick-links-cop",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Conference of the Parties'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1494,6 +1495,7 @@
         {
             "menu_name": "quick-links-com-sc",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Standing Committee'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1549,6 +1551,7 @@
         {
             "menu_name": "quick-links-com-ac",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Animals Committee'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
@@ -1592,6 +1595,7 @@
         {
             "menu_name": "quick-links-com-pc",
             "title": "Quick links",
+            "description": "The <em>Quick links</em> menu contains links for 'Plants Committee'.",
             "i18n_mode": "I18N_MODE_MULTIPLE",
             "translations": {
                 "fr": "Liens directs",
