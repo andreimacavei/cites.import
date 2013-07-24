@@ -32,7 +32,6 @@ function cites_importforum_install() {
     'type' => 'entityreference',
     'cardinality' => 1,
     'settings' => array(
-      'allowed_values' => drupal_map_assoc(range(0, 100)),
       'target_type' => 'node',
       'handler_settings' => array('target_bundles' => array('country'))
     )
@@ -92,6 +91,10 @@ function cites_importforum_install() {
   $instance['label'] = 'Firstname';
   $instance['display']['default']['weight'] = 0;
   field_create_instance($instance);
+
+  $role = user_role_load_by_name('authenticated user');
+  user_role_grant_permissions($role->rid, array('edit own extendedprofile profile',
+    'view any extendedprofile profile'));
 }
 
 ?>

@@ -54,7 +54,7 @@ class ForumManagement {
     }
     $forum = taxonomy_vocabulary_machine_name_load('forums');
     $this->forumVid = $forum->vid;
-    $this->destinationFolder = "private://forumPrivateAttachments";
+    $this->destinationFolder = "private://forumPrivateAttachments/";
     file_prepare_directory($this->destinationFolder, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
     echo "Forum attachments will be put in " . $this->destinationFolder . PHP_EOL;
 
