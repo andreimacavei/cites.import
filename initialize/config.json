@@ -1845,6 +1845,25 @@
             ]
         }
     ],
+    "contextual_menus": {
+        "about-cites": "About CITES",
+        "explore-more": "Explore more",
+        "special-topics": "Special topics",
+        "discover-cites": "Discover CITES",
+        "other-information": "Other information",
+        "species-programmes": "Species programmes",
+        "other-issues": "Other issues",
+        "mike": "MIKE",
+        "official-documents": "Official documents",
+        "quick-links-cop": "Quick links (Conference of the Parties)",
+        "quick-links-com-sc": "Quick links (Standing Committee)",
+        "quick-links-com-ac": "Quick links (Animals Committee)",
+        "quick-links-com-pc": "Quick links (Plants Committee)",
+        "resources": "Resources",
+        "secretary-generals-statements": "Secretary-General's statements",
+        "press-releases": "Press releases",
+        "other-news-items": "Other news items"
+    },
     "blocks": [
         {
             "module": "menu",
