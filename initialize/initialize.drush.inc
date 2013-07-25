@@ -16,7 +16,7 @@ function initialize_drush_command() {
     ),
     'bootstrap'           => DRUSH_BOOTSTRAP_DRUPAL_FULL,
     'description'         => 'Initializes your site.',
-    'drupal dependencies' => array('i18n_menu', 'l10n_update', 'locale'),
+    'drupal dependencies' => array('context', 'ctools', 'i18n_menu', 'l10n_update', 'locale'),
     'examples'            => array(
       'drush init languages --config-file=config.json' => 'Adds languages defined in the config.json configuration file.'
     ),
@@ -65,10 +65,11 @@ function initialize_drush_help($section) {
  */
 function drush_initialize_types() {
   $types = array(
-    'all'       => 'drush_initialize_all',
-    'languages' => 'drush_initialize_languages',
-    'menus'     => 'drush_initialize_menus',
-    'blocks'    => 'drush_initialize_blocks'
+    'all'              => 'drush_initialize_all',
+    'languages'        => 'drush_initialize_languages',
+    'menus'            => 'drush_initialize_menus',
+    'contextual-menus' => 'drush_initialize_contextual_menus',
+    'blocks'           => 'drush_initialize_blocks'
   );
 
   // Command files may customize types as desired.
@@ -407,6 +408,113 @@ function drush_initialize_menus($config) {
 
 
 /**
+ * Initializes contextual menus.
+ *
+ * @param $config
+ *   An associative array with the configuration data.
+ *
+ * @return
+ *   Nothing.
+ */
+function drush_initialize_contextual_menus($config) {
+  $vocabulary = (object) array(
+    'name'         => t('Contextual menus'),
+    'description'  => NULL,
+    'machine_name' => 'contextual_menus',
+    'help'         => NULL
+  );
+
+  taxonomy_vocabulary_save($vocabulary);
+
+  $vocabulary->vid = db_query('SELECT vid FROM {taxonomy_vocabulary} WHERE machine_name = :machine_name', array(':machine_name' => $vocabulary->machine_name))->fetchField();
+
+  foreach ($config['contextual_menus'] as $name) {
+    $term = array(
+      'name'        => t($name),
+      'description' => '',
+      'parent'      => array(0),
+      'vid'         => $vocabulary->vid,
+    );
+
+    $term = (object) $term;
+
+    taxonomy_term_save($term);
+  }
+
+  $field = array(
+    'field_name'  => 'field_' . $vocabulary->machine_name,
+    'type'        => 'taxonomy_term_reference',
+    'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+    'settings'    => array(
+      'allowed_values' => array(
+        array(
+          'vocabulary' => $vocabulary->machine_name,
+          'parent'     => 0
+        )
+      )
+    )
+  );
+
+  field_create_field($field);
+
+  $bundles = array('article', 'page');
+
+  foreach ($bundles as $bundle) {
+    $instance = array(
+      'field_name'  => 'field_' . $vocabulary->machine_name,
+      'entity_type' => 'node',
+      'label'       => 'Contextual menus',
+      'bundle'      => $bundle,
+      'description' => $vocabulary->help,
+      'widget'      => array(
+        'type'   => 'options_select',
+        'weight' => -4
+      ),
+      'display'     => array(
+        'default' => array(
+          'type'   => 'hidden',
+          'weight' => 10
+        ),
+        'teaser'  => array(
+          'type'   => 'hidden',
+          'weight' => 10
+        )
+      )
+    );
+
+    field_create_instance($instance);
+  }
+
+  foreach ($config['contextual_menus'] as $menu_name => $name) {
+    $tid = db_query('SELECT tid FROM {taxonomy_term_data} WHERE vid = :vid AND name = :name', array(':vid' => $vocabulary->vid, ':name' => $name))->fetchField();
+
+    ctools_include('export');
+
+    $context = ctools_export_new_object('context');
+
+    $context->name           = t($name);
+    $context->tag            = t('Contextual menus');
+    $context->conditions     = array('node_taxonomy' => array('values' => array($tid => $tid)));
+    $context->reactions      = array(
+      'block' => array(
+        'blocks' => array(
+          'menu-' . $menu_name => array(
+            'module' => 'menu',
+            'delta'  => $menu_name,
+            'region' => 'sidebar_first',
+            'weight' => '-10'
+          )
+        )
+      )
+    );
+    $context->condition_mode = 1;
+
+    context_save($context);
+  }
+}
+
+
+/**
  * Sanitizes a block definition.
  *
  * @param $block
@@ -465,6 +573,7 @@ function drush_initialize_blocks($config) {
     drush_log(dt('!module: !delta: Block successfully saved', array('!module' => $block['module'], '!delta' => $block['delta'])), 'ok');
   }
 }
+
 
 /**
  * Command callback for drush initialize.
