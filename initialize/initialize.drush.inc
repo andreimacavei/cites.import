@@ -16,7 +16,7 @@ function initialize_drush_command() {
     ),
     'bootstrap'           => DRUSH_BOOTSTRAP_DRUPAL_FULL,
     'description'         => 'Initializes your site.',
-    'drupal dependencies' => array('i18n_menu', 'l10n_update', 'locale'),
+    'drupal dependencies' => array('context', 'ctools', 'i18n_menu', 'l10n_update', 'locale'),
     'examples'            => array(
       'drush init languages --config-file=config.json' => 'Adds languages defined in the config.json configuration file.'
     ),
