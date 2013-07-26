@@ -1,3 +1,4 @@
+# coding=utf-8
 #!/usr/bin/python
 
 import re
@@ -11,10 +12,18 @@ import json
 
 from bs4 import BeautifulSoup
 
+misspelled_months = {
+    'fevrier': u'février', 
+    u'août': u'août'
+    }
 
 def clean_date(local_date):
-     buf = re.sub(r"\r?\n? de", "", local_date)
-     return re.sub(" +", " ", buf.strip())
+    for k, v in misspelled_months.items():
+        if local_date.lower().find(k) != -1:
+            local_date = local_date.lower().replace(k, v)
+
+    buf = re.sub(r"\r?\n? de", "", local_date)
+    return re.sub(" +", " ", buf.strip())
 
 def get_parent_directory(url):
     parent_url = '/'.join(url.split('/')[:-1]) + '/'
@@ -41,12 +50,13 @@ def download(url, current_locale):
         local_date = clean_date(title.split(':')[0])
         rel_url = urlsplit(url).path
         try:
-            results[rel_url] = convert_to_mysql_date(local_date, current_locale)
+            results[rel_url] = convert_to_mysql_date(local_date.encode('utf-8'), current_locale)
         except ValueError:
             year = rel_url.split('/')[-2]
+            import pdb; pdb.set_trace()
             if not year in local_date: 
                 local_date = local_date + ' {}'.format(year)
-            results[rel_url] = convert_to_mysql_date(local_date, current_locale)
+            results[rel_url] = convert_to_mysql_date(local_date.encode('utf-8'), current_locale)
 
     return results
 
@@ -60,11 +70,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', default='http://www.cites.org/eng/news/pr/index.php', help="absolute path")
     parser.add_argument('-l', '--locale', default='en_US.UTF-8', help="example for english: 'en_US.UTF-8'")
-    parser.add_argument('-o', '--output', default='news.json', help="output file to save the data")
+    parser.add_argument('-o', '--output', default='news.json', help="output file where to save the data")
     args = parser.parse_args()
     
     
     news = download(args.url, args.locale)
     to_json(args.output, news)
 
-    print "{0} records inserted".format(len(news))
+    print "{} records inserted".format(len(news))
