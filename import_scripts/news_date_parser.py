@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 misspelled_months = {
     'fevrier': u'février', 
-    u'août': u'août'
+    u'août': u'aout'
     }
 
 def clean_date(local_date):
@@ -34,7 +34,10 @@ def convert_to_mysql_date(local_date, curr_locale):
     try:
         date = datetime.strptime(local_date, '%d %B %Y')
     except ValueError:
-        date = datetime.strptime(local_date, '%B %Y')
+        try:
+            date = datetime.strptime(local_date, '%B %Y')
+        except:
+            return
     return date.strftime('%Y-%m-%d')
 
 def download(url, current_locale):
@@ -53,7 +56,7 @@ def download(url, current_locale):
             results[rel_url] = convert_to_mysql_date(local_date.encode('utf-8'), current_locale)
         except ValueError:
             year = rel_url.split('/')[-2]
-            import pdb; pdb.set_trace()
+            #import pdb; pdb.set_trace()
             if not year in local_date: 
                 local_date = local_date + ' {}'.format(year)
             results[rel_url] = convert_to_mysql_date(local_date.encode('utf-8'), current_locale)
