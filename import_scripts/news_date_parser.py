@@ -88,8 +88,8 @@ def download(url, language):
                 results[rel_url] = convert_to_mysql_date(local_date, language)
             except ValueError:
                 local_date = local_date.split()[-1]
-                #print "{} --- {}".format(rel_url, local_date)
-                results[rel_url] = convert_to_mysql_date(local_date, language)
+                if not rel_url in results.keys():
+                    results[rel_url] = convert_to_mysql_date(local_date, language)
 
     return results
 
