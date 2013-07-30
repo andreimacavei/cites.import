@@ -58,11 +58,8 @@ def convert_to_mysql_date(local_date, language):
         try:
             date = datetime.strptime(local_date, '%B %Y')
         except ValueError:
-            local_date = local_date.split()[-1]
-            if any(char.isdigit() for char in local_date):
-                date = datetime.strptime(local_date, '%Y')
-            else:
-                return
+            date = datetime.strptime(local_date, '%Y')
+
     return date.strftime('%Y-%m-%d')
 
 def download(url, language):
@@ -81,9 +78,18 @@ def download(url, language):
             results[rel_url] = convert_to_mysql_date(local_date, language)
         except ValueError:
             year = rel_url.split('/')[-2]
-            if not year in local_date: 
+            if not bool(re.match('[0-9]+$', year)):
+                # We skip the missing year links
+                results[rel_url] = None
+                continue
+            if not year in local_date : 
                 local_date = local_date + ' {}'.format(year)
-            results[rel_url] = convert_to_mysql_date(local_date, language)
+            try:
+                results[rel_url] = convert_to_mysql_date(local_date, language)
+            except ValueError:
+                local_date = local_date.split()[-1]
+                #print "{} --- {}".format(rel_url, local_date)
+                results[rel_url] = convert_to_mysql_date(local_date, language)
 
     return results
 
