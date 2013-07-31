@@ -58,6 +58,7 @@ def download(url, language):
         title = clean_title(content.split(':', 1)[-1])
         news['title'] = title
         news['link'] = url.strip()
+        news['language'] = language
         try:
             date = convert_to_mysql_date(local_date, language)
         except ValueError as err:
@@ -84,7 +85,7 @@ def to_json(filename, results):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('urls', nargs ='+')
+    parser.add_argument('urls', nargs ='+', help="takes one or more urls")
     parser.add_argument('-o', '--output', default="news.json", help="output file where to save the data")
     args = parser.parse_args()
 
