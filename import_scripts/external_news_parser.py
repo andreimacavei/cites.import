@@ -63,7 +63,7 @@ def download(url, language):
             date = convert_to_mysql_date(local_date, language)
         except ValueError as err:
             print err
-            # We're skipping duplicated links with no data in text
+            # We're apending text for duplicated links
             continue
         else:
             news['date'] = date

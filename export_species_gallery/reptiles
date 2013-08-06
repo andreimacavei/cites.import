@@ -1,0 +1,400 @@
+[
+    {
+        "menu_name": "turtles & tortoises", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "African \n spurred tortoise", 
+                "link_path": "gallery/species/reptile/african_spurred_tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n sillonn\u00e9e", 
+                    "es": "Tortuga \r\n con p\u00faas"
+                }
+            }, 
+            {
+                "link_title": "African \n tent tortoise", 
+                "link_path": "gallery/species/reptile/s-african-tent-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n bossel\u00e9e", 
+                    "es": "Tortuga \r\n estrellada sudafricana"
+                }
+            }, 
+            {
+                "link_title": "Aldabra \n giant tortoise", 
+                "link_path": "gallery/species/reptile/aldabra-giant-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n g\u00e9ante", 
+                    "es": "Tortuga \r\n gigante de Aldabra"
+                }
+            }, 
+            {
+                "link_title": "Angulated \n tortoise", 
+                "link_path": "gallery/species/reptile/angulated-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n \u00e0 soc d'Afrique du Sud", 
+                    "es": "Tortuga \r\n ariete"
+                }
+            }, 
+            {
+                "link_title": "Geometric \n tortoise", 
+                "link_path": "gallery/species/reptile/geometric-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n g\u00e9om\u00e9trique", 
+                    "es": "Tortuga \r\n geom\u00e9trica"
+                }
+            }, 
+            {
+                "link_title": "Karoo \n cape tortoise", 
+                "link_path": "gallery/species/reptile/karoo_cape_tortoise.html", 
+                "translations": {
+                    "fr": "Homopode \r\n \u00e0 \u00e9peron", 
+                    "es": "<i>Homopus \r\n femoralis</i>"
+                }
+            }, 
+            {
+                "link_title": "Leopard \n tortoise", 
+                "link_path": "gallery/species/reptile/leopard-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue-l\u00e9opard \r\n du Cap", 
+                    "es": "Tortuga \r\n leopardo"
+                }
+            }, 
+            {
+                "link_title": "Parrot-beaked \n tortoise", 
+                "link_path": "gallery/species/reptile/parrot-beaked-tortoise.html", 
+                "translations": {
+                    "fr": "Homopode \r\n ar\u00e9ol\u00e9", 
+                    "es": "Tortuga \r\n pico de loro"
+                }
+            }, 
+            {
+                "link_title": "Radiated \n tortoise", 
+                "link_path": "gallery/species/reptile/radiated-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n rayonn\u00e9e", 
+                    "es": "Tortuga \r\n estrellada de Madagascar"
+                }
+            }, 
+            {
+                "link_title": "Serrated \n star tortoise", 
+                "link_path": "gallery/species/reptile/serrated-star-tortoise.html", 
+                "translations": {
+                    "fr": "Tortue \r\n ocel\u00e9e", 
+                    "es": "Tortuga \r\n estrellada sudafricana de caparaz\u00f3n"
+                }
+            }, 
+            {
+                "link_title": "Asiatic softshell \n turtle", 
+                "link_path": "gallery/species/reptile/asiatic_softshell_turtle.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Green turtle", 
+                "link_path": "gallery/species/reptile/green_turtle.html", 
+                "translations": {
+                    "fr": "Tortue \r\n franche", 
+                    "es": "Tortuga \r\n verde"
+                }
+            }, 
+            {
+                "link_title": "Hawksbill \n turtle", 
+                "link_path": "gallery/species/reptile/hawksbill_turtle.html", 
+                "translations": {
+                    "fr": "Tortue \r\n imbriqu\u00e9e", 
+                    "es": "Tortuga \r\n carey"
+                }
+            }, 
+            {
+                "link_title": "Annam leaf turtle", 
+                "link_path": "gallery/species/reptile/annamemys_annamensis.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Giant Asian pond turtle", 
+                "link_path": "gallery/species/reptile/heosemys_grandis.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Roti snake-necked \n turtle", 
+                "link_path": "gallery/species/reptile/Chelodina_mccordi.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "turtles & tortoises"
+    }, 
+    {
+        "menu_name": "crocodylians", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "American \n alligator", 
+                "link_path": "gallery/species/reptile/american_alligator.html", 
+                "translations": {
+                    "fr": "Alligator \r\n am\u00e9ricain", 
+                    "es": "Aligator \r\n del Mississippi"
+                }
+            }, 
+            {
+                "link_title": "Chinese \n alligator", 
+                "link_path": "gallery/species/reptile/chinese_alligator.html", 
+                "translations": {
+                    "fr": "Alligator \r\n de Chine", 
+                    "es": "Alligator \r\n de China"
+                }
+            }, 
+            {
+                "link_title": "Cuban crocodile", 
+                "link_path": "gallery/species/reptile/cuban_crocodile.html", 
+                "translations": {
+                    "fr": "Crocodile \r\n de Cuba", 
+                    "es": "Cocodrilo \r\n de Cuba"
+                }
+            }, 
+            {
+                "link_title": "Marsh crocodile", 
+                "link_path": "gallery/species/reptile/marsh_crocodile.html", 
+                "translations": {
+                    "fr": "Crocodile \r\n palud\u00e9en", 
+                    "es": "Cocodrilo \r\n marisme\u00f1o"
+                }
+            }, 
+            {
+                "link_title": "Nile crocodile", 
+                "link_path": "gallery/species/reptile/nile_crocodile.html", 
+                "translations": {
+                    "fr": "Crocodile \r\n du Nil", 
+                    "es": "Cocodrilo \r\n del Nilo"
+                }
+            }, 
+            {
+                "link_title": "Fish-eating \n crocodile", 
+                "link_path": "gallery/species/reptile/fish-eating_crocodile.html", 
+                "translations": {
+                    "fr": "Gavial \r\n du Gange", 
+                    "es": "Gavial \r\n del Gangesl"
+                }
+            }
+        ], 
+        "title": "Crocodylians"
+    }, 
+    {
+        "menu_name": "saurians", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Antsingy leaf chameleon", 
+                "link_path": "gallery/species/reptile/antsingy_leaf_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Brown leaf chameleon", 
+                "link_path": "gallery/species/reptile/brown_leaf_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Mossy leaf chameleon", 
+                "link_path": "gallery/species/reptile/flap-necked-chamaeleon.html", 
+                "translations": {
+                    "fr": "Cam\u00e9l\u00e9on \r\n bilob\u00e9", 
+                    "es": "Camale\u00f3n \r\n lobulado"
+                }
+            }, 
+            {
+                "link_title": "Canopy chameleon", 
+                "link_path": "gallery/species/reptile/canopy_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Larbord's chameleon", 
+                "link_path": "gallery/species/reptile/labords_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Parson's giant \n chameleon", 
+                "link_path": "gallery/species/reptile/parsons_giant_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Short-horned \n chameleon", 
+                "link_path": "gallery/species/reptile/short-horned_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "White-lined chameleon", 
+                "link_path": "gallery/species/reptile/white-lined_chameleon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Carpet \n chameleon", 
+                "link_path": "gallery/species/reptile/carpet_chameleon.html", 
+                "translations": {
+                    "fr": "Cam\u00e9l\u00e9on \r\n \u00e0 bandes lat\u00e9rales", 
+                    "es": "Camale\u00f3n \r\n alfombra"
+                }
+            }, 
+            {
+                "link_title": "Flap-necked \n chameleon", 
+                "link_path": "gallery/species/reptile/flap-necked-chamaeleon.html", 
+                "translations": {
+                    "fr": "Cam\u00e9l\u00e9on \r\n bilob\u00e9", 
+                    "es": "Camale\u00f3n \r\n lobulado"
+                }
+            }, 
+            {
+                "link_title": "Panther \n chameleon", 
+                "link_path": "gallery/species/reptile/panther_chameleon.html", 
+                "translations": {
+                    "fr": "Cam\u00e9l\u00e9on \r\n panth\u00e8re", 
+                    "es": "Camele\u00f3n \r\n pantera"
+                }
+            }, 
+            {
+                "link_title": "Calumma guillaumeti", 
+                "link_path": "gallery/species/reptile/calumma_guillaumeti.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Calumma vatosoa", 
+                "link_path": "gallery/species/reptile/calumma_vatosoa.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Cape crag \n lizard", 
+                "link_path": "gallery/species/reptile/cape-crag-lizard.html", 
+                "translations": {
+                    "fr": "L\u00e9zard \r\n des rochers", 
+                    "es": "Falso \r\n lagarto armadillo del Cabo"
+                }
+            }, 
+            {
+                "link_title": "Cape \n girdled lizard", 
+                "link_path": "gallery/species/reptile/common-girdled-lizard.html", 
+                "translations": {
+                    "fr": "Cordyle \r\n commun", 
+                    "es": "<i>Cordylus \r\n cordylus</i>"
+                }
+            }, 
+            {
+                "link_title": "Chinese \n crocodile lizard", 
+                "link_path": "gallery/species/reptile/chinese_crocodile_lizard.html", 
+                "translations": {
+                    "fr": "L\u00e9zard crocodile de Chine", 
+                    "es": "Lagarto \r\n cocodrilo chino"
+                }
+            }, 
+            {
+                "link_title": "Peer's \n girdled lizard", 
+                "link_path": "gallery/species/reptile/peers-girdled-lizard.html", 
+                "translations": {
+                    "fr": "L\u00e9zard \r\n \u00e0 queue \u00e9pineuse de Hewitt", 
+                    "es": "Lagarto \r\n de cola espinosa de Hewitt"
+                }
+            }, 
+            {
+                "link_title": "Karoo \n girdled lizard", 
+                "link_path": "gallery/species/reptile/karoo_girdled_lizard.html", 
+                "translations": {
+                    "fr": "Cordyle \r\n africain", 
+                    "es": "<i>Cordylus \r\n polyzonus</i>"
+                }
+            }, 
+            {
+                "link_title": "Barbour's \n day gecko", 
+                "link_path": "gallery/species/reptile/barbours_day_gecko.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Madagascar \n day gecko", 
+                "link_path": "gallery/species/reptile/madagascar_day_gecko.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Seychelles day gecko", 
+                "link_path": "gallery/species/reptile/seychelles-day-gecko.html", 
+                "translations": {
+                    "fr": "Petit gecko diurne des Seychelles", 
+                    "es": "Geco diurno de Seychelles"
+                }
+            }, 
+            {
+                "link_title": "Southern \n flat-tailed gecko", 
+                "link_path": "gallery/species/reptile/southern_flat-tailed%20_gecko.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Nile monitor", 
+                "link_path": "gallery/species/reptile/nile-monitor.html", 
+                "translations": {
+                    "fr": "Varan du Nil", 
+                    "es": "Varano del \r\n Nilo"
+                }
+            }, 
+            {
+                "link_title": "Rock monitor", 
+                "link_path": "gallery/species/reptile/rock-monitor.html", 
+                "translations": {
+                    "fr": "Varan \u00e0 gorge \r\n blanche", 
+                    "es": "Varano cuelliblanco"
+                }
+            }
+        ], 
+        "title": "Saurians"
+    }
+]
