@@ -27,6 +27,10 @@ menu_entries = {
     "other_plants": "other_plant/otherplants_list.html",
 }
 
+menu_translations = {
+
+}
+
 text_pattern = re.compile('\W+', re.UNICODE)
 html_pattern = re.compile('<[^<]+?>')
 
@@ -74,8 +78,9 @@ def get_translations(species_url, rel_url):
 
 def build_species_dict(data, species_order, species_url):
     species = {}
+    species_order = species_order.lower()
     species["menu_name"] = species_order.lower()
-    species['title'] = species_order
+    species['title'] = species_order[0].upper() + species_order[1:]
     species['i18n_mode'] = "I18N_MODE_MULTIPLE"
     species['contextual_menu'] = { "enabled": True }
     species['links'] = []
