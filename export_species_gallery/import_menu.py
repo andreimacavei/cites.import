@@ -4,12 +4,14 @@ import re
 from datetime import datetime
 import locale
 from urllib2 import urlopen
+from urllib2 import HTTPError
 from urlparse import urljoin, urlsplit
 
 import argparse
 import json
 
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 
 BASE_URL = "http://www.cites.org/gallery/species/"
 
@@ -25,27 +27,39 @@ menu_entries = {
     "other_plants": "other_plant/otherplants_list.html",
 }
 
+text_pattern = re.compile('\W+', re.UNICODE)
+html_pattern = re.compile('<[^<]+?>')
+
+
 def clean_title(title):
 
-    if isinstance(title, unicode):
-        title = title.encode('utf-8')
-    try:
-        buf = re.sub(r"\r?\r\n?\n?<i>?</i>?<b>?</b>?", "", str(title))
-        buf = re.sub(" +", " ", buf.strip())
-    except TypeError as err:
-        print str(err)
-        import pdb; pdb.set_trace()
-    return buf
+    if isinstance(title, Tag):
+        title = title.contents[0]
+
+    html_cleaned = html_pattern.sub('', title).strip()
+    return text_pattern.sub(' ', html_cleaned)
 
 def get_translations(species_url, rel_url):
-    url_fra = "/".join(BASE_URL.split("/")[:3]) + '/fra/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+
     url_esp = "/".join(BASE_URL.split("/")[:3]) + '/esp/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+
+    # For other_plants category the fra link differs by character 's' in "other_plants"
+    if 'other_plant' in species_url:
+            parent_url = species_url.split('/')[0] + 's'
+            species_url = parent_url + '/' + species_url.split('/')[1]
+            url_fra = "/".join(BASE_URL.split("/")[:3]) + '/fra/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+    else:
+        url_fra = "/".join(BASE_URL.split("/")[:3]) + '/fra/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+
     url_list = [ url_fra, url_esp]
 
     translations = {}
     for url in url_list:
-        #import pdb; pdb.set_trace()
-        html = urlopen(url).read()
+        try:
+            html = urlopen(url).read()
+        except HTTPError as err:
+            print err
+
         soup = BeautifulSoup(html, "html.parser")
         row = soup.find("a", href="{}".format(rel_url))
         lang = str(url.split('/')[3])[:-1]
@@ -72,6 +86,7 @@ def build_subspecies_dict(data, species_url):
     subspecies['link_path'] = "gallery/species/" + species_url.split('/')[0] + "/" + data.a.get('href')
     subspecies['link_title'] = clean_title(data.a.contents[0])
     rel_url = data.a.get('href')
+
     subspecies['translations'] = get_translations(species_url, rel_url)
     return subspecies
 
@@ -84,7 +99,7 @@ def download_menu_entry(species_url):
 
     results = []
     species = {}
-    #import pdb; pdb.set_trace()
+    flag = False
     for data in table_data:
         if data.has_attr('class'):
             # if we get to the next list head item we append the dictionary to the result
@@ -98,7 +113,13 @@ def download_menu_entry(species_url):
             try:
                 species['links'].append(subspecies)
             except KeyError as err:
-                print err
+                # If species has not been initialized, we do it here
+                species_order = species_url.split('/')[0]
+                species = build_species_dict(data, species_order, species_url)
+                species['links'].append(subspecies)
+                flag = True
+    if flag:
+        results.append(species)
     return results
 
 def to_json(filename, results):
