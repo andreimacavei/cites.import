@@ -82,8 +82,11 @@ def build_species_dict(species_order, species_trans = (), order = -1):
     species['contextual_menu'] = { "enabled": True }
     species['translations'] = {}
     if order != -1:
-        species['translations']['fr'] = species_trans[order][1]
-        species['translations']['fr'] = species_trans[order][2]
+        try:
+            species['translations']['fr'] = species_trans[order][1]
+            species['translations']['fr'] = species_trans[order][2]
+        except IndexError as err:
+            print err
     species['links'] = []
     return species
 
@@ -116,7 +119,7 @@ def get_species_order(table, species_url):
         soup = BeautifulSoup(html, "html.parser")
         table = soup.find("table")
         species_orders_trans = [clean_title(td.contents[0]) for td in table.find_all("td", { "class": "pglisthead"})]
-        species_orders = species_orders + species_orders_trans
+        species_orders = [species_orders + species_orders_trans]
 
 
     return zip(*species_orders)
@@ -130,7 +133,6 @@ def download_menu_entry(species_url):
 
     species_trans = get_species_order(table, species_url)
     for species in species_trans:
-        print type(species)
         print species[:]
 
     results = []
