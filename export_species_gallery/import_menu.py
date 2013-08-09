@@ -27,9 +27,6 @@ menu_entries = {
     "other_plants": "other_plant/otherplants_list.html",
 }
 
-menu_translations = {
-
-}
 
 text_pattern = re.compile('\W+', re.UNICODE)
 html_pattern = re.compile('<[^<]+?>')
@@ -45,7 +42,7 @@ def clean_title(title):
 
 def get_translations(species_url, rel_url):
 
-    url_esp = "/".join(BASE_URL.split("/")[:3]) + '/esp/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+    url_esp = "/".join(BASE_URL.split("/")[:3]) + '/esp/' + "/".join(BASE_URL.split("/")[3:]) + species_url
 
     # For other_plants category the fra link differs by character 's' in "other_plants"
     if 'other_plant' in species_url:
@@ -76,13 +73,17 @@ def get_translations(species_url, rel_url):
 
     return translations
 
-def build_species_dict(data, species_order, species_url):
+def build_species_dict(species_order, species_trans = (), order = -1):
     species = {}
     species_order = species_order.lower()
     species["menu_name"] = species_order.lower()
     species['title'] = species_order[0].upper() + species_order[1:]
     species['i18n_mode'] = "I18N_MODE_MULTIPLE"
     species['contextual_menu'] = { "enabled": True }
+    species['translations'] = {}
+    if order != -1:
+        species['translations']['fr'] = species_trans[order][1]
+        species['translations']['fr'] = species_trans[order][2]
     species['links'] = []
     return species
 
@@ -95,6 +96,31 @@ def build_subspecies_dict(data, species_url):
     subspecies['translations'] = get_translations(species_url, rel_url)
     return subspecies
 
+def get_species_order(table, species_url):
+
+    species_orders = [clean_title(td.contents[0]) for td in table.find_all("td", { "class": "pglisthead"})]
+
+    url_esp = "/".join(BASE_URL.split("/")[:3]) + '/esp/' + "/".join(BASE_URL.split("/")[3:]) + species_url
+    if 'other_plant' in species_url:
+            species_url = species_url.split('/')[0] + 's' + '/' + species_url.split('/')[1]
+            url_fra = "/".join(BASE_URL.split("/")[:3]) + '/fra/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+    else:
+        url_fra = "/".join(BASE_URL.split("/")[:3]) + '/fra/' + "/".join(BASE_URL.split("/")[3:])  + species_url
+
+    url_list = [url_fra, url_esp]
+    for url in url_list:
+        try:
+            html = urlopen(url).read()
+        except HTTPError as err:
+            print err
+        soup = BeautifulSoup(html, "html.parser")
+        table = soup.find("table")
+        species_orders_trans = [clean_title(td.contents[0]) for td in table.find_all("td", { "class": "pglisthead"})]
+        species_orders = species_orders + species_orders_trans
+
+
+    return zip(*species_orders)
+
 def download_menu_entry(species_url):
     html = urlopen(BASE_URL + species_url).read()
     soup = BeautifulSoup(html, "html.parser")
@@ -102,9 +128,15 @@ def download_menu_entry(species_url):
 
     table_data = [td for td in table.find_all("td")][3:]
 
+    species_trans = get_species_order(table, species_url)
+    for species in species_trans:
+        print type(species)
+        print species[:]
+
     results = []
     species = {}
     flag = False
+    order = 0
     for data in table_data:
         if data.has_attr('class'):
             # if we get to the next list head item we append the dictionary to the result
@@ -112,7 +144,8 @@ def download_menu_entry(species_url):
                 results.append(species)
                 species = {}
             species_order = clean_title(data.contents[0])
-            species = build_species_dict(data, species_order, species_url)
+            species = build_species_dict(species_order, species_trans, order)
+            order += 1
         elif data.a:
             subspecies = build_subspecies_dict(data, species_url)
             try:
@@ -120,7 +153,7 @@ def download_menu_entry(species_url):
             except KeyError as err:
                 # If species has not been initialized, we do it here
                 species_order = species_url.split('/')[0]
-                species = build_species_dict(data, species_order, species_url)
+                species = build_species_dict(species_order)
                 species['links'].append(subspecies)
                 flag = True
     if flag:
