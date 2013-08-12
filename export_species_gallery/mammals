@@ -1,0 +1,762 @@
+[
+    {
+        "menu_name": "primates", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Ring tailed lemur", 
+                "link_path": "gallery/species/mammal/ringtailedlemur.html", 
+                "translations": {
+                    "fr": "Lémur catta", 
+                    "es": "Lemur colianillado"
+                }
+            }, 
+            {
+                "link_title": "Ruffed lemur", 
+                "link_path": "gallery/species/mammal/ruffed_lemur.html", 
+                "translations": {
+                    "fr": "Lémur vari", 
+                    "es": "Lemur de collar"
+                }
+            }, 
+            {
+                "link_title": "Golden lion tamarin", 
+                "link_path": "gallery/species/mammal/golden_lion_tamarin.html", 
+                "translations": {
+                    "fr": "Singe lion", 
+                    "es": "Tamarino león dorado"
+                }
+            }, 
+            {
+                "link_title": "Long nosed monkey", 
+                "link_path": "gallery/species/mammal/long_nosed_monkey.html", 
+                "translations": {
+                    "fr": "Nasique", 
+                    "es": "Mono narigudo"
+                }
+            }, 
+            {
+                "link_title": "Common squirrel monkey", 
+                "link_path": "gallery/species/mammal/common_squirrel_monkey.html", 
+                "translations": {
+                    "fr": "Saïmiri écureuil", 
+                    "es": "Saimiri sciureus"
+                }
+            }, 
+            {
+                "link_title": "Squirrel monkey", 
+                "link_path": "gallery/species/mammal/squirrel_monkey.html", 
+                "translations": {
+                    "fr": "Saimiri boliviensis", 
+                    "es": "Mono tití de cabeza negra"
+                }
+            }, 
+            {
+                "link_title": "Patas monkey", 
+                "link_path": "gallery/species/mammal/patas_monkey.html", 
+                "translations": {
+                    "fr": "Patas", 
+                    "es": "Erythrocebus patas"
+                }
+            }, 
+            {
+                "link_title": "Preuss s monkey", 
+                "link_path": "gallery/species/mammal/preuss_monkey.html", 
+                "translations": {
+                    "fr": "Cercopithecus preussi", 
+                    "es": "Mono de Preuss"
+                }
+            }, 
+            {
+                "link_title": "De Brazza s monkey", 
+                "link_path": "gallery/species/mammal/DeBrazzas_monkey.html", 
+                "translations": {
+                    "fr": "Cercopithèque de Brazza", 
+                    "es": "Cercopithecus neglectus"
+                }
+            }, 
+            {
+                "link_title": "Savanna monkey", 
+                "link_path": "gallery/species/mammal/savanna_monkey.html", 
+                "translations": {
+                    "fr": "Singe vert", 
+                    "es": "Mono verde"
+                }
+            }, 
+            {
+                "link_title": "Collared mangabey", 
+                "link_path": "gallery/species/mammal/collared_mangabey.html", 
+                "translations": {
+                    "fr": "Mangabey couronné", 
+                    "es": "Mangabey de collar blanco"
+                }
+            }, 
+            {
+                "link_title": "Grey cheekedmangabey", 
+                "link_path": "gallery/species/mammal/grey-cheeked_mangabey.html", 
+                "translations": {
+                    "fr": "Lophocebus albigena", 
+                    "es": "Mangabey de mejillas grises"
+                }
+            }, 
+            {
+                "link_title": "Chacma baboon", 
+                "link_path": "gallery/species/mammal/chacma_baboon.html", 
+                "translations": {
+                    "fr": "Babouin anubis", 
+                    "es": "Papión de Guinea"
+                }
+            }, 
+            {
+                "link_title": "Gelada baboon", 
+                "link_path": "gallery/species/mammal/gelada_baboon.html", 
+                "translations": {
+                    "fr": "Gelada", 
+                    "es": "Theropithecus gelada"
+                }
+            }, 
+            {
+                "link_title": "Drill", 
+                "link_path": "gallery/species/mammal/drill.html", 
+                "translations": {
+                    "fr": "Drill", 
+                    "es": "Dril"
+                }
+            }, 
+            {
+                "link_title": "Purple faced leaf monkey", 
+                "link_path": "gallery/species/mammal/purple-faced-leaf-monkey.html", 
+                "translations": {
+                    "fr": "Semnopithèque blanchâtre", 
+                    "es": "Langur de cara roja"
+                }
+            }, 
+            {
+                "link_title": "Golden monkey", 
+                "link_path": "gallery/species/mammal/golden_monkey.html", 
+                "translations": {
+                    "fr": "Rhinopithèque doré", 
+                    "es": "Sichuan Snub nosed Monkey"
+                }
+            }, 
+            {
+                "link_title": "Gorilla", 
+                "link_path": "gallery/species/mammal/gorilla.html", 
+                "translations": {
+                    "fr": "Gorille", 
+                    "es": "Gorila"
+                }
+            }, 
+            {
+                "link_title": "Chimpanzee", 
+                "link_path": "gallery/species/mammal/chimpanzee.html", 
+                "translations": {
+                    "fr": "Chimpanzé", 
+                    "es": "Chimpancé"
+                }
+            }, 
+            {
+                "link_title": "Orang utan", 
+                "link_path": "gallery/species/mammal/orang-utan.html", 
+                "translations": {
+                    "fr": "Orang outan", 
+                    "es": "Orangután"
+                }
+            }, 
+            {
+                "link_title": "Javan gibbon", 
+                "link_path": "gallery/species/mammal/javan_gibbon.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Primates"
+    }, 
+    {
+        "menu_name": "pholidota", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Chinese pangolin", 
+                "link_path": "gallery/species/mammal/chinese_pangolin.html", 
+                "translations": {
+                    "fr": "Pangolin de Chine", 
+                    "es": "Pangolín chino"
+                }
+            }
+        ], 
+        "title": "Pholidota"
+    }, 
+    {
+        "menu_name": "cetacea", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Chinese lake dolphin", 
+                "link_path": "gallery/species/mammal/chinese_lake_dolphin.html", 
+                "translations": {
+                    "fr": "Baiji", 
+                    "es": "Delfín de China"
+                }
+            }, 
+            {
+                "link_title": "Snubfin dolphin", 
+                "link_path": "gallery/species/mammal/snubfin_dolphin.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Cetacea"
+    }, 
+    {
+        "menu_name": "carnivores", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Asiatic wild dog", 
+                "link_path": "gallery/species/mammal/Asiatic_wilddog.html", 
+                "translations": {
+                    "fr": "Dhole", 
+                    "es": "Perro salvaje asiático"
+                }
+            }, 
+            {
+                "link_title": "Bush dog", 
+                "link_path": "gallery/species/mammal/bush_dog.html", 
+                "translations": {
+                    "fr": "Chien des buissons", 
+                    "es": "Cachorro de mato vinagre"
+                }
+            }, 
+            {
+                "link_title": "Fennec fox", 
+                "link_path": "gallery/species/mammal/Fennec_fox.html", 
+                "translations": {
+                    "fr": "Fennec", 
+                    "es": "Fennec"
+                }
+            }, 
+            {
+                "link_title": "Maned wolf", 
+                "link_path": "gallery/species/mammal/maned_wolf.html", 
+                "translations": {
+                    "fr": "Loup à crinière", 
+                    "es": "Aguara guazu"
+                }
+            }, 
+            {
+                "link_title": "Wolf", 
+                "link_path": "gallery/species/mammal/wolf.html", 
+                "translations": {
+                    "fr": "Loup gris", 
+                    "es": "Lobo común"
+                }
+            }, 
+            {
+                "link_title": "American black bear", 
+                "link_path": "gallery/species/mammal/american_black_bear.html", 
+                "translations": {
+                    "fr": "Ours noir américain", 
+                    "es": "Oso negro americano"
+                }
+            }, 
+            {
+                "link_title": "Asiatic black bear", 
+                "link_path": "gallery/species/mammal/Asiatic_black_bear.html", 
+                "translations": {
+                    "fr": "Ours noir", 
+                    "es": "Oso negro de Asia"
+                }
+            }, 
+            {
+                "link_title": "Brown bear", 
+                "link_path": "gallery/species/mammal/brown_bear.html", 
+                "translations": {
+                    "fr": "Ours brun", 
+                    "es": "Oso pardo"
+                }
+            }, 
+            {
+                "link_title": "Polar bear", 
+                "link_path": "gallery/species/mammal/polar_bear.html", 
+                "translations": {
+                    "fr": "Ours blanc", 
+                    "es": "Oso polar"
+                }
+            }, 
+            {
+                "link_title": "Sloth bear", 
+                "link_path": "gallery/species/mammal/sloth_bear.html", 
+                "translations": {
+                    "fr": "Ours lippu de l Inde", 
+                    "es": "Oso perezoso"
+                }
+            }, 
+            {
+                "link_title": "Spectacled bear", 
+                "link_path": "gallery/species/mammal/spectacled_bear.html", 
+                "translations": {
+                    "fr": "Ours à lunettes", 
+                    "es": "Oso de anteojos"
+                }
+            }, 
+            {
+                "link_title": "Sun bear", 
+                "link_path": "gallery/species/mammal/sun_bear.html", 
+                "translations": {
+                    "fr": "Ours malais", 
+                    "es": "Oso de sol"
+                }
+            }, 
+            {
+                "link_title": "Giant panda", 
+                "link_path": "gallery/species/mammal/giant_panda.html", 
+                "translations": {
+                    "fr": "Panda géant", 
+                    "es": "Panda gigante"
+                }
+            }, 
+            {
+                "link_title": "Lesser panda", 
+                "link_path": "gallery/species/mammal/lesser_panda.html", 
+                "translations": {
+                    "fr": "Panda éclatant", 
+                    "es": "Panda chico"
+                }
+            }, 
+            {
+                "link_title": "Aardwolf", 
+                "link_path": "gallery/species/mammal/aardwolf.html", 
+                "translations": {
+                    "fr": "Protèle", 
+                    "es": "Lobo de tierra"
+                }
+            }, 
+            {
+                "link_title": "Cheetah", 
+                "link_path": "gallery/species/mammal/cheetah.html", 
+                "translations": {
+                    "fr": "Guépard", 
+                    "es": "Cheta"
+                }
+            }, 
+            {
+                "link_title": "Caracal", 
+                "link_path": "gallery/species/mammal/caracal.html", 
+                "translations": {
+                    "fr": "Caracal", 
+                    "es": "Caracal"
+                }
+            }, 
+            {
+                "link_title": "Jaguar", 
+                "link_path": "gallery/species/mammal/jaguar.html", 
+                "translations": {
+                    "fr": "Jaguar", 
+                    "es": "Jaguar"
+                }
+            }, 
+            {
+                "link_title": "Lion", 
+                "link_path": "gallery/species/mammal/lion.html", 
+                "translations": {
+                    "fr": "Lion", 
+                    "es": "León"
+                }
+            }, 
+            {
+                "link_title": "Snow leopard", 
+                "link_path": "gallery/species/mammal/snow_leopard.html", 
+                "translations": {
+                    "fr": "Léopard des neiges", 
+                    "es": "Snow Leopard"
+                }
+            }, 
+            {
+                "link_title": "Leopard", 
+                "link_path": "gallery/species/mammal/leopard.html", 
+                "translations": {
+                    "fr": "Léopard", 
+                    "es": "Leopardo"
+                }
+            }, 
+            {
+                "link_title": "Tiger", 
+                "link_path": "gallery/species/mammal/tiger.html", 
+                "translations": {
+                    "fr": "Tigre", 
+                    "es": "Tigre"
+                }
+            }, 
+            {
+                "link_title": "Cape fur seal", 
+                "link_path": "gallery/species/mammal/cape_fur_seal.html", 
+                "translations": {
+                    "fr": "Arctocéphale d Afrique du Sud", 
+                    "es": "Oso marino del Cabo"
+                }
+            }, 
+            {
+                "link_title": "Walrus", 
+                "link_path": "gallery/species/mammal/walrus.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Carnivores"
+    }, 
+    {
+        "menu_name": "proboscidea", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "African elephant", 
+                "link_path": "gallery/species/mammal/african_elephant.html", 
+                "translations": {
+                    "fr": "Eléphant d Afrique", 
+                    "es": "Elefante africano"
+                }
+            }, 
+            {
+                "link_title": "Asian elephant", 
+                "link_path": "gallery/species/mammal/asianelephant.html", 
+                "translations": {
+                    "fr": "Eléphant d Asie", 
+                    "es": "Elefante asiático"
+                }
+            }
+        ], 
+        "title": "Proboscidea"
+    }, 
+    {
+        "menu_name": "sirenia", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Dugong", 
+                "link_path": "gallery/species/mammal/dugong.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Sirenia"
+    }, 
+    {
+        "menu_name": "perissodactyla", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "African wild ass", 
+                "link_path": "gallery/species/mammal/african_ass.html", 
+                "translations": {
+                    "fr": "Ane sauvage d Afrique", 
+                    "es": "Asno salvaje de Africa"
+                }
+            }, 
+            {
+                "link_title": "Asiatic wild ass", 
+                "link_path": "gallery/species/mammal/Asiatic_wild_ass.html", 
+                "translations": {
+                    "fr": "Ane sauvage d Asie", 
+                    "es": "Asno salvaje asiático"
+                }
+            }, 
+            {
+                "link_title": "Mongolian wild horse", 
+                "link_path": "gallery/species/mammal/mongolian_wild_horse.html", 
+                "translations": {
+                    "fr": "Cheval de Przewalski", 
+                    "es": "Caballo de Przewalski"
+                }
+            }, 
+            {
+                "link_title": "Hartmann s mountain zebra", 
+                "link_path": "gallery/species/mammal/hartmanns_mountain_zebra.html", 
+                "translations": {
+                    "fr": "Zèbre de Hartmann", 
+                    "es": "Cebra de Hartmann"
+                }
+            }, 
+            {
+                "link_title": "Cape mountain zebra", 
+                "link_path": "gallery/species/mammal/cape_mountain_zebra.html", 
+                "translations": {
+                    "fr": "Zèbre de montagne du Cap", 
+                    "es": "Zebra montañesa del Cabo"
+                }
+            }, 
+            {
+                "link_title": "Grevy s zebra", 
+                "link_path": "gallery/species/mammal/grevys_zebra.html", 
+                "translations": {
+                    "fr": "Zèbre de Grévy", 
+                    "es": "Zebra de Grévy"
+                }
+            }, 
+            {
+                "link_title": "Central American tapir", 
+                "link_path": "gallery/species/mammal/central_american_tapir.html", 
+                "translations": {
+                    "fr": "Tapir de Baird", 
+                    "es": "Tapir centroamericano"
+                }
+            }, 
+            {
+                "link_title": "South American tapir", 
+                "link_path": "gallery/species/mammal/lowland_tapir.html", 
+                "translations": {
+                    "fr": "Tapir terrestre", 
+                    "es": "Antar"
+                }
+            }, 
+            {
+                "link_title": "Great Indian rhinoceros", 
+                "link_path": "gallery/species/mammal/indian_rhino.html", 
+                "translations": {
+                    "fr": "Rhinocéros unicorne de l Inde", 
+                    "es": "Rinoceronte unicornio índico"
+                }
+            }, 
+            {
+                "link_title": "Black rhinoceros", 
+                "link_path": "gallery/species/mammal/black_rhino.html", 
+                "translations": {
+                    "fr": "Rhinocéros noir", 
+                    "es": "Rinoceronte negro"
+                }
+            }, 
+            {
+                "link_title": "White rhinoceros", 
+                "link_path": "gallery/species/mammal/white_rhino.html", 
+                "translations": {
+                    "fr": "Rhinocéros blanc", 
+                    "es": "Rinoceronte blanco"
+                }
+            }
+        ], 
+        "title": "Perissodactyla"
+    }, 
+    {
+        "menu_name": "artiodactyla", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Babirusa", 
+                "link_path": "gallery/species/mammal/babirusa.html", 
+                "translations": {
+                    "fr": "Babiroussa", 
+                    "es": "Babirusa"
+                }
+            }, 
+            {
+                "link_title": "Collared peccary", 
+                "link_path": "gallery/species/mammal/collared_peccary.html", 
+                "translations": {
+                    "fr": "Pécari à collier", 
+                    "es": "Pecarí de labio blanco"
+                }
+            }, 
+            {
+                "link_title": "White lipped peccary", 
+                "link_path": "gallery/species/mammal/white-lipped_peccary.html", 
+                "translations": {
+                    "fr": "Pécari à barbe blanche", 
+                    "es": "Pecarí de labio blanco"
+                }
+            }, 
+            {
+                "link_title": "Hippopotamus", 
+                "link_path": "gallery/species/mammal/hippo.html", 
+                "translations": {
+                    "fr": "Hippopotame", 
+                    "es": "Hipopótamo anfibio"
+                }
+            }, 
+            {
+                "link_title": "Guanaco", 
+                "link_path": "gallery/species/mammal/guanaco.html", 
+                "translations": {
+                    "fr": "Guanaco", 
+                    "es": "Guanaco"
+                }
+            }, 
+            {
+                "link_title": "Vicugna", 
+                "link_path": "gallery/species/mammal/vicugna.html", 
+                "translations": {
+                    "fr": "Vigogne", 
+                    "es": "Vicuña"
+                }
+            }, 
+            {
+                "link_title": "Musk deer", 
+                "link_path": "gallery/species/mammal/musk_deer.html", 
+                "translations": {
+                    "fr": "Chevrotain porte musc", 
+                    "es": "Ciervo almizclero"
+                }
+            }, 
+            {
+                "link_title": "Eld s deer", 
+                "link_path": "gallery/species/mammal/eld_deer.html", 
+                "translations": {
+                    "fr": "Cerf d Eld", 
+                    "es": "Ciervo de Elde"
+                }
+            }, 
+            {
+                "link_title": "Marsh deer", 
+                "link_path": "gallery/species/mammal/marsh_deer.html", 
+                "translations": {
+                    "fr": "Cerf des marais", 
+                    "es": "Ciervo de los pantanos"
+                }
+            }, 
+            {
+                "link_title": "Pampas deer", 
+                "link_path": "gallery/species/mammal/pampas_deer.html", 
+                "translations": {
+                    "fr": "Cerf des pampas", 
+                    "es": "Ciervo de las Pampas"
+                }
+            }, 
+            {
+                "link_title": "Addax", 
+                "link_path": "gallery/species/mammal/addax.html", 
+                "translations": {
+                    "fr": "Addax", 
+                    "es": "Addax"
+                }
+            }, 
+            {
+                "link_title": "Arabian oryx", 
+                "link_path": "gallery/species/mammal/Arabian_oryx.html", 
+                "translations": {
+                    "fr": "Oryx d Arabie", 
+                    "es": "Orix de Arabia"
+                }
+            }, 
+            {
+                "link_title": "Bontebok", 
+                "link_path": "gallery/species/mammal/bontebok.html", 
+                "translations": {
+                    "fr": "Bontebok", 
+                    "es": "Bontebok"
+                }
+            }, 
+            {
+                "link_title": "Cyprus mouflon", 
+                "link_path": "gallery/species/mammal/cyprus_mouflon.html", 
+                "translations": {
+                    "fr": "Mouflon de Chypre", 
+                    "es": "Muflón de Chipre"
+                }
+            }, 
+            {
+                "link_title": "Dama gazelle", 
+                "link_path": "gallery/species/mammal/dama_gazelle.html", 
+                "translations": {
+                    "fr": "Gazelle dama", 
+                    "es": "Gazella dama"
+                }
+            }, 
+            {
+                "link_title": "Gaur", 
+                "link_path": "gallery/species/mammal/gaur.html", 
+                "translations": {
+                    "fr": "Gaur", 
+                    "es": "Gaur"
+                }
+            }, 
+            {
+                "link_title": "Goral", 
+                "link_path": "gallery/species/mammal/goral.html", 
+                "translations": {
+                    "fr": "Goral", 
+                    "es": "Goral"
+                }
+            }, 
+            {
+                "link_title": "Lechwe", 
+                "link_path": "gallery/species/mammal/lechwe.html", 
+                "translations": {
+                    "fr": "Lechwe", 
+                    "es": "Lechwe"
+                }
+            }, 
+            {
+                "link_title": "Saiga antelope", 
+                "link_path": "gallery/species/mammal/saiga.html", 
+                "translations": {
+                    "fr": "Saïga", 
+                    "es": "Antílope saiga"
+                }
+            }, 
+            {
+                "link_title": "Scimitar horned oryx", 
+                "link_path": "gallery/species/mammal/sahara_oryx.html", 
+                "translations": {
+                    "fr": "Oryx algazelle", 
+                    "es": "Orix de cimitarra"
+                }
+            }, 
+            {
+                "link_title": "Takin", 
+                "link_path": "gallery/species/mammal/takin.html", 
+                "translations": {
+                    "fr": "Takin", 
+                    "es": "Takin"
+                }
+            }, 
+            {
+                "link_title": "Tibetan antelope", 
+                "link_path": "gallery/species/mammal/tibetan_antelope.html", 
+                "translations": {
+                    "fr": "Antilope du Tibet", 
+                    "es": "Antílope del Tibet"
+                }
+            }, 
+            {
+                "link_title": "Argetina", 
+                "link_path": "gallery/species/mammal/http://www.cites.org/common/resources/reports/pab/permits/Argentina.pdf", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Artiodactyla"
+    }
+]

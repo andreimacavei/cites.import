@@ -1,0 +1,482 @@
+[
+    {
+        "menu_name": "struthioniformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Ostrich", 
+                "link_path": "gallery/species/bird/ostrich.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Struthioniformes"
+    }, 
+    {
+        "menu_name": "rheiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Lesser rhea", 
+                "link_path": "gallery/species/bird/lesser_rhea.html", 
+                "translations": {
+                    "fr": "Nandou de Darwin", 
+                    "es": "Avestruz de Magallanes"
+                }
+            }
+        ], 
+        "title": "Rheiformes"
+    }, 
+    {
+        "menu_name": "sphenisciformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Jackass penguin", 
+                "link_path": "gallery/species/bird/jackass_penguin.html", 
+                "translations": {
+                    "fr": "Manchot du Cap", 
+                    "es": "Pingüino del Cabo"
+                }
+            }
+        ], 
+        "title": "Sphenisciformes"
+    }, 
+    {
+        "menu_name": "pelecaniformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Dalmatian pelican", 
+                "link_path": "gallery/species/bird/dalmatian_pelican.html", 
+                "translations": {
+                    "fr": "Pélican frisé", 
+                    "es": "Pelícano ceñudo"
+                }
+            }
+        ], 
+        "title": "Pelecaniformes"
+    }, 
+    {
+        "menu_name": "ciconiiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Shoebill", 
+                "link_path": "gallery/species/bird/shoebill.html", 
+                "translations": {
+                    "fr": "Balaniceps roi", 
+                    "es": "Picozapato"
+                }
+            }, 
+            {
+                "link_title": "Bald ibis", 
+                "link_path": "gallery/species/bird/bald_ibis.html", 
+                "translations": {
+                    "fr": "Ibis noir", 
+                    "es": "Ibis calvo"
+                }
+            }, 
+            {
+                "link_title": "Hermit ibis", 
+                "link_path": "gallery/species/bird/hermit_ibis.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Scarlet ibis", 
+                "link_path": "gallery/species/bird/scarlet_ibis.html", 
+                "translations": {
+                    "fr": "Ibis rouge", 
+                    "es": "Ibis escarlata"
+                }
+            }, 
+            {
+                "link_title": "Chilean flamingo", 
+                "link_path": "gallery/species/bird/chilean_flamingo.html", 
+                "translations": {
+                    "fr": "Flamant du Chili", 
+                    "es": "Flamenco chileno"
+                }
+            }, 
+            {
+                "link_title": "Greater flamingo", 
+                "link_path": "gallery/species/bird/greater_flamingo.html", 
+                "translations": {
+                    "fr": "Flamant rouge", 
+                    "es": "Flamenco"
+                }
+            }, 
+            {
+                "link_title": "Lesser flamingo", 
+                "link_path": "gallery/species/bird/lesser_flamingo.html", 
+                "translations": {
+                    "fr": "Petit flamant", 
+                    "es": "Flamenco enano"
+                }
+            }
+        ], 
+        "title": "Ciconiiformes"
+    }, 
+    {
+        "menu_name": "anseriformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Cuban tree duck", 
+                "link_path": "gallery/species/bird/cuban_tree-duck.html", 
+                "translations": {
+                    "fr": "Dendrocygne à bec noir", 
+                    "es": "Pato silvón de Cuba"
+                }
+            }, 
+            {
+                "link_title": "Knob billed goose", 
+                "link_path": "gallery/species/bird/knob-billed_goose.html", 
+                "translations": {
+                    "fr": "Canard caronculé", 
+                    "es": "Pato crestudo"
+                }
+            }, 
+            {
+                "link_title": "Red breasted goose", 
+                "link_path": "gallery/species/bird/red-breasted_goose.html", 
+                "translations": {
+                    "fr": "Bernache à cou roux", 
+                    "es": "Barnacla cuelliroja"
+                }
+            }, 
+            {
+                "link_title": "Spur winged goose", 
+                "link_path": "gallery/species/bird/spur-winged_goose.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Black necked swan", 
+                "link_path": "gallery/species/bird/black-necked_swan.html", 
+                "translations": {
+                    "fr": "Cygne à cou noir", 
+                    "es": "Cisne cuellinegro"
+                }
+            }
+        ], 
+        "title": "Anseriformes"
+    }, 
+    {
+        "menu_name": "falconiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Augur buzzard", 
+                "link_path": "gallery/species/bird/augur_buzzard.html", 
+                "translations": {
+                    "fr": "Buse augure", 
+                    "es": "Busardo augur oriental"
+                }
+            }, 
+            {
+                "link_title": "Jackal buzzard", 
+                "link_path": "gallery/species/bird/jackal_buzzard.html", 
+                "translations": {
+                    "fr": "Buse roux noir", 
+                    "es": "Busardo augur meridional"
+                }
+            }, 
+            {
+                "link_title": "African fish eagle", 
+                "link_path": "gallery/species/bird/african_fish_eagle.html", 
+                "translations": {
+                    "fr": "Pygargue vocifère", 
+                    "es": "Pigargo vocinglero"
+                }
+            }, 
+            {
+                "link_title": "Bald eagle", 
+                "link_path": "gallery/species/bird/bald_eagle.html", 
+                "translations": {
+                    "fr": "Aigle à tête blanche", 
+                    "es": "Aguila cabeciblanca"
+                }
+            }, 
+            {
+                "link_title": "Long crested eagle", 
+                "link_path": "gallery/species/bird/long-crested_eagle.html", 
+                "translations": {
+                    "fr": "Aigle huppard", 
+                    "es": "Aguila copetuda africana"
+                }
+            }, 
+            {
+                "link_title": "Tawny eagle", 
+                "link_path": "gallery/species/bird/tawny_eagle.html", 
+                "translations": {
+                    "fr": "Aigle ravisseur", 
+                    "es": "Aguila rapaz"
+                }
+            }, 
+            {
+                "link_title": "Gabar goshawk", 
+                "link_path": "gallery/species/bird/gabar_goshawk.html", 
+                "translations": {
+                    "fr": "Autour gabar", 
+                    "es": "Gavilán gabar"
+                }
+            }, 
+            {
+                "link_title": "Yellow billed Kite", 
+                "link_path": "gallery/species/bird/yellow_billed_kite.html", 
+                "translations": {
+                    "fr": "Milan noir", 
+                    "es": "Milano negro"
+                }
+            }, 
+            {
+                "link_title": "Hooded vulture", 
+                "link_path": "gallery/species/bird/hooded_vulture.html", 
+                "translations": {
+                    "fr": "Vautour charognard", 
+                    "es": "Alimoche sombrío"
+                }
+            }, 
+            {
+                "link_title": "White backed vulture", 
+                "link_path": "gallery/species/bird/white_backed_vulture.html", 
+                "translations": {
+                    "fr": "Vautour africain", 
+                    "es": "Buitre dorsiblanco africano"
+                }
+            }, 
+            {
+                "link_title": "Martial eagle", 
+                "link_path": "gallery/species/bird/martial_eagle.html", 
+                "translations": {
+                    "fr": "Aigle martial", 
+                    "es": "Aguila marcial"
+                }
+            }, 
+            {
+                "link_title": "Bateleur", 
+                "link_path": "gallery/species/bird/bateleur_eagle.html", 
+                "translations": {
+                    "fr": "Bateleur", 
+                    "es": "Aguila volatinera"
+                }
+            }, 
+            {
+                "link_title": "Lappet faced vulture", 
+                "link_path": "gallery/species/bird/lappet-faced_vulture.html", 
+                "translations": {
+                    "fr": "Vautour oricou", 
+                    "es": "Buitre orejudo"
+                }
+            }, 
+            {
+                "link_title": "Secretary bird", 
+                "link_path": "gallery/species/bird/secretary_bird.html", 
+                "translations": {
+                    "fr": "Secrétaire des serpents", 
+                    "es": "Secretario"
+                }
+            }, 
+            {
+                "link_title": "Greater kestrel", 
+                "link_path": "gallery/species/bird/greater_kestrel.html", 
+                "translations": {
+                    "fr": "Crécerelle aux yeux blancs", 
+                    "es": "Cernícalo ojiblanco"
+                }
+            }, 
+            {
+                "link_title": "Red headed merlin", 
+                "link_path": "gallery/species/bird/red_necked_merlin.html", 
+                "translations": {
+                    "fr": "Faucon chicquera", 
+                    "es": "Alcotán cuellirojo"
+                }
+            }
+        ], 
+        "title": "Falconiformes"
+    }, 
+    {
+        "menu_name": "gruiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Blue crane", 
+                "link_path": "gallery/species/bird/blue_crane.html", 
+                "translations": {
+                    "fr": "Grue de Paradis", 
+                    "es": "Grulla azul"
+                }
+            }, 
+            {
+                "link_title": "White quilled bustard", 
+                "link_path": "gallery/species/bird/white-quilled-bustard.html", 
+                "translations": {
+                    "fr": "Outarde à miroir blanc", 
+                    "es": "Sisón negro aliclaro"
+                }
+            }, 
+            {
+                "link_title": "Kori bustard", 
+                "link_path": "gallery/species/bird/kori_bustard.html", 
+                "translations": {
+                    "fr": "Outarde kori", 
+                    "es": "Avutarda kori"
+                }
+            }, 
+            {
+                "link_title": "Damara bustard", 
+                "link_path": "gallery/species/bird/damara_bustard.html", 
+                "translations": {
+                    "fr": "Outarde de Rüppell", 
+                    "es": "Sisón de Damaraland"
+                }
+            }, 
+            {
+                "link_title": "Karoo bustard", 
+                "link_path": "gallery/species/bird/karoo_bustard.html", 
+                "translations": {
+                    "fr": "Outarde de Vigors", 
+                    "es": "Sisón de Vigors"
+                }
+            }
+        ], 
+        "title": "Gruiformes"
+    }, 
+    {
+        "menu_name": "psittaciformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Grey parrot", 
+                "link_path": "gallery/species/bird/grey_parrot.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Rueppell s parrot", 
+                "link_path": "gallery/species/bird/rueppell_parrot.html", 
+                "translations": {
+                    "fr": "Perroquet de Rüppell", 
+                    "es": "Lorito de Rueppell"
+                }
+            }, 
+            {
+                "link_title": "Lilac crowned amazon", 
+                "link_path": "gallery/species/bird/Amazona_finschi.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Psittaciformes"
+    }, 
+    {
+        "menu_name": "strigiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Grey owl", 
+                "link_path": "gallery/species/bird/grey_owl.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Tawny owl", 
+                "link_path": "gallery/species/bird/tawny_owl.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Strigiformes"
+    }, 
+    {
+        "menu_name": "coraciiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Great hornbill", 
+                "link_path": "gallery/species/bird/great_hornbill.html", 
+                "translations": {
+                    "fr": "Calao bicorne", 
+                    "es": "Cálao grande"
+                }
+            }
+        ], 
+        "title": "Coraciiformes"
+    }, 
+    {
+        "menu_name": "piciformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Channel billed toucan", 
+                "link_path": "gallery/species/bird/channel-billed_toucan.html", 
+                "translations": {
+                    "fr": "Toucan ariel", 
+                    "es": "Diostedé pico acanalado"
+                }
+            }, 
+            {
+                "link_title": "Toco toucan", 
+                "link_path": "gallery/species/bird/toco_toucan.html", 
+                "translations": {
+                    "fr": "Toucan toco", 
+                    "es": "Tucán grande"
+                }
+            }
+        ], 
+        "title": "Piciformes"
+    }
+]

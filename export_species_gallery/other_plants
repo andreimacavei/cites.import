@@ -1,0 +1,242 @@
+[
+    {
+        "menu_name": "apocynaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Hoodia gordinii", 
+                "link_path": "gallery/species/other_plant/Hoodia_gordonii.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }, 
+            {
+                "link_title": "Pachypodium lealei", 
+                "link_path": "gallery/species/other_plant/pachypodium_lealei.html", 
+                "translations": {
+                    "fr": "Pachypodium lealei", 
+                    "es": "Pachypodium lealei"
+                }
+            }
+        ], 
+        "title": "Apocynaceae"
+    }, 
+    {
+        "menu_name": "cupressaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Fitzroya cupressoides", 
+                "link_path": "gallery/species/other_plant/Fitzroya_cupressoides.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": ""
+                }
+            }
+        ], 
+        "title": "Cupressaceae"
+    }, 
+    {
+        "menu_name": "cycadaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Cycas beddomei", 
+                "link_path": "gallery/species/other_plant/cycas_beddomei.html", 
+                "translations": {
+                    "fr": "Cycas beddomei", 
+                    "es": "Cycas beddomei"
+                }
+            }
+        ], 
+        "title": "Cycadaceae"
+    }, 
+    {
+        "menu_name": "euphorbiaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Euphorbia milii", 
+                "link_path": "gallery/species/other_plant/euphorbia_milii.html", 
+                "translations": {
+                    "fr": "Euphorbia milii", 
+                    "es": "Euphorbia milii"
+                }
+            }, 
+            {
+                "link_title": "Euphorbia trigona", 
+                "link_path": "gallery/species/other_plant/euphorbia_trigona.html", 
+                "translations": {
+                    "fr": "Euphorbia trigona", 
+                    "es": "Euphorbia trigona"
+                }
+            }
+        ], 
+        "title": "Euphorbiaceae"
+    }, 
+    {
+        "menu_name": "liliaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Aloe arborescens", 
+                "link_path": "gallery/species/other_plant/Aloe_arborescens.html", 
+                "translations": {
+                    "fr": "Aloe arborescens", 
+                    "es": "Aloe arborescens"
+                }
+            }, 
+            {
+                "link_title": "Aloe bainesii", 
+                "link_path": "gallery/species/other_plant/Aloe_bainesii.html", 
+                "translations": {
+                    "fr": "Aloe bainesii", 
+                    "es": "Aloe bainesii"
+                }
+            }, 
+            {
+                "link_title": "Aloe chabaudii", 
+                "link_path": "gallery/species/other_plant/Aloe_chabaudii.html", 
+                "translations": {
+                    "fr": "Aloe chabaudii", 
+                    "es": "Aloe chabaudii"
+                }
+            }, 
+            {
+                "link_title": "Aloe dichotoma", 
+                "link_path": "gallery/species/other_plant/aloe_dichotoma.html", 
+                "translations": {
+                    "fr": "Aloe dichotoma", 
+                    "es": "Aloe dichotoma"
+                }
+            }, 
+            {
+                "link_title": "Aloe excelsa", 
+                "link_path": "gallery/species/other_plant/Aloe_excelsa.html", 
+                "translations": {
+                    "fr": "Aloe excelsa", 
+                    "es": "Aloe excelsa"
+                }
+            }, 
+            {
+                "link_title": "Aloe ferox", 
+                "link_path": "gallery/species/other_plant/Aloe_ferox.html", 
+                "translations": {
+                    "fr": "Aloe ferox", 
+                    "es": "Aloe ferox"
+                }
+            }, 
+            {
+                "link_title": "Aloe marlothii", 
+                "link_path": "gallery/species/other_plant/Aloe_marlothii.html", 
+                "translations": {
+                    "fr": "Aloe marlothii", 
+                    "es": "Aloe marlothii"
+                }
+            }
+        ], 
+        "title": "Liliaceae"
+    }, 
+    {
+        "menu_name": "stangeriaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Bowenia serrulata", 
+                "link_path": "gallery/species/other_plant/Bowenia_serrulata.html", 
+                "translations": {
+                    "fr": "Bowenia serrulata", 
+                    "es": "Bowenia serrulata"
+                }
+            }
+        ], 
+        "title": "Stangeriaceae"
+    }, 
+    {
+        "menu_name": "welwitschiaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Welwitschia mirabilis", 
+                "link_path": "gallery/species/other_plant/welwitschia_mirabilis.html", 
+                "translations": {
+                    "fr": "Welwitschia mirabilis", 
+                    "es": "Welwitschia mirabilis"
+                }
+            }
+        ], 
+        "title": "Welwitschiaceae"
+    }, 
+    {
+        "menu_name": "zamiaceae", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Ceratozamia mexicana", 
+                "link_path": "gallery/species/other_plant/Ceratozamia_mexicana.html", 
+                "translations": {
+                    "fr": "Ceratozamia mexicana", 
+                    "es": "Ceratozamia mexicana"
+                }
+            }, 
+            {
+                "link_title": "Ceratozamia microstrobila", 
+                "link_path": "gallery/species/other_plant/Ceratozamia_microstrobila.html", 
+                "translations": {
+                    "fr": "Ceratozamia microstrobila", 
+                    "es": "Ceratozamia microstrobila"
+                }
+            }, 
+            {
+                "link_title": "Encephalartos laevifolius", 
+                "link_path": "gallery/species/other_plant/Encephalartos_laevifolius.html", 
+                "translations": {
+                    "fr": "Encephalartos laevifolius", 
+                    "es": "Encephalartos laevifolius"
+                }
+            }, 
+            {
+                "link_title": "Encephalartos umbeluziensis", 
+                "link_path": "gallery/species/other_plant/Encephalartos_umbeluziensis.html", 
+                "translations": {
+                    "fr": "Encephalartos umbeluziensis", 
+                    "es": "Encephalartos umbeluziensis"
+                }
+            }, 
+            {
+                "link_title": "Zamia dressleri", 
+                "link_path": "gallery/species/other_plant/Zamia_dressleri.html", 
+                "translations": {
+                    "fr": "Zamia dressleri", 
+                    "es": "Zamia dressleri"
+                }
+            }
+        ], 
+        "title": "Zamiaceae"
+    }
+]

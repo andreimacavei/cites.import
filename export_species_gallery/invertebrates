@@ -1,0 +1,154 @@
+[
+    {
+        "menu_name": "insects", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Apollo butterfly", 
+                "link_path": "gallery/species/invertibrate/appolo_butterfly.html", 
+                "translations": {
+                    "fr": "Parnassius apollo", 
+                    "es": "Apolo Mariposa apollo"
+                }
+            }, 
+            {
+                "link_title": "Queen Victoria s birdwing", 
+                "link_path": "gallery/species/invertibrate/queen_votorias_birdwing.html", 
+                "translations": {
+                    "fr": "", 
+                    "es": "Mariposa de la Reina Victoria"
+                }
+            }
+        ], 
+        "title": "Insects"
+    }, 
+    {
+        "menu_name": "arachnids", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Emperor scorpion", 
+                "link_path": "gallery/species/invertibrate/emperor_scorpion.html", 
+                "translations": {
+                    "fr": "Pandinus imperator", 
+                    "es": "Escorpión emperador"
+                }
+            }, 
+            {
+                "link_title": "Curly hair tarantula", 
+                "link_path": "gallery/species/invertibrate/curlyhair.html", 
+                "translations": {
+                    "fr": "Brachypelma albopilisum", 
+                    "es": "Tarántula de pelo crespo"
+                }
+            }, 
+            {
+                "link_title": "Orange knee tarantula", 
+                "link_path": "gallery/species/invertibrate/redleg.html", 
+                "translations": {
+                    "fr": "Brachypelma emilia", 
+                    "es": "Tarántula mexicana de pierna roja"
+                }
+            }, 
+            {
+                "link_title": "Red kneed tarantula", 
+                "link_path": "gallery/species/invertibrate/redknee.html", 
+                "translations": {
+                    "fr": "Brachypelma smithi", 
+                    "es": "Tarántula mexicana de rodillas rojas"
+                }
+            }, 
+            {
+                "link_title": "Mexican fireleg", 
+                "link_path": "gallery/species/invertibrate/fireleg.html", 
+                "translations": {
+                    "fr": "Brachypelma boehmei", 
+                    "es": "Tarántula mexicana pierna naranja oscuro"
+                }
+            }
+        ], 
+        "title": "Arachnids"
+    }, 
+    {
+        "menu_name": "gastropoda", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Queen conch", 
+                "link_path": "gallery/species/invertibrate/queen_conch.html", 
+                "translations": {
+                    "fr": "Strombus gigas", 
+                    "es": "Concha reina"
+                }
+            }
+        ], 
+        "title": "Gastropoda"
+    }, 
+    {
+        "menu_name": "corals", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Blue coral", 
+                "link_path": "gallery/species/invertibrate/blue_coral.html", 
+                "translations": {
+                    "fr": "Heliopora coerulea", 
+                    "es": "Coral azul"
+                }
+            }, 
+            {
+                "link_title": "Brown stem coral", 
+                "link_path": "gallery/species/invertibrate/brown_stem_coral.html", 
+                "translations": {
+                    "fr": "Pocillopora verrucosa", 
+                    "es": "Coral de tallo marrón"
+                }
+            }, 
+            {
+                "link_title": "Cactus coral", 
+                "link_path": "gallery/species/invertibrate/cactus_coral.html", 
+                "translations": {
+                    "fr": "Pavona cactus", 
+                    "es": "Coral de cactus"
+                }
+            }, 
+            {
+                "link_title": "Cauliflower coral", 
+                "link_path": "gallery/species/invertibrate/cauliflower_coral.html", 
+                "translations": {
+                    "fr": "Stylophora pistillata", 
+                    "es": "Coral coliflor"
+                }
+            }, 
+            {
+                "link_title": "Mushroom coral", 
+                "link_path": "gallery/species/invertibrate/mushroom_coral.html", 
+                "translations": {
+                    "fr": "Fungia fungites", 
+                    "es": "Coral hongo"
+                }
+            }, 
+            {
+                "link_title": "Organ pipe coral", 
+                "link_path": "gallery/species/invertibrate/organ-pipe-coral.html", 
+                "translations": {
+                    "fr": "Tubipora musica", 
+                    "es": "Coral órgano"
+                }
+            }
+        ], 
+        "title": "Corals"
+    }
+]
