@@ -1,4 +1,26 @@
 [
+	{
+        "menu_name": "ceratodontiformes", 
+        "contextual_menu": {
+            "enabled": true
+        }, 
+        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        "links": [
+            {
+                "link_title": "Australian lungfish", 
+                "link_path": "gallery/species/fish/neoceratodus_forsteri.html", 
+                "translations": {
+                    "fr": "Cératode", 
+                    "es": "Dipnoo"
+                }
+            }
+        ], 
+        "title": "Ceratodontiformes",
+		"translations": {
+			"fr": "Ceratodontiformes",
+			"es": "Ceratodontiformes"
+		}
+    },
     {
         "menu_name": "coelacanthiformes", 
         "contextual_menu": {
@@ -15,7 +37,11 @@
                 }
             }
         ], 
-        "title": "Coelacanthiformes"
+        "title": "Coelacanthiformes",
+		"translations": {
+			"fr": "Coelacanthiformes",
+			"es": "Coelacanthiformes"
+		}
     }, 
     {
         "menu_name": "acipenserformes", 
@@ -89,7 +115,11 @@
                 }
             }
         ], 
-        "title": "Acipenserformes"
+        "title": "Acipenserformes",
+		"translations": {
+			"fr": "Acipenserformes",
+			"es": "Acipenserformes"
+		}
     }, 
     {
         "menu_name": "cypriniformes", 
@@ -115,7 +145,11 @@
                 }
             }
         ], 
-        "title": "Cypriniformes"
+        "title": "Cypriniformes",
+		"translations": {
+			"fr": "Cypriniformes",
+			"es": "Cypriniformes"
+		}
     }, 
     {
         "menu_name": "lamniformes", 
@@ -141,7 +175,11 @@
                 }
             }
         ], 
-        "title": "Lamniformes"
+        "title": "Lamniformes",
+		"translations": {
+			"fr": "Lamniformes",
+			"es": "Lamniformes"
+		}
     }, 
     {
         "menu_name": "orectolobiformes", 
@@ -159,7 +197,11 @@
                 }
             }
         ], 
-        "title": "Orectolobiformes"
+        "title": "Orectolobiformes",
+		"translations": {
+			"fr": "Orectolobiformes",
+			"es": "Orectolobiformes"
+		}
     }, 
     {
         "menu_name": "osteoglossiformes", 
@@ -185,7 +227,11 @@
                 }
             }
         ], 
-        "title": "Osteoglossiformes"
+        "title": "Osteoglossiformes",
+		"translations": {
+			"fr": "Osteoglossiformes",
+			"es": "Osteoglossiformes"
+		}
     }, 
     {
         "menu_name": "siluriformes", 
@@ -203,7 +249,11 @@
                 }
             }
         ], 
-        "title": "Siluriformes"
+        "title": "Siluriformes",
+		"translations": {
+			"fr": "Siluriformes",
+			"es": "Siluriformes"
+		}
     }, 
     {
         "menu_name": "syngnathiformes", 
@@ -237,6 +287,10 @@
                 }
             }
         ], 
-        "title": "Syngnathiformes"
+        "title": "Syngnathiformes",
+		"translations": {
+			"fr": "Syngnathiformes",
+			"es": "Syngnathiformes"
+		}
     }
 ]

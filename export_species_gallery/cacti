@@ -143,6 +143,10 @@
                 }
             }
         ], 
-        "title": "Cactus"
+        "title": "Cactus",
+		"translations": {
+			"fr": "",
+			"es": ""
+		}
     }
 ]

@@ -135,7 +135,11 @@
                 }
             }
         ], 
-        "title": "Turtles_&_Tortoises"
+        "title": "Turtles_&_Tortoises",
+		"translations": {
+			"fr": "Tortues",
+			"es": "Turtles_&_Tortoises"
+		}
     }, 
     {
         "menu_name": "crocodylians", 
@@ -193,7 +197,11 @@
                 }
             }
         ], 
-        "title": "Crocodylians"
+        "title": "Crocodylians",
+		"translations": {
+			"fr": "Crocodiliens",
+			"es": "Crocodylians"
+		}
     }, 
     {
         "menu_name": "saurians", 
@@ -395,7 +403,11 @@
                 }
             }
         ], 
-        "title": "Saurians"
+        "title": "Saurians",
+		"translations": {
+			"fr": "Sauriens",
+			"es": "Saurians"
+		}
     }, 
     {
         "menu_name": "snakes", 
@@ -485,6 +497,10 @@
                 }
             }
         ], 
-        "title": "Snakes"
+        "title": "Snakes",
+		"translations": {
+			"fr": "Serpents",
+			"es": "Snakes"
+		}
     }
 ]

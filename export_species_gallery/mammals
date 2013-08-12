@@ -175,7 +175,11 @@
                 }
             }
         ], 
-        "title": "Primates"
+        "title": "Primates",
+		"translations": {
+			"fr": "Primates",
+			"es": "Primates"
+		}
     }, 
     {
         "menu_name": "pholidota", 
@@ -193,7 +197,11 @@
                 }
             }
         ], 
-        "title": "Pholidota"
+        "title": "Pholidota",
+		"translations": {
+			"fr": "Edentés",
+			"es": "Pholidota"
+		}
     }, 
     {
         "menu_name": "cetacea", 
@@ -219,7 +227,11 @@
                 }
             }
         ], 
-        "title": "Cetacea"
+        "title": "Cetacea",
+		"translations": {
+			"fr": "Cétacés",
+			"es": "Cetacea"
+		}
     }, 
     {
         "menu_name": "carnivores", 
@@ -421,7 +433,11 @@
                 }
             }
         ], 
-        "title": "Carnivores"
+        "title": "Carnivores",
+		"translations": {
+			"fr": "Carnivores",
+			"es": "Carnivores"
+		}
     }, 
     {
         "menu_name": "proboscidea", 
@@ -447,7 +463,11 @@
                 }
             }
         ], 
-        "title": "Proboscidea"
+        "title": "Proboscidea",
+		"translations": {
+			"fr": "Proboscidiens",
+			"es": "Proboscidea"
+		}
     }, 
     {
         "menu_name": "sirenia", 
@@ -465,7 +485,11 @@
                 }
             }
         ], 
-        "title": "Sirenia"
+        "title": "Sirenia",
+		"translations": {
+			"fr": "",
+			"es": ""
+		}
     }, 
     {
         "menu_name": "perissodactyla", 
@@ -563,7 +587,11 @@
                 }
             }
         ], 
-        "title": "Perissodactyla"
+        "title": "Perissodactyla",
+		"translations": {
+			"fr": "Périssodactyles",
+			"es": "Perissodactyla"
+		}
     }, 
     {
         "menu_name": "artiodactyla", 
@@ -757,6 +785,10 @@
                 }
             }
         ], 
-        "title": "Artiodactyla"
+        "title": "Artiodactyla",
+		"translations": {
+			"fr": "Artiodactyles",
+			"es": "Artiodactyla"
+		}
     }
 ]

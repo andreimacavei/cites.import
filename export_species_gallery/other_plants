@@ -23,7 +23,11 @@
                 }
             }
         ], 
-        "title": "Apocynaceae"
+        "title": "Apocynaceae",
+		"translations": {
+			"fr": "Apocynaceae",
+			"es": "Apocynaceae"
+		}
     }, 
     {
         "menu_name": "cupressaceae", 
@@ -41,7 +45,11 @@
                 }
             }
         ], 
-        "title": "Cupressaceae"
+        "title": "Cupressaceae",
+		"translations": {
+			"fr": "",
+			"es": ""
+		}
     }, 
     {
         "menu_name": "cycadaceae", 
@@ -59,7 +67,11 @@
                 }
             }
         ], 
-        "title": "Cycadaceae"
+        "title": "Cycadaceae",
+		"translations": {
+			"fr": "Cycadaceae",
+			"es": "Cycadaceae"
+		}
     }, 
     {
         "menu_name": "euphorbiaceae", 
@@ -85,7 +97,11 @@
                 }
             }
         ], 
-        "title": "Euphorbiaceae"
+        "title": "Euphorbiaceae",
+		"translations": {
+			"fr": "Euphorbiaceae",
+			"es": "Euphorbiaceae"
+		}
     }, 
     {
         "menu_name": "liliaceae", 
@@ -151,7 +167,11 @@
                 }
             }
         ], 
-        "title": "Liliaceae"
+        "title": "Liliaceae",
+		"translations": {
+			"fr": "Liliaceae",
+			"es": "Liliaceae"
+		}
     }, 
     {
         "menu_name": "stangeriaceae", 
@@ -169,7 +189,11 @@
                 }
             }
         ], 
-        "title": "Stangeriaceae"
+        "title": "Stangeriaceae",
+		"translations": {
+			"fr": "Stangeriaceae",
+			"es": "Stangeriaceae"
+		}
     }, 
     {
         "menu_name": "welwitschiaceae", 
@@ -187,7 +211,11 @@
                 }
             }
         ], 
-        "title": "Welwitschiaceae"
+        "title": "Welwitschiaceae",
+		"translations": {
+			"fr": "Welwitschiaceae",
+			"es": "Welwitschiaceae"
+		}
     }, 
     {
         "menu_name": "zamiaceae", 
@@ -237,6 +265,10 @@
                 }
             }
         ], 
-        "title": "Zamiaceae"
+        "title": "Zamiaceae",
+		"translations": {
+			"fr": "Zamiaceae",
+			"es": "Zamiaceae"
+		}
     }
 ]

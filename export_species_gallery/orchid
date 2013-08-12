@@ -223,6 +223,10 @@
                 }
             }
         ], 
-        "title": "Orchid"
+        "title": "Orchid",
+		"translations": {
+			"fr": "",
+			"es": ""
+		}
     }
 ]

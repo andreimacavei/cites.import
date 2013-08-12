@@ -23,7 +23,11 @@
                 }
             }
         ], 
-        "title": "Insects"
+        "title": "Insects",
+		"translations": {
+			"fr": "Insectes",
+			"es": "Insects"
+		}
     }, 
     {
         "menu_name": "arachnids", 
@@ -73,7 +77,11 @@
                 }
             }
         ], 
-        "title": "Arachnids"
+        "title": "Arachnids",
+		"translations": {
+			"fr": "Arachnides",
+			"es": "Arachnids"
+		}
     }, 
     {
         "menu_name": "gastropoda", 
@@ -91,7 +99,11 @@
                 }
             }
         ], 
-        "title": "Gastropoda"
+        "title": "Gastropoda",
+		"translations": {
+			"fr": "Gastropoda",
+			"es": "Gastropoda"
+		}
     }, 
     {
         "menu_name": "corals", 
@@ -149,6 +161,10 @@
                 }
             }
         ], 
-        "title": "Corals"
+        "title": "Corals",
+		"translations": {
+			"fr": "Coraux",
+			"es": "Corals"
+		}
     }
 ]

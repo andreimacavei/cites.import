@@ -15,7 +15,11 @@
                 }
             }
         ], 
-        "title": "Struthioniformes"
+        "title": "Struthioniformes",
+		"translations": {
+			"fr": "",
+			"es": ""
+		}
     }, 
     {
         "menu_name": "rheiformes", 
@@ -33,7 +37,11 @@
                 }
             }
         ], 
-        "title": "Rheiformes"
+        "title": "Rheiformes",
+		"translations": {
+			"fr": "Rheiformes",
+			"es": "Rheiformes"
+		}
     }, 
     {
         "menu_name": "sphenisciformes", 
@@ -51,7 +59,11 @@
                 }
             }
         ], 
-        "title": "Sphenisciformes"
+        "title": "Sphenisciformes",
+		"translations": {
+			"fr": "Sphenisciformes",
+			"es": "Sphenisciformes"
+		}
     }, 
     {
         "menu_name": "pelecaniformes", 
@@ -69,7 +81,11 @@
                 }
             }
         ], 
-        "title": "Pelecaniformes"
+        "title": "Pelecaniformes",
+		"translations": {
+			"fr": "Pelecaniformes",
+			"es": "Pelecaniformes"
+		}
     }, 
     {
         "menu_name": "ciconiiformes", 
@@ -135,7 +151,11 @@
                 }
             }
         ], 
-        "title": "Ciconiiformes"
+        "title": "Ciconiiformes",
+		"translations": {
+			"fr": "Ciconiiformes",
+			"es": "Ciconiiformes"
+		}
     }, 
     {
         "menu_name": "anseriformes", 
@@ -185,7 +205,11 @@
                 }
             }
         ], 
-        "title": "Anseriformes"
+        "title": "Anseriformes",
+		"translations": {
+			"fr": "Anseriformes",
+			"es": "Anseriformes"
+		}
     }, 
     {
         "menu_name": "falconiformes", 
@@ -323,7 +347,11 @@
                 }
             }
         ], 
-        "title": "Falconiformes"
+        "title": "Falconiformes",
+		"translations": {
+			"fr": "Falconiformes",
+			"es": "Falconiformes"
+		}
     }, 
     {
         "menu_name": "gruiformes", 
@@ -373,7 +401,11 @@
                 }
             }
         ], 
-        "title": "Gruiformes"
+        "title": "Gruiformes",
+		"translations": {
+			"fr": "Gruiformes",
+			"es": "Gruiformes"
+		}
     }, 
     {
         "menu_name": "psittaciformes", 
@@ -407,7 +439,11 @@
                 }
             }
         ], 
-        "title": "Psittaciformes"
+        "title": "Psittaciformes",
+		"translations": {
+			"fr": "Psittaciformes",
+			"es": "Psittaciformes"
+		}
     }, 
     {
         "menu_name": "strigiformes", 
@@ -433,7 +469,11 @@
                 }
             }
         ], 
-        "title": "Strigiformes"
+        "title": "Strigiformes",
+		"translations": {
+			"fr": "",
+			"es": ""
+		}
     }, 
     {
         "menu_name": "coraciiformes", 
@@ -451,7 +491,11 @@
                 }
             }
         ], 
-        "title": "Coraciiformes"
+        "title": "Coraciiformes",
+		"translations": {
+			"fr": "Coraciiformes",
+			"es": "Coraciiformes"
+		}
     }, 
     {
         "menu_name": "piciformes", 
@@ -477,6 +521,10 @@
                 }
             }
         ], 
-        "title": "Piciformes"
+        "title": "Piciformes",
+		"translations": {
+			"fr": "Piciformes",
+			"es": "Piciformes"
+		}
     }
 ]
