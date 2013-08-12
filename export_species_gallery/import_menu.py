@@ -1,3 +1,4 @@
+# coding=utf-8
 #!/bin/usr/python
 
 import re
@@ -27,9 +28,6 @@ menu_entries = {
     "other_plants": "other_plant/otherplants_list.html",
 }
 
-menu_translations = {
-
-}
 
 text_pattern = re.compile('\W+', re.UNICODE)
 html_pattern = re.compile('<[^<]+?>')
@@ -41,7 +39,8 @@ def clean_title(title):
         title = title.contents[0]
 
     html_cleaned = html_pattern.sub('', title).strip()
-    return text_pattern.sub(' ', html_cleaned)
+    xxx = text_pattern.sub(' ', html_cleaned)
+    return xxx.encode('latin-1')
 
 def get_translations(species_url, rel_url):
 
@@ -101,10 +100,8 @@ def download_menu_entry(species_url):
     table = soup.find("table")
 
     table_data = [td for td in table.find_all("td")][3:]
-
     results = []
     species = {}
-    flag = False
     for data in table_data:
         if data.has_attr('class'):
             # if we get to the next list head item we append the dictionary to the result
@@ -122,14 +119,14 @@ def download_menu_entry(species_url):
                 species_order = species_url.split('/')[0]
                 species = build_species_dict(data, species_order, species_url)
                 species['links'].append(subspecies)
-                flag = True
-    if flag:
-        results.append(species)
+
+    results.append(species)
     return results
 
 def to_json(filename, results):
     f = open(filename, "w")
-    f.write(json.dumps(results, indent=4))
+    #f.write(json.dump(results, indent=4))
+    json.dump(results, f, ensure_ascii=False, indent=4)
     f.close()
 
 if __name__ == '__main__':
@@ -137,3 +134,4 @@ if __name__ == '__main__':
     for k, v in menu_entries.items():
         to_json(k, download_menu_entry(v))
     print "Wrote {} files".format(len(menu_entries))
+
