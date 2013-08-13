@@ -1,152 +1,148 @@
 [
     {
-        "menu_name": "cactus", 
+        "menu_name": "cactus",
         "contextual_menu": {
             "enabled": true
-        }, 
-        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        },
+        "i18n_mode": "I18N_MODE_MULTIPLE",
         "links": [
             {
-                "link_title": "Akersia roseiflora", 
-                "link_path": "gallery/species/cactus/akerisa_roseiflora.html", 
+                "link_title": "Akersia roseiflora",
+                "link_path": "gallery/species/cactus/akerisa_roseiflora.html",
                 "translations": {
-                    "fr": "Akersia roseiflora", 
+                    "fr": "Akersia roseiflora",
                     "es": "Akersia roseiflora"
                 }
-            }, 
+            },
             {
-                "link_title": "Echinocereus gentryi", 
-                "link_path": "gallery/species/cactus/echinocereus_gentryi.html", 
+                "link_title": "Echinocereus gentryi",
+                "link_path": "gallery/species/cactus/echinocereus_gentryi.html",
                 "translations": {
-                    "fr": "Echinocereus gentryi", 
+                    "fr": "Echinocereus gentryi",
                     "es": "Echinocereus gentryi"
                 }
-            }, 
+            },
             {
-                "link_title": "Ferocactus fordii", 
-                "link_path": "gallery/species/cactus/ferocactus_fordii.html", 
+                "link_title": "Ferocactus fordii",
+                "link_path": "gallery/species/cactus/ferocactus_fordii.html",
                 "translations": {
-                    "fr": "Ferocactus fordii", 
+                    "fr": "Ferocactus fordii",
                     "es": "Ferocactus fordii"
                 }
-            }, 
+            },
             {
-                "link_title": "Lobivia famatimensis", 
-                "link_path": "gallery/species/cactus/lobivia_famatimensis.html", 
+                "link_title": "Lobivia famatimensis",
+                "link_path": "gallery/species/cactus/lobivia_famatimensis.html",
                 "translations": {
-                    "fr": "Lobivia famatimensis", 
+                    "fr": "Lobivia famatimensis",
                     "es": "Lobivia famatimensis"
                 }
-            }, 
+            },
             {
-                "link_title": "Mammillaria blossfeldiana", 
-                "link_path": "gallery/species/cactus/Mammillaria_blossfeldiana.html", 
+                "link_title": "Mammillaria blossfeldiana",
+                "link_path": "gallery/species/cactus/Mammillaria_blossfeldiana.html",
                 "translations": {
-                    "fr": "Mammillaria blossfeldiana", 
+                    "fr": "Mammillaria blossfeldiana",
                     "es": "Mammillaria blossfeldiana"
                 }
-            }, 
+            },
             {
-                "link_title": "Mammillaria deherdtiana", 
-                "link_path": "gallery/species/cactus/Mammillaria_deherdtiana.html", 
+                "link_title": "Mammillaria deherdtiana",
+                "link_path": "gallery/species/cactus/Mammillaria_deherdtiana.html",
                 "translations": {
-                    "fr": "Mammillaria deherdtiana", 
+                    "fr": "Mammillaria deherdtiana",
                     "es": "Mammillaria deherdtiana"
                 }
-            }, 
+            },
             {
-                "link_title": "Mammillaria longimamma", 
-                "link_path": "gallery/species/cactus/Mammillaria_longimamma.html", 
+                "link_title": "Mammillaria longimamma",
+                "link_path": "gallery/species/cactus/Mammillaria_longimamma.html",
                 "translations": {
-                    "fr": "Mammillaria longimamma", 
+                    "fr": "Mammillaria longimamma",
                     "es": "Mammillaria longimamma"
                 }
-            }, 
+            },
             {
-                "link_title": "Mammillaria perezdelarosae", 
-                "link_path": "gallery/species/cactus/Mammillaria_perezdelarosae.html", 
+                "link_title": "Mammillaria perezdelarosae",
+                "link_path": "gallery/species/cactus/Mammillaria_perezdelarosae.html",
                 "translations": {
-                    "fr": "Mammillaria perezdelarosae", 
+                    "fr": "Mammillaria perezdelarosae",
                     "es": "Mammillaria perezdelarosae"
                 }
-            }, 
+            },
             {
-                "link_title": "Mammillaria yaquensis", 
-                "link_path": "gallery/species/cactus/Mammillaria_yaquensis.html", 
+                "link_title": "Mammillaria yaquensis",
+                "link_path": "gallery/species/cactus/Mammillaria_yaquensis.html",
                 "translations": {
-                    "fr": "Mammillaria yaquensis", 
+                    "fr": "Mammillaria yaquensis",
                     "es": "Mammillaria yaquensis"
                 }
-            }, 
+            },
             {
-                "link_title": "Mammillaria zeilmanniana", 
-                "link_path": "gallery/species/cactus/Mammillaria_zeilmanniana.html", 
+                "link_title": "Mammillaria zeilmanniana",
+                "link_path": "gallery/species/cactus/Mammillaria_zeilmanniana.html",
                 "translations": {
-                    "fr": "Mammillaria zeilmanniana", 
+                    "fr": "Mammillaria zeilmanniana",
                     "es": "Mammillaria zeilmanniana"
                 }
-            }, 
+            },
             {
-                "link_title": "Notocactus haselbergii", 
-                "link_path": "gallery/species/cactus/Notocactus_haselbergii.html", 
+                "link_title": "Notocactus haselbergii",
+                "link_path": "gallery/species/cactus/Notocactus_haselbergii.html",
                 "translations": {
-                    "fr": "Notocactus haselbergii", 
+                    "fr": "Notocactus haselbergii",
                     "es": "Notocactus haselbergii"
                 }
-            }, 
+            },
             {
-                "link_title": "Pelecyphora valdeziana", 
-                "link_path": "gallery/species/cactus/pelecyphora_valdeziana.html", 
+                "link_title": "Pelecyphora valdeziana",
+                "link_path": "gallery/species/cactus/pelecyphora_valdeziana.html",
                 "translations": {
-                    "fr": "Pelecyphora valdeziana", 
+                    "fr": "Pelecyphora valdeziana",
                     "es": "Pelecyphora valdeziana"
                 }
-            }, 
+            },
             {
-                "link_title": "Selenicereus grandiflorus", 
-                "link_path": "gallery/species/cactus/Selenicereus_grandiflorus.html", 
+                "link_title": "Selenicereus grandiflorus",
+                "link_path": "gallery/species/cactus/Selenicereus_grandiflorus.html",
                 "translations": {
-                    "fr": "Selenicereus grandiflorus", 
+                    "fr": "Selenicereus grandiflorus",
                     "es": "Selenicereus grandiflorus"
                 }
-            }, 
+            },
             {
-                "link_title": "Sulcorebutia flavissima", 
-                "link_path": "gallery/species/cactus/Sulcorebutia_flavissima.html", 
+                "link_title": "Sulcorebutia flavissima",
+                "link_path": "gallery/species/cactus/Sulcorebutia_flavissima.html",
                 "translations": {
-                    "fr": "Sulcorebutia flavissima", 
+                    "fr": "Sulcorebutia flavissima",
                     "es": "Sulcorebutia flavissima"
                 }
-            }, 
+            },
             {
-                "link_title": "Sulcorebutia lepida", 
-                "link_path": "gallery/species/cactus/Sulcorebutia_lepida.html", 
+                "link_title": "Sulcorebutia lepida",
+                "link_path": "gallery/species/cactus/Sulcorebutia_lepida.html",
                 "translations": {
-                    "fr": "Sulcorebutia lepida", 
+                    "fr": "Sulcorebutia lepida",
                     "es": "Sulcorebutia lepida"
                 }
-            }, 
+            },
             {
-                "link_title": "Sulcorebutia rauschii", 
-                "link_path": "gallery/species/cactus/Sulcorebutia_rauschii.html", 
+                "link_title": "Sulcorebutia rauschii",
+                "link_path": "gallery/species/cactus/Sulcorebutia_rauschii.html",
                 "translations": {
-                    "fr": "Sulcorebutia rauschii", 
+                    "fr": "Sulcorebutia rauschii",
                     "es": "Sulcorebutia rauschii"
                 }
-            }, 
+            },
             {
-                "link_title": "Weingartia neocumingii", 
-                "link_path": "gallery/species/cactus/weingartia_%20neocumingii.html", 
+                "link_title": "Weingartia neocumingii",
+                "link_path": "gallery/species/cactus/weingartia_%20neocumingii.html",
                 "translations": {
-                    "fr": "Weingartia neocumingii", 
+                    "fr": "Weingartia neocumingii",
                     "es": "Weingartia neocumingii"
                 }
             }
-        ], 
-        "title": "Cactus",
-		"translations": {
-			"fr": "",
-			"es": ""
-		}
+        ],
+        "title": "Cactus"
     }
 ]

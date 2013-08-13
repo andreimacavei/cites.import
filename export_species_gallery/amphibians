@@ -1,154 +1,123 @@
 [
     {
-        "menu_name": "caudata", 
+        "menu_name": "caudata",
         "contextual_menu": {
             "enabled": true
-        }, 
-        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        },
+        "i18n_mode": "I18N_MODE_MULTIPLE",
         "links": [
             {
-                "link_title": "Chinese giant salamander", 
-                "link_path": "gallery/species/amphibian/chinese_giant_salamander.html", 
+                "link_title": "Chinese giant salamander",
+                "link_path": "gallery/species/amphibian/chinese_giant_salamander.html",
                 "translations": {
-                    "fr": "Salamandre du père David", 
+                    "fr": "Salamandre du père David",
                     "es": "Salamandra gigante de China"
                 }
             }
-        ], 
+        ],
         "title": "Caudata",
 		"translations": {
 			"fr": "Caudata",
 			"es": "Caudata"
 		}
-    }, 
+    },
     {
-        "menu_name": "anura", 
+        "menu_name": "anura",
         "contextual_menu": {
             "enabled": true
-        }, 
-        "i18n_mode": "I18N_MODE_MULTIPLE", 
+        },
+        "i18n_mode": "I18N_MODE_MULTIPLE",
         "links": [
             {
-                "link_title": "Dyeing poison frog", 
-                "link_path": "gallery/species/amphibian/dyeing_poison_frog.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Dyeing poison frog",
+                "link_path": "gallery/species/amphibian/dyeing_poison_frog.html"
+            },
             {
-                "link_title": "Golden poison frog", 
-                "link_path": "gallery/species/amphibian/golden_poison_frog.html", 
+                "link_title": "Golden poison frog",
+                "link_path": "gallery/species/amphibian/golden_poison_frog.html",
                 "translations": {
-                    "fr": "Phyllobate terrible", 
+                    "fr": "Phyllobate terrible",
                     "es": "Rana de punta de flecha terrible"
                 }
-            }, 
+            },
             {
-                "link_title": "Golfoduicean poison frog", 
-                "link_path": "gallery/species/amphibian/golfoduicean_poison_frog.html", 
+                "link_title": "Golfoduicean poison frog",
+                "link_path": "gallery/species/amphibian/golfoduicean_poison_frog.html",
                 "translations": {
-                    "fr": "Phyllobate à bande", 
+                    "fr": "Phyllobate à bande",
                     "es": "Rana de punta de flecha rayada"
                 }
-            }, 
+            },
             {
-                "link_title": "Green poison frog", 
-                "link_path": "gallery/species/amphibian/green_poison_frog.html", 
+                "link_title": "Green poison frog",
+                "link_path": "gallery/species/amphibian/green_poison_frog.html",
                 "translations": {
-                    "fr": "Dendrobate doré", 
+                    "fr": "Dendrobate doré",
                     "es": "Dendrobates auratus"
                 }
-            }, 
+            },
             {
-                "link_title": "Red and blue poison frog", 
-                "link_path": "gallery/species/amphibian/red-blue-poison-frog.html", 
+                "link_title": "Red and blue poison frog",
+                "link_path": "gallery/species/amphibian/red-blue-poison-frog.html",
                 "translations": {
-                    "fr": "Dendrobate pumilio", 
+                    "fr": "Dendrobate pumilio",
                     "es": "Rana de punta de flecha roja"
                 }
-            }, 
+            },
             {
-                "link_title": "Red rain frog", 
-                "link_path": "gallery/species/amphibian/red_rain_frog.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Red rain frog",
+                "link_path": "gallery/species/amphibian/red_rain_frog.html"
+            },
             {
-                "link_title": "Yellow banded poison frog", 
-                "link_path": "gallery/species/amphibian/yellow_banded_poison_frog.html", 
+                "link_title": "Yellow banded poison frog",
+                "link_path": "gallery/species/amphibian/yellow_banded_poison_frog.html",
                 "translations": {
-                    "fr": "Dendrobate jaune et noir", 
+                    "fr": "Dendrobate jaune et noir",
                     "es": "Rana de punta de flecha de bandas amarillas"
                 }
-            }, 
+            },
             {
-                "link_title": "Black golden frog", 
-                "link_path": "gallery/species/amphibian/black_golden_frog.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Black golden frog",
+                "link_path": "gallery/species/amphibian/black_golden_frog.html"
+            },
             {
-                "link_title": "Black mantella", 
-                "link_path": "gallery/species/amphibian/black_mantella.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Black mantella",
+                "link_path": "gallery/species/amphibian/black_mantella.html",
+
+            },
             {
-                "link_title": "Blue legged mantella", 
-                "link_path": "gallery/species/amphibian/blue-legged_mantella.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Blue legged mantella",
+                "link_path": "gallery/species/amphibian/blue-legged_mantella.html"
+            },
             {
-                "link_title": "Golden mantella", 
-                "link_path": "gallery/species/amphibian/golden_mantella.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Golden mantella",
+                "link_path": "gallery/species/amphibian/golden_mantella.html"
+            },
             {
-                "link_title": "Green mantella", 
-                "link_path": "gallery/species/amphibian/green_mantella.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Green mantella",
+                "link_path": "gallery/species/amphibian/green_mantella.html"
+            },
             {
-                "link_title": "Brown mantella", 
-                "link_path": "gallery/species/amphibian/brown_mantella.html", 
-                "translations": {
-                    "fr": "", 
-                    "es": ""
-                }
-            }, 
+                "link_title": "Brown mantella",
+                "link_path": "gallery/species/amphibian/brown_mantella.html"
+            },
             {
-                "link_title": "Tiger frog", 
-                "link_path": "gallery/species/amphibian/tiger_frog.html", 
+                "link_title": "Tiger frog",
+                "link_path": "gallery/species/amphibian/tiger_frog.html",
                 "translations": {
-                    "fr": "Grenouille tigre", 
+                    "fr": "Grenouille tigre",
                     "es": "Rana tigre"
                 }
-            }, 
+            },
             {
-                "link_title": "Tomato frog", 
-                "link_path": "gallery/species/amphibian/tomato_frog.html", 
+                "link_title": "Tomato frog",
+                "link_path": "gallery/species/amphibian/tomato_frog.html",
                 "translations": {
-                    "fr": "Crapaud rouge de Madagascar", 
+                    "fr": "Crapaud rouge de Madagascar",
                     "es": "Rana roja de Madagascar"
                 }
             }
-        ], 
+        ],
         "title": "Anura",
 		"translations": {
 			"fr": "Anura",
