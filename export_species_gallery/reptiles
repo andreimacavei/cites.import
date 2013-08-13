@@ -34,7 +34,7 @@
                 "link_title": "Angulated tortoise",
                 "link_path": "gallery/species/reptile/angulated-tortoise.html",
                 "translations": {
-                    "fr": "Tortue à soc d Afrique du Sud",
+                    "fr": "Tortue à soc d'Afrique du Sud",
                     "es": "Tortuga ariete"
                 }
             },
@@ -120,10 +120,10 @@
             }
         ],
         "title": "Turtles_&_Tortoises",
-		"translations": {
-			"fr": "Tortues",
-			"es": "Turtles_&_Tortoises"
-		}
+        "translations": {
+            "fr": "Tortues",
+            "es": "Turtles_&_Tortoises"
+        }
     },
     {
         "menu_name": "crocodylians",
@@ -182,10 +182,10 @@
             }
         ],
         "title": "Crocodylians",
-		"translations": {
-			"fr": "Crocodiliens",
-			"es": "Crocodylians"
-		}
+        "translations": {
+            "fr": "Crocodiliens",
+            "es": "Crocodylians"
+        }
     },
     {
         "menu_name": "saurians",
@@ -215,11 +215,11 @@
                 "link_path": "gallery/species/reptile/canopy_chameleon.html"
             },
             {
-                "link_title": "Larbord s chameleon",
+                "link_title": "Larbord's chameleon",
                 "link_path": "gallery/species/reptile/labords_chameleon.html"
             },
             {
-                "link_title": "Parson s giant chameleon",
+                "link_title": "Parson's giant chameleon",
                 "link_path": "gallery/species/reptile/parsons_giant_chameleon.html"
             },
             {
@@ -287,7 +287,7 @@
                 }
             },
             {
-                "link_title": "Peer s girdled lizard",
+                "link_title": "Peer's girdled lizard",
                 "link_path": "gallery/species/reptile/peers-girdled-lizard.html",
                 "translations": {
                     "fr": "Lézard à queue épineuse de Hewitt",
@@ -303,7 +303,7 @@
                 }
             },
             {
-                "link_title": "Barbour s day gecko",
+                "link_title": "Barbour's day gecko",
                 "link_path": "gallery/species/reptile/barbours_day_gecko.html"
             },
             {
@@ -340,10 +340,10 @@
             }
         ],
         "title": "Saurians",
-		"translations": {
-			"fr": "Sauriens",
-			"es": "Saurians"
-		}
+        "translations": {
+            "fr": "Sauriens",
+            "es": "Saurians"
+        }
     },
     {
         "menu_name": "snakes",
@@ -426,9 +426,9 @@
             }
         ],
         "title": "Snakes",
-		"translations": {
-			"fr": "Serpents",
-			"es": "Snakes"
-		}
+        "translations": {
+            "fr": "Serpents",
+            "es": "Snakes"
+        }
     }
 ]

@@ -16,10 +16,10 @@
             }
         ],
         "title": "Caudata",
-		"translations": {
-			"fr": "Caudata",
-			"es": "Caudata"
-		}
+        "translations": {
+            "fr": "Caudata",
+            "es": "Caudata"
+        }
     },
     {
         "menu_name": "anura",
@@ -119,9 +119,9 @@
             }
         ],
         "title": "Anura",
-		"translations": {
-			"fr": "Anura",
-			"es": "Anura"
-		}
+        "translations": {
+            "fr": "Anura",
+            "es": "Anura"
+        }
     }
 ]

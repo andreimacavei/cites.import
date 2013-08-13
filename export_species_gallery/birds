@@ -30,10 +30,10 @@
             }
         ],
         "title": "Rheiformes",
-		"translations": {
-			"fr": "Rheiformes",
-			"es": "Rheiformes"
-		}
+        "translations": {
+            "fr": "Rheiformes",
+            "es": "Rheiformes"
+        }
     },
     {
         "menu_name": "sphenisciformes",
@@ -52,10 +52,10 @@
             }
         ],
         "title": "Sphenisciformes",
-		"translations": {
-			"fr": "Sphenisciformes",
-			"es": "Sphenisciformes"
-		}
+        "translations": {
+            "fr": "Sphenisciformes",
+            "es": "Sphenisciformes"
+        }
     },
     {
         "menu_name": "pelecaniformes",
@@ -74,10 +74,10 @@
             }
         ],
         "title": "Pelecaniformes",
-		"translations": {
-			"fr": "Pelecaniformes",
-			"es": "Pelecaniformes"
-		}
+        "translations": {
+            "fr": "Pelecaniformes",
+            "es": "Pelecaniformes"
+        }
     },
     {
         "menu_name": "ciconiiformes",
@@ -140,10 +140,10 @@
             }
         ],
         "title": "Ciconiiformes",
-		"translations": {
-			"fr": "Ciconiiformes",
-			"es": "Ciconiiformes"
-		}
+        "translations": {
+            "fr": "Ciconiiformes",
+            "es": "Ciconiiformes"
+        }
     },
     {
         "menu_name": "anseriformes",
@@ -190,10 +190,10 @@
             }
         ],
         "title": "Anseriformes",
-		"translations": {
-			"fr": "Anseriformes",
-			"es": "Anseriformes"
-		}
+        "translations": {
+            "fr": "Anseriformes",
+            "es": "Anseriformes"
+        }
     },
     {
         "menu_name": "falconiformes",
@@ -332,10 +332,10 @@
             }
         ],
         "title": "Falconiformes",
-		"translations": {
-			"fr": "Falconiformes",
-			"es": "Falconiformes"
-		}
+        "translations": {
+            "fr": "Falconiformes",
+            "es": "Falconiformes"
+        }
     },
     {
         "menu_name": "gruiformes",
@@ -386,10 +386,10 @@
             }
         ],
         "title": "Gruiformes",
-		"translations": {
-			"fr": "Gruiformes",
-			"es": "Gruiformes"
-		}
+        "translations": {
+            "fr": "Gruiformes",
+            "es": "Gruiformes"
+        }
     },
     {
         "menu_name": "psittaciformes",
@@ -403,7 +403,7 @@
                 "link_path": "gallery/species/bird/grey_parrot.html"
             },
             {
-                "link_title": "Rueppell s parrot",
+                "link_title": "Rueppell's parrot",
                 "link_path": "gallery/species/bird/rueppell_parrot.html",
                 "translations": {
                     "fr": "Perroquet de Rüppell",
@@ -416,10 +416,10 @@
             }
         ],
         "title": "Psittaciformes",
-		"translations": {
-			"fr": "Psittaciformes",
-			"es": "Psittaciformes"
-		}
+        "translations": {
+            "fr": "Psittaciformes",
+            "es": "Psittaciformes"
+        }
     },
     {
         "menu_name": "strigiformes",
@@ -456,10 +456,10 @@
             }
         ],
         "title": "Coraciiformes",
-		"translations": {
-			"fr": "Coraciiformes",
-			"es": "Coraciiformes"
-		}
+        "translations": {
+            "fr": "Coraciiformes",
+            "es": "Coraciiformes"
+        }
     },
     {
         "menu_name": "piciformes",
@@ -486,9 +486,9 @@
             }
         ],
         "title": "Piciformes",
-		"translations": {
-			"fr": "Piciformes",
-			"es": "Piciformes"
-		}
+        "translations": {
+            "fr": "Piciformes",
+            "es": "Piciformes"
+        }
     }
 ]

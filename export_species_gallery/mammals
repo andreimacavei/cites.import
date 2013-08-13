@@ -63,7 +63,7 @@
                 }
             },
             {
-                "link_title": "Preuss s monkey",
+                "link_title": "Preuss's monkey",
                 "link_path": "gallery/species/mammal/preuss_monkey.html",
                 "translations": {
                     "fr": "Cercopithecus preussi",
@@ -71,7 +71,7 @@
                 }
             },
             {
-                "link_title": "De Brazza s monkey",
+                "link_title": "De Brazza's monkey",
                 "link_path": "gallery/species/mammal/DeBrazzas_monkey.html",
                 "translations": {
                     "fr": "Cercopithèque de Brazza",
@@ -172,10 +172,10 @@
             }
         ],
         "title": "Primates",
-		"translations": {
-			"fr": "Primates",
-			"es": "Primates"
-		}
+        "translations": {
+            "fr": "Primates",
+            "es": "Primates"
+        }
     },
     {
         "menu_name": "pholidota",
@@ -194,10 +194,10 @@
             }
         ],
         "title": "Pholidota",
-		"translations": {
-			"fr": "Edentés",
-			"es": "Pholidota"
-		}
+        "translations": {
+            "fr": "Edentés",
+            "es": "Pholidota"
+        }
     },
     {
         "menu_name": "cetacea",
@@ -220,10 +220,10 @@
             }
         ],
         "title": "Cetacea",
-		"translations": {
-			"fr": "Cétacés",
-			"es": "Cetacea"
-		}
+        "translations": {
+            "fr": "Cétacés",
+            "es": "Cetacea"
+        }
     },
     {
         "menu_name": "carnivores",
@@ -412,7 +412,7 @@
                 "link_title": "Cape fur seal",
                 "link_path": "gallery/species/mammal/cape_fur_seal.html",
                 "translations": {
-                    "fr": "Arctocéphale d Afrique du Sud",
+                    "fr": "Arctocéphale d'Afrique du Sud",
                     "es": "Oso marino del Cabo"
                 }
             },
@@ -422,10 +422,10 @@
             }
         ],
         "title": "Carnivores",
-		"translations": {
-			"fr": "Carnivores",
-			"es": "Carnivores"
-		}
+        "translations": {
+            "fr": "Carnivores",
+            "es": "Carnivores"
+        }
     },
     {
         "menu_name": "proboscidea",
@@ -438,7 +438,7 @@
                 "link_title": "African elephant",
                 "link_path": "gallery/species/mammal/african_elephant.html",
                 "translations": {
-                    "fr": "Eléphant d Afrique",
+                    "fr": "Eléphant d'Afrique",
                     "es": "Elefante africano"
                 }
             },
@@ -446,16 +446,16 @@
                 "link_title": "Asian elephant",
                 "link_path": "gallery/species/mammal/asianelephant.html",
                 "translations": {
-                    "fr": "Eléphant d Asie",
+                    "fr": "Eléphant d'Asie",
                     "es": "Elefante asiático"
                 }
             }
         ],
         "title": "Proboscidea",
-		"translations": {
-			"fr": "Proboscidiens",
-			"es": "Proboscidea"
-		}
+        "translations": {
+            "fr": "Proboscidiens",
+            "es": "Proboscidea"
+        }
     },
     {
         "menu_name": "sirenia",
@@ -482,7 +482,7 @@
                 "link_title": "African wild ass",
                 "link_path": "gallery/species/mammal/african_ass.html",
                 "translations": {
-                    "fr": "Ane sauvage d Afrique",
+                    "fr": "Ane sauvage d'Afrique",
                     "es": "Asno salvaje de Africa"
                 }
             },
@@ -490,7 +490,7 @@
                 "link_title": "Asiatic wild ass",
                 "link_path": "gallery/species/mammal/Asiatic_wild_ass.html",
                 "translations": {
-                    "fr": "Ane sauvage d Asie",
+                    "fr": "Ane sauvage d'Asie",
                     "es": "Asno salvaje asiático"
                 }
             },
@@ -503,7 +503,7 @@
                 }
             },
             {
-                "link_title": "Hartmann s mountain zebra",
+                "link_title": "Hartmann's mountain zebra",
                 "link_path": "gallery/species/mammal/hartmanns_mountain_zebra.html",
                 "translations": {
                     "fr": "Zèbre de Hartmann",
@@ -519,7 +519,7 @@
                 }
             },
             {
-                "link_title": "Grevy s zebra",
+                "link_title": "Grevy's zebra",
                 "link_path": "gallery/species/mammal/grevys_zebra.html",
                 "translations": {
                     "fr": "Zèbre de Grévy",
@@ -568,10 +568,10 @@
             }
         ],
         "title": "Perissodactyla",
-		"translations": {
-			"fr": "Périssodactyles",
-			"es": "Perissodactyla"
-		}
+        "translations": {
+            "fr": "Périssodactyles",
+            "es": "Perissodactyla"
+        }
     },
     {
         "menu_name": "artiodactyla",
@@ -637,10 +637,10 @@
                 }
             },
             {
-                "link_title": "Eld s deer",
+                "link_title": "Eld's deer",
                 "link_path": "gallery/species/mammal/eld_deer.html",
                 "translations": {
-                    "fr": "Cerf d Eld",
+                    "fr": "Cerf d'Eld",
                     "es": "Ciervo de Elde"
                 }
             },
@@ -672,7 +672,7 @@
                 "link_title": "Arabian oryx",
                 "link_path": "gallery/species/mammal/Arabian_oryx.html",
                 "translations": {
-                    "fr": "Oryx d Arabie",
+                    "fr": "Oryx d'Arabie",
                     "es": "Orix de Arabia"
                 }
             },
@@ -762,9 +762,9 @@
             }
         ],
         "title": "Artiodactyla",
-		"translations": {
-			"fr": "Artiodactyles",
-			"es": "Artiodactyla"
-		}
+        "translations": {
+            "fr": "Artiodactyles",
+            "es": "Artiodactyla"
+        }
     }
 ]
