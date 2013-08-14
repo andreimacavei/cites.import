@@ -125,7 +125,6 @@ def download_menu_entry(species_url):
 
 def to_json(filename, results):
     f = open(filename, "w")
-    #f.write(json.dump(results, indent=4))
     json.dump(results, f, ensure_ascii=False, indent=4)
     f.close()
 
