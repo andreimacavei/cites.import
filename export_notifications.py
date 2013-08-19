@@ -26,7 +26,7 @@ def get_correct_table(soup):
 
 def download(url):
     html = urlopen(url).read()
-    soup = BeautifulSoup(html, "html.parser")
+    soup = BeautifulSoup(html, "lxml")
     table = get_correct_table(soup)
     # depending if table has class="knoir" attr, we get the right table data
     if table.has_attr("class") and table['class'] == "knoir":
@@ -54,6 +54,7 @@ def download(url):
             try:
                 status = cells[2].img.get('src')
             except:
+                # aici se opreste cand exista taguri <tr> ce nu sunt deschise/inchise corespunzator
                 import pdb; pdb.set_trace()
 
             if '/valid' in status:
@@ -65,19 +66,26 @@ def download(url):
             if cells[3].a:
                 rel_link = cells[3].a.get('href')
             else:
-                rel_link = cells[4].a.get('href')
+                try:
+                    rel_link = cells[4].a.get('href')
+                except:
+                    document['link'] = ''
+
             if '/common/' in rel_link:
                 parent_url = '/'.join(url.split('/')[:3])
                 document['link'] = urljoin(parent_url, '/'.join(rel_link.split('/')[2:]))
-            else:
+            elif rel_link:
                 parent_url = '/'.join(url.split('/')[:-1])
                 document['link'] = urljoin(parent_url, rel_link)
+
             document['title'] = clean_text(cells[3].text)
         else:
             try:
                 rel_link = cells[0].a.get('href')
             except AttributeError:
+                import pdb; pdb.set_trace()
                 rel_link = cells[1].a.get('href')
+
             if 'common' in rel_link:
                 parent_url = '/'.join(url.split('/')[:3])
                 document['link'] = urljoin(parent_url, '/'.join(rel_link.split('/')[2:]))
@@ -96,5 +104,5 @@ def to_json(filename, results):
 
 if __name__ == '__main__':
 
-    notifications = download("http://www.cites.org/eng/notif/2010.shtml")
-    to_json('eng_notif_2010', notifications)
+    notifications = download("http://www.cites.org/eng/notif/2009.shtml")
+    to_json('eng_notif_2009', notifications)

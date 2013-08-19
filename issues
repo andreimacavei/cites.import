@@ -1,0 +1,11 @@
+
+http://www.cites.org/eng/notif/2012.php
+-(FIXED) table row <tr> is not opened properly for associated text:Sixty-second meeting of the Standing Committee
+
+http://www.cites.org/eng/notif/2010.shtml
+- table rows between lines 279 and 299 are not closed properly. Search for text:Master's course on
+
+http://www.cites.org/eng/notif/2009.shtml
+ - alot of table rows without proper close tags - switching to lxml parser from html.parser
+ - not it parses the bad table rows but the enxt problem is at lines: 410-415 - it automatically closes <tr> tag after reading the first 3 <td> elements. Search text for:2009/016
+ -the cause of this problem is that table gets truncated at this row, when calling beautifulSoup(html, "lxml")
