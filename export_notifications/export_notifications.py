@@ -9,6 +9,8 @@ import json
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
+from tidylib import tidy_document
+
 BASE_URL = "http://www.cites.org/eng/notif/"
 
 def clean_text(text):
@@ -26,7 +28,8 @@ def get_correct_table(soup):
 
 def download(url):
     html = urlopen(url).read()
-    soup = BeautifulSoup(html, "lxml")
+    html_cleaned, errors = tidy_document(html)
+    soup = BeautifulSoup(html_cleaned, "html.parser")
     table = get_correct_table(soup)
     # depending if table has class="knoir" attr, we get the right table data
     if table.has_attr("class") and table['class'] == "knoir":
@@ -51,11 +54,7 @@ def download(url):
                 notif = {}
             notif['number'] = clean_text(cells[0].text)
             notif['date'] = clean_text(cells[1].text)
-            try:
-                status = cells[2].img.get('src')
-            except:
-                # aici se opreste cand exista taguri <tr> ce nu sunt deschise/inchise corespunzator
-                import pdb; pdb.set_trace()
+            status = cells[2].img.get('src')
 
             if '/valid' in status:
                 notif['status'] = 'valid'
@@ -83,7 +82,6 @@ def download(url):
             try:
                 rel_link = cells[0].a.get('href')
             except AttributeError:
-                import pdb; pdb.set_trace()
                 rel_link = cells[1].a.get('href')
 
             if 'common' in rel_link:
@@ -104,5 +102,5 @@ def to_json(filename, results):
 
 if __name__ == '__main__':
 
-    notifications = download("http://www.cites.org/eng/notif/2009.shtml")
-    to_json('eng_notif_2009', notifications)
+    notifications = download("http://www.cites.org/eng/notif/2010.shtml")
+    to_json('eng_notif_2010', notifications)
