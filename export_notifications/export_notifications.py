@@ -11,26 +11,51 @@ from bs4.element import Tag
 
 from tidylib import tidy_document
 
-BASE_URL = "http://www.cites.org/eng/notif/"
+BASE_URLS = [
+    "http://www.cites.org/eng/notif/2013.php",
+    "http://www.cites.org/fra/notif/2013.php",
+    "http://www.cites.org/esp/notif/2013.php",
+]
 
 def clean_text(text):
     buf = re.sub(r"\r?\n?\t?", "", text)
     buf = re.sub(" +", " ", buf.strip())
     return buf
 
-def get_correct_table(soup):
+def get_correct_table(soup, url):
+    langs = [ 'esp', 'fra']
+    lang = url.split('/')[3]
     table = soup.find("table", { "class": "knoir" })
     if not table:
         table = soup.find("table", id="demo_table")
-        if not table:
+        # if table has no class or id we get the corect table order depending on language
+        if not table and lang in langs:
+            table = soup.find_all("table")[3]
+        elif not table:
             table = soup.find_all("table")[2]
     return table
+
+def get_url_by_year(url):
+    html = urlopen(url).read()
+    soup = BeautifulSoup(html, "html.parser")
+    table = soup.find("table", { "class": "nectar"})
+    if not table:
+        table = soup.find("table", { "class": "bggreen"})
+    rel_urls = [a.get('href') for a in table.find_all('a')][1:]
+
+    parent_url = '/'.join(url.split('/'))[:-1]
+    urls = []
+    for rel_url in rel_urls:
+        url = urljoin(parent_url, rel_url)
+        urls.append(url)
+    return urls
+
 
 def download(url):
     html = urlopen(url).read()
     html_cleaned, errors = tidy_document(html)
     soup = BeautifulSoup(html_cleaned, "html.parser")
-    table = get_correct_table(soup)
+    table = get_correct_table(soup, url)
     # depending if table has class="knoir" attr, we get the right table data
     if table.has_attr("class") and table['class'] == "knoir":
         table_data = [tr for tr in table.find_all("tr")]
@@ -54,7 +79,13 @@ def download(url):
                 notif = {}
             notif['number'] = clean_text(cells[0].text)
             notif['date'] = clean_text(cells[1].text)
-            status = cells[2].img.get('src')
+            try:
+                status = cells[2].img.get('src')
+            except AttributeError as err:
+                # print "************************************"
+                # print "{} : {}".format(err, url)
+                # print cells
+                status  = ''
 
             if '/valid' in status:
                 notif['status'] = 'valid'
@@ -65,10 +96,12 @@ def download(url):
             if cells[3].a:
                 rel_link = cells[3].a.get('href')
             else:
+                # Sometimes we can find titles with no link atached and we get the url from last column then
                 try:
                     rel_link = cells[4].a.get('href')
                 except:
                     document['link'] = ''
+                    rel_link = ''
 
             if '/common/' in rel_link:
                 parent_url = '/'.join(url.split('/')[:3])
@@ -77,7 +110,9 @@ def download(url):
                 parent_url = '/'.join(url.split('/')[:-1])
                 document['link'] = urljoin(parent_url, rel_link)
 
-            document['title'] = clean_text(cells[3].text)
+            title = clean_text(cells[3].text)
+            notif['title'] = title
+            document['title'] = title
         else:
             try:
                 rel_link = cells[0].a.get('href')
@@ -93,6 +128,7 @@ def download(url):
                 document['link'] = urljoin(parent_url, rel_link)
                 document['title'] = clean_text(cells[0].text)
         notif['documents'].append(document)
+    results.append(notif)
     return results
 
 def to_json(filename, results):
@@ -102,5 +138,10 @@ def to_json(filename, results):
 
 if __name__ == '__main__':
 
-    notifications = download("http://www.cites.org/eng/notif/2010.shtml")
-    to_json('eng_notif_2010', notifications)
+    results = []
+    for base_url in BASE_URLS:
+        url_years = get_url_by_year(base_url)
+        for url in url_years:
+            results.extend(download(url))
+        lang = base_url.split('/')[3]
+        to_json(lang, results)
