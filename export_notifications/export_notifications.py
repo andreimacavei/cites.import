@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# coding=utf-8
 
 import re
 
@@ -11,6 +12,10 @@ from bs4.element import Tag
 
 from tidylib import tidy_document
 
+BASE_OPTIONS = {
+
+}
+
 BASE_URLS = [
     "http://www.cites.org/eng/notif/2013.php",
     "http://www.cites.org/fra/notif/2013.php",
@@ -18,6 +23,7 @@ BASE_URLS = [
 ]
 
 def clean_text(text):
+    # buf = buf.replace(u'\xe2\u20ac\u201c', '-')
     buf = re.sub(r"\r?\n?\t?", "", text)
     buf = re.sub(" +", " ", buf.strip())
     return buf
@@ -131,6 +137,11 @@ def to_json(filename, results):
     f = open(filename, "w")
     f.write(json.dumps(results, indent=4))
     f.close()
+
+# def to_json(filename, results):
+#     f = open(filename, "w")
+#     json.dump(results, f, ensure_ascii=False, indent=4)
+#     f.close()
 
 if __name__ == '__main__':
 
