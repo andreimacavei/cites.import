@@ -23,7 +23,7 @@ def clean_text(text):
     return buf
 
 def get_correct_table(soup, url):
-    langs = [ 'esp', 'fra']
+    langs = [ 'esp', 'fra' ]
     lang = url.split('/')[3]
     table = soup.find("table", { "class": "knoir" })
     if not table:
@@ -49,7 +49,6 @@ def get_url_by_year(url):
         url = urljoin(parent_url, rel_url)
         urls.append(url)
     return urls
-
 
 def download(url):
     html = urlopen(url).read()
@@ -102,12 +101,10 @@ def download(url):
                 except:
                     document['link'] = ''
                     rel_link = ''
-
-            if '/common/' in rel_link:
-                parent_url = '/'.join(url.split('/')[:3])
-                document['link'] = urljoin(parent_url, '/'.join(rel_link.split('/')[2:]))
+            if '/common/' in rel_link or '../../' in rel_link:
+                document['link'] = '/'.join(rel_link.split('/')[2:])
             elif rel_link:
-                parent_url = '/'.join(url.split('/')[:-1])
+                parent_url = '/'.join(url.split('/')[3:5]) + '/'
                 document['link'] = urljoin(parent_url, rel_link)
 
             title = clean_text(cells[3].text)
@@ -119,12 +116,11 @@ def download(url):
             except AttributeError:
                 rel_link = cells[1].a.get('href')
 
-            if 'common' in rel_link:
-                parent_url = '/'.join(url.split('/')[:3])
-                document['link'] = urljoin(parent_url, '/'.join(rel_link.split('/')[2:]))
+            if 'common' in rel_link or '../..' in rel_link:
+                document['link'] = '/'.join(rel_link.split('/')[2:])
                 document['title'] = clean_text(cells[0].text)
-            else:
-                parent_url = '/'.join(url.split('/')[:-1])
+            elif rel_link:
+                parent_url = '/'.join(url.split('/')[3:5]) + '/'
                 document['link'] = urljoin(parent_url, rel_link)
                 document['title'] = clean_text(cells[0].text)
         notif['documents'].append(document)
@@ -138,8 +134,9 @@ def to_json(filename, results):
 
 if __name__ == '__main__':
 
-    results = []
+
     for base_url in BASE_URLS:
+        results = []
         url_years = get_url_by_year(base_url)
         for url in url_years:
             results.extend(download(url))

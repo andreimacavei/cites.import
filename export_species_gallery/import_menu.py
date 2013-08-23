@@ -40,7 +40,7 @@ def clean_title(title):
 
     html_cleaned = html_pattern.sub('', title).strip()
     xxx = text_pattern.sub(' ', html_cleaned)
-    return xxx
+    return xxx.encode('latin-1')
 
 def get_translations(species_url, rel_url):
 
