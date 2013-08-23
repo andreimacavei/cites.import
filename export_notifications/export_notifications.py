@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# coding=utf-8
 
 import re
 
@@ -23,9 +22,14 @@ BASE_URLS = [
 ]
 
 def clean_text(text):
-    # buf = buf.replace(u'\xe2\u20ac\u201c', '-')
+    # buf = text.replace(u'\xe2\u20ac\u201c', '-')
     buf = re.sub(r"\r?\n?\t?", "", text)
     buf = re.sub(" +", " ", buf.strip())
+
+    try:
+        buf = buf.encode('latin-1')
+    except UnicodeEncodeError:
+        buf = buf.encode('utf-8')
     return buf
 
 def get_correct_table(soup, url):
@@ -58,8 +62,8 @@ def get_url_by_year(url):
 
 def download(url):
     html = urlopen(url).read()
-    html_cleaned, errors = tidy_document(html)
-    soup = BeautifulSoup(html_cleaned, "html.parser")
+    # html_cleaned, errors = tidy_document(html)
+    soup = BeautifulSoup(html, "html.parser")
     table = get_correct_table(soup, url)
     # depending if table has class="knoir" attr, we get the right table data
     if table.has_attr("class") and table['class'] == "knoir":
@@ -87,9 +91,6 @@ def download(url):
             try:
                 status = cells[2].img.get('src')
             except AttributeError as err:
-                # print "************************************"
-                # print "{} : {}".format(err, url)
-                # print cells
                 status  = ''
 
             if '/valid' in status:
@@ -135,13 +136,8 @@ def download(url):
 
 def to_json(filename, results):
     f = open(filename, "w")
-    f.write(json.dumps(results, indent=4))
+    json.dump(results, f, ensure_ascii=False, indent=4)
     f.close()
-
-# def to_json(filename, results):
-#     f = open(filename, "w")
-#     json.dump(results, f, ensure_ascii=False, indent=4)
-#     f.close()
 
 if __name__ == '__main__':
 
