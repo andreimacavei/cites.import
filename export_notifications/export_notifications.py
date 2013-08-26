@@ -16,9 +16,9 @@ BASE_OPTIONS = {
 }
 
 BASE_URLS = [
-    "http://www.cites.org/eng/notif/2013.php",
+    # "http://www.cites.org/eng/notif/2013.php",
     "http://www.cites.org/fra/notif/2013.php",
-    "http://www.cites.org/esp/notif/2013.php",
+    # "http://www.cites.org/esp/notif/2013.php",
 ]
 
 def utStripMSWordUTF8(s):
@@ -46,8 +46,7 @@ def clean_text(text):
     buf = utStripMSWordUnicode(text)
     buf = re.sub(r"\r?\n?\t?", "", buf)
     buf = re.sub(" +", " ", buf.strip())
-    buf = buf.encode('latin-1')
-    return buf
+    return buf.encode('latin-1')
 
 def get_correct_table(soup, url):
     langs = [ 'esp', 'fra' ]
