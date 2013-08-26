@@ -33,15 +33,20 @@ def utStripMSWordUTF8(s):
     s = s.replace('\\xe2\\x80\\xa2', '*')  #dot used for bullet points
     return s
 
+def utStripMSWordUnicode(buf):
+    buf = buf.replace(u"\u2013", "-")
+    buf = buf.replace(u"\u2019", "'")
+    buf = buf.replace(u"\u2018", "'")
+    buf = buf.replace(u"\u0153", "oe")
+    buf = buf.replace(u"\u201a", ",")
+    return buf
+
 def clean_text(text):
     # buf = text.replace(u'\xe2\u20ac\u201c', '-')
-    buf = text.replace(u"\u2013", "-")
+    buf = utStripMSWordUnicode(text)
     buf = re.sub(r"\r?\n?\t?", "", buf)
     buf = re.sub(" +", " ", buf.strip())
-    try:
-        buf = buf.encode('latin-1')
-    except UnicodeEncodeError:
-        buf = buf.encode('utf-8')
+    buf = buf.encode('latin-1')
     return buf
 
 def get_correct_table(soup, url):
