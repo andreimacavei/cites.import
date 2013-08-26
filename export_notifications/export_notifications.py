@@ -6,7 +6,7 @@ from urllib2 import urlopen
 from urlparse import urljoin, urlsplit
 import json
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, UnicodeDammit
 from bs4.element import Tag
 
 from tidylib import tidy_document
@@ -21,11 +21,23 @@ BASE_URLS = [
     "http://www.cites.org/esp/notif/2013.php",
 ]
 
+def utStripMSWordUTF8(s):
+    """ replace MSWord characters """
+    s = s.replace('\\xe2\\x80\\xa6', '...') #ellipsis
+    s = s.replace('\\xe2\\x80\\x93', '-')   #long dash
+    s = s.replace('\\xe2\\x80\\x94', '-')   #long dash
+    s = s.replace('\\xe2\\x80\\x98', '\'')  #single quote opening
+    s = s.replace('\\xe2\\x80\\x99', '\'')  #single quote closing
+    s = s.replace('\\xe2\\x80\\x9c', '"')  #single quote closing
+    s = s.replace('\\xe2\\x80\\x9d', '"')  #single quote closing
+    s = s.replace('\\xe2\\x80\\xa2', '*')  #dot used for bullet points
+    return s
+
 def clean_text(text):
     # buf = text.replace(u'\xe2\u20ac\u201c', '-')
-    buf = re.sub(r"\r?\n?\t?", "", text)
+    buf = text.replace(u"\u2013", "-")
+    buf = re.sub(r"\r?\n?\t?", "", buf)
     buf = re.sub(" +", " ", buf.strip())
-
     try:
         buf = buf.encode('latin-1')
     except UnicodeEncodeError:
@@ -63,8 +75,10 @@ def get_url_by_year(url):
 def download(url):
     html = urlopen(url).read()
     # html_cleaned, errors = tidy_document(html)
+    # html_cleaned = UnicodeDammit.detwingle(html)
     soup = BeautifulSoup(html, "html.parser")
     table = get_correct_table(soup, url)
+
     # depending if table has class="knoir" attr, we get the right table data
     if table.has_attr("class") and table['class'] == "knoir":
         table_data = [tr for tr in table.find_all("tr")]
@@ -86,6 +100,7 @@ def download(url):
             if notif:
                 results.append(notif)
                 notif = {}
+
             notif['number'] = clean_text(cells[0].text)
             notif['date'] = clean_text(cells[1].text)
             try:

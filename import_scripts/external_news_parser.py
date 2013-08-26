@@ -20,7 +20,7 @@ locale_conv = {
 
 
 def clean_date(local_date, language):
-  
+
     buf = re.sub(r"\r?\n? de", "", local_date)
     buf = re.sub(" +", " ", buf.strip())
     return buf.replace("\xc2\xa0", " ")
