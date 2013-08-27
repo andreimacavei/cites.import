@@ -529,7 +529,7 @@
             },
             {
                 "link": "esp/notif/2012/S062A.pdf",
-                "title": ""
+                "title": "Anexo: Formulario de inscripción"
             }
         ],
         "number": "2012/062",
@@ -2845,7 +2845,7 @@
         "status": "invalid",
         "documents": [
             {
-                "link": "",
+                "link": "esp/notif/2009/S045.pdf",
                 "title": "Decimoquinta reunión de la Conferencia de las Partes – Información general"
             },
             {
@@ -2867,7 +2867,7 @@
             {
                 "link": "esp/notif/2009/S045A5.pdf",
                 "title": "Anexo 5: Información sobre Qatar",
-            },
+            }
         ],
         "number": "2009/045",
         "title": "Decimoquinta reunión de la Conferencia de las Partes – Información general"
@@ -3719,65 +3719,30 @@
             {
                 "link": "esp/notif/2008/S057.pdf",
                 "title": "Máster en gestión, acceso y conservación de especies en el comercio: el marco internacional"
+            },
+            {
+                "link": "esp/notif/2008/S057A1.pdf",
+                "title": "Anexo 1: Información general",
+            },
+            {
+                "link": "esp/notif/2008/S057A2.pdf",
+                "title": "Anexo 2: Solicitud de Preinscripción",
+            },
+            {
+                "link": "esp/notif/2008/S057A3.pdf",
+                "title": "Anexo 3: Curriculum Vitae",
+            },
+            {
+                "link": "esp/notif/2008/S057A4.pdf",
+                "title": "Anexo 4: Solicitud con Titulo Extranjero no Homologado",
+            },
+            {
+                "link": "esp/notif/2008/S057A5.pdf",
+                "title": "Anexo 5: Solicitud de Beca",
             }
         ],
         "number": "2008/057",
         "title": "Máster en gestión, acceso y conservación de especies en el comercio: el marco internacional"
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "esp/notif/2008/S057A2.pdf",
-                "title": ""
-            }
-        ],
-        "number": "Anexo 1: Información general",
-        "title": ""
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "esp/notif/2008/S057A3.pdf",
-                "title": ""
-            }
-        ],
-        "number": "Anexo 2: Solicitud de Preinscripción",
-        "title": ""
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "esp/notif/2008/S057A4.pdf",
-                "title": ""
-            }
-        ],
-        "number": "Anexo 3: Curriculum Vitae",
-        "title": ""
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "esp/notif/2008/S057A5.pdf",
-                "title": ""
-            }
-        ],
-        "number": "Anexo 4: Solicitud con Titulo Extranjero no Homologado",
-        "title": ""
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "",
-                "title": "04/09/08"
-            }
-        ],
-        "number": "Anexo 5: Solicitud de Beca",
-        "title": "04/09/08"
     },
     {
         "date": "04/09/08",

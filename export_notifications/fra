@@ -517,7 +517,7 @@
             },
             {
                 "link": "fra/notif/2012/F062A.pdf",
-                "title": ""
+                "title": "Annexe: Formulaire d'inscription"
             }
         ],
         "number": "2012/062",
@@ -2851,7 +2851,7 @@
             {
                 "link": "fra/notif/2009/F045A5.pdf",
                 "title": "Annexe 5: Informations sur le Qatar",
-            },
+            }
         ],
         "number": "2009/045",
         "title": "Quinzième session de la Conférence des Parties - Informations générales"
@@ -2918,12 +2918,12 @@
             },
             {
                 "link": "eng/notif/2009.shtml",
-                "title": "Pour les annexes en anglais, voir la page en anglais
+                "title": "Pour les annexes en anglais, voir la page en anglais"
             },
             {
                 "link": "esp/notif/2009.shtml",
                 "title": "Pour les annexes en espagnol, voir la page en espagnol"
-            },
+            }
         ],
         "number": "2009/040 (republiée avec une correction au premier paragraphe le 18/09/09)",
         "title": "Cours de maîtrise sur l'Accès aux espèces dans le commerce, leur gestion et leur conservation: le cadre international"
@@ -3692,32 +3692,18 @@
             {
                 "link": "fra/notif/2008/F057.pdf",
                 "title": "Cours de maîtrise sur l'Accès aux espèces dans le commerce, leur gestion et leur conservation: le cadre international"
+            },
+            {
+                "link": "eng/notif/2008.shtml",
+                "title": "Pour les annexes en anglais, voir la page en anglais"
+            },
+            {
+                "link": "esp/notif/2008.shtml",
+                "title": "Pour les annexes en espagnol, voir la page en espagnol"
             }
         ],
         "number": "2008/057",
         "title": "Cours de maîtrise sur l'Accès aux espèces dans le commerce, leur gestion et leur conservation: le cadre international"
-    },
-    {
-        "date": "Pour les annexes en espagnol, voir la page en espagnol",
-        "documents": [
-            {
-                "link": "",
-                "title": "04/09/08"
-            }
-        ],
-        "number": "Pour les annexes en anglais, voir la page en anglais",
-        "title": "04/09/08"
-    },
-    {
-        "date": "2008/056",
-        "documents": [
-            {
-                "link": "fra/notif/2008/F056.pdf",
-                "title": ""
-            }
-        ],
-        "number": "Pour les annexes en espagnol, voir la page en espagnol",
-        "title": ""
     },
     {
         "date": "04/09/08",
