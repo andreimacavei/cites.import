@@ -868,15 +868,20 @@
         "title": "Lois nationales d'application de la Convention"
     },
     {
-        "date": "",
+        "date": "16/04/12",
+        "status": "invalid",
         "documents": [
             {
-                "link": "",
-                "title": "02/04/12"
+                "link": "fra/notif/2012/F035.pdf",
+                "title": "Soixante-deuxième session du Comité permanent (republié le 25/04/12 en éliminant la référence à des "personnes" au paragraphe 4)"
+            },
+            {
+                "link": "fra/notif/2012/F035A.pdf",
+                "title": "Annexe: Formulaire d'inscription"
             }
         ],
-        "number": "Annexe: Formulaire d'inscription",
-        "title": "02/04/12"
+        "number": "2012/035",
+        "title": "Soixante-deuxième session du Comité permanent (republié le 25/04/12 en éliminant la référence à des "personnes" au paragraphe 4)"
     },
     {
         "date": "02/04/12",
@@ -2397,32 +2402,18 @@
             {
                 "link": "fra/notif/2010/F025.pdf",
                 "title": "Cours de maîtrise sur l'Accès aux espèces dans le commerce, leur gestion et leur conservation: le cadre international"
+            },
+            {
+                "link": "eng/notif/2010.shtml",
+                "title": "Pour les annexes en anglais, voir la page en anglais"
+            },
+            {
+                "link": "esp/notif/2010.shtml",
+                "title": "Pour les annexes en espagnol, voir la page en espagnol"
             }
         ],
         "number": "2010/025",
         "title": "Cours de maîtrise sur l'Accès aux espèces dans le commerce, leur gestion et leur conservation: le cadre international"
-    },
-    {
-        "date": "Pour les annexes en espagnol, voir la page en espagnol",
-        "documents": [
-            {
-                "link": "",
-                "title": "16/08/10"
-            }
-        ],
-        "number": "Pour les annexes en anglais, voir la page en anglais",
-        "title": "16/08/10"
-    },
-    {
-        "date": "2010/024",
-        "documents": [
-            {
-                "link": "fra/notif/2010/F024.pdf",
-                "title": ""
-            }
-        ],
-        "number": "Pour les annexes en espagnol, voir la page en espagnol",
-        "title": ""
     },
     {
         "date": "16/08/10",
@@ -4724,21 +4715,14 @@
             {
                 "link": "fra/notif/2007/F029.pdf",
                 "title": "Questionnaire sur les éléphants et le commerce de l'ivoire"
+            },
+            {
+                "link": "fra/notif/2007/F029A.pdf",
+                "title": "Questionnaire"
             }
         ],
         "number": "2007/029",
         "title": "Questionnaire sur les éléphants et le commerce de l'ivoire"
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "",
-                "title": "29/08/07"
-            }
-        ],
-        "number": "Questionnaire",
-        "title": "29/08/07"
     },
     {
         "date": "29/08/07",
@@ -4955,21 +4939,14 @@
             {
                 "link": "fra/notif/2007/F012.pdf",
                 "title": "Annexes I, II et III"
+            },
+            {
+                "link": "fra/notif/2007/F-p20.pdf",
+                "title": "Annexe"
             }
         ],
         "number": "2007/012",
         "title": "Annexes I, II et III"
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "",
-                "title": "12/03/07"
-            }
-        ],
-        "number": "Annexe",
-        "title": "12/03/07"
     },
     {
         "date": "12/03/07",
@@ -4978,21 +4955,14 @@
             {
                 "link": "fra/notif/2007/F011.pdf",
                 "title": "Réserves spéciales"
+            },
+            {
+                "link": "fra/app/F070304.pdf",
+                "number": "Réserves spéciales formulées par les Parties en vigueur dès le 4 mars 2007"
             }
         ],
         "number": "2007/011",
         "title": "Réserves spéciales"
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "",
-                "title": "05/03/07"
-            }
-        ],
-        "number": "Réserves spéciales formulées par les Parties en vigueur dès le 4 mars 2007",
-        "title": "05/03/07"
     },
     {
         "date": "05/03/07",
@@ -5065,21 +5035,14 @@
             {
                 "link": "fra/notif/2007/F005.pdf",
                 "title": "Envoi de documents"
+            },
+            {
+                "link": "eng/notif/2007/E005A.pdf",
+                "title": "Fascicule: Exemptions and Conditions for Exporting Orchid Hybrids without CITES Permits (783 KB, uniquement en anglais)"
             }
         ],
         "number": "2007/005",
         "title": "Envoi de documents"
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "",
-                "title": "22/01/07"
-            }
-        ],
-        "number": "Fascicule: Exemptions and Conditions for Exporting Orchid Hybrids without CITES Permits (783 KB, uniquement en anglais)",
-        "title": "22/01/07"
     },
     {
         "date": "22/01/07",
@@ -7236,21 +7199,14 @@
             {
                 "link": "fra/notif/2004/064.pdf",
                 "title": "Registre des établissements élevant en captivité à des fins commercialesdes espèces animales inscrites à l'Annexe I"
+            },
+            {
+                "link": "common/notif/2004/ESF064A.pdf",
+                "title": "Annexe"
             }
         ],
         "number": "2004/064",
         "title": "Registre des établissements élevant en captivité à des fins commercialesdes espèces animales inscrites à l'Annexe I"
-    },
-    {
-        "date": "",
-        "documents": [
-            {
-                "link": "",
-                "title": "01/09/04"
-            }
-        ],
-        "number": "Annexe",
-        "title": "01/09/04"
     },
     {
         "date": "01/09/04",
