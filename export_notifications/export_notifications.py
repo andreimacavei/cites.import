@@ -16,9 +16,9 @@ BASE_OPTIONS = {
 }
 
 BASE_URLS = [
-    # "http://www.cites.org/eng/notif/2013.php",
+    "http://www.cites.org/eng/notif/2013.php",
     "http://www.cites.org/fra/notif/2013.php",
-    # "http://www.cites.org/esp/notif/2013.php",
+    "http://www.cites.org/esp/notif/2013.php",
 ]
 
 def utStripMSWordUTF8(s):
