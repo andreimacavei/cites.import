@@ -48,9 +48,11 @@ def download(url, language):
         main = soup.find("div", { "class" : "khaki2" })
     else:
         main = soup.find("div", id="main")
-
-    urls = [(a.get('href'), a.contents[0]) for a in main.find_all('a')]
-
+    try:
+        urls = [(a.get('href'), a.get_text()) for a in main.find_all('a')]
+    except IndexError as er:
+        print er
+        import pdb; pdb.set_trace()
     results = []
     for url, content in urls:
         news = {}
@@ -62,7 +64,6 @@ def download(url, language):
         try:
             date = convert_to_mysql_date(local_date, language)
         except ValueError as err:
-            print err
             # We're apending text for duplicated links
             continue
         else:
@@ -86,7 +87,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('urls', nargs ='+', help="takes one or more urls")
-    parser.add_argument('-o', '--output', default="news.json", help="output file where to save the data")
+    parser.add_argument('-o', '--output', default="external_news.json", help="output file where to save the data")
     args = parser.parse_args()
 
     news = []
