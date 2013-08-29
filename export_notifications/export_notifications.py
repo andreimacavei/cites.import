@@ -36,6 +36,7 @@ def utStripMSWordUTF8(s):
 def utStripMSWordUnicode(buf):
     buf = buf.replace(u"\u2013", "-")
     buf = buf.replace(u"\u2014", "-")
+    buf = buf.replace(u"\u2011", "-")
     buf = buf.replace(u"\u2019", "'")
     buf = buf.replace(u"\u2018", "'")
     buf = buf.replace(u"\u0153", "oe")
