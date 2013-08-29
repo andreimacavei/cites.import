@@ -89,7 +89,7 @@ def download(url):
                     abs_url = url + '/'.join(rel_url.split('/')[2:])
                 else:
                     abs_url = url + rel_url
-                document['link'] = abs_url
+                document['link'] = cells[2].a.get('href')
                 if abs_url.find('.pdf') < 0:
                     resolution['body'] = clean_text(get_resolution(abs_url))
                 resolution['documents'] = []
