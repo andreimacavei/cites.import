@@ -25,9 +25,24 @@ def clean_date(local_date, language):
     buf = re.sub(" +", " ", buf.strip())
     return buf.replace("\xc2\xa0", " ")
 
-def clean_title(title):
-    buf = re.sub(r"\r?\n?", "", title)
-    return buf.strip()
+def utStripMSWordUnicode(buf):
+    buf = buf.replace(u"\u2013", "-")
+    buf = buf.replace(u"\u2014", "-")
+    buf = buf.replace(u"\u2019", "'")
+    buf = buf.replace(u"\u2018", "'")
+    buf = buf.replace(u"\u0153", "oe")
+    buf = buf.replace(u"\u201a", ",")
+    buf = buf.replace(u"\u201c", '"')
+    buf = buf.replace(u"\u201d", '"')
+    buf = buf.replace(u"\u2026", "...")
+    return buf
+
+def clean_text(text):
+    # buf = text.replace(u'\xe2\u20ac\u201c', '-')
+    buf = utStripMSWordUnicode(text)
+    buf = re.sub(r"\r?\n?\t?", "", buf)
+    buf = re.sub(" +", " ", buf.strip())
+    return buf.encode('latin-1')
 
 def convert_to_mysql_date(local_date, language):
     locale.setlocale(locale.LC_ALL, locale_conv[language])
@@ -57,7 +72,7 @@ def download(url, language):
     for url, content in urls:
         news = {}
         local_date = clean_date(content.split(':')[0].encode('utf-8'), language)
-        title = clean_title(content.split(':', 1)[-1])
+        title = clean_text(content.split(':', 1)[-1])
         news['title'] = title
         news['link'] = url.strip()
         news['language'] = language
@@ -80,7 +95,7 @@ def extract_lang(url):
 
 def to_json(filename, results):
     f = open(filename, "w")
-    f.write(json.dumps(results, indent=4))
+    json.dump(results, f, ensure_ascii=False, indent=4)
     f.close()
 
 if __name__ == '__main__':

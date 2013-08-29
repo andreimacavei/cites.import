@@ -35,10 +35,14 @@ def utStripMSWordUTF8(s):
 
 def utStripMSWordUnicode(buf):
     buf = buf.replace(u"\u2013", "-")
+    buf = buf.replace(u"\u2014", "-")
     buf = buf.replace(u"\u2019", "'")
     buf = buf.replace(u"\u2018", "'")
     buf = buf.replace(u"\u0153", "oe")
     buf = buf.replace(u"\u201a", ",")
+    buf = buf.replace(u"\u201c", '"')
+    buf = buf.replace(u"\u201d", '"')
+    buf = buf.replace(u"\u2026", "...")
     return buf
 
 def clean_text(text):
