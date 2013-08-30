@@ -84,16 +84,22 @@ def download(url):
                 resolution['title'] = clean_text(cells[1].get_text())
                 document = {}
                 document['description'] = clean_text(cells[1].get_text())
+
+                base_url = url.split('/', 3)[-1]
                 rel_url = cells[1].a.get('href')
                 if len(rel_url.split('/')) > 3:
                     abs_url = url + '/'.join(rel_url.split('/')[2:])
+                    rel_link = base_url + '/'.join(rel_url.split('/')[2:])
                 else:
                     abs_url = url + rel_url
+                    rel_link = base_url + rel_url
+                resolution['link'] = rel_link
+
                 doc_rel = cells[2].a.get('href')
                 if len(doc_rel.split('/')) > 3:
-                    doc_abs = url + '/'.join(doc_rel.split('/')[2:])
+                    doc_abs = base_url + '/'.join(doc_rel.split('/')[2:])
                 else:
-                    doc_abs = url + doc_rel
+                    doc_abs = base_url + doc_rel
                 document['link'] = doc_abs
                 if abs_url.find('.pdf') < 0:
                     resolution['body'] = clean_text(get_resolution(abs_url))
