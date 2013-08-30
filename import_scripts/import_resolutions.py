@@ -45,11 +45,7 @@ def get_resolution(url):
         data = soup.find("blockquote")
         if not data:
             data = soup.find_all("table")[1]
-    try:
-        return data.prettify(formatter="html")
-    except AttributeError as er:
-        print er
-        import pdb; pdb.set_trace()
+    return data.prettify(formatter="html")
 
 def download(url):
     html = urlopen(url).read()
@@ -64,10 +60,7 @@ def download(url):
             if row.find('\n') == 0:
                 continue
             if row.th:
-                try:
-                    table_header = str(clean_text(row.th.get_text()))
-                except:
-                    import pdb; pdb.set_trace()
+                table_header = str(clean_text(row.th.get_text()))
                 if not meeting:
                     meeting[table_header] = []
                 else:
@@ -105,12 +98,8 @@ def download(url):
                     resolution['body'] = clean_text(get_resolution(abs_url))
                 resolution['documents'] = []
                 resolution['documents'].append(document)
+                meeting[table_header].append(resolution)
 
-                try:
-                    meeting[table_header].append(resolution)
-                except KeyError as err:
-                    print err
-                    import pdb; pdb.set_trace()
     records.append(meeting)
     return records
 
