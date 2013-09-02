@@ -82,6 +82,7 @@ def download(url):
                 resolution['title'] = clean_text(cells[1].get_text())
                 rel_url = cells[1].a.get('href')
                 abs_url = url + rel_url
+                resolution['link'] = 'eng/dec/' + rel_url
                 resolution['body'] = get_resolution(abs_url)
                 group_decisions[table_header].append(resolution)
     # we're appending annexes
