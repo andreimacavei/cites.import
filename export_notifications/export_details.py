@@ -12,9 +12,9 @@ from pprint import pprint
 from bs4 import BeautifulSoup, UnicodeDammit
 
 URLS = [
-    # 'http://www.cites.org/eng/resources/ref/suspend.php',
+    'http://www.cites.org/eng/resources/ref/suspend.php',
     'http://www.cites.org/fra/resources/ref/suspend.php',
-    # 'http://www.cites.org/esp/resources/ref/suspend.php',
+    'http://www.cites.org/esp/resources/ref/suspend.php',
 ]
 
 def utStripMSWordUnicode(buf):
@@ -116,7 +116,7 @@ def download(url, lang):
 def write_json(filename, results):
     f = open(filename, "w")
     f.write(codecs.BOM_UTF8)
-    json.dump(results, f, indent=4)
+    json.dump(results, f, indent=4, encoding="latin-1")
     f.close()
 
 def read_json(lang):
